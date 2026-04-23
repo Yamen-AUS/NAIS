@@ -60,7 +60,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%;}
 body{font-family:var(--font-sans);color:var(--gray-700);background:var(--white);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;padding-right:48px;}
-@media(max-width:1199px){body{padding-right:0;}}
+@media(max-width:1199px){body{padding-right:0 !important; padding-top:58px !important;}}
 img{max-width:100%;height:auto;display:block;}
 /* Topbar logo: correct horizontal logo dimensions */
 .topbar-logo-img { height: 46px !important; width: auto !important; max-height: 46px !important; max-width: 200px !important; object-fit: contain !important; object-position: center left !important; display: block !important; }

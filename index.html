@@ -10,9 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="shortcut icon" href="images/nais-logo.png?v=3" type="image/png" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/style.css?v=5" />
-  <link rel="stylesheet" href="css/nav.css?v=5" />
-  <link rel="stylesheet" href="css/mobile.css?v=1" />
+  <link rel="stylesheet" href="css/style.css?v=6" />
+  <link rel="stylesheet" href="css/nav.css?v=6" />
+  <link rel="stylesheet" href="css/mobile.css?v=3" />
   <style>
     #site-intro {
       position: fixed;
@@ -80,10 +80,12 @@
       transition: width 7.5s linear;
     }
 
-    .topbar { overflow: visible !important; height: 62px !important; display: flex !important; align-items: center !important; }
-    .topbar-inner { height: 62px !important; display: flex !important; align-items: center !important; padding: 0 60px 0 0 !important; }
-    .topbar-logo { width: auto !important; height: 68px !important; min-height: unset !important; max-height: 68px !important; overflow: visible !important; display: flex !important; align-items: center !important; justify-content: flex-start !important; padding: 6px 16px 6px 12px !important; background: #fff !important; flex-shrink: 0 !important; }
-    .topbar-logo-img { width: auto !important; height: 56px !important; max-width: 220px !important; max-height: 56px !important; object-fit: contain !important; object-position: left center !important; display: block !important; }
+    @media (min-width: 1200px) {
+      .topbar { overflow: visible !important; height: 62px !important; display: flex !important; align-items: center !important; }
+      .topbar-inner { height: 62px !important; display: flex !important; align-items: center !important; padding: 0 60px 0 0 !important; }
+      .topbar-logo { width: auto !important; height: 68px !important; min-height: unset !important; max-height: 68px !important; overflow: visible !important; display: flex !important; align-items: center !important; justify-content: flex-start !important; padding: 6px 16px 6px 12px !important; background: #fff !important; flex-shrink: 0 !important; }
+      .topbar-logo-img { width: auto !important; height: 56px !important; max-width: 220px !important; max-height: 56px !important; object-fit: contain !important; object-position: left center !important; display: block !important; }
+    }
 
     /* ── REQUEST INFO BOX — hidden unless screen ≥ 1500px ── */
     .hero-floating-cta { display: none !important; }
@@ -296,8 +298,8 @@
   </script>
 
   <!-- ─── TOP BAR ─── -->
-  <div class="topbar" style="height:62px;overflow:visible;display:flex;align-items:center;" id="main-topbar">
-    <div class="topbar-inner" style="height:62px;display:flex;align-items:center;width:100%;padding:0 60px 0 0;">
+  <div class="topbar" id="main-topbar">
+    <div class="topbar-inner">
       <a href="index.html" class="topbar-logo" aria-label="NAIS Dubai – Home" style="width:auto;height:68px;overflow:visible;display:flex;align-items:center;justify-content:flex-start;padding:6px 16px 6px 12px;background:#fff;flex-shrink:0;">
         <img src="images/nais-logo.png" alt="North American International School Dubai" class="topbar-logo-img" style="width:auto;height:56px;max-width:220px;max-height:56px;object-fit:contain;object-position:left center;display:block;" />
       </a>
@@ -1824,7 +1826,7 @@
         <div class="footer-grid">
           <div class="footer-brand">
             <div class="footer-logo">
-              <img src="images/nais-logo.svg" alt="NAIS Dubai Logo" class="footer-logo-img" />
+              <img src="images/nais-logo.png" alt="NAIS Dubai Logo" class="footer-logo-img" />
             </div>
             <p class="footer-desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
             <div class="footer-social">

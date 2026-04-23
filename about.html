@@ -10,89 +10,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="shortcut icon" href="images/nais-logo.png?v=3" type="image/png" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/style.css?v=5" />
-  <link rel="stylesheet" href="css/pages.css?v=5" />
-  <link rel="stylesheet" href="css/nav.css?v=5" />
-  <link rel="stylesheet" href="css/mobile.css?v=1" />
+  <link rel="stylesheet" href="css/style.css?v=6" />
+  <link rel="stylesheet" href="css/pages.css?v=6" />
+  <link rel="stylesheet" href="css/nav.css?v=6" />
+  <link rel="stylesheet" href="css/mobile.css?v=3" />
   <style>
-    #site-intro{position:fixed;inset:0;z-index:99999;opacity:1;transition:opacity 1.2s ease;background:#0A0E1F;font-family:'Montserrat',Arial Black,sans-serif;}
-    #site-intro.intro-out{opacity:0;pointer-events:none;}
-    #intro-canvas{display:block;width:100%;height:100%;}
-    #intro-logo-img{position:absolute;top:clamp(12px,2.5vw,28px);left:clamp(12px,2.5vw,28px);height:clamp(44px,5.5vw,68px);width:auto;max-width:clamp(160px,20vw,270px);opacity:0;transform:translateY(-8px);transition:opacity 0.7s ease 0.2s,transform 0.7s ease 0.2s;background:#fff;padding:5px 10px;border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,0.4);object-fit:contain;z-index:2;}
-    #intro-logo-img.show{opacity:1;transform:translateY(0);}
-    #intro-skip{position:absolute;top:clamp(18px,3vw,42px);right:clamp(18px,3.5vw,50px);font-family:'Montserrat',Arial Black,sans-serif;font-size:9px;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:rgba(255,255,255,0.55);background:transparent;border:1px solid rgba(255,255,255,0.32);padding:8px 20px;border-radius:2px;cursor:pointer;opacity:0;transition:opacity 0.5s ease,color 0.2s,background 0.2s;z-index:2;}
-    #intro-skip.show{opacity:1;}
-    #intro-skip:hover{background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.65);}
-    #intro-progbar{position:absolute;bottom:0;left:0;height:4px;width:0;background:#E11B22;z-index:2;transition:width 7.5s linear;}
-
-    /* TOPBAR LOGO FIX */
-    .topbar{overflow:visible!important;height:62px!important;display:flex!important;align-items:center!important;}
-    .topbar-inner{height:62px!important;display:flex!important;align-items:center!important;padding:0 60px 0 0!important;}
-    .topbar-logo{width:auto!important;height:68px!important;max-height:68px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:6px 16px 6px 12px!important;background:#fff!important;flex-shrink:0!important;}
-    .topbar-logo-img{width:auto!important;height:56px!important;max-width:220px!important;max-height:56px!important;object-fit:contain!important;object-position:left center!important;display:block!important;}
-    #intro-logo-img{position:absolute;top:clamp(14px,2.5vw,32px);left:clamp(14px,2.5vw,32px);height:44px;width:auto;max-width:180px;opacity:0;transform:translateY(-8px);transition:opacity 0.7s ease 0.2s,transform 0.7s ease 0.2s;background:#fff;padding:5px 10px;border-radius:6px;object-fit:contain;box-shadow:0 4px 20px rgba(0,0,0,0.4);z-index:2;}
+    /* TOPBAR LOGO FIX — desktop only */
+    @media (min-width: 1200px) {
+      .topbar{overflow:visible!important;height:62px!important;display:flex!important;align-items:center!important;}
+      .topbar-inner{height:62px!important;display:flex!important;align-items:center!important;padding:0 60px 0 0!important;}
+      .topbar-logo{width:auto!important;height:68px!important;max-height:68px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:6px 16px 6px 12px!important;background:#fff!important;flex-shrink:0!important;}
+      .topbar-logo-img{width:auto!important;height:56px!important;max-width:220px!important;max-height:56px!important;object-fit:contain!important;object-position:left center!important;display:block!important;}
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ══ INTRO OVERLAY ══ -->
-  <div id="site-intro">
-    <canvas id="intro-canvas"></canvas>
-    <img src="images/nais-logo.svg" id="intro-logo-img" alt="NAIS Dubai" />
-    <button id="intro-skip">SKIP &nbsp;✕</button>
-    <div id="intro-progbar"></div>
-  </div>
-  <script>
-  (function(){
-    "use strict";
-    var AUTO_MS=7500,SLIDE_MS=3200,RED="#E11B22";
-    var IMG_URLS=["https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=80","https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80","https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80","https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=1600&q=80"];
-    var introEl=document.getElementById("site-intro"),canvas=document.getElementById("intro-canvas"),ctx=canvas.getContext("2d"),logoImg=document.getElementById("intro-logo-img"),skipBtn=document.getElementById("intro-skip"),progBar=document.getElementById("intro-progbar");
-    var W,H,DPR,imgs=[],curImg=0,nextImg=1,blending=false,blendPct=0,word0Y=0,word1Y=0,tagA=0,accentPct=0,enterA=0,dismissed=false,autoTimer,lastTs=null,raf,t0=null;
-    IMG_URLS.forEach(function(url,i){var im=new Image();im.crossOrigin="anonymous";im.src=url;imgs[i]=im;});
-    function resize(){DPR=window.devicePixelRatio||1;var r=canvas.parentElement.getBoundingClientRect();W=canvas.width=Math.round(r.width*DPR);H=canvas.height=Math.round(r.height*DPR);}
-    window.addEventListener("resize",resize);resize();
-    function drawImg(img,alpha){if(!img||!img.complete||!img.naturalWidth)return;ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,alpha));var sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);ctx.drawImage(img,(W-img.naturalWidth*sc)/2,(H-img.naturalHeight*sc)/2,img.naturalWidth*sc,img.naturalHeight*sc);ctx.restore();}
-    function getFZ(){return Math.min(Math.max(W*0.125,60*DPR),190*DPR);}
-    function easeOut(t){return 1-Math.pow(1-t,3);}
-    function frame(ts){
-      if(!t0)t0=ts;
-      var dt=lastTs?Math.min((ts-lastTs)/1000,0.05):0;lastTs=ts;var el=(ts-t0)/1000;
-      if(blending){blendPct+=dt/(SLIDE_MS/1000*0.38);if(blendPct>=1){blendPct=1;blending=false;curImg=nextImg;}}
-      if(el>0.30)word0Y=Math.min(word0Y+dt*3.5,1);
-      if(el>0.58)word1Y=Math.min(word1Y+dt*3.5,1);
-      if(el>1.15)tagA=Math.min(tagA+dt*2.2,1);
-      if(el>1.35)accentPct=Math.min(accentPct+dt*2.0,1);
-      if(el>2.20)enterA=Math.min(enterA+dt*2.0,1);
-      ctx.clearRect(0,0,W,H);ctx.fillStyle="#0A0E1F";ctx.fillRect(0,0,W,H);
-      drawImg(imgs[curImg],blending?1-blendPct:1);
-      if(blending)drawImg(imgs[nextImg],blendPct);
-      var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"rgba(0,0,0,0.42)");g.addColorStop(.45,"rgba(0,0,0,0.18)");g.addColorStop(1,"rgba(0,0,0,0.60)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-      var fz=getFZ(),baseY=H*0.5+fz*0.32;
-      ctx.font="900 "+fz+"px 'Montserrat',Arial Black,sans-serif";ctx.textBaseline="alphabetic";ctx.textAlign="left";
-      var weW=ctx.measureText("WE").width,beW=ctx.measureText("BELIEVE").width,gap=fz*0.19,sx=(W-weW-gap-beW)/2;
-      ctx.save();ctx.globalAlpha=word0Y;ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=22*DPR;ctx.fillStyle="#fff";ctx.fillText("WE",sx,baseY+(1-easeOut(word0Y))*fz*1.4);ctx.restore();
-      ctx.save();ctx.globalAlpha=word1Y;ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=22*DPR;ctx.fillStyle="#fff";ctx.fillText("BELIEVE",sx+weW+gap,baseY+(1-easeOut(word1Y))*fz*1.4);ctx.restore();
-      if(tagA>0.01){ctx.save();ctx.globalAlpha=tagA;ctx.font="700 "+Math.round(fz*0.080)+"px 'Montserrat',sans-serif";ctx.textAlign="center";ctx.textBaseline="alphabetic";ctx.fillStyle="rgba(255,255,255,0.78)";ctx.fillText("NORTH AMERICAN INTERNATIONAL SCHOOL  \u00B7  DUBAI, UAE",W/2,baseY+fz*0.31);ctx.restore();}
-      if(accentPct>0){var lw=58*DPR*easeOut(accentPct);ctx.save();ctx.globalAlpha=tagA;ctx.fillStyle=RED;ctx.fillRect(W/2-lw/2,baseY+fz*0.48,lw,3*DPR);ctx.restore();}
-      if(enterA>0.01){var bx=W/2,by=H-76*DPR,bw=218*DPR,bh=46*DPR;ctx.save();ctx.globalAlpha=enterA;ctx.strokeStyle="rgba(255,255,255,0.65)";ctx.lineWidth=1.5*DPR;ctx.strokeRect(bx-bw/2,by-bh/2,bw,bh);ctx.fillStyle="#fff";ctx.font="700 "+Math.round(fz*0.080)+"px 'Montserrat',sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("ENTER SITE  \u2192",bx,by);ctx.restore();canvas._btn={x:bx-bw/2,y:by-bh/2,w:bw,h:bh};}
-      raf=requestAnimationFrame(frame);
-    }
-    setInterval(function(){if(dismissed)return;nextImg=(curImg+1)%imgs.length;blendPct=0;blending=true;},SLIDE_MS);
-    function dismiss(){if(dismissed)return;dismissed=true;clearTimeout(autoTimer);cancelAnimationFrame(raf);introEl.classList.add("intro-out");logoImg.style.opacity="0";skipBtn.style.opacity="0";progBar.style.opacity="0";}
-    canvas.addEventListener("click",function(e){if(enterA<0.45)return;var r=canvas.getBoundingClientRect();var cx=(e.clientX-r.left)*DPR,cy=(e.clientY-r.top)*DPR;var b=canvas._btn;if(!b||(cx>=b.x&&cx<=b.x+b.w&&cy>=b.y&&cy<=b.y+b.h)){dismiss();}});
-    skipBtn.addEventListener("click",dismiss);
-    document.addEventListener("keydown",function(e){if(e.key!=="Tab"&&e.key!=="Shift")dismiss();});
-    raf=requestAnimationFrame(frame);
-    requestAnimationFrame(function(){logoImg.classList.add("show");});
-    setTimeout(function(){skipBtn.classList.add("show");},2000);
-    requestAnimationFrame(function(){progBar.style.transition="width "+(AUTO_MS/1000).toFixed(1)+"s linear";progBar.style.width="100%";});
-    autoTimer=setTimeout(dismiss,AUTO_MS);
-  }());
-  </script>
-
   <!-- TOP BAR -->
-  <div class="topbar" style="height:62px;overflow:visible;display:flex;align-items:center;" id="main-topbar">
-    <div class="topbar-inner" style="height:62px;display:flex;align-items:center;width:100%;padding:0 60px 0 0;">
+  <div class="topbar" id="main-topbar">
+    <div class="topbar-inner">
       <a href="index.html" class="topbar-logo" aria-label="NAIS Dubai – Home" style="width:auto;height:68px;overflow:visible;display:flex;align-items:center;justify-content:flex-start;padding:6px 16px 6px 12px;background:#fff;flex-shrink:0;">
         <img src="images/nais-logo.png" alt="North American International School Dubai" class="topbar-logo-img" style="width:auto;height:56px;max-width:220px;max-height:56px;object-fit:contain;object-position:left center;display:block;" />
       </a>
@@ -417,6 +353,141 @@
     </div>
   </section>
 
+  <!-- ══════════════════════════════════════════════════════
+       DSIB INSPECTION RESULTS 2023–24
+  ══════════════════════════════════════════════════════ -->
+  <section class="section-pad dsib-section" id="inspection">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="section-header centered">
+        <div class="section-label"><i class="fas fa-award"></i> &nbsp;Official Inspection Results</div>
+        <h2 class="section-title">DSIB Inspection Report<br/><em>2023–2024</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro">The Dubai Schools Inspection Bureau (DSIB) independently evaluated NAIS Dubai and recognised significant strengths across teaching, curriculum, and student development.</p>
+      </div>
+
+      <!-- Rating Badges Row -->
+      <div class="dsib-badges-row">
+        <div class="dsib-badge dsib-badge--good">
+          <div class="dsib-badge-icon"><i class="fas fa-star"></i></div>
+          <div class="dsib-badge-text">
+            <strong>Good</strong>
+            <span>All Elementary Subjects</span>
+          </div>
+        </div>
+        <div class="dsib-badge dsib-badge--good">
+          <div class="dsib-badge-icon"><i class="fas fa-calculator"></i></div>
+          <div class="dsib-badge-text">
+            <strong>Good</strong>
+            <span>Math — Elementary &amp; High School</span>
+          </div>
+        </div>
+        <div class="dsib-badge dsib-badge--good">
+          <div class="dsib-badge-icon"><i class="fas fa-book"></i></div>
+          <div class="dsib-badge-text">
+            <strong>Good</strong>
+            <span>Arabic &amp; Islamic Studies — Elementary</span>
+          </div>
+        </div>
+        <div class="dsib-badge dsib-badge--vgood">
+          <div class="dsib-badge-icon"><i class="fas fa-child"></i></div>
+          <div class="dsib-badge-text">
+            <strong>Very Good</strong>
+            <span>Personal Development — KG</span>
+          </div>
+        </div>
+        <div class="dsib-badge dsib-badge--vgood">
+          <div class="dsib-badge-icon"><i class="fas fa-users"></i></div>
+          <div class="dsib-badge-text">
+            <strong>Very Good</strong>
+            <span>Personal Development — Elementary</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two-column: ratings + quotes -->
+      <div class="dsib-grid">
+
+        <!-- Ratings List -->
+        <div class="dsib-ratings animate-fade-up">
+          <div class="dsib-col-label"><i class="fas fa-clipboard-check"></i> Rating Highlights</div>
+          <ul class="dsib-list">
+            <li class="dsib-list-item dsib-good">
+              <span class="dsib-pill dsib-pill--good">Good</span>
+              <p>Progress for <strong>all subject categories</strong> in Elementary</p>
+            </li>
+            <li class="dsib-list-item dsib-good">
+              <span class="dsib-pill dsib-pill--good">Good</span>
+              <p>Attainment in <strong>Arabic &amp; Islamic Studies</strong> — Elementary</p>
+            </li>
+            <li class="dsib-list-item dsib-good">
+              <span class="dsib-pill dsib-pill--good">Good</span>
+              <p>Attainment in <strong>Elementary Mathematics</strong></p>
+            </li>
+            <li class="dsib-list-item dsib-good">
+              <span class="dsib-pill dsib-pill--good">Good</span>
+              <p>Attainment in <strong>High School Mathematics</strong></p>
+            </li>
+            <li class="dsib-list-item dsib-vgood">
+              <span class="dsib-pill dsib-pill--vgood">Very Good</span>
+              <p><strong>Personal Development</strong> in Kindergarten</p>
+            </li>
+            <li class="dsib-list-item dsib-vgood">
+              <span class="dsib-pill dsib-pill--vgood">Very Good</span>
+              <p><strong>Personal Development</strong> in Elementary</p>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Inspector Quotes -->
+        <div class="dsib-quotes animate-fade-up">
+          <div class="dsib-col-label"><i class="fas fa-quote-right"></i> Inspector Quotes</div>
+          <div class="dsib-quotes-grid">
+            <blockquote class="dsib-quote">
+              <p>"Students' learning skills are <strong>good across the school.</strong>"</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"Teachers possess <strong>secure knowledge of their subjects.</strong>"</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"Teaching in KG and Elementary is characterised by <strong>purposeful planning</strong> and instructional approaches that suit student needs."</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"The curriculum is <strong>systematically adapted</strong> to support students' academic progress."</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"Students clearly show appreciation and understanding of <strong>Islamic values</strong> and how these values shape their daily lives in the UAE."</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"<strong>Safeguarding, child protection and anti-bullying</strong> are high priorities."</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"Students possess a clear knowledge and appreciation of <strong>Emirati culture.</strong>"</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"The <strong>leadership team manages the school effectively.</strong>"</p>
+            </blockquote>
+          </div>
+        </div>
+
+      </div><!-- /.dsib-grid -->
+
+      <!-- Bottom CTA strip -->
+      <div class="dsib-cta-strip">
+        <div class="dsib-cta-left">
+          <i class="fas fa-shield-alt dsib-cta-icon"></i>
+          <div>
+            <strong>KHDA Licensed &amp; DSIB Evaluated</strong>
+            <span>North American International School Dubai — 2023–2024 Academic Year</span>
+          </div>
+        </div>
+        <a href="admissions.html#apply" class="btn btn-primary">Apply for 2025–2026 <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </section>
+
   <!-- CAMPUS SECTION -->
   <section class="section-pad bg-light" id="campus">
     <div class="container">
@@ -598,7 +669,7 @@
     <div class="footer-top"><div class="container"><div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo">
-          <img src="images/nais-logo.svg" alt="NAIS Dubai Logo" class="footer-logo-img" />
+          <img src="images/nais-logo.png" alt="NAIS Dubai Logo" class="footer-logo-img" />
         </div>
         <p class="footer-desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
         <div class="footer-social">

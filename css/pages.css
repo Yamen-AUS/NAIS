@@ -680,3 +680,233 @@
   .adm-why-img--main{width:100%;height:200px;position:relative;left:0;bottom:0;}
   .adm-why-img--small{display:none;}
 }
+
+/* ══════════════════════════════════════════════════════════════
+   DSIB INSPECTION SECTION
+══════════════════════════════════════════════════════════════ */
+.dsib-section {
+  background: linear-gradient(160deg, #f0f3fb 0%, #ffffff 60%, #f8f0f0 100%);
+  position: relative;
+  overflow: hidden;
+}
+.dsib-section::before {
+  content: 'DSIB';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 14rem;
+  font-weight: 900;
+  color: rgba(31,47,110,0.04);
+  font-family: var(--font-display);
+  pointer-events: none;
+  line-height: 1;
+}
+
+/* ── Rating Badges Row ── */
+.dsib-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin: 40px 0 52px;
+}
+
+.dsib-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  border-radius: 50px;
+  font-family: var(--font-display);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.09);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.dsib-badge:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+}
+
+.dsib-badge--good {
+  background: #fff;
+  border: 2px solid #1F2F6E;
+}
+.dsib-badge--good .dsib-badge-icon {
+  width: 36px; height: 36px;
+  background: #1F2F6E;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.dsib-badge--good strong { color: #1F2F6E; display: block; font-size: 0.85rem; }
+.dsib-badge--good span   { color: var(--gray-500); font-size: 0.75rem; }
+
+.dsib-badge--vgood {
+  background: #fff;
+  border: 2px solid #E11B22;
+}
+.dsib-badge--vgood .dsib-badge-icon {
+  width: 36px; height: 36px;
+  background: #E11B22;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.dsib-badge--vgood strong { color: #E11B22; display: block; font-size: 0.85rem; }
+.dsib-badge--vgood span   { color: var(--gray-500); font-size: 0.75rem; }
+
+/* ── Two-column grid ── */
+.dsib-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+
+.dsib-col-label {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--red);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.dsib-col-label i { color: var(--red); }
+
+/* ── Ratings List ── */
+.dsib-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.dsib-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border-left: 3px solid transparent;
+  transition: transform 0.2s ease;
+}
+.dsib-list-item:hover { transform: translateX(4px); }
+.dsib-list-item.dsib-good  { border-left-color: #1F2F6E; }
+.dsib-list-item.dsib-vgood { border-left-color: #E11B22; }
+.dsib-list-item p { margin: 0; font-size: 0.88rem; color: var(--gray-700); line-height: 1.5; padding-top: 2px; }
+
+.dsib-pill {
+  display: inline-block;
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.dsib-pill--good  { background: #eef1fa; color: #1F2F6E; }
+.dsib-pill--vgood { background: #fdecea; color: #E11B22; }
+
+/* ── Inspector Quotes ── */
+.dsib-quotes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.dsib-quote {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 0;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+  border-top: 3px solid #1F2F6E;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.dsib-quote:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(31,47,110,0.12);
+}
+.dsib-quote::before {
+  content: '\201C';
+  font-size: 3rem;
+  color: rgba(31,47,110,0.1);
+  font-family: Georgia, serif;
+  position: absolute;
+  top: 2px;
+  left: 10px;
+  line-height: 1;
+}
+.dsib-quote p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--gray-700);
+  line-height: 1.65;
+  font-style: italic;
+}
+.dsib-quote p strong { color: var(--navy); font-style: normal; }
+
+/* ── Bottom CTA Strip ── */
+.dsib-cta-strip {
+  background: linear-gradient(105deg, var(--navy) 0%, #2a3f8f 100%);
+  border-radius: 16px;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  box-shadow: 0 8px 40px rgba(31,47,110,0.25);
+}
+.dsib-cta-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #fff;
+}
+.dsib-cta-icon {
+  font-size: 2.2rem;
+  color: rgba(255,255,255,0.7);
+  flex-shrink: 0;
+}
+.dsib-cta-left strong {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: #fff;
+  margin-bottom: 3px;
+}
+.dsib-cta-left span {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .dsib-grid { grid-template-columns: 1fr; gap: 32px; }
+  .dsib-quotes-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .dsib-badges-row { gap: 10px; }
+  .dsib-badge { padding: 10px 14px; font-size: 0.8rem; }
+  .dsib-cta-strip { flex-direction: column; text-align: center; padding: 24px 20px; }
+  .dsib-cta-left { flex-direction: column; gap: 10px; }
+  .dsib-section::before { display: none; }
+}
+

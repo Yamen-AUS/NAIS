@@ -4,41 +4,44 @@
    ============================================================ */
 
 /* ─────────────────────────────────────────────
-   GLOBAL MOBILE BASE
+   CRITICAL LAYOUT FIXES — must come first
 ───────────────────────────────────────────── */
 @media (max-width: 1199px) {
-  /* Body already padded via nav.css (padding-top:58px) */
-  *, *::before, *::after { box-sizing: border-box; }
+  /* Kill body right padding (desktop nav-rail space) */
+  body {
+    padding-right: 0 !important;
+    padding-top: 58px !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
 
+  /* Force topbar hidden — all properties to zero */
+  .topbar,
+  #main-topbar {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    position: static !important;
+    pointer-events: none !important;
+  }
+
+  /* Make main containers full width */
   .container {
+    width: 100% !important;
+    max-width: 100% !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
-  }
-
-  /* Section padding tighter on mobile */
-  .section-pad { padding-top: 56px !important; padding-bottom: 56px !important; }
-
-  /* Section headers */
-  .section-label { font-size: 0.68rem !important; }
-  .section-title { font-size: clamp(1.5rem, 6vw, 2.2rem) !important; }
-  .section-subtitle { font-size: 0.9rem !important; }
-}
-
-/* ─────────────────────────────────────────────
-   MOBILE NAV LOGO  (intro + topbar)
-───────────────────────────────────────────── */
-@media (max-width: 1199px) {
-  /* Mobile top-bar logo */
-  .nav-mobile-logo-img {
-    height: 40px !important;
-    width: auto !important;
-    max-width: 180px !important;
-    object-fit: contain !important;
-    background: #fff;
-    padding: 4px 10px;
-    border-radius: 6px;
+    box-sizing: border-box !important;
   }
 }
+
 
 /* ─────────────────────────────────────────────
    HERO SECTION  (index.html)
