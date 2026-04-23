@@ -1,0 +1,579 @@
+/* ============================================================
+   NAIS DUBAI – Mobile & Responsive Fixes
+   Covers: 320px → 1199px
+   ============================================================ */
+
+/* ─────────────────────────────────────────────
+   GLOBAL MOBILE BASE
+───────────────────────────────────────────── */
+@media (max-width: 1199px) {
+  /* Body already padded via nav.css (padding-top:58px) */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* Section padding tighter on mobile */
+  .section-pad { padding-top: 56px !important; padding-bottom: 56px !important; }
+
+  /* Section headers */
+  .section-label { font-size: 0.68rem !important; }
+  .section-title { font-size: clamp(1.5rem, 6vw, 2.2rem) !important; }
+  .section-subtitle { font-size: 0.9rem !important; }
+}
+
+/* ─────────────────────────────────────────────
+   MOBILE NAV LOGO  (intro + topbar)
+───────────────────────────────────────────── */
+@media (max-width: 1199px) {
+  /* Mobile top-bar logo */
+  .nav-mobile-logo-img {
+    height: 40px !important;
+    width: auto !important;
+    max-width: 180px !important;
+    object-fit: contain !important;
+    background: #fff;
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   HERO SECTION  (index.html)
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 100svh;
+    padding-top: 58px;
+  }
+
+  .hero-content {
+    padding: 48px 20px 32px !important;
+    text-align: center;
+  }
+
+  .hero-badge { margin: 0 auto 16px !important; }
+
+  .hero-title {
+    font-size: clamp(1.9rem, 9vw, 3rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 16px !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem !important;
+    margin-bottom: 28px !important;
+  }
+
+  .hero-actions {
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-outline {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 14px 20px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .hero-stats {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0 !important;
+    position: relative !important;
+    bottom: auto !important;
+    background: rgba(10,14,31,0.85) !important;
+    border-top: 1px solid rgba(255,255,255,0.08) !important;
+  }
+
+  .stat-item {
+    flex: 1 1 50% !important;
+    padding: 14px 12px !important;
+    text-align: center !important;
+    border-right: 1px solid rgba(255,255,255,0.06) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  }
+
+  .stat-item:nth-child(even) { border-right: none !important; }
+
+  .stat-num { font-size: 1.4rem !important; }
+  .stat-label { font-size: 0.65rem !important; }
+}
+
+/* ─────────────────────────────────────────────
+   ANNOUNCEMENT BAR
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .announcement-inner {
+    padding: 8px 16px !important;
+    font-size: 0.78rem !important;
+    gap: 8px !important;
+  }
+  .ann-more { display: none !important; }
+}
+
+/* ─────────────────────────────────────────────
+   WELCOME / INTRO SECTION
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .welcome-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  .welcome-image-col { order: -1; }
+  .welcome-image-wrap { height: 260px !important; border-radius: 12px !important; }
+  .welcome-image-wrap img { height: 100% !important; object-fit: cover !important; }
+
+  .welcome-quote-box {
+    padding: 18px 20px !important;
+    font-size: 0.88rem !important;
+  }
+
+  .pillar-cards {
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .pillar-card { padding: 14px 16px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   USP / KPI STRIP
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .usp-pillars {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px !important;
+  }
+
+  .usp-pillar {
+    padding: 20px 14px !important;
+    text-align: center !important;
+  }
+
+  .kpi-cards-row {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px !important;
+  }
+
+  .kpi-card {
+    padding: 22px 14px !important;
+    text-align: center !important;
+  }
+
+  .kpi-num { font-size: 2rem !important; }
+}
+
+@media (max-width: 480px) {
+  .usp-pillars { grid-template-columns: 1fr !important; }
+  .kpi-cards-row { grid-template-columns: 1fr !important; }
+}
+
+/* ─────────────────────────────────────────────
+   NEWS & EVENTS CARDS
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .news-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .news-card { margin: 0 !important; }
+
+  .news-card-img { height: 200px !important; }
+
+  .news-card-body { padding: 18px !important; }
+  .news-card-body h3 { font-size: 1rem !important; }
+}
+
+/* ─────────────────────────────────────────────
+   RECRUIT / VISIT SECTION
+───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .recruit-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 18px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .recruit-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .recruit-card { padding: 20px !important; }
+
+  /* Leader cards in recruit section */
+  .recruit-leader-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .recruit-leader-card { max-width: 360px !important; margin: 0 auto !important; }
+}
+
+/* ─────────────────────────────────────────────
+   VISUAL BANNER (recruit section)
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .recruit-visual-banner { height: 200px !important; }
+  .recruit-banner-overlay h3 { font-size: 1.05rem !important; }
+  .recruit-banner-overlay p { display: none !important; }
+  .recruit-banner-badge { font-size: 0.6rem !important; padding: 4px 10px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   CAMPUS 360 TOUR SECTION
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .tour-selector { flex-wrap: wrap !important; gap: 8px !important; }
+  .tour-btn { flex: 1 1 calc(33% - 8px) !important; padding: 10px 6px !important; font-size: 0.72rem !important; }
+  .tour-frame-wrap { height: 280px !important; border-radius: 10px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   PROGRAMS GRID
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .programs-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+  }
+  .program-card { padding: 20px 14px !important; }
+}
+
+@media (max-width: 480px) {
+  .programs-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ─────────────────────────────────────────────
+   STUDENT LIFE / GALLERY
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .life-showcase {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+  }
+
+  .life-main { height: 260px !important; }
+
+  .life-grid-side {
+    flex-direction: row !important;
+    height: 160px !important;
+  }
+
+  .life-card { height: 160px !important; }
+
+  .photo-gallery {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: repeat(3, 150px) !important;
+  }
+
+  .photo-gallery-item:first-child {
+    grid-column: span 2 !important;
+    grid-row: span 1 !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   TESTIMONIALS
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .testimonials-slider { gap: 16px !important; }
+  .testimonial-card {
+    min-width: 280px !important;
+    padding: 22px 18px !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   CONTACT SECTION
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .contact-form { padding: 24px 18px !important; }
+  .form-row { grid-template-columns: 1fr !important; }
+  .contact-info-item { gap: 12px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  .footer-logo-img {
+    height: 48px !important;
+    max-width: 180px !important;
+  }
+
+  .footer-brand { margin-bottom: 8px !important; }
+
+  .footer-bottom .container {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 8px !important;
+  }
+
+  .footer-bottom-links { justify-content: center !important; flex-wrap: wrap !important; }
+}
+
+/* ─────────────────────────────────────────────
+   PAGE HERO (inner pages)
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 80px 20px 48px !important;
+    text-align: center !important;
+    min-height: 260px !important;
+  }
+
+  .page-hero-title {
+    font-size: clamp(1.8rem, 8vw, 2.8rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  .page-hero-sub { font-size: 0.9rem !important; }
+
+  .breadcrumb { justify-content: center !important; }
+}
+
+/* ─────────────────────────────────────────────
+   LEADERSHIP CARDS (about.html)
+───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .leadership-grid-equal {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .leadership-grid-equal {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    max-width: 400px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .leader-card-photo { height: 260px !important; }
+  .leader-card-info { padding: 18px 16px !important; }
+  .leader-card-quote { font-size: 0.85rem !important; }
+}
+
+/* ─────────────────────────────────────────────
+   ACADEMICS HIGHLIGHTS BAR
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .academics-highlights {
+    flex-direction: column !important;
+    gap: 18px !important;
+    padding: 20px !important;
+  }
+
+  .acad-highlight-divider {
+    width: 100% !important;
+    height: 1px !important;
+    margin: 0 !important;
+  }
+
+  .acad-highlight-item { width: 100% !important; text-align: center !important; }
+}
+
+/* ─────────────────────────────────────────────
+   ADMISSIONS STEPS
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .admissions-steps {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0 !important;
+  }
+
+  .adm-step { text-align: center !important; width: 100% !important; max-width: 320px !important; }
+
+  .adm-step-arrow {
+    transform: rotate(90deg) !important;
+    margin: 8px auto !important;
+    display: block !important;
+  }
+
+  .adm-step-num { margin: 0 auto 12px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   MATH & SCIENCE SECTION
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .math-science-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  .math-science-features {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+
+  .math-science-img-col img { height: 240px !important; border-radius: 12px !important; }
+  .math-science-badge { right: 12px !important; bottom: 12px !important; }
+}
+
+@media (max-width: 480px) {
+  .math-science-features { grid-template-columns: 1fr !important; }
+}
+
+/* ─────────────────────────────────────────────
+   TOUR BANNER
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .tour-banner-inner {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 18px !important;
+  }
+
+  .tour-banner-text h3 { font-size: 1.4rem !important; }
+  .tour-banner-text p { font-size: 0.88rem !important; }
+}
+
+/* ─────────────────────────────────────────────
+   INTRO OVERLAY (mobile)
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  #intro-logo-img {
+    height: 52px !important;
+    max-width: 220px !important;
+    padding: 7px 14px !important;
+    top: 12px !important;
+    left: 12px !important;
+  }
+
+  #intro-skip {
+    top: 14px !important;
+    right: 14px !important;
+    font-size: 8px !important;
+    padding: 6px 14px !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   FLOATING BUTTONS (mobile)
+───────────────────────────────────────────── */
+@media (max-width: 1199px) {
+  .apply-float { right: 20px !important; bottom: 144px !important; }
+  .whatsapp-float { right: 20px !important; bottom: 80px !important; }
+  .back-to-top { right: 20px !important; }
+}
+
+@media (max-width: 480px) {
+  .apply-float { width: 46px !important; height: 46px !important; font-size: 1.1rem !important; bottom: 132px !important; }
+  .whatsapp-float { width: 46px !important; height: 46px !important; font-size: 1.3rem !important; bottom: 74px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   WHY CHOOSE US
+───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .why-grid { grid-template-columns: 1fr 1fr !important; gap: 18px !important; }
+}
+
+@media (max-width: 560px) {
+  .why-grid { grid-template-columns: 1fr !important; }
+  .why-card { padding: 24px 18px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   STATS GRID
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .stats-grid-full {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+
+  .stat-card { padding: 22px 14px !important; }
+  .stat-card-num { font-size: 2.2rem !important; }
+}
+
+@media (max-width: 400px) {
+  .stats-grid-full { grid-template-columns: 1fr !important; }
+}
+
+/* ─────────────────────────────────────────────
+   CARE SECTION
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .care-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .care-card { padding: 22px 18px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   UNIVERSITY LOGOS STRIP
+───────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .uni-logos { gap: 16px 22px !important; }
+  .uni-logo-badge { width: 58px !important; height: 58px !important; }
+  .uni-logo-badge i { font-size: 1.2rem !important; }
+  .uni-logo-item span { font-size: 0.62rem !important; }
+}
+
+/* ─────────────────────────────────────────────
+   SECTION HEADER
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .section-header-right { align-self: flex-start !important; }
+}
+
+/* ─────────────────────────────────────────────
+   MAP
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .map-wrap { height: 260px !important; }
+}
+
+/* ─────────────────────────────────────────────
+   PREVENT HORIZONTAL SCROLL
+───────────────────────────────────────────── */
+@media (max-width: 1199px) {
+  body { overflow-x: hidden !important; }
+  .container { max-width: 100% !important; }
+}
+
+/* ─────────────────────────────────────────────
+   SMALL PHONE (320px – 375px)
+───────────────────────────────────────────── */
+@media (max-width: 375px) {
+  .container { padding-left: 14px !important; padding-right: 14px !important; }
+  .section-pad { padding-top: 44px !important; padding-bottom: 44px !important; }
+  .section-title { font-size: 1.55rem !important; }
+  .hero-title { font-size: 1.7rem !important; }
+
+  .recruit-card { padding: 16px 14px !important; }
+  .leader-card-photo { height: 220px !important; }
+  .news-card-img { height: 170px !important; }
+}

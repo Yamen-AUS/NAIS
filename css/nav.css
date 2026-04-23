@@ -588,8 +588,9 @@ html.nav-open { overflow: hidden; }
    RESPONSIVE  ≤ 1199 px  (mobile / tablet)
 ───────────────────────────────────────────── */
 @media (max-width: 1199px) {
-  /* Hide topbar on small screens */
-  .topbar { display: none; }
+  /* Hide topbar on small screens — !important overrides inline style */
+  .topbar { display: none !important; }
+  #main-topbar { display: none !important; }
   .site-header { display: none !important; }
 
   /* Nav rail becomes full-width horizontal top bar */
