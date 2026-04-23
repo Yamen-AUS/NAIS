@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Academics | North American International School Dubai</title>
+  <meta name="description" content="Explore NAIS Dubai's comprehensive American curriculum programs from Kindergarten through Grade 12, including AP courses, inclusion support, and university counseling." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" href="images/nais-logo.png?v=3" type="image/png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css?v=5" />
+  <link rel="stylesheet" href="css/pages.css?v=5" />
+  <link rel="stylesheet" href="css/nav.css?v=5" />
+  <style>
+    #site-intro{position:fixed;inset:0;z-index:99999;opacity:1;transition:opacity 1.2s ease;background:#0A0E1F;font-family:'Montserrat',Arial Black,sans-serif;}
+    #site-intro.intro-out{opacity:0;pointer-events:none;}
+    #intro-canvas{display:block;width:100%;height:100%;}
+    #intro-logo-img{position:absolute;top:clamp(12px,2.5vw,28px);left:clamp(12px,2.5vw,28px);height:clamp(44px,5.5vw,68px);width:auto;max-width:clamp(160px,20vw,270px);opacity:0;transform:translateY(-8px);transition:opacity 0.7s ease 0.2s,transform 0.7s ease 0.2s;background:#fff;padding:5px 10px;border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,0.4);object-fit:contain;z-index:2;}
+    #intro-logo-img.show{opacity:1;transform:translateY(0);}
+    #intro-skip{position:absolute;top:clamp(18px,3vw,42px);right:clamp(18px,3.5vw,50px);font-family:'Montserrat',Arial Black,sans-serif;font-size:9px;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:rgba(255,255,255,0.55);background:transparent;border:1px solid rgba(255,255,255,0.32);padding:8px 20px;border-radius:2px;cursor:pointer;opacity:0;transition:opacity 0.5s ease,color 0.2s,background 0.2s;z-index:2;}
+    #intro-skip.show{opacity:1;}
+    #intro-skip:hover{background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.65);}
+    #intro-progbar{position:absolute;bottom:0;left:0;height:4px;width:0;background:#E11B22;z-index:2;transition:width 7.5s linear;}
+
+    /* TOPBAR LOGO FIX */
+    .topbar{overflow:visible!important;height:62px!important;display:flex!important;align-items:center!important;}
+    .topbar-inner{height:62px!important;display:flex!important;align-items:center!important;padding:0 60px 0 0!important;}
+    .topbar-logo{width:auto!important;height:68px!important;max-height:68px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:6px 16px 6px 12px!important;background:#fff!important;flex-shrink:0!important;}
+    .topbar-logo-img{width:auto!important;height:56px!important;max-width:220px!important;max-height:56px!important;object-fit:contain!important;object-position:left center!important;display:block!important;}
+    #intro-logo-img{position:absolute;top:clamp(14px,2.5vw,32px);left:clamp(14px,2.5vw,32px);height:44px;width:auto;max-width:180px;opacity:0;transform:translateY(-8px);transition:opacity 0.7s ease 0.2s,transform 0.7s ease 0.2s;background:#fff;padding:5px 10px;border-radius:6px;object-fit:contain;box-shadow:0 4px 20px rgba(0,0,0,0.4);z-index:2;}
+  </style>
+</head>
+<body>
+
+  <!-- ══ INTRO OVERLAY ══ -->
+  <div id="site-intro">
+    <canvas id="intro-canvas"></canvas>
+    <img src="images/nais-logo.svg" id="intro-logo-img" alt="NAIS Dubai" />
+    <button id="intro-skip">SKIP &nbsp;✕</button>
+    <div id="intro-progbar"></div>
+  </div>
+  <script>
+  (function(){
+    "use strict";
+    var AUTO_MS=7500,SLIDE_MS=3200,RED="#E11B22";
+    var IMG_URLS=["https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=80","https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80","https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80","https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=1600&q=80"];
+    var introEl=document.getElementById("site-intro"),canvas=document.getElementById("intro-canvas"),ctx=canvas.getContext("2d"),logoImg=document.getElementById("intro-logo-img"),skipBtn=document.getElementById("intro-skip"),progBar=document.getElementById("intro-progbar");
+    var W,H,DPR,imgs=[],curImg=0,nextImg=1,blending=false,blendPct=0,word0Y=0,word1Y=0,tagA=0,accentPct=0,enterA=0,dismissed=false,autoTimer,lastTs=null,raf,t0=null;
+    IMG_URLS.forEach(function(url,i){var im=new Image();im.crossOrigin="anonymous";im.src=url;imgs[i]=im;});
+    function resize(){DPR=window.devicePixelRatio||1;var r=canvas.parentElement.getBoundingClientRect();W=canvas.width=Math.round(r.width*DPR);H=canvas.height=Math.round(r.height*DPR);}
+    window.addEventListener("resize",resize);resize();
+    function drawImg(img,alpha){if(!img||!img.complete||!img.naturalWidth)return;ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,alpha));var sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);ctx.drawImage(img,(W-img.naturalWidth*sc)/2,(H-img.naturalHeight*sc)/2,img.naturalWidth*sc,img.naturalHeight*sc);ctx.restore();}
+    function getFZ(){return Math.min(Math.max(W*0.125,60*DPR),190*DPR);}
+    function easeOut(t){return 1-Math.pow(1-t,3);}
+    function frame(ts){
+      if(!t0)t0=ts;
+      var dt=lastTs?Math.min((ts-lastTs)/1000,0.05):0;lastTs=ts;var el=(ts-t0)/1000;
+      if(blending){blendPct+=dt/(SLIDE_MS/1000*0.38);if(blendPct>=1){blendPct=1;blending=false;curImg=nextImg;}}
+      if(el>0.30)word0Y=Math.min(word0Y+dt*3.5,1);
+      if(el>0.58)word1Y=Math.min(word1Y+dt*3.5,1);
+      if(el>1.15)tagA=Math.min(tagA+dt*2.2,1);
+      if(el>1.35)accentPct=Math.min(accentPct+dt*2.0,1);
+      if(el>2.20)enterA=Math.min(enterA+dt*2.0,1);
+      ctx.clearRect(0,0,W,H);ctx.fillStyle="#0A0E1F";ctx.fillRect(0,0,W,H);
+      drawImg(imgs[curImg],blending?1-blendPct:1);
+      if(blending)drawImg(imgs[nextImg],blendPct);
+      var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"rgba(0,0,0,0.42)");g.addColorStop(.45,"rgba(0,0,0,0.18)");g.addColorStop(1,"rgba(0,0,0,0.60)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+      var fz=getFZ(),baseY=H*0.5+fz*0.32;
+      ctx.font="900 "+fz+"px 'Montserrat',Arial Black,sans-serif";ctx.textBaseline="alphabetic";ctx.textAlign="left";
+      var weW=ctx.measureText("WE").width,beW=ctx.measureText("BELIEVE").width,gap=fz*0.19,sx=(W-weW-gap-beW)/2;
+      ctx.save();ctx.globalAlpha=word0Y;ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=22*DPR;ctx.fillStyle="#fff";ctx.fillText("WE",sx,baseY+(1-easeOut(word0Y))*fz*1.4);ctx.restore();
+      ctx.save();ctx.globalAlpha=word1Y;ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=22*DPR;ctx.fillStyle="#fff";ctx.fillText("BELIEVE",sx+weW+gap,baseY+(1-easeOut(word1Y))*fz*1.4);ctx.restore();
+      if(tagA>0.01){ctx.save();ctx.globalAlpha=tagA;ctx.font="700 "+Math.round(fz*0.080)+"px 'Montserrat',sans-serif";ctx.textAlign="center";ctx.textBaseline="alphabetic";ctx.fillStyle="rgba(255,255,255,0.78)";ctx.fillText("NORTH AMERICAN INTERNATIONAL SCHOOL  \u00B7  DUBAI, UAE",W/2,baseY+fz*0.31);ctx.restore();}
+      if(accentPct>0){var lw=58*DPR*easeOut(accentPct);ctx.save();ctx.globalAlpha=tagA;ctx.fillStyle=RED;ctx.fillRect(W/2-lw/2,baseY+fz*0.48,lw,3*DPR);ctx.restore();}
+      if(enterA>0.01){var bx=W/2,by=H-76*DPR,bw=218*DPR,bh=46*DPR;ctx.save();ctx.globalAlpha=enterA;ctx.strokeStyle="rgba(255,255,255,0.65)";ctx.lineWidth=1.5*DPR;ctx.strokeRect(bx-bw/2,by-bh/2,bw,bh);ctx.fillStyle="#fff";ctx.font="700 "+Math.round(fz*0.080)+"px 'Montserrat',sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("ENTER SITE  \u2192",bx,by);ctx.restore();canvas._btn={x:bx-bw/2,y:by-bh/2,w:bw,h:bh};}
+      raf=requestAnimationFrame(frame);
+    }
+    setInterval(function(){if(dismissed)return;nextImg=(curImg+1)%imgs.length;blendPct=0;blending=true;},SLIDE_MS);
+    function dismiss(){if(dismissed)return;dismissed=true;clearTimeout(autoTimer);cancelAnimationFrame(raf);introEl.classList.add("intro-out");logoImg.style.opacity="0";skipBtn.style.opacity="0";progBar.style.opacity="0";}
+    canvas.addEventListener("click",function(e){if(enterA<0.45)return;var r=canvas.getBoundingClientRect();var cx=(e.clientX-r.left)*DPR,cy=(e.clientY-r.top)*DPR;var b=canvas._btn;if(!b||(cx>=b.x&&cx<=b.x+b.w&&cy>=b.y&&cy<=b.y+b.h)){dismiss();}});
+    skipBtn.addEventListener("click",dismiss);
+    document.addEventListener("keydown",function(e){if(e.key!=="Tab"&&e.key!=="Shift")dismiss();});
+    raf=requestAnimationFrame(frame);
+    requestAnimationFrame(function(){logoImg.classList.add("show");});
+    setTimeout(function(){skipBtn.classList.add("show");},2000);
+    requestAnimationFrame(function(){progBar.style.transition="width "+(AUTO_MS/1000).toFixed(1)+"s linear";progBar.style.width="100%";});
+    autoTimer=setTimeout(dismiss,AUTO_MS);
+  }());
+  </script>
+
+  <!-- TOP BAR -->
+  <div class="topbar" style="height:62px;overflow:visible;display:flex;align-items:center;">
+    <div class="topbar-inner" style="height:62px;display:flex;align-items:center;width:100%;padding:0 60px 0 0;">
+      <a href="index.html" class="topbar-logo" aria-label="NAIS Dubai – Home" style="width:auto;height:68px;overflow:visible;display:flex;align-items:center;justify-content:flex-start;padding:6px 16px 6px 12px;background:#fff;flex-shrink:0;">
+        <img src="images/nais-logo.png" alt="North American International School Dubai" class="topbar-logo-img" style="width:auto;height:56px;max-width:220px;max-height:56px;object-fit:contain;object-position:left center;display:block;" />
+      </a>
+      <div class="topbar-left">
+        <a href="tel:+97142635456"><i class="fas fa-phone-alt"></i> +971 4 263 5456</a>
+        <a href="mailto:admissions@naischool.ae"><i class="fas fa-envelope"></i> admissions@naischool.ae</a>
+        <span><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</span>
+      </div>
+      <div class="topbar-right">
+        <a href="#" class="topbar-link">Parent Portal</a>
+        <span class="topbar-divider">|</span>
+        <a href="#" class="topbar-link">E-Learning</a>
+        <span class="topbar-divider">|</span>
+        <a href="#" class="topbar-link">Careers</a>
+        <div class="topbar-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT-SIDE NAV RAIL -->
+  <div class="nav-rail" id="nav-rail" role="button" aria-label="Open Navigation Menu" aria-expanded="false">
+    <div class="nav-rail-inner" id="nav-rail-trigger">
+      <a href="index.html" class="logo-wrap" aria-label="NAIS Home">
+        <img src="images/nais-logo.svg" alt="NAIS" style="height:34px;max-height:34px;max-width:180px;object-fit:contain;background:#fff;padding:3px 7px;border-radius:3px;" />
+      </a>
+      <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
+        <div class="nav-rail-lines"><span></span><span></span><span></span></div>
+        <span class="nav-rail-label">MENU</span>
+      </button>
+    </div>
+    <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
+    <span id="nav-desktop-label">MENU</span>
+  </div>
+
+  <!-- FULL-SCREEN NAV OVERLAY -->
+  <div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Main Navigation" aria-hidden="true" style="background-color:#0b1230;">
+
+    <!-- LEFT VISUAL PANEL -->
+    <div class="nav-left-panel" aria-hidden="true" style="background-color:#0a1128;position:relative;flex-shrink:0;">
+      <div class="nav-left-bg" style="position:absolute;inset:0;background:linear-gradient(155deg,#0f1d45 0%,#1e3175 40%,#0a1128 100%);z-index:0;"></div>
+      <div class="nav-left-content">
+        <a href="index.html" class="nav-left-logo">
+          <img src="images/nais-logo.png" alt="North American International School" style="height:72px;max-width:300px;width:auto;object-fit:contain;display:block;" />
+        </a>
+        <div class="nav-left-tagline">
+          <div class="nav-left-tagline-top">Est. 2005 · Dubai, UAE</div>
+          <div class="nav-left-tagline-title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
+          <p class="nav-left-tagline-sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
+        </div>
+        <div class="nav-left-spacer"></div>
+        <div class="nav-promo-card">
+          <div class="nav-promo-card-label">Open Enrollment</div>
+          <div class="nav-promo-card-title">Apply for <span>2025–2026</span></div>
+          <p class="nav-promo-card-desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
+          <a href="admissions.html" class="nav-promo-card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT NAV PANEL -->
+    <div class="nav-right-panel" style="background-color:#0d1535;">
+      <div class="nav-close" id="nav-close" aria-label="Close Navigation">
+        <button class="nav-close-inner" aria-label="Close Menu">&#x2715;</button>
+      </div>
+      <div class="nav-panel">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-primary-list">
+          <li class="nav-primary-item" data-item="about">
+            <a href="about.html" class="nav-primary-link">About</a>
+            <ul class="nav-subnav">
+              <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link">Mission &amp; Vision</a></li>
+              <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">School Leadership</a></li>
+              <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link">Core Values — CARE</a></li>
+              <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link">Our Campus</a></li>
+              <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link">Accreditation</a></li>
+            </ul>
+          </li>
+          <li class="nav-primary-item" data-item="academics">
+            <a href="academics.html" class="nav-primary-link">Academics</a>
+            <ul class="nav-subnav">
+              <li class="nav-subnav-item"><a href="academics.html#kindergarten" class="nav-subnav-link">Kindergarten</a></li>
+              <li class="nav-subnav-item"><a href="academics.html#elementary" class="nav-subnav-link">Elementary School</a></li>
+              <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link">Middle School</a></li>
+              <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link">High School</a></li>
+              <li class="nav-subnav-item"><a href="academics.html#inclusion" class="nav-subnav-link">Inclusion Program</a></li>
+              <li class="nav-subnav-item nav-subnav-item--has-children">
+                <a href="academics.html#ap" class="nav-subnav-link">AP Courses <i class="nav-subnav-expand fas fa-chevron-right"></i></a>
+                <ul class="nav-subnav-level3 nav-subnav-level3-wrap">
+                  <li><a href="academics.html#ap" class="nav-subnav-link">Math &amp; Sciences</a></li>
+                  <li><a href="academics.html#ap" class="nav-subnav-link">Humanities &amp; Languages</a></li>
+                  <li><a href="academics.html#ap" class="nav-subnav-link">Computer Science</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-primary-item" data-item="student-life">
+            <a href="index.html#student-life" class="nav-primary-link">Student Life</a>
+            <ul class="nav-subnav">
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Arts &amp; Culture</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Athletics &amp; Sports</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Clubs &amp; Activities</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Community Service</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Student Council</a></li>
+            </ul>
+          </li>
+          <li class="nav-primary-item" data-item="admissions">
+            <a href="admissions.html" class="nav-primary-link">Admissions</a>
+            <ul class="nav-subnav">
+              <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link">How to Apply</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link">Tuition &amp; Fees</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link">Required Documents</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#faq" class="nav-subnav-link">Admissions FAQ</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link">Apply Now</a></li>
+            </ul>
+          </li>
+          <li class="nav-primary-item" data-item="news">
+            <a href="index.html#news" class="nav-primary-link">News &amp; Events</a>
+            <ul class="nav-subnav">
+              <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link">Latest News</a></li>
+              <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link">Events Calendar</a></li>
+              <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link">Announcements</a></li>
+              <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link">Contact Us</a></li>
+              <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link">Visit Campus</a></li>
+            </ul>
+          </li>
+        </ul>
+        </nav>
+        <div class="nav-panel-bottom">
+          <div class="nav-bottom-careers">
+            <span class="nav-careers-label">Career Opportunities</span>
+            <div class="nav-bottom-social">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="nav-bottom-search">
+            <span class="nav-search-label">Search</span>
+            <div class="nav-search-form">
+              <input type="text" class="nav-search-input" placeholder="Keyword" aria-label="Search" />
+              <button class="nav-search-btn" aria-label="Submit Search"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <a href="admissions.html" class="nav-apply-btn">Apply Now</a>
+        </div>
+      </div><!-- /.nav-panel -->
+    </div><!-- /.nav-right-panel -->
+  </div><!-- /.nav-overlay -->
+
+  <!-- QUICK LINKS BAR -->
+  <nav class="quick-links-bar" aria-label="Quick Access Links">
+    <div class="quick-links-inner">
+      <a href="admissions.html#apply" class="quick-link-item highlight"><i class="fas fa-user-plus"></i> Apply Now</a>
+      <a href="admissions.html#fees" class="quick-link-item"><i class="fas fa-dollar-sign"></i> Tuition Fees</a>
+      <a href="#kindergarten" class="quick-link-item"><i class="fas fa-star"></i> Kindergarten</a>
+      <a href="#elementary" class="quick-link-item"><i class="fas fa-book"></i> Elementary</a>
+      <a href="#middle" class="quick-link-item"><i class="fas fa-flask"></i> Middle School</a>
+      <a href="#high" class="quick-link-item"><i class="fas fa-graduation-cap"></i> High School</a>
+      <a href="#ap" class="quick-link-item"><i class="fas fa-award"></i> AP Courses</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1920&q=80')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <nav class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Academics</span></nav>
+      <h1 class="page-hero-title">Academic <em>Programs</em></h1>
+      <p class="page-hero-subtitle">A rigorous American curriculum designed to develop critical thinkers, confident communicators, and lifelong learners from KG through Grade 12.</p>
+    </div>
+    <div class="page-hero-accent">KG–12</div>
+  </section>
+
+  <!-- CURRICULUM INTRO -->
+  <section class="curriculum-intro section-pad" id="curriculum">
+    <div class="container">
+      <div class="curriculum-intro-grid">
+        <div class="animate-fade-up">
+          <div class="section-label">Our Approach</div>
+          <h2 class="section-title">The American Curriculum<br/><em>Advantage</em></h2>
+          <div class="title-ornament"></div>
+          <p>NAIS delivers the rigorous American curriculum — the same standard used by top schools across the United States — enhanced by our international community context and Dubai's global perspective. Our programs are designed to nurture whole-child development: academic excellence, critical thinking, creativity, and strong character.</p>
+          <p>From Kindergarten through Grade 12, students progress through carefully sequenced programs that build on each other, ensuring a seamless educational journey that prepares them for the world's top universities.</p>
+          <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:32px;">
+            <div style="display:flex;align-items:center;gap:10px;background:var(--light-gray);padding:14px 20px;border-radius:var(--radius-md);border-left:3px solid var(--red);">
+              <i class="fas fa-check-circle" style="color:var(--red);font-size:1.1rem;"></i>
+              <span style="font-family:var(--font-display);font-size:0.82rem;font-weight:700;color:var(--navy);">American Curriculum (Common Core + State Standards)</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;background:var(--light-gray);padding:14px 20px;border-radius:var(--radius-md);border-left:3px solid var(--red);">
+              <i class="fas fa-check-circle" style="color:var(--red);font-size:1.1rem;"></i>
+              <span style="font-family:var(--font-display);font-size:0.82rem;font-weight:700;color:var(--navy);">AP (Advanced Placement) Courses in High School</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;background:var(--light-gray);padding:14px 20px;border-radius:var(--radius-md);border-left:3px solid var(--red);">
+              <i class="fas fa-check-circle" style="color:var(--red);font-size:1.1rem;"></i>
+              <span style="font-family:var(--font-display);font-size:0.82rem;font-weight:700;color:var(--navy);">Average Class Size: 18 Students</span>
+            </div>
+          </div>
+        </div>
+        <div class="animate-fade-up" style="transition-delay:0.2s;background:var(--navy);border-radius:var(--radius-xl);padding:44px;color:white;">
+          <h3 style="font-family:var(--font-serif);font-size:1.5rem;margin-bottom:28px;color:var(--white);">By the Numbers</h3>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;align-items:center;gap:18px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+              <span style="font-family:var(--font-display);font-size:2.2rem;font-weight:900;color:var(--red);">95%</span>
+              <span style="font-size:0.88rem;color:rgba(255,255,255,0.7);">University acceptance rate — our graduates attend top institutions across North America, the UK, and Australia</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:18px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+              <span style="font-family:var(--font-display);font-size:2.2rem;font-weight:900;color:var(--red);">18</span>
+              <span style="font-size:0.88rem;color:rgba(255,255,255,0.7);">Maximum students per class — ensuring personalized attention for every learner</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:18px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.08);">
+              <span style="font-family:var(--font-display);font-size:2.2rem;font-weight:900;color:var(--red);">KG–12</span>
+              <span style="font-size:0.88rem;color:rgba(255,255,255,0.7);">Complete American curriculum pathway from Kindergarten through Grade 12</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:18px;">
+              <span style="font-family:var(--font-display);font-size:2.2rem;font-weight:900;color:var(--red);">15+</span>
+              <span style="font-size:0.88rem;color:rgba(255,255,255,0.7);">Advanced Placement (AP) courses offered to High School students</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KINDERGARTEN -->
+  <section class="program-detail-section section-pad bg-light" id="kindergarten">
+    <div class="container">
+      <div class="program-detail-grid">
+        <div class="program-detail-content animate-fade-up">
+          <div class="section-label">Early Years</div>
+          <h2 class="section-title">Kindergarten<br/><em>KG 1 &amp; KG 2</em></h2>
+          <div class="title-ornament"></div>
+          <p>Our Kindergarten program creates a warm, joyful learning environment where young children develop a love of discovery and build the foundational skills they'll carry through their entire education.</p>
+          <p>Through play-based learning, hands-on exploration, and nurturing teacher relationships, our youngest students develop literacy, numeracy, social skills, creativity, and confidence in a safe and stimulating classroom environment.</p>
+          <div class="program-features">
+            <div class="program-feature"><i class="fas fa-check"></i> Play-based learning approach</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Phonics &amp; early literacy</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Number sense &amp; math concepts</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Social-emotional development</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Arts, music &amp; movement</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Arabic language introduction</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Science exploration</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Technology integration</div>
+          </div>
+          <a href="admissions.html" class="btn btn-primary">Apply for Kindergarten</a>
+        </div>
+        <div class="program-detail-image animate-fade-up" style="transition-delay:0.2s">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80" alt="Kindergarten students" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ELEMENTARY -->
+  <section class="program-detail-section section-pad" id="elementary">
+    <div class="container">
+      <div class="program-detail-grid reverse">
+        <div class="program-detail-image animate-fade-up">
+          <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80" alt="Elementary students" />
+        </div>
+        <div class="program-detail-content animate-fade-up" style="transition-delay:0.2s">
+          <div class="section-label">Grades 1–5</div>
+          <h2 class="section-title">Elementary<br/><em>School</em></h2>
+          <div class="title-ornament"></div>
+          <p>Elementary School at NAIS is where students build the essential academic and social foundations that will support their learning journey. Our curriculum balances core subject mastery with creative, interdisciplinary exploration.</p>
+          <p>Students develop strong literacy and mathematical skills while also exploring science, social studies, arts, Arabic, and physical education. Our small classes ensure teachers truly know each student, enabling personalized support and challenge.</p>
+          <div class="program-features">
+            <div class="program-feature"><i class="fas fa-check"></i> English Language Arts (ELA)</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Mathematics (Common Core)</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Science &amp; STEM projects</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Social Studies</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Arabic language &amp; Islamic Studies</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Physical Education</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Visual &amp; Performing Arts</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Digital literacy &amp; technology</div>
+          </div>
+          <a href="admissions.html" class="btn btn-primary">Apply for Elementary</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MIDDLE SCHOOL -->
+  <section class="program-detail-section section-pad bg-light" id="middle">
+    <div class="container">
+      <div class="program-detail-grid">
+        <div class="program-detail-content animate-fade-up">
+          <div class="section-label">Grades 6–8</div>
+          <h2 class="section-title">Middle<br/><em>School</em></h2>
+          <div class="title-ornament"></div>
+          <p>Middle School is a transformative time, and at NAIS we embrace it fully. Our program challenges students academically while providing exceptional pastoral support as they navigate the complexities of adolescence.</p>
+          <p>Project-based learning, critical thinking exercises, and leadership opportunities help students discover their strengths, deepen their passions, and develop the independence they'll need in High School and beyond.</p>
+          <div class="program-features">
+            <div class="program-feature"><i class="fas fa-check"></i> Advanced English &amp; Literature</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Pre-Algebra &amp; Algebra 1</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Life &amp; Physical Sciences</div>
+            <div class="program-feature"><i class="fas fa-check"></i> World History &amp; Geography</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Foreign Languages</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Project-based learning</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Leadership development</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Elective enrichment courses</div>
+          </div>
+          <a href="admissions.html" class="btn btn-primary">Apply for Middle School</a>
+        </div>
+        <div class="program-detail-image animate-fade-up" style="transition-delay:0.2s">
+          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80" alt="Middle school students" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGH SCHOOL -->
+  <section class="program-detail-section section-pad" id="high">
+    <div class="container">
+      <div class="program-detail-grid reverse">
+        <div class="program-detail-image animate-fade-up">
+          <img src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66?w=800&q=80" alt="High school students" />
+        </div>
+        <div class="program-detail-content animate-fade-up" style="transition-delay:0.2s">
+          <div class="section-label">Grades 9–12</div>
+          <h2 class="section-title">High<br/><em>School</em></h2>
+          <div class="title-ornament"></div>
+          <p>Our High School program is a college-preparatory experience of the highest standard. Students are challenged with rigorous coursework, including Advanced Placement (AP) courses, while being supported by expert teachers and dedicated university counselors.</p>
+          <p>With a 95% university acceptance rate, our graduates go on to top institutions in North America, the UK, Europe, and Australia. Our university counseling program begins in Grade 9, ensuring students are fully prepared for every step of the application process.</p>
+          <div class="program-features">
+            <div class="program-feature"><i class="fas fa-check"></i> 15+ AP Courses available</div>
+            <div class="program-feature"><i class="fas fa-check"></i> SAT/ACT preparation</div>
+            <div class="program-feature"><i class="fas fa-check"></i> University counseling (Gr 9–12)</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Honors &amp; AP English</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Calculus &amp; Statistics</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Lab Sciences (Bio, Chem, Physics)</div>
+            <div class="program-feature"><i class="fas fa-check"></i> US &amp; World History</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Fine Arts electives</div>
+          </div>
+          <a href="admissions.html" class="btn btn-primary">Apply for High School</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AP COURSES -->
+  <section class="ap-courses-section section-pad" id="ap">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label">College-Level Preparation</div>
+        <h2 class="section-title">Advanced Placement<br/><em>AP Courses</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro">NAIS offers over 15 College Board-approved AP courses, giving high school students the opportunity to earn college credit and demonstrate their academic potential to universities worldwide.</p>
+      </div>
+      <div class="ap-grid stagger-children">
+        <div class="ap-card">
+          <h4><i class="fas fa-book" style="color:var(--red);margin-right:8px;"></i> English &amp; Language Arts</h4>
+          <ul>
+            <li>AP English Language &amp; Composition</li>
+            <li>AP English Literature &amp; Composition</li>
+          </ul>
+        </div>
+        <div class="ap-card">
+          <h4><i class="fas fa-square-root-alt" style="color:var(--red);margin-right:8px;"></i> Mathematics</h4>
+          <ul>
+            <li>AP Calculus AB</li>
+            <li>AP Calculus BC</li>
+            <li>AP Statistics</li>
+          </ul>
+        </div>
+        <div class="ap-card">
+          <h4><i class="fas fa-flask" style="color:var(--red);margin-right:8px;"></i> Sciences</h4>
+          <ul>
+            <li>AP Biology</li>
+            <li>AP Chemistry</li>
+            <li>AP Physics 1 &amp; 2</li>
+            <li>AP Environmental Science</li>
+          </ul>
+        </div>
+        <div class="ap-card">
+          <h4><i class="fas fa-landmark" style="color:var(--red);margin-right:8px;"></i> History &amp; Social Studies</h4>
+          <ul>
+            <li>AP US History</li>
+            <li>AP World History</li>
+            <li>AP Human Geography</li>
+            <li>AP Psychology</li>
+          </ul>
+        </div>
+        <div class="ap-card">
+          <h4><i class="fas fa-laptop-code" style="color:var(--red);margin-right:8px;"></i> Computer Science</h4>
+          <ul>
+            <li>AP Computer Science A</li>
+            <li>AP Computer Science Principles</li>
+          </ul>
+        </div>
+        <div class="ap-card">
+          <h4><i class="fas fa-globe" style="color:var(--red);margin-right:8px;"></i> Economics &amp; Languages</h4>
+          <ul>
+            <li>AP Economics (Macro/Micro)</li>
+            <li>AP Spanish Language</li>
+            <li>AP Arabic Language</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUSION -->
+  <section class="program-detail-section section-pad" id="inclusion">
+    <div class="container">
+      <div class="program-detail-grid">
+        <div class="program-detail-content animate-fade-up">
+          <div class="section-label">Every Child Belongs</div>
+          <h2 class="section-title">Inclusion<br/><em>Program</em></h2>
+          <div class="title-ornament"></div>
+          <p>NAIS is deeply committed to inclusive education. Our dedicated Inclusion Program ensures that students with diverse learning needs receive the individualized support, accommodations, and expertise needed to thrive academically and socially.</p>
+          <p>Our trained Special Education professionals work collaboratively with classroom teachers to develop personalized learning plans (IEPs), implement evidence-based strategies, and create an environment where every student belongs and succeeds.</p>
+          <div class="program-features">
+            <div class="program-feature"><i class="fas fa-check"></i> Individualized Education Plans (IEPs)</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Learning support specialists</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Speech &amp; language therapy</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Occupational therapy support</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Co-teaching model</div>
+            <div class="program-feature"><i class="fas fa-check"></i> Differentiated instruction</div>
+          </div>
+          <a href="admissions.html" class="btn btn-primary">Learn More About Inclusion</a>
+        </div>
+        <div class="program-detail-image animate-fade-up" style="transition-delay:0.2s">
+          <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=800&q=80" alt="Inclusion program at NAIS" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATH & SCIENCES -->
+  <section class="math-science-section" id="math-sciences">
+    <div class="container">
+      <div class="math-science-grid">
+        <div class="animate-fade-up">
+          <div class="section-label light">STEM Excellence</div>
+          <h2 class="section-title light">Math &amp; <em>Sciences</em></h2>
+          <div class="title-ornament light-ornament"></div>
+          <p style="color:rgba(255,255,255,0.78);line-height:1.85;margin-bottom:24px;">Our STEM program is at the heart of the NAIS academic experience. Students work in state-of-the-art laboratories and participate in hands-on, inquiry-based learning that develops genuine scientific thinking and mathematical reasoning.</p>
+          <p style="color:rgba(255,255,255,0.65);font-size:0.92rem;line-height:1.8;margin-bottom:32px;">From early numeracy in Kindergarten to AP Calculus and AP Physics in Grade 12, every student builds a strong foundation in mathematical thinking, scientific inquiry, and data literacy.</p>
+          <div class="math-science-features">
+            <div class="math-science-feat">
+              <i class="fas fa-flask"></i>
+              <h5>Advanced Science Labs</h5>
+              <p>Fully-equipped Biology, Chemistry, and Physics labs for Grades 6–12 practical learning</p>
+            </div>
+            <div class="math-science-feat">
+              <i class="fas fa-robot"></i>
+              <h5>Robotics &amp; Coding</h5>
+              <p>Dedicated maker space with robotics kits, 3D printers, and coding environments</p>
+            </div>
+            <div class="math-science-feat">
+              <i class="fas fa-square-root-alt"></i>
+              <h5>AP Math Courses</h5>
+              <p>AP Calculus AB/BC, AP Statistics, and AP Computer Science for college-ready students</p>
+            </div>
+            <div class="math-science-feat">
+              <i class="fas fa-microscope"></i>
+              <h5>AP Sciences</h5>
+              <p>AP Biology, Chemistry, Physics 1&amp;2, and Environmental Science with lab practicals</p>
+            </div>
+          </div>
+        </div>
+        <div class="math-science-img-col animate-fade-up" style="transition-delay:0.2s;">
+          <img src="https://images.unsplash.com/photo-1532094349884-543559059a57?w=800&q=80" alt="NAIS science lab" />
+          <div class="math-science-badge">
+            <strong>STEM</strong>
+            <span>State-of-the-art<br/>Innovation Hub</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIVERSITY DESTINATIONS -->
+  <section class="uni-strip-section">
+    <div class="container">
+      <div class="uni-strip-label">
+        <div class="section-label" style="justify-content:center;">Graduate Destinations</div>
+        <p style="font-size:0.88rem;color:var(--gray-500);margin-top:6px;text-align:center;">Our graduates consistently gain admission to the world's top universities</p>
+      </div>
+      <div class="uni-logos">
+        <div class="uni-logo-item">
+          <div class="uni-logo-badge"><i class="fas fa-university"></i></div>
+          <span>University of Toronto</span>
+        </div>
+        <div class="uni-logo-item">
+          <div class="uni-logo-badge"><i class="fas fa-graduation-cap"></i></div>
+          <span>New York University</span>
+        </div>
+        <div class="uni-logo-item">
+          <div class="uni-logo-badge"><i class="fas fa-university"></i></div>
+          <span>UCL London</span>
+        </div>
+        <div class="uni-logo-item">
+          <div class="uni-logo-badge"><i class="fas fa-graduation-cap"></i></div>
+          <span>McGill University</span>
+        </div>
+        <div class="uni-logo-item">
+          <div class="uni-logo-badge"><i class="fas fa-university"></i></div>
+          <span>King's College London</span>
+        </div>
+        <div class="uni-logo-item">
+          <div class="uni-logo-badge"><i class="fas fa-graduation-cap"></i></div>
+          <span>Boston University</span>
+        </div>
+        <div class="uni-logo-item">
+          <div class="uni-logo-badge"><i class="fas fa-university"></i></div>
+          <span>Univ. of Melbourne</span>
+        </div>
+        <div class="uni-logo-item">
+          <div class="uni-logo-badge"><i class="fas fa-graduation-cap"></i></div>
+          <span>American Univ. Dubai</span>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:28px;font-family:var(--font-display);font-size:0.78rem;font-weight:700;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;">95% of NAIS graduates accepted to their first-choice university</p>
+    </div>
+  </section>
+
+  <!-- ADMISSIONS CTA -->
+  <section class="admissions-cta-section">
+    <div class="admissions-cta-bg"></div>
+    <div class="container">
+      <div class="admissions-cta-content">
+        <div class="section-label light">Enroll Today</div>
+        <h2>Start Your Child's Academic Journey at NAIS</h2>
+        <p>Enrollment is now open for the 2025–2026 academic year. Join our community of inspired learners.</p>
+        <div class="admissions-cta-buttons">
+          <a href="admissions.html" class="btn btn-red">Apply Now</a>
+          <a href="index.html#contact" class="btn btn-outline-white">Contact Admissions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top"><div class="container"><div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="images/nais-logo.svg" alt="NAIS Dubai Logo" class="footer-logo-img" /></div>
+        <p class="footer-desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow.</p>
+        <div class="footer-social"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div>
+      </div>
+      <div class="footer-col"><h4 class="footer-heading">Quick Links</h4><ul class="footer-links"><li><a href="about.html">About NAIS</a></li><li><a href="academics.html">Academic Programs</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="index.html#contact">Contact Us</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-heading">Programs</h4><ul class="footer-links"><li><a href="#kindergarten">Kindergarten</a></li><li><a href="#elementary">Elementary</a></li><li><a href="#middle">Middle School</a></li><li><a href="#high">High School</a></li><li><a href="#inclusion">Inclusion</a></li><li><a href="#ap">AP Courses</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-heading">Contact</h4><ul class="footer-contact-list"><li><i class="fas fa-map-marker-alt"></i><span>Al Mizhar 1, Mirdif, Dubai, UAE</span></li><li><i class="fas fa-phone-alt"></i><a href="tel:+97142635456">+971 4 263 5456</a></li><li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li></ul><a href="admissions.html" class="btn btn-red-sm">Apply Now <i class="fas fa-arrow-right"></i></a></div>
+    </div></div></div>
+    <div class="footer-bottom"><div class="container"><p>© 2025 North American International School, Dubai. All Rights Reserved.</p><div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div></div></div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="admissions.html#apply" class="apply-float" aria-label="Apply Now"><i class="fas fa-pen-to-square"></i><span class="apply-float-label">Apply Now</span></a>
+<a href="https://wa.me/97142635456" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+  <script src="js/nav.js"></script>

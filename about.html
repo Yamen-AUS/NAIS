@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About NAIS | North American International School Dubai</title>
+  <meta name="description" content="Discover the story, mission, values and leadership of North American International School (NAIS) in Dubai. A premier American curriculum school committed to excellence." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" href="images/nais-logo.png?v=3" type="image/png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css?v=5" />
+  <link rel="stylesheet" href="css/pages.css?v=5" />
+  <link rel="stylesheet" href="css/nav.css?v=5" />
+  <style>
+    #site-intro{position:fixed;inset:0;z-index:99999;opacity:1;transition:opacity 1.2s ease;background:#0A0E1F;font-family:'Montserrat',Arial Black,sans-serif;}
+    #site-intro.intro-out{opacity:0;pointer-events:none;}
+    #intro-canvas{display:block;width:100%;height:100%;}
+    #intro-logo-img{position:absolute;top:clamp(12px,2.5vw,28px);left:clamp(12px,2.5vw,28px);height:clamp(44px,5.5vw,68px);width:auto;max-width:clamp(160px,20vw,270px);opacity:0;transform:translateY(-8px);transition:opacity 0.7s ease 0.2s,transform 0.7s ease 0.2s;background:#fff;padding:5px 10px;border-radius:6px;box-shadow:0 4px 20px rgba(0,0,0,0.4);object-fit:contain;z-index:2;}
+    #intro-logo-img.show{opacity:1;transform:translateY(0);}
+    #intro-skip{position:absolute;top:clamp(18px,3vw,42px);right:clamp(18px,3.5vw,50px);font-family:'Montserrat',Arial Black,sans-serif;font-size:9px;font-weight:700;letter-spacing:0.32em;text-transform:uppercase;color:rgba(255,255,255,0.55);background:transparent;border:1px solid rgba(255,255,255,0.32);padding:8px 20px;border-radius:2px;cursor:pointer;opacity:0;transition:opacity 0.5s ease,color 0.2s,background 0.2s;z-index:2;}
+    #intro-skip.show{opacity:1;}
+    #intro-skip:hover{background:rgba(255,255,255,0.12);color:#fff;border-color:rgba(255,255,255,0.65);}
+    #intro-progbar{position:absolute;bottom:0;left:0;height:4px;width:0;background:#E11B22;z-index:2;transition:width 7.5s linear;}
+
+    /* TOPBAR LOGO FIX */
+    .topbar{overflow:visible!important;height:62px!important;display:flex!important;align-items:center!important;}
+    .topbar-inner{height:62px!important;display:flex!important;align-items:center!important;padding:0 60px 0 0!important;}
+    .topbar-logo{width:auto!important;height:68px!important;max-height:68px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:6px 16px 6px 12px!important;background:#fff!important;flex-shrink:0!important;}
+    .topbar-logo-img{width:auto!important;height:56px!important;max-width:220px!important;max-height:56px!important;object-fit:contain!important;object-position:left center!important;display:block!important;}
+    #intro-logo-img{position:absolute;top:clamp(14px,2.5vw,32px);left:clamp(14px,2.5vw,32px);height:44px;width:auto;max-width:180px;opacity:0;transform:translateY(-8px);transition:opacity 0.7s ease 0.2s,transform 0.7s ease 0.2s;background:#fff;padding:5px 10px;border-radius:6px;object-fit:contain;box-shadow:0 4px 20px rgba(0,0,0,0.4);z-index:2;}
+</head>
+<body>
+
+  <!-- ══ INTRO OVERLAY ══ -->
+  <div id="site-intro">
+    <canvas id="intro-canvas"></canvas>
+    <img src="images/nais-logo.svg" id="intro-logo-img" alt="NAIS Dubai" />
+    <button id="intro-skip">SKIP &nbsp;✕</button>
+    <div id="intro-progbar"></div>
+  </div>
+  <script>
+  (function(){
+    "use strict";
+    var AUTO_MS=7500,SLIDE_MS=3200,RED="#E11B22";
+    var IMG_URLS=["https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=80","https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80","https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80","https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=1600&q=80"];
+    var introEl=document.getElementById("site-intro"),canvas=document.getElementById("intro-canvas"),ctx=canvas.getContext("2d"),logoImg=document.getElementById("intro-logo-img"),skipBtn=document.getElementById("intro-skip"),progBar=document.getElementById("intro-progbar");
+    var W,H,DPR,imgs=[],curImg=0,nextImg=1,blending=false,blendPct=0,word0Y=0,word1Y=0,tagA=0,accentPct=0,enterA=0,dismissed=false,autoTimer,lastTs=null,raf,t0=null;
+    IMG_URLS.forEach(function(url,i){var im=new Image();im.crossOrigin="anonymous";im.src=url;imgs[i]=im;});
+    function resize(){DPR=window.devicePixelRatio||1;var r=canvas.parentElement.getBoundingClientRect();W=canvas.width=Math.round(r.width*DPR);H=canvas.height=Math.round(r.height*DPR);}
+    window.addEventListener("resize",resize);resize();
+    function drawImg(img,alpha){if(!img||!img.complete||!img.naturalWidth)return;ctx.save();ctx.globalAlpha=Math.max(0,Math.min(1,alpha));var sc=Math.max(W/img.naturalWidth,H/img.naturalHeight);ctx.drawImage(img,(W-img.naturalWidth*sc)/2,(H-img.naturalHeight*sc)/2,img.naturalWidth*sc,img.naturalHeight*sc);ctx.restore();}
+    function getFZ(){return Math.min(Math.max(W*0.125,60*DPR),190*DPR);}
+    function easeOut(t){return 1-Math.pow(1-t,3);}
+    function frame(ts){
+      if(!t0)t0=ts;
+      var dt=lastTs?Math.min((ts-lastTs)/1000,0.05):0;lastTs=ts;var el=(ts-t0)/1000;
+      if(blending){blendPct+=dt/(SLIDE_MS/1000*0.38);if(blendPct>=1){blendPct=1;blending=false;curImg=nextImg;}}
+      if(el>0.30)word0Y=Math.min(word0Y+dt*3.5,1);
+      if(el>0.58)word1Y=Math.min(word1Y+dt*3.5,1);
+      if(el>1.15)tagA=Math.min(tagA+dt*2.2,1);
+      if(el>1.35)accentPct=Math.min(accentPct+dt*2.0,1);
+      if(el>2.20)enterA=Math.min(enterA+dt*2.0,1);
+      ctx.clearRect(0,0,W,H);ctx.fillStyle="#0A0E1F";ctx.fillRect(0,0,W,H);
+      drawImg(imgs[curImg],blending?1-blendPct:1);
+      if(blending)drawImg(imgs[nextImg],blendPct);
+      var g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"rgba(0,0,0,0.42)");g.addColorStop(.45,"rgba(0,0,0,0.18)");g.addColorStop(1,"rgba(0,0,0,0.60)");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+      var fz=getFZ(),baseY=H*0.5+fz*0.32;
+      ctx.font="900 "+fz+"px 'Montserrat',Arial Black,sans-serif";ctx.textBaseline="alphabetic";ctx.textAlign="left";
+      var weW=ctx.measureText("WE").width,beW=ctx.measureText("BELIEVE").width,gap=fz*0.19,sx=(W-weW-gap-beW)/2;
+      ctx.save();ctx.globalAlpha=word0Y;ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=22*DPR;ctx.fillStyle="#fff";ctx.fillText("WE",sx,baseY+(1-easeOut(word0Y))*fz*1.4);ctx.restore();
+      ctx.save();ctx.globalAlpha=word1Y;ctx.shadowColor="rgba(0,0,0,0.55)";ctx.shadowBlur=22*DPR;ctx.fillStyle="#fff";ctx.fillText("BELIEVE",sx+weW+gap,baseY+(1-easeOut(word1Y))*fz*1.4);ctx.restore();
+      if(tagA>0.01){ctx.save();ctx.globalAlpha=tagA;ctx.font="700 "+Math.round(fz*0.080)+"px 'Montserrat',sans-serif";ctx.textAlign="center";ctx.textBaseline="alphabetic";ctx.fillStyle="rgba(255,255,255,0.78)";ctx.fillText("NORTH AMERICAN INTERNATIONAL SCHOOL  \u00B7  DUBAI, UAE",W/2,baseY+fz*0.31);ctx.restore();}
+      if(accentPct>0){var lw=58*DPR*easeOut(accentPct);ctx.save();ctx.globalAlpha=tagA;ctx.fillStyle=RED;ctx.fillRect(W/2-lw/2,baseY+fz*0.48,lw,3*DPR);ctx.restore();}
+      if(enterA>0.01){var bx=W/2,by=H-76*DPR,bw=218*DPR,bh=46*DPR;ctx.save();ctx.globalAlpha=enterA;ctx.strokeStyle="rgba(255,255,255,0.65)";ctx.lineWidth=1.5*DPR;ctx.strokeRect(bx-bw/2,by-bh/2,bw,bh);ctx.fillStyle="#fff";ctx.font="700 "+Math.round(fz*0.080)+"px 'Montserrat',sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("ENTER SITE  \u2192",bx,by);ctx.restore();canvas._btn={x:bx-bw/2,y:by-bh/2,w:bw,h:bh};}
+      raf=requestAnimationFrame(frame);
+    }
+    setInterval(function(){if(dismissed)return;nextImg=(curImg+1)%imgs.length;blendPct=0;blending=true;},SLIDE_MS);
+    function dismiss(){if(dismissed)return;dismissed=true;clearTimeout(autoTimer);cancelAnimationFrame(raf);introEl.classList.add("intro-out");logoImg.style.opacity="0";skipBtn.style.opacity="0";progBar.style.opacity="0";}
+    canvas.addEventListener("click",function(e){if(enterA<0.45)return;var r=canvas.getBoundingClientRect();var cx=(e.clientX-r.left)*DPR,cy=(e.clientY-r.top)*DPR;var b=canvas._btn;if(!b||(cx>=b.x&&cx<=b.x+b.w&&cy>=b.y&&cy<=b.y+b.h)){dismiss();}});
+    skipBtn.addEventListener("click",dismiss);
+    document.addEventListener("keydown",function(e){if(e.key!=="Tab"&&e.key!=="Shift")dismiss();});
+    raf=requestAnimationFrame(frame);
+    requestAnimationFrame(function(){logoImg.classList.add("show");});
+    setTimeout(function(){skipBtn.classList.add("show");},2000);
+    requestAnimationFrame(function(){progBar.style.transition="width "+(AUTO_MS/1000).toFixed(1)+"s linear";progBar.style.width="100%";});
+    autoTimer=setTimeout(dismiss,AUTO_MS);
+  }());
+  </script>
+
+  <!-- TOP BAR -->
+  <div class="topbar" style="height:62px;overflow:visible;display:flex;align-items:center;">
+    <div class="topbar-inner" style="height:62px;display:flex;align-items:center;width:100%;padding:0 60px 0 0;">
+      <a href="index.html" class="topbar-logo" aria-label="NAIS Dubai – Home" style="width:auto;height:68px;overflow:visible;display:flex;align-items:center;justify-content:flex-start;padding:6px 16px 6px 12px;background:#fff;flex-shrink:0;">
+        <img src="images/nais-logo.png" alt="North American International School Dubai" class="topbar-logo-img" style="width:auto;height:56px;max-width:220px;max-height:56px;object-fit:contain;object-position:left center;display:block;" />
+      </a>
+      <div class="topbar-left">
+        <a href="tel:+97142635456"><i class="fas fa-phone-alt"></i> +971 4 263 5456</a>
+        <a href="mailto:admissions@naischool.ae"><i class="fas fa-envelope"></i> admissions@naischool.ae</a>
+        <span><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</span>
+      </div>
+      <div class="topbar-right">
+        <a href="#" class="topbar-link">Parent Portal</a>
+        <span class="topbar-divider">|</span>
+        <a href="#" class="topbar-link">E-Learning</a>
+        <span class="topbar-divider">|</span>
+        <a href="#" class="topbar-link">Careers</a>
+        <div class="topbar-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT-SIDE NAV RAIL -->
+  <div class="nav-rail" id="nav-rail" role="button" aria-label="Open Navigation Menu" aria-expanded="false">
+    <div class="nav-rail-inner" id="nav-rail-trigger">
+      <a href="index.html" class="logo-wrap" aria-label="NAIS Home">
+        <img src="images/nais-logo.svg" alt="NAIS" style="height:34px;max-height:34px;max-width:180px;object-fit:contain;background:#fff;padding:3px 7px;border-radius:3px;" />
+      </a>
+      <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
+        <div class="nav-rail-lines"><span></span><span></span><span></span></div>
+        <span class="nav-rail-label">MENU</span>
+      </button>
+    </div>
+    <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
+    <span id="nav-desktop-label">MENU</span>
+  </div>
+
+  <!-- FULL-SCREEN NAV OVERLAY -->
+  <div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Main Navigation" aria-hidden="true" style="background-color:#0b1230;">
+    <!-- LEFT VISUAL PANEL -->
+    <div class="nav-left-panel" aria-hidden="true" style="background-color:#0a1128;position:relative;flex-shrink:0;">
+      <div class="nav-left-bg" style="position:absolute;inset:0;background:linear-gradient(155deg,#0f1d45 0%,#1e3175 40%,#0a1128 100%);z-index:0;"></div>
+      <div class="nav-left-content">
+        <a href="index.html" class="nav-left-logo">
+          <img src="images/nais-logo.png" alt="North American International School" style="height:72px;max-width:300px;width:auto;object-fit:contain;display:block;" />
+        </a>
+        <div class="nav-left-tagline">
+          <div class="nav-left-tagline-top">Est. 2005 · Dubai, UAE</div>
+          <div class="nav-left-tagline-title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
+          <p class="nav-left-tagline-sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
+        </div>
+        <div class="nav-left-spacer"></div>
+        <div class="nav-promo-card">
+          <div class="nav-promo-card-label">Open Enrollment</div>
+          <div class="nav-promo-card-title">Apply for <span>2025–2026</span></div>
+          <p class="nav-promo-card-desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
+          <a href="admissions.html" class="nav-promo-card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- RIGHT NAV PANEL -->
+    <div class="nav-right-panel" style="background-color:#0d1535;">
+      <div class="nav-close" id="nav-close" aria-label="Close Navigation">
+        <button class="nav-close-inner" aria-label="Close Menu">&#x2715;</button>
+      </div>
+      <div class="nav-panel">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-primary-list">
+            <li class="nav-primary-item" data-item="about">
+              <a href="about.html" class="nav-primary-link">About</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link">Mission &amp; Vision</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">School Leadership</a></li>
+                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link">Core Values — CARE</a></li>
+                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link">Our Campus</a></li>
+                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link">Accreditation</a></li>
+              </ul>
+            </li>
+            <li class="nav-primary-item" data-item="academics">
+              <a href="academics.html" class="nav-primary-link">Academics</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="academics.html#kindergarten" class="nav-subnav-link">Kindergarten</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#elementary" class="nav-subnav-link">Elementary School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link">Middle School <i class="fas fa-chevron-right nav-subnav-arrow"></i></a></li>
+                <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link">High School <i class="fas fa-chevron-right nav-subnav-arrow"></i></a></li>
+                <li class="nav-subnav-item"><a href="academics.html#inclusion" class="nav-subnav-link">Inclusion Program</a></li>
+                <li class="nav-subnav-item nav-subnav-item--has-children">
+                  <a href="academics.html#ap" class="nav-subnav-link">AP Courses <i class="fas fa-chevron-right nav-subnav-arrow"></i></a>
+                  <ul class="nav-subnav-level3 nav-subnav-level3-wrap">
+                    <li><a href="academics.html#ap" class="nav-subnav-link">Math &amp; Sciences</a></li>
+                    <li><a href="academics.html#ap" class="nav-subnav-link">Humanities &amp; Languages</a></li>
+                    <li><a href="academics.html#ap" class="nav-subnav-link">Computer Science</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-primary-item" data-item="student-life">
+              <a href="index.html#student-life" class="nav-primary-link">Student Life</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Arts &amp; Culture</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Athletics &amp; Sports</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Clubs &amp; Activities</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Community Service</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Student Council</a></li>
+              </ul>
+            </li>
+            <li class="nav-primary-item" data-item="admissions">
+              <a href="admissions.html" class="nav-primary-link">Admissions</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link">How to Apply</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link">Tuition &amp; Fees</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link">Campus Tours</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link">Request Information</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link">Required Documents</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link">Apply Now</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#faq" class="nav-subnav-link">Admissions FAQ</a></li>
+              </ul>
+            </li>
+            <li class="nav-primary-item" data-item="our-school">
+              <a href="about.html" class="nav-primary-link">Our School</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Life at NAIS</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link">Middle School <i class="fas fa-chevron-right nav-subnav-arrow"></i></a></li>
+                <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link">Upper School <i class="fas fa-chevron-right nav-subnav-arrow"></i></a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">Parent Community</a></li>
+                <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link">News &amp; Events</a></li>
+                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link">Contact Us</a></li>
+                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link">Visit Campus</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <div class="nav-panel-bottom">
+          <div class="nav-bottom-careers">
+            <span class="nav-careers-label">Career Opportunities</span>
+            <div class="nav-bottom-social">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="nav-bottom-search">
+            <span class="nav-search-label">Search</span>
+            <div class="nav-search-form">
+              <input type="text" class="nav-search-input" placeholder="Keyword" aria-label="Search" />
+              <button class="nav-search-btn" aria-label="Submit Search"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <a href="admissions.html" class="nav-apply-btn">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK LINKS BAR -->
+  <nav class="quick-links-bar" aria-label="Quick Access Links">
+    <div class="quick-links-inner">
+      <a href="admissions.html#apply" class="quick-link-item highlight"><i class="fas fa-user-plus"></i> Apply Now</a>
+      <a href="admissions.html#fees" class="quick-link-item"><i class="fas fa-dollar-sign"></i> Tuition Fees</a>
+      <a href="academics.html" class="quick-link-item"><i class="fas fa-graduation-cap"></i> Academics</a>
+      <a href="index.html#calendar" class="quick-link-item"><i class="fas fa-calendar-alt"></i> School Calendar</a>
+      <a href="index.html#contact" class="quick-link-item"><i class="fas fa-phone-alt"></i> Contact Us</a>
+      <a href="https://edunation.me" target="_blank" rel="noopener" class="quick-link-item"><i class="fas fa-external-link-alt"></i> LMS Login</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1920&q=80')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span>About NAIS</span>
+      </nav>
+      <h1 class="page-hero-title">About North American<br/><em>International School</em></h1>
+      <p class="page-hero-subtitle">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
+    </div>
+    <div class="page-hero-accent">NAIS</div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section class="about-mission-section section-pad" id="mission">
+    <div class="container">
+      <div class="mission-grid">
+        <div class="mission-content animate-fade-up">
+          <div class="section-label">Our Purpose</div>
+          <h2 class="section-title">Mission, Vision<br/><em>&amp; Philosophy</em></h2>
+          <div class="title-ornament"></div>
+          <p>North American International School was founded on the belief that every child deserves an exceptional education that prepares them not just for university, but for life. Rooted in the American curriculum tradition, we have built a community of learners who are curious, compassionate, and ready for a changing world.</p>
+          <p>Our approach combines academic rigor with genuine care for each student's social-emotional wellbeing. At NAIS, students are not numbers — they are individuals with unique gifts, passions, and potential. Our small class sizes, dedicated faculty, and supportive community create the ideal conditions for every student to thrive.</p>
+
+          <div class="mission-highlight">
+            <h4>Our Mission</h4>
+            <p>"To provide an exceptional American education that empowers students to achieve academic excellence, develop strong character, and become engaged global citizens."</p>
+          </div>
+          <div class="mission-highlight" style="margin-top:16px;">
+            <h4>Our Vision</h4>
+            <p>"A community of learners who are intellectually curious, morally grounded, and equipped to make a positive difference in the world."</p>
+          </div>
+        </div>
+        <div class="mission-image animate-fade-up" style="transition-delay:0.2s">
+          <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=900&q=80" alt="NAIS students learning" />
+          <div class="mission-image-badge">
+            <span class="big-num">20+</span>
+            <span>Years of Educational Excellence in Dubai</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARE VALUES -->
+  <section class="values-section" id="values">
+    <div class="values-bg-overlay"></div>
+    <div class="container">
+      <div class="values-header">
+        <div class="section-label light">Our Core Framework</div>
+        <h2 class="section-title light">The NAIS <em>CARE</em> Values</h2>
+        <div class="title-ornament centered-ornament light-ornament"></div>
+        <p class="section-intro light">Everything we do at NAIS is guided by our four core values — Community, Awareness, Resilience, and Engagement. These aren't just words on a wall; they are the living culture of our school.</p>
+      </div>
+      <div class="care-grid stagger-children">
+        <div class="care-card">
+          <div class="care-letter">C</div>
+          <h3>Community</h3>
+          <p>We cultivate a warm, inclusive community where every student feels known, respected, and connected — across classrooms, hallways, and beyond.</p>
+          <div class="care-line"></div>
+        </div>
+        <div class="care-card">
+          <div class="care-letter">A</div>
+          <h3>Awareness</h3>
+          <p>We develop mindful, empathetic learners who are aware of themselves, their environment, and their responsibility to the broader global community.</p>
+          <div class="care-line"></div>
+        </div>
+        <div class="care-card">
+          <div class="care-letter">R</div>
+          <h3>Resilience</h3>
+          <p>We nurture the strength and grit to overcome challenges, learn from setbacks, and emerge more confident and capable with every experience.</p>
+          <div class="care-line"></div>
+        </div>
+        <div class="care-card">
+          <div class="care-letter">E</div>
+          <h3>Engagement</h3>
+          <p>We inspire deep, active engagement in learning, school life, and community — building students who are passionate and purposeful in all they do.</p>
+          <div class="care-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="leadership-section section-pad" id="leadership">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label">Our People</div>
+        <h2 class="section-title">School <em>Leadership</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro">Our experienced, passionate leadership team sets the tone for excellence, care, and innovation across every aspect of school life at NAIS.</p>
+      </div>
+
+      <div class="leadership-grid-equal stagger-children">
+
+        <!-- Group CEO -->
+        <div class="leader-card-equal">
+          <div class="leader-card-photo">
+            <img src="images/group-ceo.jpg" alt="Kelvin Hornsby – Group CEO" />
+            <div class="leader-card-role-tag">Group CEO</div>
+          </div>
+          <div class="leader-card-body">
+            <h3>Kelvin Hornsby</h3>
+            <div class="leader-card-title">Group Chief Executive Officer</div>
+            <blockquote class="leader-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"Our mission is simple: create world-class schools where every child is inspired to achieve their greatest potential and every family feels at home."</p>
+            </blockquote>
+            <p class="leader-card-bio">Kelvin Hornsby brings decades of international education leadership across the Middle East and beyond. His strategic vision drives the group's commitment to academic excellence, inclusive values, and sustainable school growth.</p>
+          </div>
+        </div>
+
+        <!-- Executive Director -->
+        <div class="leader-card-equal">
+          <div class="leader-card-photo">
+            <img src="images/executive-director.jpg" alt="Ms. Arwa A. Taher – Executive Director" />
+            <div class="leader-card-role-tag">Executive Director</div>
+          </div>
+          <div class="leader-card-body">
+            <h3>Ms. Arwa A. Taher</h3>
+            <div class="leader-card-title">Executive Director, NAIS Dubai</div>
+            <blockquote class="leader-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"At NAIS, we nurture every child's unique potential within a safe, inclusive, and values-driven environment — because great education begins with belonging."</p>
+            </blockquote>
+            <p class="leader-card-bio">Ms. Taher's visionary leadership has shaped NAIS into one of Dubai's most trusted American curriculum schools. Her commitment to Emirati values and community excellence defines the school's culture and strategic direction.</p>
+          </div>
+        </div>
+
+        <!-- Principal -->
+        <div class="leader-card-equal">
+          <div class="leader-card-photo">
+            <img src="images/principal.jpg" alt="Justin Allen McCauley – Principal" />
+            <div class="leader-card-role-tag">Principal</div>
+          </div>
+          <div class="leader-card-body">
+            <h3>Justin Allen McCauley</h3>
+            <div class="leader-card-title">Principal, NAIS Dubai</div>
+            <blockquote class="leader-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"Every student at NAIS is known, valued, and challenged. We don't just build academic excellence — we build leaders of character who are ready for the world."</p>
+            </blockquote>
+            <p class="leader-card-bio">With over 15 years of international educational leadership, Mr. McCauley fosters a culture of curiosity, accountability, and care. He holds a Masters in Educational Leadership and has served in schools across the Middle East and North America.</p>
+          </div>
+        </div>
+
+      </div><!-- /.leadership-grid-equal -->
+    </div>
+  </section>
+
+  <!-- CAMPUS SECTION -->
+  <section class="section-pad bg-light" id="campus">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label">Our Environment</div>
+        <h2 class="section-title">A Campus Designed for<br/><em>Learning &amp; Growth</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro">Our thoughtfully designed campus in Al Mizhar 1, Dubai provides students with inspiring spaces to learn, create, collaborate, and thrive.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" class="stagger-children">
+        <div style="background:white;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:200px;overflow:hidden;">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80" alt="Modern Classrooms" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''" />
+          </div>
+          <div style="padding:24px;">
+            <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+              <i class="fas fa-chalkboard-teacher" style="color:white;font-size:1.1rem;"></i>
+            </div>
+            <h3 style="font-family:var(--font-serif);font-size:1.15rem;color:var(--navy);margin-bottom:8px;">Modern Classrooms</h3>
+            <p style="font-size:0.88rem;color:var(--gray-500);line-height:1.7;">Bright, technology-equipped classrooms with interactive whiteboards and collaborative learning spaces designed to inspire.</p>
+          </div>
+        </div>
+
+        <div style="background:white;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:200px;overflow:hidden;">
+            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&q=80" alt="Sports Facilities" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" />
+          </div>
+          <div style="padding:24px;">
+            <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+              <i class="fas fa-running" style="color:white;font-size:1.1rem;"></i>
+            </div>
+            <h3 style="font-family:var(--font-serif);font-size:1.15rem;color:var(--navy);margin-bottom:8px;">Sports Facilities</h3>
+            <p style="font-size:0.88rem;color:var(--gray-500);line-height:1.7;">Full gymnasium, outdoor courts, and a sports field supporting a wide range of athletic programs and physical education.</p>
+          </div>
+        </div>
+
+        <div style="background:white;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:200px;overflow:hidden;">
+            <img src="https://images.unsplash.com/photo-1462536943532-57a629f6cc60?w=600&q=80" alt="Library & Resources" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" />
+          </div>
+          <div style="padding:24px;">
+            <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+              <i class="fas fa-book-open" style="color:white;font-size:1.1rem;"></i>
+            </div>
+            <h3 style="font-family:var(--font-serif);font-size:1.15rem;color:var(--navy);margin-bottom:8px;">Library &amp; Resource Centre</h3>
+            <p style="font-size:0.88rem;color:var(--gray-500);line-height:1.7;">A well-stocked library and digital resource centre providing students access to knowledge, research tools, and quiet study spaces.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDENT LIFE & PHOTO GALLERY -->
+  <section class="section-pad" id="student-life">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label">Life at NAIS</div>
+        <h2 class="section-title">Beyond the <em>Classroom</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro">At NAIS, education extends far beyond textbooks. Our rich co-curricular programs, vibrant arts scene, competitive sports, and community service initiatives develop the whole child.</p>
+      </div>
+
+      <!-- Activities Grid -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:48px;" class="stagger-children">
+        <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:180px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=500&q=80" alt="Athletics" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''" /></div>
+          <div style="padding:20px;">
+            <div style="width:38px;height:38px;background:var(--red);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><i class="fas fa-running" style="color:white;font-size:1rem;"></i></div>
+            <h4 style="font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);margin-bottom:6px;">Athletics &amp; Sports</h4>
+            <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.65;">Football, basketball, swimming, athletics and more — competitive teams with expert coaching.</p>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:180px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=500&q=80" alt="Arts" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''" /></div>
+          <div style="padding:20px;">
+            <div style="width:38px;height:38px;background:var(--red);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><i class="fas fa-palette" style="color:white;font-size:1rem;"></i></div>
+            <h4 style="font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);margin-bottom:6px;">Visual &amp; Performing Arts</h4>
+            <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.65;">Drama, music, visual arts and dance — building creativity and self-expression in every student.</p>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:180px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&q=80" alt="Clubs" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''" /></div>
+          <div style="padding:20px;">
+            <div style="width:38px;height:38px;background:var(--red);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><i class="fas fa-users" style="color:white;font-size:1rem;"></i></div>
+            <h4 style="font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);margin-bottom:6px;">Clubs &amp; Societies</h4>
+            <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.65;">30+ student-led clubs spanning robotics, debate, journalism, MUN, coding, and more.</p>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:180px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500&q=80" alt="Community" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''" /></div>
+          <div style="padding:20px;">
+            <div style="width:38px;height:38px;background:var(--red);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><i class="fas fa-heart" style="color:white;font-size:1rem;"></i></div>
+            <h4 style="font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);margin-bottom:6px;">Community Service</h4>
+            <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.65;">Inspiring global citizenship through meaningful service projects locally and internationally.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Photo Gallery -->
+      <div class="photo-gallery animate-fade-up">
+        <div class="photo-gallery-item">
+          <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=900&q=80" alt="NAIS campus life" />
+        </div>
+        <div class="photo-gallery-item">
+          <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80" alt="Students learning" />
+        </div>
+        <div class="photo-gallery-item">
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&q=80" alt="Sports at NAIS" />
+        </div>
+        <div class="photo-gallery-item">
+          <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=600&q=80" alt="Arts program" />
+        </div>
+        <div class="photo-gallery-item">
+          <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Student clubs" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDENT TESTIMONIALS -->
+  <section class="section-pad bg-light">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label">Voices of Our Community</div>
+        <h2 class="section-title">What Our Students <em>Say</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" class="stagger-children">
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);position:relative;">
+          <div style="color:#f5a623;font-size:0.9rem;letter-spacing:2px;margin-bottom:14px;">★★★★★</div>
+          <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.75;font-style:italic;margin-bottom:20px;">"NAIS shaped me into the person I am today. The teachers really pushed me to reach my potential, and the CARE values weren't just words — they were the culture of our school every single day."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:46px;height:46px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;color:#fff;border:2px solid var(--red);flex-shrink:0;">AK</div>
+            <div><strong style="display:block;font-family:var(--font-display);font-size:0.85rem;color:var(--navy);">Adam K.</strong><span style="font-size:0.78rem;color:var(--gray-500);">Class of 2024 — University of Toronto</span></div>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);position:relative;">
+          <div style="color:#f5a623;font-size:0.9rem;letter-spacing:2px;margin-bottom:14px;">★★★★★</div>
+          <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.75;font-style:italic;margin-bottom:20px;">"The AP courses gave me a real advantage when I started university. My professors were impressed by how well-prepared I was. I owe that entirely to my incredible teachers at NAIS."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:46px;height:46px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;color:#fff;border:2px solid var(--red);flex-shrink:0;">SR</div>
+            <div><strong style="display:block;font-family:var(--font-display);font-size:0.85rem;color:var(--navy);">Sara R.</strong><span style="font-size:0.78rem;color:var(--gray-500);">Class of 2023 — King's College London</span></div>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);position:relative;">
+          <div style="color:#f5a623;font-size:0.9rem;letter-spacing:2px;margin-bottom:14px;">★★★★★</div>
+          <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.75;font-style:italic;margin-bottom:20px;">"Coming from a different country, I was worried about fitting in. At NAIS I found a community that welcomed me immediately. The diversity is beautiful — my best friends come from 12 different countries!"</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:46px;height:46px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;color:#fff;border:2px solid var(--red);flex-shrink:0;">YT</div>
+            <div><strong style="display:block;font-family:var(--font-display);font-size:0.85rem;color:var(--navy);">Yuki T.</strong><span style="font-size:0.78rem;color:var(--gray-500);">Grade 11 Student</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCREDITATIONS -->
+  <section class="accreditations-section section-pad" id="accreditation">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label">Recognition &amp; Trust</div>
+        <h2 class="section-title">Accreditations &amp; <em>Affiliations</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro">NAIS is recognized and accredited by leading educational bodies, ensuring our programs meet the highest international standards.</p>
+      </div>
+      <div class="accreditation-logos">
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-shield-alt"></i><span>KHDA</span></div><p>Knowledge &amp; Human Development Authority</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-star"></i><span>AdvancED</span></div><p>Accreditation Commission</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-globe-americas"></i><span>NEASC</span></div><p>New England Association of Schools &amp; Colleges</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-university"></i><span>College Board</span></div><p>Advanced Placement Program Member</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-flag"></i><span>MoE UAE</span></div><p>UAE Ministry of Education Licensed</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" id="footer">
+    <div class="footer-top"><div class="container"><div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="images/nais-logo.svg" alt="NAIS Dubai Logo" class="footer-logo-img" />
+        </div>
+        <p class="footer-desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4 class="footer-heading">Quick Links</h4><ul class="footer-links"><li><a href="about.html">About NAIS</a></li><li><a href="academics.html">Academic Programs</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="index.html#student-life">Student Life</a></li><li><a href="index.html#contact">Contact Us</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-heading">Academic Programs</h4><ul class="footer-links"><li><a href="academics.html#kindergarten">Kindergarten</a></li><li><a href="academics.html#elementary">Elementary</a></li><li><a href="academics.html#middle">Middle School</a></li><li><a href="academics.html#high">High School</a></li><li><a href="academics.html#inclusion">Inclusion</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-heading">Contact</h4><ul class="footer-contact-list"><li><i class="fas fa-map-marker-alt"></i><span>Al Mizhar 1, Mirdif, Dubai, UAE</span></li><li><i class="fas fa-phone-alt"></i><a href="tel:+97142635456">+971 4 263 5456</a></li><li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li></ul><a href="admissions.html" class="btn btn-red-sm">Apply Now <i class="fas fa-arrow-right"></i></a></div>
+    </div></div></div>
+    <div class="footer-bottom"><div class="container">
+      <p>© 2025 North American International School, Dubai. All Rights Reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Safeguarding</a></div>
+    </div></div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="admissions.html#apply" class="apply-float" aria-label="Apply Now"><i class="fas fa-pen-to-square"></i><span class="apply-float-label">Apply Now</span></a>
+<a href="https://wa.me/97142635456" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+  <script src="js/nav.js"></script>
+</body>
+</html>

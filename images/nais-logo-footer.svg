@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 62" role="img" aria-label="North American International School Logo">
+  <!-- ══ LEFT BADGE ══ -->
+  <rect x="1" y="1" width="60" height="60" rx="2" fill="white" stroke="#1F2F6E" stroke-width="0.8"/>
+  <!-- Top-left: navy -->
+  <rect x="2.5" y="2.5" width="27" height="27" fill="#1F2F6E"/>
+  <!-- Top-right: red -->
+  <rect x="31.5" y="2.5" width="27" height="27" fill="#E11B22"/>
+  <!-- Bottom-left: red -->
+  <rect x="2.5" y="31.5" width="27" height="27" fill="#E11B22"/>
+  <!-- Bottom-right: navy -->
+  <rect x="31.5" y="31.5" width="27" height="27" fill="#1F2F6E"/>
+  <!-- White cross dividers -->
+  <rect x="29" y="2.5" width="3.5" height="57" fill="white"/>
+  <rect x="2.5" y="29" width="57" height="3.5" fill="white"/>
+  <!-- Eagle medallion -->
+  <circle cx="31" cy="31" r="16" fill="#1F2F6E" stroke="white" stroke-width="1.8"/>
+  <!-- Eagle body -->
+  <ellipse cx="31" cy="33" rx="3.5" ry="4.5" fill="white"/>
+  <!-- Eagle head -->
+  <circle cx="31" cy="25.5" r="3" fill="white"/>
+  <!-- Beak -->
+  <polygon points="34,25.5 36.5,27 34,28" fill="#E11B22"/>
+  <!-- Left wing -->
+  <path d="M17 30 Q21 22 28 27 Q26 31 22 30 Z" fill="white"/>
+  <!-- Right wing -->
+  <path d="M45 30 Q41 22 34 27 Q36 31 40 30 Z" fill="white"/>
+  <!-- Tail -->
+  <path d="M29 37 L31 43 L33 37 Z" fill="white"/>
+
+  <!-- ══ RIGHT TEXT & FLAG ══ -->
+  <!-- Arabic text -->
+  <text x="71" y="16" font-family="'Segoe UI','Tahoma','Arial',sans-serif" font-size="8.5" font-weight="700" fill="#1F2F6E">مدرسة نورث أمريكان انترناشونال</text>
+  <!-- Stars box -->
+  <rect x="71" y="20" width="32" height="12" fill="#1F2F6E" rx="1"/>
+  <text x="75" y="30" font-family="Arial" font-size="8" fill="white" letter-spacing="4">★★★</text>
+  <!-- Red stripes -->
+  <rect x="106" y="20" width="210" height="5.5" fill="#E11B22" rx="0.5"/>
+  <rect x="106" y="26.5" width="210" height="5.5" fill="#E11B22" rx="0.5"/>
+  <!-- NORTH AMERICAN -->
+  <text x="71" y="47" font-family="'Montserrat','Arial Black','Arial',sans-serif" font-size="16.5" font-weight="900" fill="#1F2F6E" letter-spacing="1">NORTH AMERICAN</text>
+  <!-- INTERNATIONAL SCHOOL -->
+  <text x="71" y="59" font-family="'Montserrat','Arial',sans-serif" font-size="9.5" font-weight="600" fill="#1F2F6E" letter-spacing="2.5">INTERNATIONAL SCHOOL</text>
+</svg>

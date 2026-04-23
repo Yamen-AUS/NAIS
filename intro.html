@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAIS Dubai – Welcome</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: #0B1230;
+      font-family: 'Montserrat', Arial Black, sans-serif;
+    }
+
+    /* ── Wrapper ── */
+    #intro-wrap {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 1.2s ease;
+    }
+    #intro-wrap.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ── Canvas fills the screen ── */
+    #intro-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── LOGO — real PNG on top of canvas ── */
+    #intro-logo {
+      position: fixed;
+      top: clamp(20px, 3vw, 44px);
+      left: clamp(20px, 3.5vw, 52px);
+      z-index: 10002;
+      height: clamp(40px, 5vw, 66px);
+      width: auto;
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.55));
+    }
+    #intro-logo.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── SKIP button ── */
+    #skip-btn {
+      position: fixed;
+      top: clamp(20px, 3vw, 44px);
+      right: clamp(20px, 3.5vw, 52px);
+      z-index: 10002;
+      font-family: 'Montserrat', Arial Black, sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.32);
+      padding: 8px 20px;
+      border-radius: 2px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.5s ease, color 0.2s, background 0.2s, border-color 0.2s;
+    }
+    #skip-btn.show { opacity: 1; }
+    #skip-btn:hover {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border-color: rgba(255,255,255,0.65);
+    }
+
+    /* ── Progress bar ── */
+    #intro-prog {
+      position: fixed;
+      bottom: 0; left: 0;
+      height: 4px;
+      width: 0;
+      background: #E11B22;
+      z-index: 10002;
+      transition: width 7.5s linear;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="intro-wrap">
+    <canvas id="intro-canvas"></canvas>
+  </div>
+
+  <!-- Real logo PNG on top of canvas -->
+  <img src="images/nais-logo.png" alt="North American International School Dubai" id="intro-logo" />
+
+  <button id="skip-btn" aria-label="Skip intro">SKIP &nbsp;✕</button>
+  <div id="intro-prog"></div>
+
+<script>
+!function(){
+  "use strict";
+
+  /* ── Config ── */
+  var DEST     = "index.html";
+  var AUTO_MS  = 7500;
+  var SLIDE_MS = 3200;
+  var RED      = "#E11B22";
+
+  var IMG_URLS = [
+    "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=80",
+    "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&q=80",
+    "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80",
+    "https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=1600&q=80"
+  ];
+
+  /* ── Elements ── */
+  var wrap       = document.getElementById("intro-wrap");
+  var canvas     = document.getElementById("intro-canvas");
+  var ctx        = canvas.getContext("2d");
+  var logoEl     = document.getElementById("intro-logo");
+  var skipBtn    = document.getElementById("skip-btn");
+  var progBar    = document.getElementById("intro-prog");
+
+  /* ── State ── */
+  var W, H, DPR;
+  var imgs     = [];
+  var curImg   = 0;
+  var nextImg  = 1;
+  var blending = false;
+  var blendPct = 0;
+
+  /* Animated values 0→1 */
+  var word0Y    = 0;
+  var word1Y    = 0;
+  var tagA      = 0;
+  var accentPct = 0;
+  var enterA    = 0;
+
+  var dismissed = false;
+  var autoTimer;
+  var lastTs    = null;
+  var raf;
+  var t0        = null;
+
+  /* ── Preload images ── */
+  IMG_URLS.forEach(function(url, i){
+    var im = new Image();
+    im.crossOrigin = "anonymous";
+    im.src = url;
+    imgs[i] = im;
+  });
+
+  /* ── Resize ── */
+  function resize(){
+    DPR = window.devicePixelRatio || 1;
+    var r = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width  = Math.round(r.width  * DPR);
+    H = canvas.height = Math.round(r.height * DPR);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  /* ── Cover-fit draw ── */
+  function drawImg(img, alpha){
+    if(!img || !img.complete || !img.naturalWidth) return;
+    ctx.save();
+    ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
+    var sc = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+    var dw = img.naturalWidth  * sc;
+    var dh = img.naturalHeight * sc;
+    ctx.drawImage(img, (W-dw)/2, (H-dh)/2, dw, dh);
+    ctx.restore();
+  }
+
+  /* ── Font size ── */
+  function getFontSize(){ return Math.min(Math.max(W * 0.125, 60*DPR), 190*DPR); }
+
+  /* ── Easing ── */
+  function easeOut3(t){ return 1 - Math.pow(1-t, 3); }
+
+  /* ── Draw frame ── */
+  function frame(ts){
+    if(!t0) t0 = ts;
+    var dt      = lastTs ? Math.min((ts - lastTs) / 1000, 0.05) : 0;
+    lastTs      = ts;
+    var elapsed = (ts - t0) / 1000;
+
+    /* Update blend */
+    if(blending){
+      blendPct += dt / (SLIDE_MS / 1000 * 0.38);
+      if(blendPct >= 1){ blendPct=1; blending=false; curImg=nextImg; }
+    }
+
+    /* Update animation values */
+    if(elapsed > 0.3)  word0Y    = Math.min(word0Y    + dt * 3.5, 1);
+    if(elapsed > 0.58) word1Y    = Math.min(word1Y    + dt * 3.5, 1);
+    if(elapsed > 1.15) tagA      = Math.min(tagA      + dt * 2.2, 1);
+    if(elapsed > 1.35) accentPct = Math.min(accentPct + dt * 2.0, 1);
+    if(elapsed > 2.2)  enterA    = Math.min(enterA    + dt * 2.0, 1);
+
+    /* ── Clear ── */
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = "#0A0E1F";
+    ctx.fillRect(0,0,W,H);
+
+    /* ── 1. Background images ── */
+    drawImg(imgs[curImg], blending ? 1 - blendPct : 1);
+    if(blending) drawImg(imgs[nextImg], blendPct);
+
+    /* ── 2. Dark gradient overlay ── */
+    var grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0,   "rgba(0,0,0,0.42)");
+    grad.addColorStop(0.45,"rgba(0,0,0,0.20)");
+    grad.addColorStop(1,   "rgba(0,0,0,0.60)");
+    ctx.fillStyle = grad;
+    ctx.fillRect(0,0,W,H);
+
+    /* ── 3. Big Words ── */
+    var fz   = getFontSize();
+    var baseY = H * 0.5 + fz * 0.32;
+
+    ctx.font         = "900 " + fz + "px 'Montserrat', Arial Black, sans-serif";
+    ctx.textBaseline = "alphabetic";
+    ctx.textAlign    = "left";
+
+    var weW    = ctx.measureText("WE").width;
+    var beW    = ctx.measureText("BELIEVE").width;
+    var gap    = fz * 0.19;
+    var totalW = weW + gap + beW;
+    var sx     = (W - totalW) / 2;
+
+    /* WE */
+    var off0 = (1 - easeOut3(word0Y)) * fz * 1.4;
+    ctx.save();
+    ctx.globalAlpha  = word0Y;
+    ctx.shadowColor  = "rgba(0,0,0,0.55)";
+    ctx.shadowBlur   = 22 * DPR;
+    ctx.fillStyle    = "#fff";
+    ctx.fillText("WE", sx, baseY + off0);
+    ctx.restore();
+
+    /* BELIEVE */
+    var off1 = (1 - easeOut3(word1Y)) * fz * 1.4;
+    ctx.save();
+    ctx.globalAlpha  = word1Y;
+    ctx.shadowColor  = "rgba(0,0,0,0.55)";
+    ctx.shadowBlur   = 22 * DPR;
+    ctx.fillStyle    = "#fff";
+    ctx.fillText("BELIEVE", sx + weW + gap, baseY + off1);
+    ctx.restore();
+
+    /* ── 4. Tagline ── */
+    if(tagA > 0.01){
+      ctx.save();
+      ctx.globalAlpha  = tagA;
+      ctx.font         = "700 " + Math.round(fz * 0.080) + "px 'Montserrat', sans-serif";
+      ctx.textAlign    = "center";
+      ctx.textBaseline = "alphabetic";
+      ctx.fillStyle    = "rgba(255,255,255,0.78)";
+      ctx.fillText("NORTH AMERICAN INTERNATIONAL SCHOOL  ·  DUBAI, UAE", W/2, baseY + fz * 0.31);
+      ctx.restore();
+    }
+
+    /* ── 5. Red accent line ── */
+    if(accentPct > 0){
+      var maxLineW = 58 * DPR;
+      var lineW    = maxLineW * easeOut3(accentPct);
+      ctx.save();
+      ctx.globalAlpha = tagA;
+      ctx.fillStyle   = RED;
+      ctx.fillRect(W/2 - lineW/2, baseY + fz * 0.48, lineW, 3 * DPR);
+      ctx.restore();
+    }
+
+    /* ── 6. "Enter Site" button ── */
+    if(enterA > 0.01){
+      var bx = W/2;
+      var by = H - 76 * DPR;
+      var bw = 218 * DPR;
+      var bh = 46  * DPR;
+
+      ctx.save();
+      ctx.globalAlpha  = enterA;
+      ctx.strokeStyle  = "rgba(255,255,255,0.65)";
+      ctx.lineWidth    = 1.5 * DPR;
+      ctx.beginPath();
+      ctx.rect(bx - bw/2, by - bh/2, bw, bh);
+      ctx.stroke();
+      ctx.fillStyle    = "#fff";
+      ctx.font         = "700 " + Math.round(fz * 0.080) + "px 'Montserrat', sans-serif";
+      ctx.textAlign    = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("ENTER SITE  \u2192", bx, by);
+      ctx.restore();
+
+      canvas._btn = { x: bx - bw/2, y: by - bh/2, w: bw, h: bh };
+    }
+
+    raf = requestAnimationFrame(frame);
+  }
+
+  /* ── Image cycling ── */
+  setInterval(function(){
+    if(dismissed) return;
+    nextImg  = (curImg + 1) % imgs.length;
+    blendPct = 0;
+    blending = true;
+  }, SLIDE_MS);
+
+  /* ── Dismiss ── */
+  function dismiss(){
+    if(dismissed) return;
+    dismissed = true;
+    clearTimeout(autoTimer);
+    cancelAnimationFrame(raf);
+    wrap.classList.add("fade-out");
+    logoEl.style.opacity  = "0";
+    skipBtn.style.opacity = "0";
+    progBar.style.opacity = "0";
+    setTimeout(function(){ window.location.href = DEST; }, 1200);
+  }
+
+  /* ── Click canvas ── */
+  canvas.addEventListener("click", function(e){
+    if(enterA < 0.45) return;
+    var r  = canvas.getBoundingClientRect();
+    var cx = (e.clientX - r.left)  * DPR;
+    var cy = (e.clientY - r.top)   * DPR;
+    var b  = canvas._btn;
+    if(!b){ dismiss(); return; }
+    if(cx >= b.x && cx <= b.x + b.w && cy >= b.y && cy <= b.y + b.h){
+      dismiss();
+    }
+  });
+
+  skipBtn.addEventListener("click", dismiss);
+
+  document.addEventListener("keydown", function(e){
+    if(e.key !== "Tab" && e.key !== "Shift") dismiss();
+  });
+
+  /* ── Start ── */
+  function startIntro(){
+    raf = requestAnimationFrame(frame);
+
+    /* Fade-in logo */
+    requestAnimationFrame(function(){
+      logoEl.classList.add("show");
+    });
+
+    /* Show skip after 2s */
+    setTimeout(function(){ skipBtn.classList.add("show"); }, 2000);
+
+    /* Progress bar */
+    requestAnimationFrame(function(){
+      progBar.style.transition = "width " + (AUTO_MS/1000).toFixed(1) + "s linear";
+      progBar.style.width      = "100%";
+    });
+
+    /* Auto-dismiss */
+    autoTimer = setTimeout(dismiss, AUTO_MS);
+  }
+
+  startIntro();
+
+}();
+</script>
+
+</body>
+</html>
