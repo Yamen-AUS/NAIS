@@ -216,6 +216,23 @@
     scrollObserver.observe(el);
   });
 
+  /* ─── STATS COUNTER FALLBACK ─── */
+  // Dedicated observer with generous rootMargin to ensure counters always fire
+  if (fullCounters.length > 0) {
+    const statsEl = document.querySelector('.stats-section');
+    if (statsEl) {
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            startFullCounters();
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      }, { root: null, rootMargin: '0px 0px 0px 0px', threshold: 0.05 });
+      statsObserver.observe(statsEl);
+    }
+  }
+
   // Add animation classes to key elements dynamically
   const sectionsToAnimate = [
     '.welcome-grid',

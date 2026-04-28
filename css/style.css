@@ -2367,6 +2367,75 @@ textarea:focus-visible {
   .btn-360-hero { flex-wrap: wrap; }
 }
 
+/* ── Photo-mode box (replaces iframe box when showing real photos) ── */
+.tour-photo-box {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0a0e1f;
+  height: 520px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(225,27,34,0.15);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.tour-photo-box:hover {
+  box-shadow: 0 32px 100px rgba(0,0,0,0.65), 0 0 0 1px rgba(225,27,34,0.30);
+}
+
+/* Campus photo fills the entire box, below the source badge */
+.tour-campus-photo {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  top: 37px;               /* leave room for the source badge */
+  left: 0;
+  right: 0;
+  bottom: 38px;            /* leave room for the caption */
+  height: calc(100% - 37px - 38px);
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1), filter 0.4s ease;
+  filter: brightness(0.97) saturate(1.05);
+}
+.tour-photo-box:hover .tour-campus-photo {
+  transform: scale(1.03);
+  filter: brightness(1) saturate(1.15);
+}
+
+/* Caption bar at the bottom of the photo */
+.tour-photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(0deg, rgba(6,8,15,0.88) 0%, rgba(6,8,15,0.45) 60%, transparent 100%);
+  padding: 18px 20px 14px;
+  font-family: var(--font-display);
+  font-size: 0.70rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  z-index: 3;
+  pointer-events: none;
+}
+.tour-photo-caption i { color: var(--red); font-size: 0.80rem; }
+
+/* Responsive adjustments for photo mode */
+@media (max-width: 1024px) {
+  .tour-photo-box { height: 400px; }
+  .tour-campus-photo { height: calc(100% - 37px - 38px); }
+}
+@media (max-width: 768px) {
+  .tour-photo-box { height: 300px; border-radius: 10px; }
+  .tour-campus-photo { height: calc(100% - 37px - 38px); }
+}
+
 /* Section intro — a little more air */
 .section-intro { font-size: 1.02rem; line-height: 1.85; }
 

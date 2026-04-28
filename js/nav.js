@@ -169,24 +169,52 @@
      Animated counters
   ═══════════════════════════════════════ */
   (function () {
-    const counters = document.querySelectorAll('.stat-number');
-    if (!counters.length) return;
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = parseInt(el.getAttribute('data-target'), 10);
-        let current = 0;
-        const step = Math.ceil(target / (2200 / 16));
-        const interval = setInterval(function () {
-          current += step;
-          if (current >= target) { current = target; clearInterval(interval); }
-          el.textContent = current.toLocaleString();
-        }, 16);
-        observer.unobserve(el);
-      });
-    }, { threshold: 0.3 });
-    counters.forEach(function (c) { observer.observe(c); });
+    function runCounter(el) {
+      var target = parseInt(el.getAttribute('data-target'), 10);
+      if (isNaN(target)) return;
+      var current = 0;
+      var step = Math.ceil(target / (2200 / 16));
+      var interval = setInterval(function () {
+        current += step;
+        if (current >= target) { current = target; clearInterval(interval); }
+        el.textContent = current.toLocaleString();
+      }, 16);
+    }
+
+    /* Hero stats (.stat-number) */
+    var heroCounters = document.querySelectorAll('.stat-number[data-target]');
+    if (heroCounters.length) {
+      var heroObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          runCounter(entry.target);
+          heroObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.3 });
+      heroCounters.forEach(function (c) { heroObserver.observe(c); });
+    }
+
+    /* Full stats section (.stat-count) */
+    var fullCounters = document.querySelectorAll('.stat-count[data-target]');
+    if (fullCounters.length) {
+      var started = false;
+      var fullObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting || started) return;
+          started = true;
+          fullCounters.forEach(function (el) { runCounter(el); });
+          fullObserver.disconnect();
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
+      /* observe the section wrapper, not individual elements */
+      var statsSection = document.querySelector('.stats-section');
+      if (statsSection) {
+        fullObserver.observe(statsSection);
+      } else {
+        /* fallback: observe first counter directly */
+        fullObserver.observe(fullCounters[0]);
+      }
+    }
   })();
 
   /* ═══════════════════════════════════════

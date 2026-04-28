@@ -580,11 +580,11 @@
 
     <div class="hero-stats">
       <div class="stat-item">
-        <span class="stat-number" data-target="750">0</span><span class="stat-suffix">+</span>
+        <span class="stat-number" data-target="900">0</span><span class="stat-suffix">+</span>
         <span class="stat-label">Students Enrolled</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number" data-target="65">0</span><span class="stat-suffix">+</span>
+        <span class="stat-number" data-target="60">0</span><span class="stat-suffix">+</span>
         <span class="stat-label">Expert Faculty</span>
       </div>
       <div class="stat-item">
@@ -1653,110 +1653,95 @@
       <!-- Space Selector Tabs -->
       <div class="tour-tabs" id="tourTabs">
         <button class="tour-tab active" data-tour="classroom">
-          <i class="fas fa-chalkboard-teacher"></i>
-          <span>Classrooms</span>
+          <i class="fas fa-school"></i>
+          <span>Main Entrance</span>
         </button>
         <button class="tour-tab" data-tour="lab">
-          <i class="fas fa-flask"></i>
-          <span>Science Labs</span>
+          <i class="fas fa-child"></i>
+          <span>KG Playground</span>
         </button>
         <button class="tour-tab" data-tour="playground">
-          <i class="fas fa-running"></i>
-          <span>Playgrounds</span>
+          <i class="fas fa-futbol"></i>
+          <span>Sports Field</span>
         </button>
       </div>
 
       <!-- 360° Viewer Frame -->
       <div class="tour-viewer-wrap">
 
-        <!-- ══ CLASSROOM — Kuula 360° (real school classroom, works perfectly in iframe) ══ -->
+        <!-- ══ ENTRANCE — Real NAIS Campus Photo ══ -->
         <div class="tour-pane active" id="pane-classroom">
-          <div class="tour-iframe-box">
+          <div class="tour-iframe-box tour-photo-box">
             <div class="tour-source-badge">
-              <i class="fas fa-cube" style="margin-right:5px;"></i>
-              <span>Matterport 3D Tour · Navigate &amp; Explore Freely</span>
+              <i class="fas fa-school" style="margin-right:5px;"></i>
+              <span>NAIS Dubai · Main Entrance – Al Mizhar 1</span>
             </div>
-            <!-- Matterport: St. Joseph's College – verified public school 3D tour (works) -->
-            <iframe
-              src="https://my.matterport.com/show/?m=SxQL3iGyoDo&play=1&qs=1&hl=2&brand=0"
-              width="100%" height="100%"
-              style="border:0;"
-              frameborder="0" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"
-              title="School Classroom 3D Tour – Matterport (St. Joseph's College)">
-            </iframe>
-            <div class="tour-badge"><i class="fas fa-cube"></i> Matterport 3D Tour</div>
+            <img src="images/campus-main.jpg" alt="NAIS Dubai Main Entrance – North American International School" class="tour-campus-photo" />
+            <div class="tour-photo-caption">
+              <i class="fas fa-map-marker-alt"></i> North American International School · Al Mizhar 1, Dubai
+            </div>
           </div>
           <div class="tour-info-card">
-            <div class="tour-info-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-            <h3>Modern Classrooms</h3>
-            <p>Bright, technology-equipped classrooms designed for collaborative learning. Smart boards, flexible seating, and a stimulating atmosphere that brings every subject to life.</p>
+            <div class="tour-info-icon"><i class="fas fa-school"></i></div>
+            <h3>Our NAIS Campus</h3>
+            <p>The iconic NAIS Dubai main building in Al Mizhar 1 — a welcoming, purpose-built school designed to inspire every student from the moment they arrive.</p>
             <ul class="tour-features">
-              <li><i class="fas fa-check-circle"></i> Smart Interactive Boards</li>
-              <li><i class="fas fa-check-circle"></i> 1:1 Device Program</li>
-              <li><i class="fas fa-check-circle"></i> Max 18 Students Per Class</li>
-              <li><i class="fas fa-check-circle"></i> AC &amp; Natural Lighting</li>
+              <li><i class="fas fa-check-circle"></i> Purpose-Built School Campus</li>
+              <li><i class="fas fa-check-circle"></i> Al Mizhar 1, Mirdif, Dubai</li>
+              <li><i class="fas fa-check-circle"></i> Secure, Gated Entrance</li>
+              <li><i class="fas fa-check-circle"></i> Ample Parking &amp; Drop-Off</li>
             </ul>
-            <a href="admissions.html" class="btn btn-red-sm">Book a Physical Tour <i class="fas fa-arrow-right"></i></a>
+            <a href="admissions.html" class="btn btn-red-sm">Book a Campus Tour <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
-        <!-- ══ SCIENCE LAB — Matterport: Different school building / science wing ══ -->
+        <!-- ══ PLAYGROUND — Real NAIS Campus Photo ══ -->
         <div class="tour-pane" id="pane-lab">
-          <div class="tour-iframe-box">
+          <div class="tour-iframe-box tour-photo-box">
             <div class="tour-source-badge">
-              <i class="fas fa-cube" style="margin-right:5px;"></i>
-              <span>Matterport 3D Tour · Navigate &amp; Explore Freely</span>
+              <i class="fas fa-child" style="margin-right:5px;"></i>
+              <span>NAIS Dubai · KG Playground – Shaded &amp; Safe</span>
             </div>
-            <!-- Matterport: Fully furnished school building – public scan, verified working -->
-            <iframe
-              data-src="https://my.matterport.com/show/?m=SxQL3iGyoDo&play=1&qs=1&hl=2&brand=0&sr=-.67,.55&ss=36"
-              src="about:blank"
-              width="100%" height="100%" style="border:0;"
-              frameborder="0" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"
-              title="School Science Wing 3D Tour – Matterport">
-            </iframe>
-            <div class="tour-badge"><i class="fas fa-cube"></i> Matterport 3D</div>
+            <img src="images/campus-playground.jpg" alt="NAIS Dubai KG Playground – Colorful Safe Play Area" class="tour-campus-photo" />
+            <div class="tour-photo-caption">
+              <i class="fas fa-shield-alt"></i> Fully Shaded · Safety-Certified · Dedicated KG Play Zone
+            </div>
           </div>
           <div class="tour-info-card">
-            <div class="tour-info-icon"><i class="fas fa-flask"></i></div>
-            <h3>State-of-the-Art Labs</h3>
-            <p>Fully equipped science, computer, and STEM labs that give students hands-on experience with real-world tools and experiments that prepare them for university and beyond.</p>
+            <div class="tour-info-icon"><i class="fas fa-child"></i></div>
+            <h3>KG Playground</h3>
+            <p>Our vibrant, fully shaded Kindergarten play area is a safe haven of joy and discovery — colourful play equipment, soft rubberised flooring, and age-appropriate activities designed for our youngest learners.</p>
             <ul class="tour-features">
-              <li><i class="fas fa-check-circle"></i> Physics, Chemistry &amp; Biology Labs</li>
-              <li><i class="fas fa-check-circle"></i> Innovation &amp; Robotics Hub</li>
-              <li><i class="fas fa-check-circle"></i> High-Speed Computer Lab</li>
-              <li><i class="fas fa-check-circle"></i> Safety-Certified Equipment</li>
+              <li><i class="fas fa-check-circle"></i> Fully Shaded Canopy</li>
+              <li><i class="fas fa-check-circle"></i> Safety-Certified Rubber Flooring</li>
+              <li><i class="fas fa-check-circle"></i> Age-Appropriate Play Equipment</li>
+              <li><i class="fas fa-check-circle"></i> Supervised at All Times</li>
             </ul>
-            <a href="academics.html" class="btn btn-red-sm">Explore Academics <i class="fas fa-arrow-right"></i></a>
+            <a href="academics.html#kindergarten" class="btn btn-red-sm">KG Programme <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
-        <!-- ══ PLAYGROUND — Matterport: Verified sports/recreation public tour ══ -->
+        <!-- ══ SPORTS FIELD — Real NAIS Campus Photo ══ -->
         <div class="tour-pane" id="pane-playground">
-          <div class="tour-iframe-box">
+          <div class="tour-iframe-box tour-photo-box">
             <div class="tour-source-badge">
-              <i class="fas fa-cube" style="margin-right:5px;"></i>
-              <span>Matterport 3D Tour · Navigate &amp; Explore Freely</span>
+              <i class="fas fa-futbol" style="margin-right:5px;"></i>
+              <span>NAIS Dubai · Football Field – Shaded Artificial Turf</span>
             </div>
-            <!-- Matterport: Modern recreation / sports facility – verified public, works -->
-            <iframe
-              data-src="https://my.matterport.com/show/?m=j4RZx7ZGM6T&play=1&qs=1&brand=0"
-              src="about:blank"
-              width="100%" height="100%" style="border:0;"
-              frameborder="0" allowfullscreen allow="xr-spatial-tracking; gyroscope; accelerometer"
-              title="School Sports &amp; Playground 3D Tour – Matterport">
-            </iframe>
-            <div class="tour-badge"><i class="fas fa-cube"></i> Matterport 3D</div>
+            <img src="images/campus-sports.jpg" alt="NAIS Dubai Football Field – Full-Size Shaded Sports Pitch" class="tour-campus-photo" />
+            <div class="tour-photo-caption">
+              <i class="fas fa-running"></i> Full-Size Pitch · Premium Artificial Turf · Shaded Canopy
+            </div>
           </div>
           <div class="tour-info-card">
-            <div class="tour-info-icon"><i class="fas fa-running"></i></div>
-            <h3>Sports &amp; Playgrounds</h3>
-            <p>Expansive outdoor and indoor sports facilities including football pitches, basketball courts, and play areas designed to develop teamwork, fitness, and a love for an active lifestyle.</p>
+            <div class="tour-info-icon"><i class="fas fa-futbol"></i></div>
+            <h3>Sports Field</h3>
+            <p>Our full-size, premium artificial turf football pitch with a grand shaded canopy — the perfect arena for competitive sports, PE lessons, and school tournaments all year round.</p>
             <ul class="tour-features">
-              <li><i class="fas fa-check-circle"></i> Football &amp; Basketball Courts</li>
-              <li><i class="fas fa-check-circle"></i> Indoor Sports Hall</li>
-              <li><i class="fas fa-check-circle"></i> Dedicated KG Play Areas</li>
-              <li><i class="fas fa-check-circle"></i> Shaded Outdoor Spaces</li>
+              <li><i class="fas fa-check-circle"></i> Full-Size Artificial Turf Pitch</li>
+              <li><i class="fas fa-check-circle"></i> Large Shaded Canopy</li>
+              <li><i class="fas fa-check-circle"></i> Football, Basketball &amp; Athletics</li>
+              <li><i class="fas fa-check-circle"></i> Fenced &amp; Fully Enclosed</li>
             </ul>
             <a href="index.html#student-life" class="btn btn-red-sm">Student Life <i class="fas fa-arrow-right"></i></a>
           </div>
@@ -1785,12 +1770,12 @@
       <div class="stats-grid-full">
         <div class="stat-full-item">
           <div class="stat-icon"><i class="fas fa-users"></i></div>
-          <div class="stat-count" data-target="750">0</div><div class="stat-unit">+</div>
+          <div class="stat-count" data-target="900">0</div><div class="stat-unit">+</div>
           <div class="stat-name">Students</div>
         </div>
         <div class="stat-full-item">
           <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-          <div class="stat-count" data-target="65">0</div><div class="stat-unit">+</div>
+          <div class="stat-count" data-target="60">0</div><div class="stat-unit">+</div>
           <div class="stat-name">Qualified Teachers</div>
         </div>
         <div class="stat-full-item">
@@ -1800,7 +1785,7 @@
         </div>
         <div class="stat-full-item">
           <div class="stat-icon"><i class="fas fa-award"></i></div>
-          <div class="stat-count" data-target="95">0</div><div class="stat-unit">%</div>
+          <div class="stat-count" data-target="100">0</div><div class="stat-unit">%</div>
           <div class="stat-name">University Acceptance</div>
         </div>
         <div class="stat-full-item">
@@ -2122,7 +2107,7 @@
     <div class="container">
       <div>
         <h3>Ready to Start Your NAIS Journey?</h3>
-        <p>Join our community of 750+ students from 45+ nationalities</p>
+        <p>Join our community of 900+ students from 45+ nationalities</p>
       </div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
         <a href="admissions.html#apply" class="btn btn-red"><i class="fas fa-user-plus"></i> Apply Now</a>
