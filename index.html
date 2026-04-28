@@ -201,25 +201,26 @@
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
 
       var fz = getFZ();
-      var baseY = H*0.5 + fz*0.32;
+      var baseY = H*0.5 - fz*0.30;
 
-      ctx.font = "900 "+fz+"px 'Montserrat',Arial Black,sans-serif";
       ctx.textBaseline = "alphabetic"; ctx.textAlign = "center";
-      var weW = ctx.measureText("WHERE").width;
-      var beW = ctx.measureText("MINDS GROW.").width;
-      var totalW = weW + fz*0.15 + beW;
-      var gap = fz*0.15;
-      var sx  = W/2 - totalW/2;
 
-      ctx.textAlign = "left";
-      // WHERE
-      ctx.save(); ctx.globalAlpha=word0Y; ctx.shadowColor="rgba(0,0,0,0.55)"; ctx.shadowBlur=18*DPR; ctx.fillStyle="#fff";
-      ctx.fillText("WHERE", sx, baseY + (1-easeOut(word0Y))*fz*1.2);
+      // Line 1: "Progress You Can See."  — white
+      ctx.save();
+      ctx.globalAlpha = word0Y;
+      ctx.shadowColor = "rgba(0,0,0,0.60)"; ctx.shadowBlur = 20*DPR;
+      ctx.font = "900 "+fz+"px 'Montserrat',Arial Black,sans-serif";
+      ctx.fillStyle = "#fff";
+      ctx.fillText("Progress You Can See.", W/2, baseY + (1-easeOut(word0Y))*fz*1.2);
       ctx.restore();
 
-      // MINDS GROW.
-      ctx.save(); ctx.globalAlpha=word1Y; ctx.shadowColor="rgba(0,0,0,0.55)"; ctx.shadowBlur=18*DPR; ctx.fillStyle="#E11B22";
-      ctx.fillText("MINDS GROW.", sx+weW+gap, baseY + (1-easeOut(word1Y))*fz*1.2);
+      // Line 2: "Care You Can Feel."  — red accent
+      ctx.save();
+      ctx.globalAlpha = word1Y;
+      ctx.shadowColor = "rgba(0,0,0,0.60)"; ctx.shadowBlur = 20*DPR;
+      ctx.font = "900 "+fz+"px 'Montserrat',Arial Black,sans-serif";
+      ctx.fillStyle = "#E11B22";
+      ctx.fillText("Care You Can Feel.", W/2, baseY + fz*1.25 + (1-easeOut(word1Y))*fz*1.2);
       ctx.restore();
 
       // Tagline
@@ -227,7 +228,7 @@
         ctx.save(); ctx.globalAlpha=tagA;
         ctx.font="700 "+Math.round(fz*0.080)+"px 'Montserrat',sans-serif";
         ctx.textAlign="center"; ctx.textBaseline="alphabetic"; ctx.fillStyle="rgba(255,255,255,0.78)";
-        ctx.fillText("NORTH AMERICAN INTERNATIONAL SCHOOL  \u00B7  DUBAI, UAE", W/2, baseY+fz*0.31);
+        ctx.fillText("NORTH AMERICAN INTERNATIONAL SCHOOL  \u00B7  DUBAI, UAE", W/2, baseY+fz*2.0);
         ctx.restore();
       }
 
@@ -235,7 +236,7 @@
       if(accentPct>0){
         var lw = 58*DPR*easeOut(accentPct);
         ctx.save(); ctx.globalAlpha=tagA; ctx.fillStyle=RED;
-        ctx.fillRect(W/2-lw/2, baseY+fz*0.48, lw, 3*DPR);
+        ctx.fillRect(W/2-lw/2, baseY+fz*2.18, lw, 3*DPR);
         ctx.restore();
       }
 
