@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parent FAQ | North American International School Dubai</title>
+  <meta name="description" content="Parent FAQ – Everything you need to know about the American Curriculum at NAIS Dubai. Grading, assessments, AP courses, university preparation, wellbeing and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" href="images/nais-logo.png?v=3" type="image/png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css?v=6" />
+  <link rel="stylesheet" href="css/pages.css?v=6" />
+  <link rel="stylesheet" href="css/nav.css?v=6" />
+  <link rel="stylesheet" href="css/mobile.css?v=3" />
+  <style>
+    @media (min-width: 1200px) {
+      .topbar{overflow:visible!important;height:62px!important;display:flex!important;align-items:center!important;}
+      .topbar-inner{height:62px!important;display:flex!important;align-items:center!important;padding:0 60px 0 0!important;}
+      .topbar-logo{width:auto!important;height:68px!important;max-height:68px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:6px 16px 6px 12px!important;background:#fff!important;flex-shrink:0!important;}
+      .topbar-logo-img{width:auto!important;height:56px!important;max-width:220px!important;max-height:56px!important;object-fit:contain!important;object-position:left center!important;display:block!important;}
+    }
+
+    :root {
+      --navy:  #1F2F6E;
+      --red:   #E11B22;
+      --gold:  #F5A623;
+      --green: #27AE60;
+      --teal:  #0891b2;
+      --purple:#7c3aed;
+      --light: #F4F6FB;
+      --border:#DDE3F0;
+    }
+
+    /* ═══════════ HERO ═══════════ */
+    .faq-hero {
+      background: linear-gradient(135deg, #0B1230 0%, #1F2F6E 55%, #2a3d8f 100%);
+      padding: 110px 0 70px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .faq-hero::before {
+      content: 'FAQ';
+      position: absolute;
+      font-size: clamp(120px, 22vw, 260px);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      color: rgba(255,255,255,0.03);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      letter-spacing: -6px;
+      white-space: nowrap;
+    }
+    .faq-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,166,35,0.18);
+      border: 1px solid rgba(245,166,35,0.45);
+      color: #fbbf24;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 7px 20px;
+      border-radius: 50px;
+      margin-bottom: 22px;
+    }
+    .faq-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      color: #fff;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .faq-hero h1 em { color: var(--gold); font-style: italic; }
+    .faq-hero p {
+      color: rgba(255,255,255,0.72);
+      font-size: 1rem;
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+    .faq-hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 52px;
+      flex-wrap: wrap;
+    }
+    .faq-hero-stat .n {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--gold);
+      display: block;
+      line-height: 1;
+    }
+    .faq-hero-stat .l {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 5px;
+      display: block;
+    }
+
+    /* ═══════════ STICKY CATEGORY TABS ═══════════ */
+    .faq-tabs-bar {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    }
+    .faq-tabs-inner {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 16px;
+    }
+    .faq-tabs-inner::-webkit-scrollbar { display: none; }
+    .faq-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 15px 18px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .faq-tab-btn:hover { color: #fff; border-bottom-color: rgba(245,166,35,0.5); }
+    .faq-tab-btn.active { color: #fff; border-bottom-color: var(--gold); }
+    .faq-tab-count {
+      background: rgba(255,255,255,0.15);
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 20px;
+      min-width: 20px;
+      text-align: center;
+    }
+    .faq-tab-btn.active .faq-tab-count { background: var(--gold); color: var(--navy); }
+
+    /* ═══════════ LAYOUT ═══════════ */
+    .faq-body { padding: 64px 0 80px; background: var(--light); }
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    /* ═══════════ SIDEBAR ═══════════ */
+    .faq-sidebar {
+      position: sticky;
+      top: 68px;
+    }
+    .faq-sidebar-card {
+      background: #fff;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 3px 18px rgba(31,47,110,0.08);
+      border: 1px solid var(--border);
+    }
+    .faq-sidebar-header {
+      background: var(--navy);
+      color: #fff;
+      padding: 20px 22px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .faq-sidebar-nav { padding: 8px 0; }
+    .faq-sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 20px;
+      font-size: 0.84rem;
+      color: #4b5563;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.18s;
+      border-left: 3px solid transparent;
+    }
+    .faq-sidebar-link:hover { background: var(--light); color: var(--navy); border-left-color: var(--border); }
+    .faq-sidebar-link.active { background: #eef1fc; color: var(--navy); border-left-color: var(--navy); font-weight: 700; }
+    .faq-sidebar-link .sl-icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      color: #fff;
+    }
+    .faq-sidebar-count {
+      margin-left: auto;
+      background: var(--light);
+      color: #6b7280;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+    }
+    .faq-sidebar-link.active .faq-sidebar-count { background: var(--navy); color: #fff; }
+
+    /* Contact card */
+    .faq-contact-card {
+      background: linear-gradient(135deg, var(--navy), #2a3d8f);
+      border-radius: 18px;
+      padding: 28px 22px;
+      margin-top: 20px;
+      color: #fff;
+      text-align: center;
+    }
+    .faq-contact-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .faq-contact-card p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .faq-contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 10px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.2s;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+    .faq-contact-btn:hover { background: #e8950f; transform: translateY(-2px); }
+    .faq-contact-btn.whatsapp-btn { background: #25D366; color: #fff; }
+    .faq-contact-btn.whatsapp-btn:hover { background: #1faf56; }
+
+    /* ═══════════ FAQ SECTIONS ═══════════ */
+    .faq-sections { display: flex; flex-direction: column; gap: 32px; }
+
+    .faq-section-block {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 3px 20px rgba(31,47,110,0.07);
+      border: 1px solid var(--border);
+    }
+    .faq-section-heading {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-section-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .faq-section-heading h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+    .faq-section-heading .q-count {
+      margin-left: auto;
+      background: var(--light);
+      color: #6b7280;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ═══════════ ACCORDION ITEMS ═══════════ */
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.93rem;
+      font-weight: 600;
+      color: #1f2937;
+      transition: background 0.15s;
+      line-height: 1.45;
+    }
+    .faq-question:hover { background: #fafbff; }
+    .faq-question.open { background: var(--navy); color: #fff; }
+
+    .faq-q-left { display: flex; align-items: center; gap: 14px; flex: 1; }
+    .faq-q-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--light);
+      color: var(--navy);
+      font-size: 0.7rem;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .faq-question.open .faq-q-num { background: rgba(255,255,255,0.2); color: #fff; }
+
+    .faq-arrow {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem;
+      color: var(--navy);
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+    .faq-question.open .faq-arrow { background: rgba(255,255,255,0.18); color: #fff; transform: rotate(180deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.42s cubic-bezier(0.16,1,0.3,1);
+    }
+    .faq-answer.open { max-height: 800px; }
+    .faq-answer-inner {
+      padding: 22px 28px 26px 68px;
+      font-size: 0.9rem;
+      color: #374151;
+      line-height: 1.8;
+      border-top: 1px solid var(--border);
+    }
+    .faq-answer-inner p { margin: 0 0 12px; }
+    .faq-answer-inner p:last-child { margin-bottom: 0; }
+    .faq-answer-inner ul, .faq-answer-inner ol {
+      padding: 0;
+      list-style: none;
+      margin: 10px 0;
+    }
+    .faq-answer-inner ul li, .faq-answer-inner ol li {
+      padding: 5px 0 5px 20px;
+      position: relative;
+      color: #4b5563;
+      font-size: 0.88rem;
+    }
+    .faq-answer-inner ul li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 13px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .faq-answer-inner ol { counter-reset: ol-counter; }
+    .faq-answer-inner ol li { counter-increment: ol-counter; }
+    .faq-answer-inner ol li::before {
+      content: counter(ol-counter)'.';
+      position: absolute;
+      left: 0; top: 5px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .faq-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+    .tag-green  { background: #d1fae5; color: #065f46; }
+    .tag-blue   { background: #dbeafe; color: #1e40af; }
+    .tag-gold   { background: #fef3c7; color: #92400e; }
+    .tag-red    { background: #fee2e2; color: #991b1b; }
+    .tag-purple { background: #ede9fe; color: #5b21b6; }
+    .faq-highlight-box {
+      background: var(--light);
+      border-left: 4px solid var(--navy);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 0.88rem;
+      color: #374151;
+      line-height: 1.65;
+    }
+    .faq-highlight-box.gold-accent { border-left-color: var(--gold); background: #fffbeb; }
+    .faq-highlight-box.green-accent { border-left-color: var(--green); background: #f0fdf4; }
+    .faq-highlight-box.red-accent   { border-left-color: var(--red);   background: #fff5f5; }
+
+    /* ═══════════ SEARCH BAR ═══════════ */
+    .faq-search-wrap {
+      max-width: 560px;
+      margin: 0 auto 40px;
+      position: relative;
+    }
+    .faq-search-input {
+      width: 100%;
+      padding: 16px 56px 16px 22px;
+      border-radius: 50px;
+      border: 2px solid var(--border);
+      font-size: 0.92rem;
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: #1f2937;
+      outline: none;
+      box-shadow: 0 3px 14px rgba(31,47,110,0.07);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+    .faq-search-input:focus { border-color: var(--navy); box-shadow: 0 3px 20px rgba(31,47,110,0.13); }
+    .faq-search-icon {
+      position: absolute;
+      right: 20px; top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+    .faq-search-count {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: -28px;
+      margin-bottom: 28px;
+      display: none;
+    }
+    .faq-item.hidden { display: none; }
+
+    /* ═══════════ CTA BANNER ═══════════ */
+    .faq-cta {
+      background: linear-gradient(135deg, var(--red) 0%, #c0151b 100%);
+      border-radius: 22px;
+      padding: 52px 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+      margin-top: 40px;
+    }
+    .faq-cta h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .faq-cta h3 em { color: #fde68a; font-style: italic; }
+    .faq-cta p { color: rgba(255,255,255,0.82); font-size: 0.95rem; line-height: 1.7; margin: 0; max-width: 540px; }
+    .faq-cta-btns { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+    .btn-white-solid {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; color: var(--red); font-weight: 700; font-size: 0.88rem;
+      padding: 14px 28px; border-radius: 50px; text-decoration: none;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .btn-white-solid:hover { background: #fde68a; transform: translateY(-2px); }
+    .btn-outline-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: #fff;
+      border: 2px solid rgba(255,255,255,0.5);
+      font-weight: 700; font-size: 0.88rem;
+      padding: 13px 28px; border-radius: 50px; text-decoration: none;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
+
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media (max-width: 960px) {
+      .faq-layout { grid-template-columns: 1fr; }
+      .faq-sidebar { position: static; }
+      .faq-cta { grid-template-columns: 1fr; padding: 36px 28px; }
+      .faq-cta-btns { flex-direction: row; flex-wrap: wrap; }
+    }
+    @media (max-width: 600px) {
+      .faq-answer-inner { padding: 18px 20px 22px; }
+      .faq-question { padding: 16px 20px; }
+      .faq-section-heading { padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ TOP BAR ══ -->
+  <div class="topbar" id="main-topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="topbar-logo" style="width:auto;height:68px;overflow:visible;display:flex;align-items:center;justify-content:flex-start;padding:6px 16px 6px 12px;background:#fff;flex-shrink:0;">
+        <img src="images/nais-logo.png" alt="North American International School Dubai" class="topbar-logo-img" style="width:auto;height:56px;max-width:220px;max-height:56px;object-fit:contain;object-position:left center;display:block;" />
+      </a>
+      <div class="topbar-left">
+        <a href="tel:+97142635456"><i class="fas fa-phone-alt"></i> +971 4 263 5456</a>
+        <a href="mailto:admissions@naischool.ae"><i class="fas fa-envelope"></i> admissions@naischool.ae</a>
+        <span><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</span>
+      </div>
+      <div class="topbar-right">
+        <a href="#" class="topbar-link">Parent Portal</a>
+        <span class="topbar-divider">|</span>
+        <a href="#" class="topbar-link">E-Learning</a>
+        <span class="topbar-divider">|</span>
+        <a href="#" class="topbar-link">Careers</a>
+        <div class="topbar-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ NAV RAIL ══ -->
+  <div class="nav-rail" id="nav-rail" role="button" aria-label="Open Navigation Menu" aria-expanded="false">
+    <div class="nav-rail-inner" id="nav-rail-trigger">
+      <a href="index.html" class="logo-wrap" aria-label="NAIS Home">
+        <img src="images/nais-logo.png" alt="NAIS" style="height:42px;max-height:42px;max-width:190px;width:auto;object-fit:contain;background:#fff;padding:5px 10px;border-radius:5px;" />
+      </a>
+      <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
+        <div class="nav-rail-lines"><span></span><span></span><span></span></div>
+        <span class="nav-rail-label">MENU</span>
+      </button>
+    </div>
+    <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
+    <span id="nav-desktop-label">MENU</span>
+  </div>
+
+  <!-- ══ NAV OVERLAY ══ -->
+  <div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Main Navigation" aria-hidden="true" style="background-color:#0b1230;">
+    <div class="nav-left-panel" aria-hidden="true" style="background-color:#0a1128;position:relative;flex-shrink:0;">
+      <div class="nav-left-bg" style="position:absolute;inset:0;background:linear-gradient(155deg,#0f1d45 0%,#1e3175 40%,#0a1128 100%);z-index:0;"></div>
+      <div class="nav-left-content">
+        <a href="index.html" class="nav-left-logo">
+          <img src="images/nais-logo.png" alt="North American International School" style="height:72px;max-width:300px;width:auto;object-fit:contain;display:block;" />
+        </a>
+        <div class="nav-left-tagline">
+          <div class="nav-left-tagline-top">Est. 2005 · Dubai, UAE</div>
+          <div class="nav-left-tagline-title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
+          <p class="nav-left-tagline-sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
+        </div>
+        <div class="nav-left-spacer"></div>
+        <div class="nav-promo-card">
+          <div class="nav-promo-card-label">Open Enrollment</div>
+          <div class="nav-promo-card-title">Apply for <span>2025–2026</span></div>
+          <p class="nav-promo-card-desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
+          <a href="admissions.html" class="nav-promo-card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right-panel" style="background-color:#0d1535;">
+      <div class="nav-close" id="nav-close" aria-label="Close Navigation">
+        <button class="nav-close-inner" aria-label="Close Menu">&#x2715;</button>
+      </div>
+      <div class="nav-panel">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-primary-list">
+            <li class="nav-primary-item" data-item="about">
+              <a href="about.html" class="nav-primary-link">About</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link">Mission &amp; Vision</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">School Leadership</a></li>
+                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link">Core Values — CARE</a></li>
+                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link">Our Campus</a></li>
+                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link">Accreditation</a></li>
+              </ul>
+            </li>
+            <li class="nav-primary-item" data-item="academics">
+              <a href="academics.html" class="nav-primary-link">Academics</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="academics.html#kindergarten" class="nav-subnav-link">Kindergarten</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#elementary" class="nav-subnav-link">Elementary School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link">Middle School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link">High School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#ap" class="nav-subnav-link">AP Courses</a></li>
+                <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">Project-Based Learning &#9733;</a></li>
+              </ul>
+            </li>
+            <li class="nav-primary-item" data-item="curriculum">
+              <a href="curriculum.html" class="nav-primary-link">American Curriculum</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="curriculum.html#grading" class="nav-subnav-link">Grading System</a></li>
+                <li class="nav-subnav-item"><a href="curriculum.html#exams" class="nav-subnav-link">Assessments</a></li>
+                <li class="nav-subnav-item"><a href="curriculum.html#pathways" class="nav-subnav-link">Learning Pathways</a></li>
+                <li class="nav-subnav-item"><a href="parent-faq.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">Parent FAQ ★</a></li>
+              </ul>
+            </li>
+            <li class="nav-primary-item" data-item="student-life">
+              <a href="index.html#student-life" class="nav-primary-link">Student Life</a>
+            </li>
+            <li class="nav-primary-item" data-item="admissions">
+              <a href="admissions.html" class="nav-primary-link">Admissions</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link">How to Apply</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link">Tuition &amp; Fees</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link">Apply Now</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <div class="nav-panel-bottom">
+          <div class="nav-bottom-careers">
+            <span class="nav-careers-label">Career Opportunities</span>
+            <div class="nav-bottom-social">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="nav-bottom-search">
+            <span class="nav-search-label">Search</span>
+            <div class="nav-search-form">
+              <input type="text" class="nav-search-input" placeholder="Keyword" aria-label="Search" />
+              <button class="nav-search-btn" aria-label="Submit Search"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <a href="admissions.html" class="nav-apply-btn">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════ -->
+  <section class="faq-hero">
+    <div class="container">
+      <div class="faq-hero-badge"><i class="fas fa-comments"></i> Parent Resource</div>
+      <h1>Parent <em>FAQ</em><br/>American Curriculum at NAIS</h1>
+      <p>Everything you need to know about how we teach, assess, support, and prepare your child for success — answered clearly and honestly.</p>
+      <div class="faq-hero-stats">
+        <div class="faq-hero-stat"><span class="n">24</span><span class="l">Questions Answered</span></div>
+        <div class="faq-hero-stat"><span class="n">7</span><span class="l">Topic Categories</span></div>
+        <div class="faq-hero-stat"><span class="n">KG–12</span><span class="l">All Grade Levels</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STICKY CATEGORY TABS ══ -->
+  <nav class="faq-tabs-bar" aria-label="FAQ Categories">
+    <div class="container">
+      <div class="faq-tabs-inner">
+        <button class="faq-tab-btn active" data-section="general"><i class="fas fa-globe"></i> General <span class="faq-tab-count">3</span></button>
+        <button class="faq-tab-btn" data-section="assessment"><i class="fas fa-star-half-alt"></i> Assessment <span class="faq-tab-count">5</span></button>
+        <button class="faq-tab-btn" data-section="learning"><i class="fas fa-brain"></i> Learning <span class="faq-tab-count">3</span></button>
+        <button class="faq-tab-btn" data-section="exams"><i class="fas fa-file-alt"></i> Exams &amp; Workload <span class="faq-tab-count">3</span></button>
+        <button class="faq-tab-btn" data-section="integrity"><i class="fas fa-shield-alt"></i> Integrity <span class="faq-tab-count">2</span></button>
+        <button class="faq-tab-btn" data-section="university"><i class="fas fa-university"></i> University <span class="faq-tab-count">2</span></button>
+        <button class="faq-tab-btn" data-section="wellbeing"><i class="fas fa-heart"></i> Wellbeing <span class="faq-tab-count">2</span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       MAIN BODY
+  ══════════════════════════════════════════ -->
+  <div class="faq-body">
+    <div class="container">
+
+      <!-- Search -->
+      <div class="faq-search-wrap">
+        <input type="text" class="faq-search-input" id="faqSearch" placeholder="Search questions... e.g. grading, AP courses, homework" aria-label="Search FAQ" />
+        <i class="fas fa-search faq-search-icon"></i>
+      </div>
+      <div class="faq-search-count" id="searchCount"></div>
+
+      <div class="faq-layout">
+
+        <!-- ══ SIDEBAR ══ -->
+        <aside class="faq-sidebar">
+          <div class="faq-sidebar-card">
+            <div class="faq-sidebar-header"><i class="fas fa-list-ul" style="margin-right:8px;"></i> Categories</div>
+            <nav class="faq-sidebar-nav">
+              <a href="#general"    class="faq-sidebar-link active" data-section="general">
+                <span class="sl-icon" style="background:var(--navy);"><i class="fas fa-globe"></i></span> General Questions <span class="faq-sidebar-count">3</span>
+              </a>
+              <a href="#assessment" class="faq-sidebar-link" data-section="assessment">
+                <span class="sl-icon" style="background:var(--red);"><i class="fas fa-star-half-alt"></i></span> Assessment &amp; Grading <span class="faq-sidebar-count">5</span>
+              </a>
+              <a href="#learning"   class="faq-sidebar-link" data-section="learning">
+                <span class="sl-icon" style="background:var(--teal);"><i class="fas fa-brain"></i></span> Learning &amp; Teaching <span class="faq-sidebar-count">3</span>
+              </a>
+              <a href="#exams"      class="faq-sidebar-link" data-section="exams">
+                <span class="sl-icon" style="background:var(--gold);"><i class="fas fa-file-alt"></i></span> Exams &amp; Workload <span class="faq-sidebar-count">3</span>
+              </a>
+              <a href="#integrity"  class="faq-sidebar-link" data-section="integrity">
+                <span class="sl-icon" style="background:var(--purple);"><i class="fas fa-shield-alt"></i></span> Academic Integrity <span class="faq-sidebar-count">2</span>
+              </a>
+              <a href="#university" class="faq-sidebar-link" data-section="university">
+                <span class="sl-icon" style="background:var(--green);"><i class="fas fa-university"></i></span> University Pathways <span class="faq-sidebar-count">2</span>
+              </a>
+              <a href="#wellbeing"  class="faq-sidebar-link" data-section="wellbeing">
+                <span class="sl-icon" style="background:#e11d72;"><i class="fas fa-heart"></i></span> Wellbeing &amp; Support <span class="faq-sidebar-count">2</span>
+              </a>
+            </nav>
+          </div>
+
+          <!-- Contact card -->
+          <div class="faq-contact-card">
+            <h4>Still Have Questions?</h4>
+            <p>Our team is available immediately to support you and your student. We believe in a truly open-door policy.</p>
+            <a href="mailto:admissions@naischool.ae" class="faq-contact-btn"><i class="fas fa-envelope"></i> Email Us</a>
+            <a href="https://wa.me/97142635456" class="faq-contact-btn whatsapp-btn" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+          </div>
+        </aside>
+
+        <!-- ══ FAQ SECTIONS ══ -->
+        <div class="faq-sections">
+
+          <!-- ── GENERAL ── -->
+          <div class="faq-section-block" id="general" data-section="general">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon" style="background:var(--navy);"><i class="fas fa-globe"></i></div>
+              <h2>General Questions</h2>
+              <span class="q-count">3 Questions</span>
+            </div>
+
+            <div class="faq-item" data-q="1">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">1</span> What curriculum does NAIS follow?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>North American International School follows the <strong>United States Common Core Curriculum</strong>, specifically the curriculum for the <strong>State of California</strong>. Our curriculum is aligned with U.S. standards and focuses on:</p>
+                  <ul>
+                    <li>Academic excellence across all subject areas</li>
+                    <li>Critical thinking and analytical skills</li>
+                    <li>Preparing students for universities worldwide</li>
+                  </ul>
+                  <div class="faq-highlight-box gold-accent"><i class="fas fa-star" style="color:var(--gold);margin-right:8px;"></i><strong>California Standards</strong> are among the most rigorous in the United States, ensuring NAIS students are challenged and prepared at the highest level.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="2">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">2</span> Is the American curriculum recognized internationally?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p><strong>Yes.</strong> The American curriculum is widely recognized by universities across the world. Students at NAIS graduate with a <strong>High School Diploma</strong> and may also earn internationally recognized qualifications including:</p>
+                  <ul>
+                    <li><strong>SAT</strong> — Scholastic Assessment Test (U.S. university entry standard)</li>
+                    <li><strong>AP (Advanced Placement)</strong> — College-level courses recognized globally</li>
+                    <li><strong>IELTS</strong> — English proficiency for international university applications</li>
+                  </ul>
+                  <div class="faq-highlight-box green-accent"><i class="fas fa-check-circle" style="color:var(--green);margin-right:8px;"></i>NAIS graduates are accepted into universities in the <strong>USA, Canada, UK, Australia, UAE</strong>, and beyond.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="3">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">3</span> What makes the American curriculum different from other curricula?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>The American curriculum is distinct in several key ways:</p>
+                  <ul>
+                    <li><strong>Continuous assessment</strong> — not just final exams. Students are evaluated throughout the year.</li>
+                    <li><strong>Critical thinking and problem-solving</strong> — students learn to analyze, not just memorize.</li>
+                    <li><strong>Flexible subject choices</strong> — AP courses, electives, and personalised pathways.</li>
+                    <li><strong>Well-rounded education</strong> — academics, arts, sports, and extracurricular activities are all valued equally.</li>
+                  </ul>
+                  <span class="faq-tag tag-blue"><i class="fas fa-info-circle"></i> Focused on the whole child — academically, personally, and socially.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── ASSESSMENT & GRADING ── -->
+          <div class="faq-section-block" id="assessment" data-section="assessment">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon" style="background:var(--red);"><i class="fas fa-star-half-alt"></i></div>
+              <h2>Assessment &amp; Grading</h2>
+              <span class="q-count">5 Questions</span>
+            </div>
+
+            <div class="faq-item" data-q="4">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">4</span> How are students assessed?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>Students are assessed using a <strong>combination of methods</strong> to ensure a complete picture of their learning — not just performance on one test:</p>
+                  <ul>
+                    <li>Classwork and participation</li>
+                    <li>Projects and presentations</li>
+                    <li>Quizzes and tests</li>
+                    <li>Homework assignments</li>
+                    <li>End-of-unit assessments</li>
+                  </ul>
+                  <p>This multi-method approach rewards students for consistent effort, creativity, and genuine understanding throughout the year.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="5">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">5</span> How much do exams count toward the final grade?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>Exams are only <strong>one part</strong> of the overall grade, not the whole picture:</p>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;">
+                    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:18px 16px;text-align:center;">
+                      <div style="font-family:'Montserrat',sans-serif;font-size:1.6rem;font-weight:800;color:var(--green);">100%</div>
+                      <div style="font-weight:700;font-size:0.85rem;color:#065f46;margin-top:4px;">Elementary School</div>
+                      <div style="font-size:0.78rem;color:#6b7280;margin-top:4px;">Ongoing performance only — no formal exams</div>
+                    </div>
+                    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:18px 16px;text-align:center;">
+                      <div style="font-family:'Montserrat',sans-serif;font-size:1.6rem;font-weight:800;color:var(--navy);">80 / 20</div>
+                      <div style="font-weight:700;font-size:0.85rem;color:var(--navy);margin-top:4px;">Secondary School</div>
+                      <div style="font-size:0.78rem;color:#6b7280;margin-top:4px;">80% coursework · 20% exams</div>
+                    </div>
+                  </div>
+                  <div class="faq-highlight-box">This balanced approach <strong>reduces exam pressure</strong> and encourages students to give their best effort every single day.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="6">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">6</span> What grading system does NAIS use?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>Students receive <strong>letter grades (A–F)</strong> based on percentage scores. In high school, these letter grades combine to form a <strong>GPA (Grade Point Average)</strong> — the standard metric used by U.S. and international university admissions offices.</p>
+                  <div style="overflow-x:auto;margin:16px 0;">
+                    <table style="width:100%;border-collapse:collapse;font-size:0.85rem;border-radius:10px;overflow:hidden;border:1px solid var(--border);">
+                      <thead><tr style="background:var(--navy);color:#fff;">
+                        <th style="padding:10px 14px;text-align:left;font-size:0.75rem;letter-spacing:1px;">Grade</th>
+                        <th style="padding:10px 14px;text-align:left;font-size:0.75rem;letter-spacing:1px;">Percentage</th>
+                        <th style="padding:10px 14px;text-align:left;font-size:0.75rem;letter-spacing:1px;">GPA Points</th>
+                        <th style="padding:10px 14px;text-align:left;font-size:0.75rem;letter-spacing:1px;">Description</th>
+                      </tr></thead>
+                      <tbody>
+                        <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px;font-weight:700;color:var(--green);">A</td><td style="padding:10px 14px;">90–100%</td><td style="padding:10px 14px;">4.0</td><td style="padding:10px 14px;">Outstanding</td></tr>
+                        <tr style="border-bottom:1px solid var(--border);background:#fafbff;"><td style="padding:10px 14px;font-weight:700;color:var(--teal);">B</td><td style="padding:10px 14px;">80–89%</td><td style="padding:10px 14px;">3.0</td><td style="padding:10px 14px;">Above Average</td></tr>
+                        <tr style="border-bottom:1px solid var(--border);"><td style="padding:10px 14px;font-weight:700;color:var(--gold);">C</td><td style="padding:10px 14px;">70–79%</td><td style="padding:10px 14px;">2.0</td><td style="padding:10px 14px;">Average</td></tr>
+                        <tr style="border-bottom:1px solid var(--border);background:#fafbff;"><td style="padding:10px 14px;font-weight:700;color:var(--red);">D</td><td style="padding:10px 14px;">60–69%</td><td style="padding:10px 14px;">1.0</td><td style="padding:10px 14px;">Below Average</td></tr>
+                        <tr><td style="padding:10px 14px;font-weight:700;color:#9ca3af;">F</td><td style="padding:10px 14px;">Below 60%</td><td style="padding:10px 14px;">0.0</td><td style="padding:10px 14px;">Failing</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="7">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">7</span> How can parents track their child's progress?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>Parents have <strong>real-time access</strong> to grades and progress through the school portal, allowing you to monitor:</p>
+                  <ul>
+                    <li>Current grade averages across all subjects</li>
+                    <li>Individual assignment and assessment results</li>
+                    <li>Performance on MAP, NGRT, and CAT4 standardized exams</li>
+                    <li>Overall academic progress and trajectory</li>
+                  </ul>
+                  <div class="faq-highlight-box gold-accent"><i class="fas fa-laptop" style="color:var(--gold);margin-right:8px;"></i>Log in to the <strong>Parent Portal</strong> at any time to stay fully informed — no need to wait for a report card.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="8">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">8</span> Will my child receive feedback on their work?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p><strong>Yes, absolutely.</strong> Students receive <strong>regular, meaningful feedback</strong> designed to help them improve — not just a score. Feedback is considered an essential part of the learning process at NAIS and supports genuine student growth.</p>
+                  <ul>
+                    <li>Written comments on assignments and assessments</li>
+                    <li>Verbal feedback during lessons and one-on-one sessions</li>
+                    <li>Goal-setting conversations to guide next steps</li>
+                  </ul>
+                  <span class="faq-tag tag-green"><i class="fas fa-check-circle"></i> Feedback is about growth — not just judgment.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── LEARNING & TEACHING ── -->
+          <div class="faq-section-block" id="learning" data-section="learning">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon" style="background:var(--teal);"><i class="fas fa-brain"></i></div>
+              <h2>Learning &amp; Teaching</h2>
+              <span class="q-count">3 Questions</span>
+            </div>
+
+            <div class="faq-item" data-q="9">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">9</span> How do teachers support different learning needs?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>Our teachers are trained to ensure that <strong>every student can succeed at their level</strong>. Support strategies used in every classroom include:</p>
+                  <ul>
+                    <li><strong>Differentiated instruction</strong> — lessons adapted to various learning levels within the same classroom</li>
+                    <li><strong>Flexible grouping</strong> — students grouped strategically to maximize peer learning and individual growth</li>
+                    <li><strong>Individualized support</strong> — one-on-one or small-group attention for students who need it</li>
+                    <li><strong>Adapted assessments</strong> — modified tasks to ensure fair evaluation for all learners</li>
+                  </ul>
+                  <p>For students who need additional structured support, our <strong>Inclusion Program</strong> provides dedicated, specialist assistance.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="10">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">10</span> What types of skills will my child develop?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>The American curriculum at NAIS goes far beyond subject knowledge. Students develop <strong>essential life and career skills</strong>:</p>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;">
+                    <div style="background:var(--light);border-radius:12px;padding:16px;text-align:center;border:1px solid var(--border);">
+                      <div style="font-size:1.3rem;color:var(--navy);margin-bottom:8px;"><i class="fas fa-lightbulb"></i></div>
+                      <div style="font-weight:700;font-size:0.82rem;color:var(--navy);">Critical Thinking</div>
+                    </div>
+                    <div style="background:var(--light);border-radius:12px;padding:16px;text-align:center;border:1px solid var(--border);">
+                      <div style="font-size:1.3rem;color:var(--red);margin-bottom:8px;"><i class="fas fa-comments"></i></div>
+                      <div style="font-weight:700;font-size:0.82rem;color:var(--navy);">Communication</div>
+                    </div>
+                    <div style="background:var(--light);border-radius:12px;padding:16px;text-align:center;border:1px solid var(--border);">
+                      <div style="font-size:1.3rem;color:var(--gold);margin-bottom:8px;"><i class="fas fa-palette"></i></div>
+                      <div style="font-weight:700;font-size:0.82rem;color:var(--navy);">Creativity</div>
+                    </div>
+                    <div style="background:var(--light);border-radius:12px;padding:16px;text-align:center;border:1px solid var(--border);">
+                      <div style="font-size:1.3rem;color:var(--green);margin-bottom:8px;"><i class="fas fa-users"></i></div>
+                      <div style="font-weight:700;font-size:0.82rem;color:var(--navy);">Collaboration</div>
+                    </div>
+                    <div style="background:var(--light);border-radius:12px;padding:16px;text-align:center;border:1px solid var(--border);">
+                      <div style="font-size:1.3rem;color:var(--teal);margin-bottom:8px;"><i class="fas fa-puzzle-piece"></i></div>
+                      <div style="font-weight:700;font-size:0.82rem;color:var(--navy);">Problem-Solving</div>
+                    </div>
+                    <div style="background:var(--light);border-radius:12px;padding:16px;text-align:center;border:1px solid var(--border);">
+                      <div style="font-size:1.3rem;color:var(--purple);margin-bottom:8px;"><i class="fas fa-star"></i></div>
+                      <div style="font-weight:700;font-size:0.82rem;color:var(--navy);">Independence</div>
+                    </div>
+                  </div>
+                  <p>These skills are <strong>essential for success</strong> in university and every future career.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="11">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">11</span> Do students memorize facts or understand concepts?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>At NAIS, students are encouraged to <strong>understand and apply knowledge</strong>, not just memorize it. Assessments are specifically designed to go beyond recall:</p>
+                  <ul>
+                    <li><strong>Real-world problem solving</strong> — applying concepts to authentic situations</li>
+                    <li><strong>Analysis and evaluation tasks</strong> — breaking down ideas and forming justified opinions</li>
+                    <li><strong>Projects and presentations</strong> — demonstrating deep understanding creatively</li>
+                  </ul>
+                  <div class="faq-highlight-box"><i class="fas fa-quote-left" style="color:var(--gold);margin-right:8px;"></i>The goal is not to produce students who can pass a test — it is to produce students who can <strong>think, adapt, and succeed</strong> in any situation.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── EXAMS & WORKLOAD ── -->
+          <div class="faq-section-block" id="exams" data-section="exams">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon" style="background:var(--gold);"><i class="fas fa-file-alt"></i></div>
+              <h2>Examinations &amp; Workload</h2>
+              <span class="q-count">3 Questions</span>
+            </div>
+
+            <div class="faq-item" data-q="12">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">12</span> Are there many exams at NAIS?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p><strong>No.</strong> The American system is deliberately <strong>not exam-heavy</strong>. Instead, students complete:</p>
+                  <ul>
+                    <li><strong>Regular assessments</strong> spread throughout each semester — not clustered at the end</li>
+                    <li>A <strong>limited number of structured exams</strong> which make up only 20% of the secondary grade</li>
+                  </ul>
+                  <div class="faq-highlight-box green-accent"><i class="fas fa-check-circle" style="color:var(--green);margin-right:8px;"></i>This approach <strong>reduces pressure</strong>, allows students to show their best work over time, and builds genuine confidence.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="13">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">13</span> How much homework is given?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>Homework at NAIS is assigned to <strong>reinforce learning</strong> — not to overwhelm students. It serves a meaningful academic purpose and forms part of the overall grade, helping to:</p>
+                  <ul>
+                    <li>Consolidate what was covered in class</li>
+                    <li>Build student responsibility and time management</li>
+                    <li>Prepare students for upcoming assessments</li>
+                  </ul>
+                  <p>Teachers are mindful of the total workload across subjects to ensure homework remains <strong>purposeful and balanced</strong>.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="14">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">14</span> What happens if my child misses school?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <ul>
+                    <li>Students with <strong>excused absences</strong> are fully supported in making up any missed work</li>
+                    <li>Teachers proactively support students in <strong>catching up</strong> without falling behind</li>
+                    <li>Clear, fair school policies ensure <strong>continuity and consistency</strong> for all students</li>
+                  </ul>
+                  <div class="faq-highlight-box gold-accent"><i class="fas fa-phone" style="color:var(--gold);margin-right:8px;"></i>If your child is absent, <strong>contact the school directly</strong> — our team is available to coordinate support immediately.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── ACADEMIC INTEGRITY ── -->
+          <div class="faq-section-block" id="integrity" data-section="integrity">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon" style="background:var(--purple);"><i class="fas fa-shield-alt"></i></div>
+              <h2>Academic Integrity &amp; Expectations</h2>
+              <span class="q-count">2 Questions</span>
+            </div>
+
+            <div class="faq-item" data-q="15">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">15</span> What is expected from students academically?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>NAIS expects every student to bring <strong>commitment and integrity</strong> to their studies:</p>
+                  <ul>
+                    <li>Complete their own work independently and honestly</li>
+                    <li>Meet deadlines and manage their time responsibly</li>
+                    <li>Participate actively in class discussions and activities</li>
+                    <li>Follow academic honesty guidelines at all times</li>
+                  </ul>
+                  <p>These expectations reflect the values we instill in students — preparing them for the standards they will face at university and in professional life.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="16">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">16</span> What is academic honesty?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>Academic honesty means students must <strong>submit their own original work</strong> and properly give credit to any ideas, sources, or content that belongs to others.</p>
+                  <ul>
+                    <li>No copying, plagiarism, or unauthorized use of AI-generated content</li>
+                    <li>Correct citation and referencing for research tasks</li>
+                    <li>Honest reporting of results and data in science assignments</li>
+                  </ul>
+                  <div class="faq-highlight-box"><i class="fas fa-graduation-cap" style="color:var(--navy);margin-right:8px;"></i>Academic integrity builds the <strong>character and credibility</strong> that universities and employers look for — it is a habit we nurture from an early age.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── UNIVERSITY ── -->
+          <div class="faq-section-block" id="university" data-section="university">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon" style="background:var(--green);"><i class="fas fa-university"></i></div>
+              <h2>University &amp; Future Pathways</h2>
+              <span class="q-count">2 Questions</span>
+            </div>
+
+            <div class="faq-item" data-q="17">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">17</span> Will my child be prepared for university?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p><strong>Absolutely yes.</strong> University preparation is at the core of everything we do in Phase 4 (Grades 9–12). NAIS prepares students through:</p>
+                  <ul>
+                    <li><strong>GPA tracking</strong> — a cumulative academic record reviewed by every university admissions office</li>
+                    <li><strong>SAT &amp; PSAT preparation</strong> — standardized tests recognized by universities worldwide</li>
+                    <li><strong>AP Courses</strong> — college-level coursework that can earn university credit before graduation</li>
+                    <li><strong>IELTS</strong> — English proficiency certification for international university applications</li>
+                    <li><strong>Independent learning skills</strong> — critical thinking and self-management essential for university success</li>
+                  </ul>
+                  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;">
+                    <span class="faq-tag tag-green"><i class="fas fa-flag-usa"></i> USA</span>
+                    <span class="faq-tag tag-blue"><i class="fas fa-globe"></i> Canada</span>
+                    <span class="faq-tag tag-gold"><i class="fas fa-globe-europe"></i> UK &amp; Europe</span>
+                    <span class="faq-tag tag-purple"><i class="fas fa-globe-asia"></i> Australia &amp; Asia</span>
+                    <span class="faq-tag tag-red"><i class="fas fa-star"></i> UAE &amp; Region</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="18">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">18</span> Can students take advanced courses?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p><strong>Yes.</strong> NAIS offers multiple advanced academic pathways for motivated students:</p>
+                  <ul>
+                    <li><strong>Advanced Placement (AP) courses</strong> — college-level classes in Math &amp; Sciences, Humanities &amp; Languages, and Computer Science. Passing an AP exam (score 3–5) can earn <strong>university credit</strong>.</li>
+                    <li><strong>Elective subjects</strong> — arts, technology, business, and more — allowing students to build a personalized academic profile.</li>
+                    <li><strong>Honors-level coursework</strong> — subject teachers can recommend students for advanced tracks based on demonstrated ability.</li>
+                  </ul>
+                  <div class="faq-highlight-box gold-accent"><i class="fas fa-award" style="color:var(--gold);margin-right:8px;"></i>AP courses allow students to <strong>customize their academic journey</strong> and stand out in university applications worldwide.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── WELLBEING ── -->
+          <div class="faq-section-block" id="wellbeing" data-section="wellbeing">
+            <div class="faq-section-heading">
+              <div class="faq-section-icon" style="background:#e11d72;"><i class="fas fa-heart"></i></div>
+              <h2>Wellbeing &amp; Support</h2>
+              <span class="q-count">2 Questions</span>
+            </div>
+
+            <div class="faq-item" data-q="19">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">19</span> How does NAIS support student wellbeing?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>At NAIS, student wellbeing is not an afterthought — it is central to our school culture. We provide:</p>
+                  <ul>
+                    <li>A <strong>safe, inclusive, and supportive environment</strong> where every student belongs</li>
+                    <li><strong>Strong teacher-student relationships</strong> built on trust and mutual respect</li>
+                    <li><strong>Counseling and academic support</strong> services available to all students</li>
+                    <li>A <strong>healthy balance</strong> between academics, extracurriculars, and personal time</li>
+                  </ul>
+                  <div class="faq-highlight-box" style="border-left-color:#e11d72;background:#fff0f7;">
+                    <i class="fas fa-heart" style="color:#e11d72;margin-right:8px;"></i>
+                    <strong>NAIS is a relationship-based school.</strong> Students feel like family, not just a number. Every child is seen, known, and valued.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="faq-item" data-q="20">
+              <button class="faq-question" aria-expanded="false">
+                <span class="faq-q-left"><span class="faq-q-num">20</span> How can parents communicate with the school?</span>
+                <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-inner">
+                  <p>We believe that <strong>strong parent partnerships</strong> are key to every student's success. You can reach us through multiple channels:</p>
+                  <ul>
+                    <li>Contact teachers directly via the <strong>school portal</strong></li>
+                    <li>Attend scheduled <strong>parent-teacher meetings and conferences</strong></li>
+                    <li>Participate in <strong>school events and community activities</strong></li>
+                    <li>Contact administrators directly via <strong>WhatsApp</strong> for immediate support</li>
+                  </ul>
+                  <div class="faq-highlight-box green-accent">
+                    <i class="fas fa-door-open" style="color:var(--green);margin-right:8px;"></i>
+                    <strong>We believe in a truly open-door policy.</strong> If you have a concern, someone is available <em>immediately</em> to support you and your student. No concern is too small.
+                  </div>
+                  <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">
+                    <a href="mailto:admissions@naischool.ae" style="display:inline-flex;align-items:center;gap:7px;background:var(--navy);color:#fff;font-size:0.82rem;font-weight:700;padding:10px 20px;border-radius:50px;text-decoration:none;"><i class="fas fa-envelope"></i> Email Us</a>
+                    <a href="https://wa.me/97142635456" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;font-size:0.82rem;font-weight:700;padding:10px 20px;border-radius:50px;text-decoration:none;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="tel:+97142635456" style="display:inline-flex;align-items:center;gap:7px;background:var(--light);color:var(--navy);border:1px solid var(--border);font-size:0.82rem;font-weight:700;padding:10px 20px;border-radius:50px;text-decoration:none;"><i class="fas fa-phone"></i> +971 4 263 5456</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="faq-cta">
+            <div>
+              <h3>Ready to Join the NAIS <em>Family?</em></h3>
+              <p>We'd love to welcome your child to our community. Visit our campus, speak with our team, or apply online today. Someone is always available to answer your questions.</p>
+            </div>
+            <div class="faq-cta-btns">
+              <a href="admissions.html#apply" class="btn-white-solid"><i class="fas fa-pen-to-square"></i> Apply Now</a>
+              <a href="admissions.html" class="btn-outline-white"><i class="fas fa-info-circle"></i> Admissions Info</a>
+            </div>
+          </div>
+
+        </div><!-- /.faq-sections -->
+      </div><!-- /.faq-layout -->
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer class="site-footer" id="footer">
+    <div class="footer-top"><div class="container"><div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="images/nais-logo.png" alt="NAIS Dubai Logo" class="footer-logo-img" /></div>
+        <p class="footer-desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="about.html">About NAIS</a></li>
+          <li><a href="academics.html">Academic Programs</a></li>
+          <li><a href="curriculum.html">American Curriculum</a></li>
+          <li><a href="parent-faq.html">Parent FAQ</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Academic Programs</h4>
+        <ul class="footer-links">
+          <li><a href="academics.html#kindergarten">Kindergarten</a></li>
+          <li><a href="academics.html#elementary">Elementary</a></li>
+          <li><a href="academics.html#middle">Middle School</a></li>
+          <li><a href="academics.html#high">High School</a></li>
+          <li><a href="academics.html#ap">AP Courses</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Contact</h4>
+        <ul class="footer-contact-list">
+          <li><i class="fas fa-map-marker-alt"></i><span>Al Mizhar 1, Mirdif, Dubai, UAE</span></li>
+          <li><i class="fas fa-phone-alt"></i><a href="tel:+97142635456">+971 4 263 5456</a></li>
+          <li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li>
+        </ul>
+        <a href="admissions.html" class="btn btn-red-sm" style="margin-top:16px;display:inline-flex;align-items:center;gap:6px;">Apply Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div></div></div>
+    <div class="footer-bottom"><div class="container">
+      <p>© 2025 North American International School, Dubai. All Rights Reserved.</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Safeguarding</a></div>
+    </div></div>
+  </footer>
+
+  <a href="admissions.html#apply" class="apply-float" aria-label="Apply Now"><i class="fas fa-pen-to-square"></i><span class="apply-float-label">Apply Now</span></a>
+  <a href="https://wa.me/97142635456" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+
+  <script src="js/nav.js"></script>
+  <script>
+    /* ── ACCORDION ── */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isOpen = btn.classList.contains('open');
+        document.querySelectorAll('.faq-question').forEach(b => {
+          b.classList.remove('open');
+          b.setAttribute('aria-expanded','false');
+          b.nextElementSibling.classList.remove('open');
+        });
+        if (!isOpen) {
+          btn.classList.add('open');
+          btn.setAttribute('aria-expanded','true');
+          btn.nextElementSibling.classList.add('open');
+        }
+      });
+    });
+
+    /* ── SEARCH ── */
+    const searchInput = document.getElementById('faqSearch');
+    const countEl     = document.getElementById('searchCount');
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      const items = document.querySelectorAll('.faq-item');
+      let visible = 0;
+      items.forEach(item => {
+        const text = item.textContent.toLowerCase();
+        const show = !q || text.includes(q);
+        item.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+      if (q) {
+        countEl.textContent = `${visible} question${visible !== 1 ? 's' : ''} found`;
+        countEl.style.display = 'block';
+      } else {
+        countEl.style.display = 'none';
+      }
+    });
+
+    /* ── CATEGORY TABS ── */
+    document.querySelectorAll('.faq-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sec = btn.dataset.section;
+        document.querySelectorAll('.faq-tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        // Scroll to section
+        const target = document.getElementById(sec);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Update sidebar
+        document.querySelectorAll('.faq-sidebar-link').forEach(l => l.classList.remove('active'));
+        const sideLink = document.querySelector(`.faq-sidebar-link[data-section="${sec}"]`);
+        if (sideLink) sideLink.classList.add('active');
+      });
+    });
+
+    /* ── SIDEBAR active on scroll ── */
+    const sections = document.querySelectorAll('.faq-section-block');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 160) cur = s.id;
+      });
+      document.querySelectorAll('.faq-sidebar-link').forEach(l => {
+        l.classList.toggle('active', l.dataset.section === cur);
+      });
+      document.querySelectorAll('.faq-tab-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.section === cur);
+      });
+    }, { passive: true });
+
+    /* ── BACK TO TOP ── */
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => btt.classList.toggle('visible', scrollY > 400), { passive: true });
+    btt.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+  </script>
+</body>
+</html>
