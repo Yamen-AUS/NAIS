@@ -3202,6 +3202,310 @@ a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
   line-height: 1.4;
 }
 
+/* ============================================================
+   NAIS DUBAI – COMPREHENSIVE UX IMPROVEMENTS v5
+   Mobile CTA Bar · Form Validation · Visual Fixes · Polish
+   ============================================================ */
+
+/* ── MOBILE STICKY CTA BAR ── */
+.mobile-sticky-cta {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 9998;
+  background: var(--navy-deeper);
+  border-top: 3px solid var(--red);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.35);
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.mobile-sticky-cta.visible {
+  transform: translateY(0);
+}
+@media (max-width: 1199px) {
+  .mobile-sticky-cta { display: flex; }
+}
+.mob-cta-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 4px 12px;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.mob-cta-btn:last-child { border-right: none; }
+.mob-cta-btn i { font-size: 1.15rem; }
+.mob-cta-btn:hover, .mob-cta-btn:active { background: rgba(255,255,255,0.06); color: #fff; }
+.mob-cta-call  { color: #4CD964; }
+.mob-cta-call:hover  { background: rgba(76,217,100,0.12) !important; color: #4CD964 !important; }
+.mob-cta-whatsapp { color: #25D366; }
+.mob-cta-whatsapp:hover { background: rgba(37,211,102,0.12) !important; color: #25D366 !important; }
+.mob-cta-apply { background: var(--red); color: #fff !important; }
+.mob-cta-apply:hover { background: var(--red-dark) !important; }
+.mob-cta-tour  { color: rgba(255,255,255,0.75); }
+/* Bottom padding for mobile sticky bar */
+@media (max-width: 1199px) {
+  body { padding-bottom: 62px; }
+  .whatsapp-float, .apply-float { display: none; }
+}
+
+/* ── CONTACT FORM IMPROVEMENTS ── */
+.contact-form .form-group {
+  position: relative;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--navy) !important;
+  box-shadow: 0 0 0 3px rgba(31,47,110,0.12) !important;
+  outline: none;
+}
+.form-success {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #0d5c2e, #1a9b5c);
+  color: #fff;
+  padding: 18px 24px;
+  border-radius: 10px;
+  margin-top: 16px;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.form-success i { font-size: 1.3rem; flex-shrink: 0; }
+
+/* ── ENHANCED HERO STATS BAR ── */
+.hero-stats .stat-item {
+  position: relative;
+  cursor: default;
+}
+.hero-stats .stat-number {
+  font-size: 2.2rem;
+  background: linear-gradient(135deg, #fff 60%, rgba(255,255,255,0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── IMPROVED WHY-CARDS ── */
+.why-card:hover {
+  background: var(--white);
+  border-color: rgba(225,27,34,0.2);
+  box-shadow: 0 16px 48px rgba(31,47,110,0.12);
+}
+.why-icon {
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), background 0.35s;
+}
+.why-card:hover .why-icon {
+  transform: scale(1.1) rotate(-5deg);
+  background: var(--red);
+  color: #fff;
+}
+
+/* ── PROGRAM CARD IMPROVEMENTS ── */
+.program-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 64px rgba(31,47,110,0.16);
+}
+
+/* ── TESTIMONIAL CARD POLISH ── */
+.testimonial-card {
+  transition: opacity 0.5s ease;
+}
+.testimonial-card.active {
+  animation: testimonialIn 0.55s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes testimonialIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── ANNOUNCEMENT TICKER ── */
+.ann-ticker {
+  overflow: hidden;
+  flex: 1;
+}
+.ann-ticker span {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker 40s linear infinite;
+  padding-left: 100%;
+}
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+
+/* ── STATS SECTION — better mobile grid ── */
+@media (max-width: 600px) {
+  .stats-grid-full { grid-template-columns: repeat(2,1fr); }
+  .stat-full-item  { border-bottom: 1px solid rgba(255,255,255,0.06); }
+}
+
+/* ── IMPROVED SECTION CTA STRIP ── */
+.section-cta-strip {
+  background: linear-gradient(135deg, var(--navy-deeper), var(--navy));
+  padding: 40px 0;
+  border-top: 3px solid var(--red);
+  border-bottom: 3px solid rgba(225,27,34,0.25);
+}
+.section-cta-strip .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.section-cta-strip h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  color: #fff;
+  margin: 0;
+}
+.section-cta-strip p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.65);
+  margin: 4px 0 0;
+}
+@media (max-width: 768px) {
+  .section-cta-strip .container { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── TRUST BADGE STRIP UNDER HERO ── */
+.trust-strip {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-100);
+  padding: 14px 0;
+  overflow: hidden;
+}
+.trust-strip-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 20px;
+  border-right: 1px solid var(--gray-100);
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  white-space: nowrap;
+}
+.trust-item:last-child { border-right: none; }
+.trust-item i { color: var(--red); font-size: 0.78rem; }
+@media (max-width: 600px) {
+  .trust-item { padding: 6px 12px; font-size: 0.62rem; }
+  .trust-item:nth-child(n+4) { display: none; }
+}
+
+/* ── ENHANCED CALENDAR CARDS ── */
+.calendar-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(31,47,110,0.12);
+  border-color: rgba(225,27,34,0.2);
+}
+
+/* ── VIDEO PROMO SECTION ── */
+.video-play-btn {
+  cursor: pointer;
+  border: none;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.video-play-btn:hover {
+  transform: scale(1.12);
+  background: var(--red);
+  box-shadow: 0 0 0 14px rgba(225,27,34,0.15), 0 0 0 28px rgba(225,27,34,0.06);
+}
+
+/* ── RECRUITMENT SECTION OPEN HOUSE DATES ── */
+.oh-date-item {
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+}
+.oh-date-item:hover {
+  background: var(--light-gray);
+  border-radius: 10px;
+}
+
+/* ── USP PILLARS — better mobile ── */
+@media (max-width: 900px) {
+  .usp-pillars-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .usp-pillars-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .usp-pillar { padding: 22px 16px 18px; }
+}
+@media (max-width: 400px) {
+  .usp-pillars-grid { grid-template-columns: 1fr; }
+}
+
+/* ── FOOTER — enrollment year update ── */
+.footer-bottom p { opacity: 0.6; }
+
+/* ── QUICK ACCESS GRID IMPROVEMENT ── */
+.quick-access-section {
+  padding: 32px 0;
+  background: var(--navy-deeper);
+  border-bottom: 3px solid rgba(225,27,34,0.2);
+}
+.quick-access-card span {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+}
+
+/* ── PAGE BODY BOTTOM PAD (mobile bar) ── */
+@media (max-width: 1199px) {
+  .site-footer { margin-bottom: 0; }
+}
+
+/* ── SCROLL PROGRESS BAR (top of page) ── */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red), #FF6B6B);
+  z-index: 99999;
+  width: 0%;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ── FADE IN CARD animation ── */
+.fade-in-card { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade-in-card.visible-now { opacity: 1; transform: none; }
+
+/* ── IMPROVED BACK TO TOP ── */
+.back-to-top {
+  width: 44px; height: 44px;
+}
+@media (max-width: 1199px) {
+  .back-to-top { display: none; }
+}
+
 /* Principal Schedule */
 .recruit-schedule {
   display: flex;

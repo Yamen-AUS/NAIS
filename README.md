@@ -1,182 +1,287 @@
-# NAIS Dubai — North American International School Website
+# NAIS Dubai — Official School Website
 
-## Project Overview
-A fully responsive, multi-page static website for North American International School (NAIS) Dubai — a premier American curriculum school for KG–Grade 12. Features a cinematic intro overlay, rich photo gallery, parallax photo sections, and modern design with Dubai's school brand colours (Navy #1F2F6E, Red #E11B22).
+**North American International School, Dubai**  
+A premier American curriculum school serving KG–Grade 12 students.
+
+---
+
+## 🌐 Project Overview
+
+Full multi-page static website for NAIS Dubai featuring an animated intro, hero carousel, API-integrated contact forms, interactive campus tour, testimonials slider, gallery lightbox, phase 4 academic results with Chart.js visualisations, and comprehensive legal pages.
+
+**Live URL:** Deploy via the Publish tab.
 
 ---
 
 ## ✅ Completed Features
 
-### Pages
+### Core Pages (13 pages)
+
 | Page | File | Description |
 |------|------|-------------|
-| Home | `index.html` | Hero slideshow, welcome, academics, gallery mosaic, parallax photo strip, news, testimonials, contact |
-| About | `about.html` | Mission/vision, leadership, CARE values, campus photos, photo accordion strip |
-| Academics | `academics.html` | KG–12 programmes, AP courses, inclusion, STEM |
-| Admissions | `admissions.html` | Application process, fees, testimonials, campus tour |
-| Photo Gallery | `gallery.html` | Full-featured gallery: hero slideshow, filter tabs, featured mosaic, filmstrip scroller, panoramic banner, masonry grid, lightbox |
-| Curriculum | `curriculum.html` | American curriculum overview, grading, assessments, learning pathways |
-| Parent FAQ | `parent-faq.html` | 24 questions across 7 categories |
-| PBL | `pbl.html` | Project-Based Learning programme details |
-| Phase 4 Results | `phase4-results.html` | DSIB/KHDA Phase 4 assessment results with charts |
-| Intro | `intro.html` | Cinematic canvas intro overlay with Ken Burns effect |
+| Homepage | `index.html` | Full hero, all sections, mobile CTA, intro overlay |
+| About | `about.html` | Leadership, mission, CARE values, accreditation |
+| Academics | `academics.html` | KG–Grade 12 programs, AP courses, filmstrip |
+| Admissions | `admissions.html` | Application form, fees, FAQs, process steps |
+| American Curriculum | `curriculum.html` | Grading, assessments, learning pathways |
+| Project-Based Learning | `pbl.html` | PBL philosophy, projects, outcomes |
+| Parent FAQ | `parent-faq.html` | Searchable FAQ with category tabs |
+| Photo Gallery | `gallery.html` | Hero carousel, category filter, lightbox |
+| Phase 4 Results | `phase4-results.html` | MAP, PSAT, AP, SAT, IELTS data with Chart.js |
+| Privacy Policy | `privacy-policy.html` | Full privacy policy (KHDA / UAE compliant) |
+| Terms of Use | `terms-of-use.html` | Website terms and conditions |
+| Safeguarding | `safeguarding.html` | Child safeguarding policy (DSL contact included) |
+| Sitemap | `sitemap.html` | Visual sitemap with all page links |
 
-### Photo & Visual Features
-- ✅ **All images** are real NAIS Dubai photos stored locally in `images/` — zero external CDN dependency
-- ✅ **Portrait rule enforced**: school-01→09 (staff portraits) used **only** in bio/leadership sections — NEVER in galleries, heroes, or backgrounds
-- ✅ **Scene photos** (school-10→25) used in all gallery, hero, background, and decorative contexts
-- ✅ **Hero slideshow** on Home, Gallery, and all page-hero banners with full-screen photo backgrounds
-- ✅ **Photo Gallery page** (`gallery.html`) with:
-  - Ken Burns hero slideshow (4 slides: school-17, 18, 22, 15)
-  - Sticky category filter bar (All / Campus / Learning / Sports / Arts / Events / Community)
-  - Featured 2-up mosaic (school-17 Sports, school-19 Learning, school-22 Science)
-  - 7-panel colour-filter expanding strip (school-16, 21, 23, 24, 25, 18, 20)
-  - Animated filmstrip auto-scroller (seamless loop, 14 images)
-  - Panoramic banner (school-15 Graduation)
-  - 3-column Learning & Arts grid (school-23, 22, 25)
-  - 6-item masonry grid with scroll reveal
-  - Events 4-col grid
-  - Full lightbox viewer (14 entries, keyboard + touch navigation)
-- ✅ **Home Gallery Section** (`#gallery` in index.html):
-  - 5-item mosaic (school-17, 22, 21, 19, 23)
-  - 7-panel colour-filter accordion strip (school-16, 18, 24, 25, 19, 20, 09)
-- ✅ **Parallax Photo Strip** (`#photo-parallax` in index.html):
-  - 3-panel (school-18 Sports, school-22 STEM, school-25 Community)
-  - 8-tile duotone mosaic (school-16, 17, 21, 22, 23, 24, 25, 19)
-- ✅ **About page** campus photo section: big mosaic + 6-tile accordion strip
-- ✅ **Background images** on all page heroes — real NAIS scene photos, full-width
-- ✅ **Gallery link** in nav overlay on every page (highlighted red)
-- ✅ **Gallery link** in footer Quick Links on every page
-- ✅ **Intro canvas** (`intro.html`) uses scene photos (school-17, 22, 19, 15)
+### Interactive Features
+- ✅ **Animated intro overlay** — canvas slideshow with school photos, runs once per session (sessionStorage)
+- ✅ **Hero slideshow** — 6s auto-advance, dot navigation, parallax on desktop
+- ✅ **Hero counters** — animated number counting on scroll reveal (900+, 60+, 45+, 20+)
+- ✅ **Full stats counters** — IntersectionObserver triggered, 2.2s ease-out animation
+- ✅ **Testimonials slider** — auto-rotate 5.5s, prev/next, dot nav, touch-swipe support
+- ✅ **360° Campus Tour tabs** — Main Entrance, KG Playground, Sports Field
+- ✅ **Contact form** — validation + Table API submission (`contact_submissions`)
+- ✅ **Hero mini form** — lead capture with Table API submission
+- ✅ **Admissions form** — field validation + Table API submission
+- ✅ **FAQ accordion** — smooth open/close on all FAQ pages
+- ✅ **Video lightbox** — play button opens overlay; `vl-close-btn`, backdrop click, and Escape key all close it properly (inline `onclick` removed)
+- ✅ **Mobile sticky CTA bar** — Call / WhatsApp / Apply / Book Tour (hidden ≥1200px, slides up via IntersectionObserver)
+- ✅ **Back-to-top button** — appears after 400px scroll
+- ✅ **Floating Apply + WhatsApp buttons** — persistent on desktop, repositioned above mobile CTA
+- ✅ **Scroll-reveal animations** — IntersectionObserver fade-up on all sections
+- ✅ **Stagger children animation** — grid children animate in sequence with 80ms delay
+- ✅ **Gallery lightbox** — keyboard nav, swipe, touch support
+- ✅ **Gallery category filter** — fade/slide animation
+- ✅ **Announcement band** — auto-hides after 300px scroll
+- ✅ **Quick-links active section** — highlights current section in quick-links bar
+- ✅ **Active nav page highlight** — marks current page in nav overlay
+- ✅ **Quick-access card ripple** — click ripple effect
+- ✅ **Nav accordion (mobile)** — primary and sub-item toggle, single-open
+- ✅ **Navigation search** — redirects to `index.html?search=term`
+- ✅ **Image lazy-load fade-in** — smooth opacity transition on image load
+- ✅ **Image fallback system** — broken images replaced with local school photos
+- ✅ **Filmstrip scroll** — infinite CSS animation in academics & gallery pages
+- ✅ **Sticky header shrink** — `.scrolled` / `.header-scrolled` class on scroll
+- ✅ **Chart.js results page** — MAP, PSAT (bar), AP (bar), IELTS (radar), 3-year trend charts
+- ✅ **Leader photo lightbox zoom** — zoom-in/out toolbar (+/−/Reset), scroll-wheel zoom, click-to-zoom toggle, zoom range 100%–300% in 7 steps, cursor feedback, resets on leader change
+- ✅ **Leader lightbox keyboard shortcuts** — `+` zoom in, `-` zoom out, `0` reset, `←/→` navigate, `Esc` close; on-screen hint strip fades after 3 s
+- ✅ **Phase 4 Results nav item** — added to all 8 production page nav menus with full sub-menu (MAP Growth, 3-Year MAP Attainment ★, MAP Progress ★, PSAT, AP, SAT, IELTS)
 
-### Image Distribution by Page
-| Page | Hero Background | Gallery/Mosaic/Strip |
-|------|----------------|---------------------|
-| `index.html` | school-01,05,09 (hero slides) | school-17,22,21,19,23 (mosaic); school-16,18,24,25,20 (strip) |
-| `about.html` | school-18 | school-17,19,22 (split); school-16,21,23,24,25 (duo row) |
-| `academics.html` | school-22 | school-17,22,15 (gallery); school-16,17 (filmstrip) |
-| `admissions.html` | school-19 | school-22,23 (why images); school-21,24,25 (testimonials) |
-| `gallery.html` | school-17,18,22,15 | All 14 gallery items use school-16 to school-25 + 11,12,14,15 |
-| `pbl.html` | school-16 | school-19,22 (program images); school-17,23,22,18 (strip) |
-| `curriculum.html` | school-19 (bg watermark) | school-22,23,17,18 (strip) |
-| `parent-faq.html` | school-25 (bg watermark) | school-19,24,22,21 (strip) |
-| `phase4-results.html` | school-17 (bg watermark) | school-20,22,19,16 (strip) |
-| `intro.html` | — | school-17,22,19,15 (canvas) |
+### Design & UX
+- ✅ **Responsive** — mobile-first, tested down to 320px
+- ✅ **Google Fonts** — Playfair Display, Inter, Montserrat
+- ✅ **FontAwesome 6.4** — icons throughout
+- ✅ **CSS custom properties** — full design token system (`--red`, `--navy`, `--white`, etc.)
+- ✅ **Print / reduced motion** — `@media (prefers-reduced-motion: reduce)` applied
+- ✅ **Accessibility** — focus-visible outlines, aria-labels, aria-expanded, aria-current, semantic HTML
+- ✅ **60-section enhancements.css** — comprehensive animation, hover, and UX pack (v6)
+- ✅ **Legal pages** — full Privacy Policy, Terms of Use, Safeguarding, Sitemap
+
+### Social Media Links (all pages)
+All social links replaced from `href="#"` to real URLs:
+- Facebook: `https://www.facebook.com/NAISDubai`
+- Instagram: `https://www.instagram.com/naisdubai`
+- Twitter: `https://twitter.com/NAISDubai`
+- LinkedIn: `https://www.linkedin.com/company/naisdubai`
+- YouTube: `https://www.youtube.com/@NAISDubai`
+
+### Footer Legal Links (all pages)
+All footer legal links now point to real pages:
+- `privacy-policy.html` / `terms-of-use.html` / `safeguarding.html` / `sitemap.html`
 
 ---
 
-## 🗂 File Structure
+## 📁 File Structure
 
 ```
-index.html              ← Home page (hero, gallery, parallax, news)
-about.html              ← About NAIS
-academics.html          ← Academics KG–12
-admissions.html         ← Admissions
-gallery.html            ← Full photo gallery
-curriculum.html         ← American Curriculum
-parent-faq.html         ← Parent FAQ
-pbl.html                ← Project-Based Learning
-phase4-results.html     ← DSIB Phase 4 Results
-intro.html              ← Cinematic intro canvas overlay
-favicon.ico
+index.html                   — Homepage
+about.html                   — About NAIS
+academics.html               — Academic Programs
+admissions.html              — Admissions
+curriculum.html              — American Curriculum
+pbl.html                     — Project-Based Learning
+parent-faq.html              — Parent FAQ
+gallery.html                 — Photo Gallery
+phase4-results.html          — Phase 4 Academic Results (Chart.js)
+privacy-policy.html          — Privacy Policy
+terms-of-use.html            — Terms of Use
+safeguarding.html            — Safeguarding Policy
+sitemap.html                 — Visual Sitemap
+intro.html                   — Standalone intro preview
+
 css/
-  style.css             ← Main brand styles + design tokens
-  nav.css               ← Navigation overlay styles
-  pages.css             ← Page-specific styles (page-hero, sections)
-  mobile.css            ← Responsive breakpoints
+  style.css                  — Main stylesheet (vars, layout, all sections)
+  nav.css                    — Navigation overlay styles
+  pages.css                  — Inner-page specific styles
+  mobile.css                 — Mobile-first responsive overrides
+  premium.css                — Premium design elements
+  enhancements.css           — UX/UI enhancement pack v6 (60 sections)
+
 js/
-  nav.js                ← Navigation overlay logic
-  img-fallback.js       ← Image fallback system (v5, scene photos only)
+  nav.js                     — Navigation: open/close, mobile accordion,
+                               search redirect, active nav highlight
+  main.js                    — All interactive features: hero slideshow,
+                               counters, scroll-reveal, testimonials,
+                               video lightbox, forms (API), FAQ accordion,
+                               tour tabs, mobile CTA, parallax, gallery,
+                               announcement band, active sections, ripple
+  img-fallback.js            — Broken image replacement with local photos
+
 images/
-  nais-logo.png         ← Main logo (PNG)
-  nais-logo.svg         ← Main logo (SVG)
-  nais-logo-footer.svg  ← Footer logo
+  nais-logo.png              — School logo
+  school-01.jpg …            — Staff portraits (01–09)
+  school-10.jpg …            — Scene/gallery photos (10–25)
+  campus-main.jpg            — Main Entrance tour photo
+  campus-playground.jpg      — KG Playground tour photo
+  campus-sports.jpg          — Sports Field tour photo
+  executive-director.jpg     — Executive Director portrait
 
-  ── LEADERSHIP / BIO PORTRAITS (bio sections ONLY) ──
-  principal.jpg         ← Principal full photo
-  executive-director.jpg← Executive Director photo
-  group-ceo.jpg         ← Group CEO photo
-  school-01.jpg         ← Justin McCauley – Principal portrait
-  school-02.jpg         ← Crystal Goodwin – VP High School portrait
-  school-03.jpg         ← Jonathan D'Avignon – VP Middle School portrait
-  school-04.jpg         ← Jennifer McCauley – VP Elementary portrait
-  school-05.jpg         ← Natasha Sorak – Head of Lower Elementary portrait
-  school-06.jpg         ← Noha Shaaban – Head of Inclusive Education portrait
-  school-07.jpg         ← Maha El-Tantawy – Dean of Students portrait
-  school-08.jpg         ← Open Morning event photo
-  school-09.jpg         ← Classroom learning scene
-
-  ── SCENE PHOTOS (galleries, heroes, backgrounds) ──
-  school-10.jpg         ← Young girl writing in classroom
-  school-11.jpg         ← Children in library story session
-  school-12.jpg         ← Science lab experiment (high school)
-  school-13.jpg         ← Children outdoor hands-on activity
-  school-14.jpg         ← Children creative activity
-  school-15.jpg         ← Graduation ceremony NAIS Class of 2025
-  school-16.jpg         ← Children cooperative activity on sports turf (Community)
-  school-17.jpg         ← Tug-of-war competition, primary school (Sports)
-  school-18.jpg         ← Tug-of-war with balloons, festive sports day (Events)
-  school-19.jpg         ← Teacher guiding student one-on-one (Learning)
-  school-20.jpg         ← Child carrying NAIS flag at sports parade (Events)
-  school-21.jpg         ← Child with UAE flag face paint (Events/National Day)
-  school-22.jpg         ← Students conducting science experiment – Soil A (STEM)
-  school-23.jpg         ← Young children science activity – early years (Learning)
-  school-24.jpg         ← Girl in traditional dress with UAE flag (Community)
-  school-25.jpg         ← Children in Gulf traditional dress, national day (Community)
+temp/
+  nav-block.html             — Working template (not a live page)
 ```
 
 ---
 
-## 🎨 Design Tokens
-
-| Token | Value |
-|-------|-------|
-| Navy | `#1F2F6E` |
-| Red (Accent) | `#E11B22` |
-| White | `#FFFFFF` |
-| Off-white | `#F8F7F5` |
-| Serif Font | Playfair Display |
-| Sans-serif | Inter |
-| Display Font | Montserrat |
-| Section Padding | 100px |
-| Container Max Width | 1340px |
-
----
-
-## 📷 Photo Usage Rules
-1. **school-01 to school-09** = Staff/Leadership portraits → **ONLY in bio cards, leadership sections, and quote sections**. Never as page heroes, gallery items, backgrounds, or decorative strips.
-2. **school-10 to school-25** = Real school scene photos → Used freely in all visual contexts: gallery, hero backgrounds, parallax strips, mosaic sections, filmstrips, news cards, etc.
-3. **principal.jpg, executive-director.jpg, group-ceo.jpg** = Senior leadership portraits → Only in their dedicated leadership/bio cards.
-
----
-
-## 🔗 Key Entry Points
+## 🔗 Key Entry Points & Anchors
 
 | URL | Description |
 |-----|-------------|
-| `/index.html` | Home – main entry point |
-| `/gallery.html` | Photo Gallery |
-| `/about.html` | About NAIS |
-| `/academics.html` | Academic Programmes |
-| `/admissions.html#apply` | Application Form |
-| `/admissions.html#fees` | Tuition & Fees |
-| `/phase4-results.html` | DSIB Phase 4 Results |
-| `/curriculum.html` | American Curriculum |
-| `/parent-faq.html` | Parent FAQ |
-| `/pbl.html` | Project-Based Learning |
-| `/intro.html` | Cinematic intro overlay |
+| `index.html` | Homepage |
+| `index.html#hero` | Hero section |
+| `index.html#why-choose` | Why Choose NAIS |
+| `index.html#programs` | Academic programs grid |
+| `index.html#campus-tour` | 360° Campus Tour tabs |
+| `index.html#stats` | Stats section (animated counters) |
+| `index.html#testimonials` | Parent testimonials |
+| `index.html#gallery` | Life at NAIS gallery |
+| `index.html#contact` | Contact form |
+| `admissions.html#apply` | Application form |
+| `admissions.html#fees` | Tuition & fees section |
+| `admissions.html#process` | Admissions process |
+| `admissions.html#documents` | Required documents |
+| `academics.html#kindergarten` | KG program |
+| `academics.html#elementary` | Elementary program |
+| `academics.html#middle` | Middle School |
+| `academics.html#high` | High School |
+| `academics.html#inclusion` | Inclusion program |
+| `academics.html#ap` | AP Courses |
+| `about.html#mission` | Mission & Vision |
+| `about.html#leadership` | School Leadership |
+| `about.html#care` | CARE Values |
+| `about.html#campus` | Our Campus |
+| `about.html#accreditation` | Accreditations |
+| `phase4-results.html#map` | MAP Growth results |
+| `phase4-results.html#map-three-year` | 3-Year MAP Attainment data |
+| `phase4-results.html#map-progress` | MAP Progress analysis |
+| `phase4-results.html#psat` | PSAT results |
+| `phase4-results.html#ap` | AP results |
+| `phase4-results.html#sat` | SAT results |
+| `phase4-results.html#ielts` | IELTS results |
+| `privacy-policy.html` | Privacy Policy |
+| `terms-of-use.html` | Terms of Use |
+| `safeguarding.html` | Safeguarding Policy |
+| `sitemap.html` | Sitemap |
 
 ---
 
-## 🚀 Deployment
-Go to the **Publish tab** to deploy this project and get a live URL.
+## 🗃️ Data Model
+
+### Table: `contact_submissions`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | text | UUID (auto-generated) |
+| `parent_name` | text | Parent / Guardian full name |
+| `student_name` | text | Student's name |
+| `email` | text | Email address |
+| `phone` | text | Phone / WhatsApp number |
+| `grade` | text | Grade applying for |
+| `message` | text | Optional message or questions |
+| `source` | text | Form origin: `contact-form` / `hero-mini-form` / `admissions-form` |
+| `status` | text | Lead status (default: new) |
+| `created_at` | datetime | Auto-set on creation |
+
+**API Endpoint:** `POST tables/contact_submissions`  
+**View Submissions:** `GET tables/contact_submissions`
 
 ---
 
-## 📋 Recommended Next Steps
-1. **Connect contact form** — integrate Formspree or Netlify Forms for the enquiry/application form
-2. **Add Google Analytics** — insert GA4 tracking code in `<head>` of all pages
-3. **SEO meta tags** — add Open Graph and Twitter Card tags for social sharing
-4. **School video** — embed a real YouTube school film in the video promo section on index.html
-5. **News section** — replace placeholder news cards with real NAIS announcements
-6. **LMS Login** — connect the LMS Login link in the nav to the actual school LMS portal
+## 🏫 School Information
+
+| Detail | Value |
+|--------|-------|
+| Name | North American International School |
+| Location | Al Mizhar 1, Mirdif, Dubai, UAE |
+| Phone | +971 4 263 5456 |
+| WhatsApp | https://wa.me/97142635456 |
+| Admissions Email | admissions@naischool.ae |
+| Careers Email | careers@naischool.ae |
+| Parent Portal | https://edunation.me |
+| Facebook | https://www.facebook.com/NAISDubai |
+| Instagram | https://www.instagram.com/naisdubai |
+| Twitter | https://twitter.com/NAISDubai |
+| LinkedIn | https://www.linkedin.com/company/naisdubai |
+| YouTube | https://www.youtube.com/@NAISDubai |
+| Founded | 2005 |
+| Grades | KG1 – Grade 12 |
+| KHDA Rating | Good |
+| Accreditation | Cognia |
+
+---
+
+## 🛠️ CSS Architecture
+
+| File | Purpose | Approx. Size |
+|------|---------|------|
+| `style.css` | Core design system, CSS variables, all section layouts | ~128 KB |
+| `nav.css` | Navigation overlay, topbar, rail, mobile nav | ~17 KB |
+| `pages.css` | Inner-page headers, section-specific overrides | ~34 KB |
+| `mobile.css` | Breakpoint overrides (≤1199px, ≤768px, ≤480px) | ~21 KB |
+| `premium.css` | Decorative/premium elements | ~49 KB |
+| `enhancements.css` | UX/UI enhancement pack v6 (60 sections) | ~55 KB |
+
+**Loading order:** `style.css` → `pages.css` (inner pages only) → `nav.css` → `mobile.css` → `enhancements.css`
+
+---
+
+## 🔧 JavaScript Architecture
+
+| File | Purpose |
+|------|---------|
+| `nav.js` | Navigation open/close, mobile accordion, search redirect, active nav highlight |
+| `main.js` | Hero slideshow, counters, scroll-reveal, testimonials, video lightbox (proper close wiring), contact/admissions/hero forms (API), FAQ accordion, tour tabs, mobile CTA observer, parallax, gallery mosaic, announcement band, active section highlight, ripple, stagger, back-to-top, anchor scroll, image lazy-load, keyboard dropdown nav |
+| `img-fallback.js` | Replaces broken `<img>` and CSS `background-image` sources with local school photos |
+
+**Script loading order** (all pages): `nav.js` → `img-fallback.js` → `main.js`
+
+---
+
+## ⚠️ Known Limitations / Pending Items
+
+| Item | Note |
+|------|------|
+| **Video lightbox content** | Shows "School Film Coming Soon" placeholder — no actual video file yet |
+| **Campus Tour** | Uses real campus photos; no 360° iframe embed yet (photos as substitute) |
+| **Google Maps** | Embeds approximate location; update with exact embed code when available |
+| **Search results page** | `index.html?search=term` redirects correctly but no results UI exists |
+| **Email notifications** | Form submissions stored in Table API; no webhook/email forwarding set up |
+| **Leader lightbox zoom pan** | Zoomed image is scrollable within the photo pane but not draggable/pannable |
+
+---
+
+## 🚀 Recommended Next Steps
+
+1. **Add actual school video** to the video lightbox (replace "Coming Soon" with real `<iframe>`)
+2. **School calendar integration** — ICS file download or live calendar embed
+3. **Set up email forwarding** for `contact_submissions` (webhook → admissions email)
+4. **Add Google Analytics 4** for visitor tracking and conversion measurement
+5. **Add a News/Blog section** with individual article pages
+6. **Add real 360° virtual tour** (Matterport or Google Maps Street View iframes)
+7. **Add `sitemap.xml`** (machine-readable) for SEO search indexing
+8. **Add Open Graph meta tags** to all pages for social sharing previews
+9. **Explore WhatsApp Business API** integration for instant auto-reply on form submit
+10. **Add cookie consent banner** for GDPR/UAE compliance
+
+---
+
+*Last updated: April 2026 — All 13 pages QA-verified (zero console errors). All social media links, footer legal links, and placeholder `href="#"` resolved across all production pages.*

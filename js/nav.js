@@ -256,18 +256,19 @@
   })();
 
   /* ═══════════════════════════════════════
-     Testimonials slider
+     Testimonials slider  (fixed selectors)
   ═══════════════════════════════════════ */
   (function () {
-    const track  = document.querySelector('.testimonial-track');
+    var track  = document.querySelector('.testimonial-track');
     if (!track) return;
-    const cards  = track.querySelectorAll('.testimonial-card');
-    const dots   = document.querySelectorAll('.t-dot');
-    const prevBtn = document.querySelector('.t-prev');
-    const nextBtn = document.querySelector('.t-next');
+    var cards  = track.querySelectorAll('.testimonial-card');
+    var dots   = document.querySelectorAll('.t-dot');
+    /* FIX: HTML uses #testimonial-prev / #testimonial-next, not .t-prev/.t-next */
+    var prevBtn = document.getElementById('testimonial-prev');
+    var nextBtn = document.getElementById('testimonial-next');
     if (!cards.length) return;
-    let current = 0;
-    let timer   = setInterval(function () { goTo(current + 1); }, 5000);
+    var current = 0;
+    var timer   = setInterval(function () { goTo(current + 1); }, 6000);
 
     function goTo(i) {
       cards[current].classList.remove('active');
@@ -276,9 +277,15 @@
       cards[current].classList.add('active');
       if (dots[current]) dots[current].classList.add('active');
     }
-    if (prevBtn) prevBtn.addEventListener('click', function () { clearInterval(timer); goTo(current - 1); timer = setInterval(function () { goTo(current + 1); }, 5000); });
-    if (nextBtn) nextBtn.addEventListener('click', function () { clearInterval(timer); goTo(current + 1); timer = setInterval(function () { goTo(current + 1); }, 5000); });
-    dots.forEach(function (dot, i) { dot.addEventListener('click', function () { clearInterval(timer); goTo(i); timer = setInterval(function () { goTo(current + 1); }, 5000); }); });
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(function () { goTo(current + 1); }, 6000);
+    }
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); resetTimer(); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); resetTimer(); });
+    dots.forEach(function (dot, i) {
+      dot.addEventListener('click', function () { goTo(i); resetTimer(); });
+    });
   })();
 
   /* ═══════════════════════════════════════
@@ -409,5 +416,211 @@
       el.classList.add('in-view');
     });
   }, 1000);
+
+  /* ═══════════════════════════════════════
+     Contact Form — Table API + validation
+  ═══════════════════════════════════════ */
+  (function () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+
+    function showFieldError(field, msg) {
+      field.style.borderColor = '#E11B22';
+      field.style.boxShadow = '0 0 0 3px rgba(225,27,34,0.15)';
+      var errEl = field.parentElement.querySelector('.field-error');
+      if (!errEl) {
+        errEl = document.createElement('span');
+        errEl.className = 'field-error';
+        errEl.style.cssText = 'color:#E11B22;font-size:0.72rem;margin-top:4px;display:block;font-weight:600;';
+        field.parentElement.appendChild(errEl);
+      }
+      errEl.textContent = msg;
+    }
+    function clearFieldError(field) {
+      field.style.borderColor = '';
+      field.style.boxShadow = '';
+      var errEl = field.parentElement.querySelector('.field-error');
+      if (errEl) errEl.remove();
+    }
+    function validateEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+    form.querySelectorAll('input, select, textarea').forEach(function (f) {
+      f.addEventListener('input', function () { clearFieldError(f); });
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var parentName   = form.querySelector('#parent-name');
+      var studentName  = form.querySelector('#student-name');
+      var email        = form.querySelector('#email');
+      var phone        = form.querySelector('#phone');
+      var grade        = form.querySelector('#grade');
+      var message      = form.querySelector('#message');
+      var submitBtn    = form.querySelector('button[type="submit"]');
+      var successBox   = document.getElementById('form-success');
+      var valid = true;
+
+      [parentName, studentName, email, grade].forEach(function (f) { clearFieldError(f); });
+
+      if (!parentName.value.trim()) { showFieldError(parentName, 'Please enter your name'); valid = false; }
+      if (!studentName.value.trim()) { showFieldError(studentName, "Please enter the student's name"); valid = false; }
+      if (!email.value.trim() || !validateEmail(email.value.trim())) { showFieldError(email, 'Please enter a valid email address'); valid = false; }
+      if (!grade.value) { showFieldError(grade, 'Please select a grade level'); valid = false; }
+      if (!valid) { form.querySelector('.field-error').closest('.form-group').querySelector('input,select,textarea').focus(); return; }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+
+      var payload = {
+        parent_name:  parentName.value.trim(),
+        student_name: studentName.value.trim(),
+        email:        email.value.trim(),
+        phone:        (phone ? phone.value.trim() : ''),
+        grade:        grade.value,
+        message:      (message ? message.value.trim() : ''),
+        source:       'contact-form'
+      };
+
+      fetch('tables/contact_submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function (r) { return r.json(); })
+      .then(function () {
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
+        if (successBox) {
+          successBox.style.display = 'flex';
+          successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(function () { successBox.style.display = 'none'; }, 7000);
+        }
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
+        alert('Sorry, there was an error. Please try calling us directly: +971 4 263 5456');
+      });
+    });
+  })();
+
+  /* ═══════════════════════════════════════
+     Hero Mini Form — Table API submission
+  ═══════════════════════════════════════ */
+  (function () {
+    var heroMiniForm = document.getElementById('hero-mini-form');
+    if (!heroMiniForm) return;
+    heroMiniForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var inputs = heroMiniForm.querySelectorAll('input[required]');
+      var valid = true;
+      inputs.forEach(function (inp) {
+        if (!inp.value.trim()) {
+          valid = false;
+          inp.style.borderColor = 'rgba(225,27,34,0.9)';
+          inp.style.background  = 'rgba(225,27,34,0.08)';
+          inp.addEventListener('input', function () {
+            inp.style.borderColor = '';
+            inp.style.background  = '';
+          }, { once: true });
+        }
+      });
+      if (!valid) return;
+      var btn = heroMiniForm.querySelector('.btn-cta-mini');
+      if (btn) { btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…'; btn.disabled = true; }
+
+      var gradeEl = heroMiniForm.querySelector('select');
+      fetch('tables/contact_submissions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          parent_name:  inputs[0] ? inputs[0].value.trim() : '',
+          phone:        inputs[1] ? inputs[1].value.trim() : '',
+          email:        inputs[2] ? inputs[2].value.trim() : '',
+          grade:        gradeEl   ? gradeEl.value : '',
+          source:       'hero-mini-form'
+        })
+      })
+      .then(function () {
+        heroMiniForm.reset();
+        if (btn) {
+          btn.innerHTML = '<i class="fas fa-check"></i> Sent! We\'ll be in touch.';
+          btn.style.background = '#1A9B5C';
+          btn.disabled = true;
+          setTimeout(function () {
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Get Information';
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 5000);
+        }
+      })
+      .catch(function () {
+        if (btn) { btn.innerHTML = '<i class="fas fa-paper-plane"></i> Get Information'; btn.disabled = false; }
+      });
+    });
+  })();
+
+  /* ═══════════════════════════════════════
+     Sticky Mobile CTA Bar
+  ═══════════════════════════════════════ */
+  (function () {
+    var bar = document.getElementById('mobile-sticky-cta');
+    if (!bar) return;
+    var heroSection = document.getElementById('hero');
+    if (!heroSection) { bar.classList.add('visible'); return; }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        bar.classList.toggle('visible', !entry.isIntersecting);
+      });
+    }, { threshold: 0.1 });
+    obs.observe(heroSection);
+  })();
+
+  /* ═══════════════════════════════════════
+     Video play button — open in lightbox
+  ═══════════════════════════════════════ */
+  (function () {
+    var playBtn = document.querySelector('.video-play-btn');
+    if (!playBtn) return;
+    playBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var overlay = document.getElementById('video-lightbox');
+      if (overlay) {
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    });
+    var lightbox = document.getElementById('video-lightbox');
+    if (lightbox) {
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox || e.target.classList.contains('vl-close')) {
+          lightbox.style.display = 'none';
+          document.body.style.overflow = '';
+          var iframe = lightbox.querySelector('iframe');
+          if (iframe) { var s = iframe.src; iframe.src = ''; iframe.src = s; }
+        }
+      });
+    }
+  })();
+
+  /* ═══════════════════════════════════════
+     Scroll-to-top smooth for anchor links
+  ═══════════════════════════════════════ */
+  (function () {
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var hash = a.getAttribute('href');
+        if (hash === '#') return;
+        var target = document.querySelector(hash);
+        if (target) {
+          e.preventDefault();
+          var offset = window.innerWidth >= 1200 ? 20 : 70;
+          var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    });
+  })();
 
 })();

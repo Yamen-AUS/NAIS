@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/pages.css?v=6" />
   <link rel="stylesheet" href="css/nav.css?v=6" />
   <link rel="stylesheet" href="css/mobile.css?v=3" />
+  <link rel="stylesheet" href="css/enhancements.css?v=1" />
   <style>
     /* TOPBAR LOGO FIX — desktop only */
     @media (min-width: 1200px) {
@@ -21,6 +22,326 @@
       .topbar-inner{height:62px!important;display:flex!important;align-items:center!important;padding:0 60px 0 0!important;}
       .topbar-logo{width:auto!important;height:68px!important;max-height:68px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:6px 16px 6px 12px!important;background:#fff!important;flex-shrink:0!important;}
       .topbar-logo-img{width:auto!important;height:56px!important;max-width:220px!important;max-height:56px!important;object-fit:contain!important;object-position:left center!important;display:block!important;}
+    }
+
+    /* ── LEADER PHOTO ZOOM CURSOR & OVERLAY HINT ── */
+    .leader-card-photo {
+      cursor: zoom-in;
+    }
+    .leader-card-photo::after {
+      content: '\f00e'; /* fa-search-plus */
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      background: rgba(0,0,0,0.52);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      transform: scale(0.8);
+      backdrop-filter: blur(4px);
+      line-height: 32px;
+      text-align: center;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .leader-card-equal:hover .leader-card-photo::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .leader-card-photo img {
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s ease !important;
+    }
+    .leader-card-equal:hover .leader-card-photo img {
+      transform: scale(1.08) !important;
+      filter: brightness(1.06) saturate(1.1);
+    }
+
+    /* ── LEADER LIGHTBOX ── */
+    #leader-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99997;
+      background: rgba(6,10,28,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      cursor: zoom-out;
+    }
+    /* ── ZOOM TOOLBAR ── */
+    .lb-zoom-bar {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 50px;
+      padding: 5px 10px;
+      z-index: 11;
+      backdrop-filter: blur(8px);
+    }
+    .lb-zoom-btn {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s, color 0.18s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .lb-zoom-btn:hover { background: #E11B22; color: #fff; border-color: #E11B22; transform: scale(1.1); }
+    .lb-zoom-btn:disabled { opacity: 0.3; cursor: default; transform: none; }
+    .lb-zoom-level {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.5);
+      min-width: 36px;
+      text-align: center;
+      user-select: none;
+    }
+    .lb-zoom-reset {
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 8px;
+      width: auto;
+      border-radius: 50px;
+    }
+    /* Zoomed photo container */
+    .lb-photo {
+      position: relative;
+      overflow: hidden;
+    }
+    #lb-img {
+      transform-origin: center center;
+      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94) !important;
+      will-change: transform;
+      cursor: zoom-in;
+    }
+    #lb-img.zoomed {
+      cursor: zoom-out;
+    }
+    /* Keyboard hint strip */
+    .lb-kbd-hint {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px 18px;
+      background: linear-gradient(to top, rgba(6,10,28,0.9) 0%, transparent 100%);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 5;
+      transition: opacity 0.3s ease;
+    }
+    .lb-kbd-hint.hidden { opacity: 0; }
+    .lb-kbd-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.06em;
+    }
+    .lb-kbd-tag kbd {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: monospace;
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.5);
+    }
+    #leader-lightbox.open {
+      display: flex;
+      animation: lbFadeIn 0.3s ease;
+    }
+    @keyframes lbFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .lb-card {
+      background: #0d1535;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      max-width: 880px;
+      width: 100%;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7);
+      cursor: default;
+      animation: lbSlideUp 0.35s cubic-bezier(0.22,1,0.36,1);
+      position: relative;
+    }
+    @keyframes lbSlideUp {
+      from { transform: translateY(28px) scale(0.96); opacity: 0; }
+      to   { transform: translateY(0)    scale(1);    opacity: 1; }
+    }
+    .lb-photo {
+      flex: 0 0 320px;
+      position: relative;
+      overflow: hidden;
+      background: #060a1c;
+    }
+    .lb-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .lb-photo-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 60%, #0d1535 100%),
+                  linear-gradient(to top, #0d1535 0%, transparent 35%);
+      pointer-events: none;
+    }
+    .lb-role-tag {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      background: var(--red, #E11B22);
+      color: #fff;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      z-index: 2;
+    }
+    .lb-body {
+      flex: 1;
+      padding: 40px 40px 40px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+      max-height: 88vh;
+    }
+    .lb-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 4px;
+      line-height: 1.2;
+    }
+    .lb-body .lb-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #E11B22;
+      margin-bottom: 20px;
+    }
+    .lb-quote {
+      background: rgba(255,255,255,0.06);
+      border-left: 3px solid #E11B22;
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+    }
+    .lb-quote i { color: #E11B22; font-size: 0.85rem; opacity: 0.7; display:block; margin-bottom: 5px; }
+    .lb-quote p { font-style: italic; font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.75); margin: 0; }
+    .lb-bio {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.60);
+      margin-bottom: 10px;
+    }
+    .lb-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      z-index: 10;
+    }
+    .lb-close:hover {
+      background: rgba(225,27,34,0.8);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+    /* ── nav prev/next ── */
+    .lb-card { position: relative; }
+    .lb-nav {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    .lb-nav-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .lb-nav-btn:hover { background: #E11B22; color: #fff; border-color: #E11B22; }
+    /* ── counter badge ── */
+    .lb-counter {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+      z-index: 10;
+    }
+    @media (max-width: 680px) {
+      .lb-card { flex-direction: column; }
+      .lb-photo { flex: 0 0 220px; }
+      .lb-body  { padding: 24px 22px 28px; max-height: 60vh; }
+      .lb-body h2 { font-size: 1.3rem; }
+      .lb-nav { bottom: 14px; right: 22px; }
     }
   </style>
 </head>
@@ -38,17 +359,17 @@
         <span><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</span>
       </div>
       <div class="topbar-right">
-        <a href="#" class="topbar-link">Parent Portal</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">Parent Portal</a>
         <span class="topbar-divider">|</span>
-        <a href="#" class="topbar-link">E-Learning</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">E-Learning</a>
         <span class="topbar-divider">|</span>
-        <a href="#" class="topbar-link">Careers</a>
+        <a href="mailto:careers@naischool.ae" class="topbar-link">Careers</a>
         <div class="topbar-social">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/NAISDubai" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/naisdubai" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/@NAISDubai" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
     </div>
@@ -161,6 +482,20 @@
                 <li class="nav-subnav-item"><a href="parent-faq.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">Parent FAQ ★</a></li>
               </ul>
             </li>
+
+            <li class="nav-primary-item" data-item="phase4">
+              <a href="phase4-results.html" class="nav-primary-link" style="color:#4ade80;font-weight:700;"><i class="fas fa-chart-bar" style="margin-right:5px;"></i>Phase 4 Results</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="phase4-results.html#map" class="nav-subnav-link">MAP Growth</a></li>
+                <li class="nav-subnav-item"><a href="phase4-results.html#map-three-year" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">3-Year MAP Attainment ★</a></li>
+                <li class="nav-subnav-item"><a href="phase4-results.html#map-progress" class="nav-subnav-link" style="color:#4ade80;font-weight:700;">MAP Progress ★</a></li>
+                <li class="nav-subnav-item"><a href="phase4-results.html#psat" class="nav-subnav-link">PSAT Data</a></li>
+                <li class="nav-subnav-item"><a href="phase4-results.html#ap" class="nav-subnav-link">AP Courses</a></li>
+                <li class="nav-subnav-item"><a href="phase4-results.html#sat" class="nav-subnav-link">SAT Results</a></li>
+                <li class="nav-subnav-item"><a href="phase4-results.html#ielts" class="nav-subnav-link">IELTS Results</a></li>
+              </ul>
+            </li>
+
               <a href="about.html" class="nav-primary-link">Our School</a>
               <ul class="nav-subnav">
                 <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Life at NAIS</a></li>
@@ -183,11 +518,11 @@
           <div class="nav-bottom-careers">
             <span class="nav-careers-label">Career Opportunities</span>
             <div class="nav-bottom-social">
-              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
-              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com/NAISDubai" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/company/naisdubai" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://www.youtube.com/@NAISDubai" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
             </div>
           </div>
           <div class="nav-bottom-search">
@@ -935,10 +1270,10 @@
         </div>
         <p class="footer-desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
         <div class="footer-social">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/NAISDubai" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/naisdubai" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
       <div class="footer-col"><h4 class="footer-heading">Quick Links</h4><ul class="footer-links"><li><a href="about.html">About NAIS</a></li><li><a href="academics.html">Academic Programs</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="index.html#student-life">Student Life</a></li><li><a href="index.html#contact">Contact Us</a></li><li><a href="gallery.html" style="color:#E11B22;font-weight:600;"><i class="fas fa-images" style="margin-right:5px;"></i>Photo Gallery</a></li></ul></div>
@@ -947,7 +1282,7 @@
     </div></div></div>
     <div class="footer-bottom"><div class="container">
       <p>© 2025 North American International School, Dubai. All Rights Reserved.</p>
-      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Safeguarding</a></div>
+      <div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a><a href="safeguarding.html">Safeguarding</a></div>
     </div></div>
   </footer>
 
@@ -955,8 +1290,258 @@
   <a href="admissions.html#apply" class="apply-float" aria-label="Apply Now"><i class="fas fa-pen-to-square"></i><span class="apply-float-label">Apply Now</span></a>
 <a href="https://wa.me/97142635456" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
+  <!-- ── LEADER PHOTO LIGHTBOX ── -->
+  <div id="leader-lightbox" role="dialog" aria-modal="true" aria-label="Leader Profile">
+    <div class="lb-card" id="lb-card">
+      <button class="lb-close" id="lb-close" aria-label="Close"><i class="fas fa-times"></i></button>
+      <span class="lb-counter" id="lb-counter"></span>
+      <!-- Zoom toolbar -->
+      <div class="lb-zoom-bar" id="lb-zoom-bar">
+        <button class="lb-zoom-btn" id="lb-zoom-out" aria-label="Zoom out" title="Zoom out (−)"><i class="fas fa-search-minus"></i></button>
+        <span class="lb-zoom-level" id="lb-zoom-level">100%</span>
+        <button class="lb-zoom-btn" id="lb-zoom-in" aria-label="Zoom in" title="Zoom in (+)"><i class="fas fa-search-plus"></i></button>
+        <button class="lb-zoom-btn lb-zoom-reset" id="lb-zoom-reset" aria-label="Reset zoom" title="Reset zoom (0)">Reset</button>
+      </div>
+      <div class="lb-photo">
+        <img id="lb-img" src="" alt="" />
+        <div class="lb-photo-gradient"></div>
+        <div class="lb-role-tag" id="lb-role"></div>
+        <!-- Keyboard hint -->
+        <div class="lb-kbd-hint" id="lb-kbd-hint">
+          <span class="lb-kbd-tag"><kbd>+</kbd> Zoom In</span>
+          <span class="lb-kbd-tag"><kbd>-</kbd> Zoom Out</span>
+          <span class="lb-kbd-tag"><kbd>0</kbd> Reset</span>
+          <span class="lb-kbd-tag"><kbd>←</kbd><kbd>→</kbd> Navigate</span>
+          <span class="lb-kbd-tag"><kbd>Esc</kbd> Close</span>
+        </div>
+      </div>
+      <div class="lb-body">
+        <h2 id="lb-name"></h2>
+        <div class="lb-title" id="lb-job"></div>
+        <div class="lb-quote" id="lb-quote-wrap">
+          <i class="fas fa-quote-left"></i>
+          <p id="lb-quote"></p>
+        </div>
+        <p class="lb-bio" id="lb-bio1"></p>
+        <p class="lb-bio" id="lb-bio2"></p>
+      </div>
+      <div class="lb-nav">
+        <button class="lb-nav-btn" id="lb-prev" aria-label="Previous leader"><i class="fas fa-chevron-left"></i></button>
+        <button class="lb-nav-btn" id="lb-next" aria-label="Next leader"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+
   <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
   <script src="js/nav.js"></script>
   <script src="js/img-fallback.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+  /* ── LEADER PHOTO LIGHTBOX ── */
+  (function () {
+    'use strict';
+
+    /* Collect all leader data from the cards */
+    var cards = Array.prototype.slice.call(
+      document.querySelectorAll('.leader-card-equal')
+    );
+
+    var leaders = cards.map(function (card) {
+      var img   = card.querySelector('.leader-card-photo img');
+      var role  = card.querySelector('.leader-card-role-tag');
+      var name  = card.querySelector('.leader-card-body h3');
+      var title = card.querySelector('.leader-card-title');
+      var quote = card.querySelector('.leader-quote p');
+      var bios  = card.querySelectorAll('.leader-card-bio');
+      return {
+        src:   img   ? img.src   : '',
+        alt:   img   ? img.alt   : '',
+        style: img   ? img.getAttribute('style') || '' : '',
+        role:  role  ? role.textContent.trim() : '',
+        name:  name  ? name.textContent.trim() : '',
+        title: title ? title.textContent.trim() : '',
+        quote: quote ? quote.textContent.trim() : '',
+        bio1:  bios[0] ? bios[0].textContent.trim() : '',
+        bio2:  bios[1] ? bios[1].textContent.trim() : ''
+      };
+    });
+
+    var lb       = document.getElementById('leader-lightbox');
+    var lbImg    = document.getElementById('lb-img');
+    var lbRole   = document.getElementById('lb-role');
+    var lbName   = document.getElementById('lb-name');
+    var lbJob    = document.getElementById('lb-job');
+    var lbQuote  = document.getElementById('lb-quote');
+    var lbQWrap  = document.getElementById('lb-quote-wrap');
+    var lbBio1   = document.getElementById('lb-bio1');
+    var lbBio2   = document.getElementById('lb-bio2');
+    var lbClose  = document.getElementById('lb-close');
+    var lbPrev   = document.getElementById('lb-prev');
+    var lbNext   = document.getElementById('lb-next');
+    var lbCounter= document.getElementById('lb-counter');
+    var current  = 0;
+
+    function populate(idx) {
+      var l = leaders[idx];
+      if (!l) return;
+      /* animate out then in */
+      var body = document.getElementById('lb-card');
+      body.style.transition = 'opacity 0.18s ease';
+      body.style.opacity = '0';
+      setTimeout(function () {
+        lbImg.src   = l.src;
+        lbImg.alt   = l.alt;
+        /* preserve per-person object-position */
+        lbImg.style.cssText = l.style || 'object-fit:cover;object-position:center top;';
+        lbImg.style.width   = '100%';
+        lbImg.style.height  = '100%';
+        lbImg.style.display = 'block';
+        lbRole.textContent  = l.role;
+        lbName.textContent  = l.name;
+        lbJob.textContent   = l.title;
+        lbQuote.textContent = l.quote;
+        lbQWrap.style.display = l.quote ? '' : 'none';
+        lbBio1.textContent  = l.bio1;
+        lbBio1.style.display = l.bio1 ? '' : 'none';
+        lbBio2.textContent  = l.bio2;
+        lbBio2.style.display = l.bio2 ? '' : 'none';
+        lbCounter.textContent = (idx + 1) + ' / ' + leaders.length;
+        body.style.opacity = '1';
+      }, 180);
+    }
+
+    function openLb(idx) {
+      current = ((idx % leaders.length) + leaders.length) % leaders.length;
+      populate(current);
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lb.focus();
+    }
+
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* Click on photo area opens lightbox */
+    cards.forEach(function (card, i) {
+      var photoDiv = card.querySelector('.leader-card-photo');
+      if (photoDiv) {
+        photoDiv.addEventListener('click', function () { openLb(i); });
+      }
+    });
+
+    /* Close button */
+    if (lbClose) lbClose.addEventListener('click', closeLb);
+
+    /* Backdrop click closes */
+    lb.addEventListener('click', function (e) {
+      if (e.target === lb) closeLb();
+    });
+
+    /* Prev / Next */
+    if (lbPrev) lbPrev.addEventListener('click', function () {
+      current = (current - 1 + leaders.length) % leaders.length;
+      populate(current);
+    });
+    if (lbNext) lbNext.addEventListener('click', function () {
+      current = (current + 1) % leaders.length;
+      populate(current);
+    });
+
+    /* Keyboard: Escape, ArrowLeft, ArrowRight, +/-, 0 */
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape')     { closeLb(); }
+      if (e.key === 'ArrowLeft')  { current = (current - 1 + leaders.length) % leaders.length; populate(current); }
+      if (e.key === 'ArrowRight') { current = (current + 1) % leaders.length; populate(current); }
+      if (e.key === '+' || e.key === '=') { e.preventDefault(); applyZoom(zoomIdx + 1); }
+      if (e.key === '-' || e.key === '_') { e.preventDefault(); applyZoom(zoomIdx - 1); }
+      if (e.key === '0')          { e.preventDefault(); resetZoom(); }
+    });
+
+    /* ── PHOTO ZOOM SYSTEM ── */
+    var ZOOM_STEPS  = [100, 125, 150, 175, 200, 250, 300];
+    var zoomIdx     = 0;
+    var zoomBtn     = document.getElementById('lb-zoom-bar');
+    var btnZoomIn   = document.getElementById('lb-zoom-in');
+    var btnZoomOut  = document.getElementById('lb-zoom-out');
+    var btnZoomReset= document.getElementById('lb-zoom-reset');
+    var zoomLabel   = document.getElementById('lb-zoom-level');
+    var kbdHint     = document.getElementById('lb-kbd-hint');
+    var kbdHintTimer;
+
+    function applyZoom(idx) {
+      zoomIdx = Math.max(0, Math.min(ZOOM_STEPS.length - 1, idx));
+      var pct = ZOOM_STEPS[zoomIdx];
+      lbImg.style.transform = (pct === 100) ? '' : 'scale(' + (pct / 100).toFixed(2) + ')';
+      lbImg.style.transformOrigin = 'center center';
+      lbImg.style.objectFit = (pct > 100) ? 'none' : 'cover';
+      lbImg.classList.toggle('zoomed', pct > 100);
+      zoomLabel.textContent = pct + '%';
+      btnZoomIn.disabled  = (zoomIdx >= ZOOM_STEPS.length - 1);
+      btnZoomOut.disabled = (zoomIdx <= 0);
+      /* cursor on photo div */
+      document.querySelector('.lb-photo').style.overflow = (pct > 100) ? 'auto' : 'hidden';
+    }
+
+    function resetZoom() { applyZoom(0); }
+
+    /* Reset zoom whenever a new leader is shown */
+    var _origPopulate = populate;
+    populate = function (idx) {
+      resetZoom();
+      _origPopulate(idx);
+    };
+
+    if (btnZoomIn)    btnZoomIn.addEventListener('click',   function(e){ e.stopPropagation(); applyZoom(zoomIdx + 1); });
+    if (btnZoomOut)   btnZoomOut.addEventListener('click',  function(e){ e.stopPropagation(); applyZoom(zoomIdx - 1); });
+    if (btnZoomReset) btnZoomReset.addEventListener('click',function(e){ e.stopPropagation(); resetZoom(); });
+
+    /* Click on photo toggles zoom in/out */
+    lbImg.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (zoomIdx === 0) applyZoom(2);   /* jump to 150% */
+      else               resetZoom();
+    });
+
+    /* Wheel zoom on photo */
+    lbImg.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      if (e.deltaY < 0) applyZoom(zoomIdx + 1);
+      else              applyZoom(zoomIdx - 1);
+    }, { passive: false });
+
+    /* Show/hide keyboard hint */
+    function showKbdHint() {
+      if (!kbdHint) return;
+      kbdHint.classList.remove('hidden');
+      clearTimeout(kbdHintTimer);
+      kbdHintTimer = setTimeout(function () {
+        kbdHint.classList.add('hidden');
+      }, 3000);
+    }
+    lb.addEventListener('mouseenter', showKbdHint);
+
+    /* Initialise zoom state */
+    applyZoom(0);
+
+    /* Touch swipe support */
+    var swipeStartX = 0;
+    lb.addEventListener('touchstart', function (e) {
+      swipeStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      var diff = swipeStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 40) {
+        current = diff > 0
+          ? (current + 1) % leaders.length
+          : (current - 1 + leaders.length) % leaders.length;
+        populate(current);
+      }
+    }, { passive: true });
+  })();
+  </script>
 </body>
 </html>
