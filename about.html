@@ -24,6 +24,73 @@
       .topbar-logo-img{width:auto!important;height:56px!important;max-width:220px!important;max-height:56px!important;object-fit:contain!important;object-position:left center!important;display:block!important;}
     }
 
+    /* ── BIO EXPAND / COLLAPSE TOGGLE ── */
+    .leader-bio-wrap {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1),
+                  opacity   0.35s ease,
+                  margin    0.35s ease;
+      margin-top: 0;
+    }
+    .leader-bio-wrap.open {
+      max-height: 600px;   /* tall enough for any bio */
+      opacity: 1;
+      margin-top: 12px;
+    }
+    .leader-bio-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 14px;
+      background: none;
+      border: 1.5px solid rgba(225,27,34,0.35);
+      color: #E11B22;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px 6px 10px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.22s, color 0.22s, border-color 0.22s, transform 0.18s;
+      line-height: 1;
+      user-select: none;
+    }
+    .leader-bio-toggle:hover {
+      background: #E11B22;
+      color: #fff;
+      border-color: #E11B22;
+      transform: translateY(-1px);
+    }
+    .leader-bio-toggle.open {
+      background: rgba(225,27,34,0.08);
+      border-color: #E11B22;
+    }
+    .lbt-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #E11B22;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 900;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+                  background 0.22s;
+    }
+    .leader-bio-toggle.open .lbt-icon {
+      transform: rotate(45deg);   /* + → × look */
+      background: #b01318;
+    }
+    .lbt-label { transition: opacity 0.2s; }
+
     /* ── LEADER PHOTO ZOOM CURSOR & OVERLAY HINT ── */
     .leader-card-photo {
       cursor: zoom-in;
@@ -661,7 +728,12 @@
               <i class="fas fa-quote-left"></i>
               <p>"Our mission is simple: create world-class schools where every child is inspired to achieve their greatest potential and every family feels at home."</p>
             </blockquote>
-            <p class="leader-card-bio">Kelvin Hornsby brings decades of international education leadership across the Middle East and beyond. His strategic vision drives the group's commitment to academic excellence, inclusive values, and sustainable school growth.</p>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-0">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-0" aria-hidden="true">
+              <p class="leader-card-bio">Kelvin Hornsby brings decades of international education leadership across the Middle East and beyond. His strategic vision drives the group's commitment to academic excellence, inclusive values, and sustainable school growth.</p>
+            </div>
           </div>
         </div>
 
@@ -678,7 +750,12 @@
               <i class="fas fa-quote-left"></i>
               <p>"At NAIS, we nurture every child's unique potential within a safe, inclusive, and values-driven environment — because great education begins with belonging."</p>
             </blockquote>
-            <p class="leader-card-bio">Ms. Taher's visionary leadership has shaped NAIS into one of Dubai's most trusted American curriculum schools. Her commitment to Emirati values and community excellence defines the school's culture and strategic direction.</p>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-1">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-1" aria-hidden="true">
+              <p class="leader-card-bio">Ms. Taher's visionary leadership has shaped NAIS into one of Dubai's most trusted American curriculum schools. Her commitment to Emirati values and community excellence defines the school's culture and strategic direction.</p>
+            </div>
           </div>
         </div>
 
@@ -695,8 +772,13 @@
               <i class="fas fa-quote-left"></i>
               <p>"Every student at NAIS is known, valued, and challenged. We create an environment where every child feels a strong sense of belonging while being inspired to achieve their full potential."</p>
             </blockquote>
-            <p class="leader-card-bio">Justin McCauley brings over 25 years of international and U.S. educational leadership to NAIS Dubai, where he has served as Principal since 2019. Born and raised in Portland, Oregon, he holds a Bachelor of Arts from Portland State University, a post-baccalaureate teaching licence from Warner Pacific College, and a Master of Education from Lewis and Clark College, with further administrative studies at Concordia University.</p>
-            <p class="leader-card-bio" style="margin-top:10px;">Justin began his career teaching Language Arts, Leadership, and Film Studies at Centennial High School in Oregon for 10 years, before moving into school administration as Dean of Students, then Vice Principal and Principal in the United States. He subsequently joined the Abu Dhabi Department of Education and Knowledge as an Academic Vice Principal, serving four years before taking the helm at NAIS Dubai. He is passionate about data-informed decision-making, high-quality teaching, and strong family partnerships as the foundation for student growth.</p>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-2">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-2" aria-hidden="true">
+              <p class="leader-card-bio">Justin McCauley brings over 25 years of international and U.S. educational leadership to NAIS Dubai, where he has served as Principal since 2019. Born and raised in Portland, Oregon, he holds a Bachelor of Arts from Portland State University, a post-baccalaureate teaching licence from Warner Pacific College, and a Master of Education from Lewis and Clark College, with further administrative studies at Concordia University.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Justin began his career teaching Language Arts, Leadership, and Film Studies at Centennial High School in Oregon for 10 years, before moving into school administration as Dean of Students, then Vice Principal and Principal in the United States. He subsequently joined the Abu Dhabi Department of Education and Knowledge as an Academic Vice Principal, serving four years before taking the helm at NAIS Dubai. He is passionate about data-informed decision-making, high-quality teaching, and strong family partnerships as the foundation for student growth.</p>
+            </div>
           </div>
         </div>
 
@@ -713,8 +795,13 @@
               <i class="fas fa-quote-left"></i>
               <p>"Education has the power to transform society. I champion teaching that blends foundational knowledge with critical thinking — inspiring students to become the next generation of global innovators."</p>
             </blockquote>
-            <p class="leader-card-bio">Crystal C. Goodwin brings 22 years of dedicated service to education, combining deep subject-matter expertise with exceptional leadership skills. She holds a B.S. in Chemistry from Columbia College, a teaching certification from the University of North Carolina at Charlotte, and a Master of Education in Educational Leadership from Cambridge College.</p>
-            <p class="leader-card-bio" style="margin-top:10px;">Crystal began her career teaching Chemistry and Physics and developing innovative high school science curricula in the United States. After moving to the UAE — where she has lived for 11 years — she served as Curriculum Coordinator at an American high school in Dubai before joining NAIS as Vice Principal for Secondary and High School. She is a recognised expert in building professional learning communities and designing impactful professional development for teachers.</p>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-3">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-3" aria-hidden="true">
+              <p class="leader-card-bio">Crystal C. Goodwin brings 22 years of dedicated service to education, combining deep subject-matter expertise with exceptional leadership skills. She holds a B.S. in Chemistry from Columbia College, a teaching certification from the University of North Carolina at Charlotte, and a Master of Education in Educational Leadership from Cambridge College.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Crystal began her career teaching Chemistry and Physics and developing innovative high school science curricula in the United States. After moving to the UAE — where she has lived for 11 years — she served as Curriculum Coordinator at an American high school in Dubai before joining NAIS as Vice Principal for Secondary and High School. She is a recognised expert in building professional learning communities and designing impactful professional development for teachers.</p>
+            </div>
           </div>
         </div>
 
@@ -731,8 +818,13 @@
               <i class="fas fa-quote-left"></i>
               <p>"I combine evidence-based practices with a collaborative leadership philosophy — empowering educators and students alike to reach their highest potential."</p>
             </blockquote>
-            <p class="leader-card-bio">Jonathan D'Avignon brings over two decades of distinguished international educational leadership experience to NAIS Dubai. His career spans roles as Principal, Assistant Principal, Magnet Programs Coordinator, and Instructional Coach. He holds an Education Specialist degree in Educational Leadership from the University of West Florida and is currently pursuing his Doctorate in Curriculum and Instruction.</p>
-            <p class="leader-card-bio" style="margin-top:10px;">Jonathan's international experience includes serving as Principal and IB Program Administrator at The Dewey Schools in Hà Nội, Vietnam. In the United States, he was instrumental in founding multiple innovative programmes in Florida — including STEAM Magnet programmes, Walton In"10"sity School of Education, and Seacoast Collegiate High School. He is also an educational consultant, keynote speaker, and lead facilitator for professional development programmes across the region.</p>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-4">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-4" aria-hidden="true">
+              <p class="leader-card-bio">Jonathan D'Avignon brings over two decades of distinguished international educational leadership experience to NAIS Dubai. His career spans roles as Principal, Assistant Principal, Magnet Programs Coordinator, and Instructional Coach. He holds an Education Specialist degree in Educational Leadership from the University of West Florida and is currently pursuing his Doctorate in Curriculum and Instruction.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Jonathan's international experience includes serving as Principal and IB Program Administrator at The Dewey Schools in Hà Nội, Vietnam. In the United States, he was instrumental in founding multiple innovative programmes in Florida — including STEAM Magnet programmes, Walton In"10"sity School of Education, and Seacoast Collegiate High School. He is also an educational consultant, keynote speaker, and lead facilitator for professional development programmes across the region.</p>
+            </div>
           </div>
         </div>
 
@@ -749,8 +841,13 @@
               <i class="fas fa-quote-left"></i>
               <p>"Strong relationships are at the heart of a successful school. I work to build a culture where students feel confident to take risks, grow academically, and develop as individuals."</p>
             </blockquote>
-            <p class="leader-card-bio">Jennifer Rose McCauley is Vice Principal at NAIS Dubai, providing leadership in teaching and learning, student wellbeing, and schoolwide systems across the elementary division. With more than twenty years of experience in education — both in the United States and internationally — she brings a student-centred leadership approach grounded in strong relationships, instructional excellence, and an inclusive school culture.</p>
-            <p class="leader-card-bio" style="margin-top:10px;">Jennifer has a deep passion for literacy, mathematics, and science, and is committed to helping students build strong foundational skills while nurturing curiosity, problem-solving, and a love of discovery. She is especially passionate about responsible digital citizenship and supporting educators with the systems and professional resources they need to succeed in the classroom.</p>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-5">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-5" aria-hidden="true">
+              <p class="leader-card-bio">Jennifer Rose McCauley is Vice Principal at NAIS Dubai, providing leadership in teaching and learning, student wellbeing, and schoolwide systems across the elementary division. With more than twenty years of experience in education — both in the United States and internationally — she brings a student-centred leadership approach grounded in strong relationships, instructional excellence, and an inclusive school culture.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Jennifer has a deep passion for literacy, mathematics, and science, and is committed to helping students build strong foundational skills while nurturing curiosity, problem-solving, and a love of discovery. She is especially passionate about responsible digital citizenship and supporting educators with the systems and professional resources they need to succeed in the classroom.</p>
+            </div>
           </div>
         </div>
 
@@ -767,8 +864,13 @@
               <i class="fas fa-quote-left"></i>
               <p>"Strong foundations in academics and social-emotional development are the key to long-term success. Every child deserves an environment where they feel supported to thrive."</p>
             </blockquote>
-            <p class="leader-card-bio">Natasha Sorak is the Head of Department for Kindergarten through Grade 2 at NAIS Dubai. With a background in Psychology and ongoing Master's studies in both Early Childhood Education and Educational Leadership, she brings a strong balance of academic knowledge and practical leadership to her role.</p>
-            <p class="leader-card-bio" style="margin-top:10px;">Natasha is passionate about early childhood education and works closely with her team to create engaging, supportive classroom environments — with a particular focus on English Language Learners. Her areas of expertise include curriculum design, data-informed teaching, and building strong relationships within the school community.</p>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-6">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-6" aria-hidden="true">
+              <p class="leader-card-bio">Natasha Sorak is the Head of Department for Kindergarten through Grade 2 at NAIS Dubai. With a background in Psychology and ongoing Master's studies in both Early Childhood Education and Educational Leadership, she brings a strong balance of academic knowledge and practical leadership to her role.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Natasha is passionate about early childhood education and works closely with her team to create engaging, supportive classroom environments — with a particular focus on English Language Learners. Her areas of expertise include curriculum design, data-informed teaching, and building strong relationships within the school community.</p>
+            </div>
           </div>
         </div>
 
@@ -785,8 +887,13 @@
               <i class="fas fa-quote-left"></i>
               <p>"Inclusive schools are stronger schools. Every student of determination deserves the support, belief, and opportunity to reach their fullest potential."</p>
             </blockquote>
-            <p class="leader-card-bio">Noha Shaaban brings nearly 30 years of experience in education to NAIS Dubai, having begun her teaching career in 1997. She has dedicated much of her career to inclusive education — taking on leadership of Elementary Stage inclusion programmes since 2004 — and has spent the past 8 years leading inclusive programmes at American curriculum schools across Dubai and Sharjah in the UAE.</p>
-            <p class="leader-card-bio" style="margin-top:10px;">Noha holds a Master's degree in Special and Inclusive Education from University College London (UCL) and is currently pursuing her doctorate. She is also a certified school inspector, evaluating schools across the MENA region for accreditation purposes. Her work reflects a deep and unwavering commitment to supporting students of determination and building school communities where every learner belongs.</p>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-7">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-7" aria-hidden="true">
+              <p class="leader-card-bio">Noha Shaaban brings nearly 30 years of experience in education to NAIS Dubai, having begun her teaching career in 1997. She has dedicated much of her career to inclusive education — taking on leadership of Elementary Stage inclusion programmes since 2004 — and has spent the past 8 years leading inclusive programmes at American curriculum schools across Dubai and Sharjah in the UAE.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Noha holds a Master's degree in Special and Inclusive Education from University College London (UCL) and is currently pursuing her doctorate. She is also a certified school inspector, evaluating schools across the MENA region for accreditation purposes. Her work reflects a deep and unwavering commitment to supporting students of determination and building school communities where every learner belongs.</p>
+            </div>
           </div>
         </div>
 
@@ -803,8 +910,13 @@
               <i class="fas fa-quote-left"></i>
               <p>"Empowering students to take initiative and lead within their school community helps them develop confidence, resilience, and a strong sense of responsibility."</p>
             </blockquote>
-            <p class="leader-card-bio">Maha Gala El-Tantawy holds a BA in Computer Science from Cairo University and a PMP certification in Project Management, along with post-graduate studies in Engineering Project Management from the American University in Cairo. She brings over 24 years of professional experience, including 15 years working in schools across the United Arab Emirates, where she has developed extensive expertise in student affairs, wellbeing, and school leadership.</p>
-            <p class="leader-card-bio" style="margin-top:10px;">In her role, Maha oversees student wellbeing, attendance systems, and behavioural support, working closely with teachers, parents, and school leadership to foster a positive, respectful, and safe learning environment. A key part of her work involves implementing and ensuring compliance with student conduct policies aligned with KHDA and UAE Ministry of Education standards. She is deeply committed to student safety and safeguarding, while mentoring students and nurturing leadership skills through guidance, responsibility, and positive role modelling.</p>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-8">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-8" aria-hidden="true">
+              <p class="leader-card-bio">Maha Gala El-Tantawy holds a BA in Computer Science from Cairo University and a PMP certification in Project Management, along with post-graduate studies in Engineering Project Management from the American University in Cairo. She brings over 24 years of professional experience, including 15 years working in schools across the United Arab Emirates, where she has developed extensive expertise in student affairs, wellbeing, and school leadership.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">In her role, Maha oversees student wellbeing, attendance systems, and behavioural support, working closely with teachers, parents, and school leadership to foster a positive, respectful, and safe learning environment. A key part of her work involves implementing and ensuring compliance with student conduct policies aligned with KHDA and UAE Ministry of Education standards. She is deeply committed to student safety and safeguarding, while mentoring students and nurturing leadership skills through guidance, responsibility, and positive role modelling.</p>
+            </div>
           </div>
         </div>
 
@@ -1338,6 +1450,40 @@
   <script src="js/main.js"></script>
 
   <script>
+  /* ── BIO EXPAND / COLLAPSE TOGGLE ── */
+  (function () {
+    'use strict';
+    var toggles = document.querySelectorAll('.leader-bio-toggle');
+    toggles.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var targetId = btn.getAttribute('aria-controls');
+        var wrap     = document.getElementById(targetId);
+        var icon     = btn.querySelector('.lbt-icon');
+        var label    = btn.querySelector('.lbt-label');
+        var isOpen   = btn.classList.contains('open');
+
+        if (isOpen) {
+          /* Collapse */
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          wrap.classList.remove('open');
+          wrap.setAttribute('aria-hidden', 'true');
+          icon.textContent = '+';
+          label.textContent = 'Read Bio';
+        } else {
+          /* Expand */
+          btn.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          wrap.classList.add('open');
+          wrap.setAttribute('aria-hidden', 'false');
+          icon.textContent = '−';
+          label.textContent = 'Hide Bio';
+        }
+      });
+    });
+  }());
+
   /* ── LEADER PHOTO LIGHTBOX ── */
   (function () {
     'use strict';

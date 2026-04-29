@@ -65,6 +65,7 @@ Full multi-page static website for NAIS Dubai featuring an animated intro, hero 
 - ✅ **Chart.js results page** — MAP, PSAT (bar), AP (bar), IELTS (radar), 3-year trend charts
 - ✅ **Leader photo lightbox zoom** — zoom-in/out toolbar (+/−/Reset), scroll-wheel zoom, click-to-zoom toggle, zoom range 100%–300% in 7 steps, cursor feedback, resets on leader change
 - ✅ **Leader lightbox keyboard shortcuts** — `+` zoom in, `-` zoom out, `0` reset, `←/→` navigate, `Esc` close; on-screen hint strip fades after 3 s
+- ✅ **Leader bio expand/collapse toggle** — `+` / `−` pill button below each quote; smooth max-height + opacity animation; icon rotates 45° when open; label toggles "Read Bio" ↔ "Hide Bio"; fully accessible (`aria-expanded`, `aria-hidden`, `aria-controls`); all 9 leader cards wired
 - ✅ **Phase 4 Results nav item** — added to all 8 production page nav menus with full sub-menu (MAP Growth, 3-Year MAP Attainment ★, MAP Progress ★, PSAT, AP, SAT, IELTS)
 
 ### Design & UX
@@ -284,4 +285,4 @@ temp/
 
 ---
 
-*Last updated: April 2026 — All 13 pages QA-verified (zero console errors). All social media links, footer legal links, and placeholder `href="#"` resolved across all production pages.*
+*Last updated: April 2026 — All 13 pages QA-verified (zero console errors). Leader bio +/− toggle added (9 cards), leader lightbox zoom system, Phase 4 Results nav on all 8 pages. All social media links, footer legal links, and placeholder `href="#"` resolved across all production pages.*

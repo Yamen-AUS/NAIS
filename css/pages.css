@@ -744,18 +744,18 @@
 
 .dsib-badge--vgood {
   background: #fff;
-  border: 2px solid #E11B22;
+  border: 2px solid #16a34a;
 }
 .dsib-badge--vgood .dsib-badge-icon {
   width: 36px; height: 36px;
-  background: #E11B22;
+  background: #16a34a;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   color: #fff;
   font-size: 0.85rem;
   flex-shrink: 0;
 }
-.dsib-badge--vgood strong { color: #E11B22; display: block; font-size: 0.85rem; }
+.dsib-badge--vgood strong { color: #16a34a; display: block; font-size: 0.85rem; }
 .dsib-badge--vgood span   { color: var(--gray-500); font-size: 0.75rem; }
 
 /* ── Two-column grid ── */
@@ -805,7 +805,7 @@
 }
 .dsib-list-item:hover { transform: translateX(4px); }
 .dsib-list-item.dsib-good  { border-left-color: #1F2F6E; }
-.dsib-list-item.dsib-vgood { border-left-color: #E11B22; }
+.dsib-list-item.dsib-vgood { border-left-color: #16a34a; }
 .dsib-list-item p { margin: 0; font-size: 0.88rem; color: var(--gray-700); line-height: 1.5; padding-top: 2px; }
 
 .dsib-pill {
@@ -821,7 +821,7 @@
   white-space: nowrap;
 }
 .dsib-pill--good  { background: #eef1fa; color: #1F2F6E; }
-.dsib-pill--vgood { background: #fdecea; color: #E11B22; }
+.dsib-pill--vgood { background: #dcfce7; color: #16a34a; }
 
 /* ── Inspector Quotes ── */
 .dsib-quotes-grid {
