@@ -236,12 +236,26 @@ temp/
 |------|---------|------|
 | `style.css` | Core design system, CSS variables, all section layouts | ~128 KB |
 | `nav.css` | Navigation overlay, topbar, rail, mobile nav | ~17 KB |
-| `pages.css` | Inner-page headers, section-specific overrides | ~34 KB |
-| `mobile.css` | Breakpoint overrides (≤1199px, ≤768px, ≤480px) | ~21 KB |
+| `pages.css` | Inner-page headers, leadership card responsive rules (v6) | ~35 KB |
+| `mobile.css` | Full mobile-first breakpoint overrides — v5 rewrite (v6 tag) | ~60 KB |
 | `premium.css` | Decorative/premium elements | ~49 KB |
-| `enhancements.css` | UX/UI enhancement pack v6 (60 sections) | ~55 KB |
+| `enhancements.css` | UX/UI enhancement pack (64 sections, v2 tag) | ~64 KB |
 
 **Loading order:** `style.css` → `pages.css` (inner pages only) → `nav.css` → `mobile.css` → `enhancements.css`
+
+### Mobile Responsive Breakpoints
+
+| Breakpoint | Trigger | Key changes |
+|-----------|---------|-------------|
+| `≤ 1199px` | Tablet / mobile entry | Nav rail → fixed top bar (58 px), remove desktop rail padding, hide topbar |
+| `≤ 1024px` | Tablet landscape | Leadership equal grid → 2 col, photo 280 px; leader-card--featured 2-col |
+| `≤ 900px` | Tablet portrait | Recruit grid → 1 col; admissions process → 2 col; DSIB grid → 1 col |
+| `≤ 768px` | Large phone | Leadership grid → 1 col; hero full-svh; page-hero 360 px; mission image 260 px |
+| `≤ 640px` | Phone landscape | — (handled by 600 px block) |
+| `≤ 600px` | Phone landscape | **Leadership equal grid → single column, max-width 400 px centered, photo 240 px** |
+| `≤ 480px` | Phone portrait | Hero stats hidden; hero font reduced; video promo adjustments |
+| `≤ 375px` | Small phone | **Leader photo → 220 px**; section-pad 44 px; small font tweaks |
+| `≤ 320px` | Tiny phone | Minimal padding, container edge-to-edge |
 
 ---
 
@@ -286,3 +300,15 @@ temp/
 ---
 
 *Last updated: April 2026 — All 13 pages QA-verified (zero console errors). Leader bio +/− toggle added (9 cards), leader lightbox zoom system, Phase 4 Results nav on all 8 pages. All social media links, footer legal links, and placeholder `href="#"` resolved across all production pages.*
+
+*Mobile pass (April 30 2026) — Full mobile rewrite completed across **mobile.css v6**, **pages.css v6**, **enhancements.css v2**:*
+- *Leader-card photo heights: ≤600 px → 240 px | ≤375 px → 220 px (pages.css + mobile.css + enhancements.css, all three layers)*
+- *`.leadership-grid-equal` single-column at ≤600 px, max-width 400 px, auto margins*
+- *`#0a1030` dark navy background on all `.leader-card-photo` containers (no white flash)*
+- *`object-fit: cover; object-position: center top` enforced at every breakpoint to prevent face cropping*
+- *Hover scale 1.05 / 0.5 s transition preserved on mobile*
+- *`gallery.html` nav overhauled: `.nav-hamburger` replaced with standard `.nav-rail` + `.nav-rail-inner` + `#nav-mobile-toggle` + `.nav-rail-lines` (matches every other page)*
+- *`enhancements.css` sections 61–64 added: leader-card photo mobile guards, `.nav-hamburger` fallback styling, padding conflict resolution, section-pad reduction*
+- *`body padding-bottom` unified to 68 px at ≤1199 px across all sheets*
+- *CSS version cache-busting: `mobile.css?v=6`, `enhancements.css?v=2` on all 13 pages*
+- *Zero console errors verified on index.html, about.html, gallery.html*

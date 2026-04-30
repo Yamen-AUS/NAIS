@@ -1019,7 +1019,7 @@ a { transition: color 0.25s ease, opacity 0.25s ease; }
   box-shadow: var(--shadow-xl);
 }
 .leader-card-photo {
-  height: 280px;
+  height: 260px;
   overflow: hidden;
 }
 .leader-card-photo img {
@@ -1884,5 +1884,142 @@ body {
   .whatsapp-float { bottom: 80px; }
   .back-to-top    { bottom: 80px; }
   .apply-float    { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   61. LEADER CARD PHOTO — mobile overrides
+   Keep #0a1030 fallback background (dark navy) so before the
+   photo loads the card doesn't flash white.
+   Preserve hover scale (1.05, 0.5s) at all breakpoints.
+═══════════════════════════════════════════════════════════ */
+.leader-card-photo,
+.leader-card-equal .leader-card-photo {
+  background: #0a1030;   /* dark fallback, matches brand dark bg */
+}
+
+.leader-card-photo img,
+.leader-card-equal .leader-card-photo img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Preserve hover scale on all screen sizes */
+.leader-card-equal:hover .leader-card-photo img,
+.leader-card:hover .leader-card-photo img,
+.leader-card:hover .leader-photo img {
+  transform: scale(1.05);
+  transition: transform 0.5s ease;
+}
+
+/* ≤ 1024px — 2-column grid already handled by pages.css;
+   just reinforce object-position so faces don't crop */
+@media (max-width: 1024px) {
+  .leader-card-photo img,
+  .leader-photo img {
+    object-position: center top !important;
+  }
+}
+
+/* ≤ 768px — reduce hover scale slightly to avoid jarring shift */
+@media (max-width: 768px) {
+  .leader-card-equal:hover .leader-card-photo img,
+  .leader-card:hover .leader-card-photo img {
+    transform: scale(1.04) !important;
+  }
+}
+
+/* ≤ 600px — single-column, photo height 240px (also set in pages.css
+   and mobile.css; here we add the background colour guard) */
+@media (max-width: 600px) {
+  .leader-card-photo,
+  .leader-card-equal .leader-card-photo,
+  .leadership-grid-equal .leader-card-photo {
+    background: #0a1030 !important;
+    height: 240px !important;
+  }
+}
+
+/* ≤ 375px — 220px height */
+@media (max-width: 375px) {
+  .leader-card-photo,
+  .leader-card-equal .leader-card-photo,
+  .leadership-grid-equal .leader-card-photo {
+    height: 220px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   62. NAV HAMBURGER — gallery.html uses .nav-hamburger class
+   Add full styling so it matches the standard rail toggle
+═══════════════════════════════════════════════════════════ */
+.nav-hamburger {
+  display: none;         /* hidden on desktop */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease, background 0.25s ease;
+  flex-shrink: 0;
+}
+.nav-hamburger:hover,
+.nav-hamburger:focus {
+  background: rgba(255,255,255,0.08);
+  outline: none;
+}
+.nav-hamburger:hover span { background: #fff; }
+
+/* Show hamburger and hide topbar on mobile */
+@media (max-width: 1199px) {
+  .nav-hamburger {
+    display: flex !important;
+  }
+  /* Animated open state */
+  html.nav-open .nav-hamburger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  html.nav-open .nav-hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  html.nav-open .nav-hamburger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   63. PADDING CONFLICT RESOLUTION
+   mobile.css sets body padding-bottom:68px; enhancements.css
+   also sets 64px at ≤1199px.  Unify to 68px so sticky CTA
+   (64px tall) plus breathing room is consistent.
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 1199px) {
+  body { padding-bottom: 68px !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   64. SECTION PADDING REDUCTION ON SMALL PHONES
+   Prevents excessive vertical whitespace on ≤480px devices.
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  :root { --section-pad: 52px; }
+}
+@media (max-width: 375px) {
+  :root { --section-pad: 44px; }
 }
 

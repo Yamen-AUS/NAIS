@@ -230,7 +230,7 @@
 /* Photo area — fixed equal height for all */
 .leader-card-photo {
   position: relative;
-  height: 300px;
+  height: 260px;
   overflow: hidden;
   flex-shrink: 0;
   background: #0a1030;
@@ -240,19 +240,25 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 15%;
+  object-position: center top;
   display: block;
   transition: transform 0.5s ease;
-  transform-origin: center 20%;
+  transform-origin: center top;
 }
 
-/* Per-person photo positioning in about.html: CEO, Director, Principal */
-.leader-card-equal:nth-child(1) .leader-card-photo img { object-fit: contain; object-position: center center; background: #0a0a0a; }
-.leader-card-equal:nth-child(2) .leader-card-photo img { object-position: center 10%; }
-.leader-card-equal:nth-child(3) .leader-card-photo img { object-position: center 20%; }
+/* Per-person photo positioning — show full face from top */
+.leader-card-equal:nth-child(1) .leader-card-photo img { object-fit: cover; object-position: center top; }
+.leader-card-equal:nth-child(2) .leader-card-photo img { object-position: center top; }
+.leader-card-equal:nth-child(3) .leader-card-photo img { object-position: center top; }
+.leader-card-equal:nth-child(4) .leader-card-photo img { object-position: center top; }
+.leader-card-equal:nth-child(5) .leader-card-photo img { object-position: center top; }
+.leader-card-equal:nth-child(6) .leader-card-photo img { object-position: center top; }
+.leader-card-equal:nth-child(7) .leader-card-photo img { object-position: center top; }
+.leader-card-equal:nth-child(8) .leader-card-photo img { object-position: center top; }
+.leader-card-equal:nth-child(9) .leader-card-photo img { object-position: center top; }
 
 .leader-card-equal:hover .leader-card-photo img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 /* Role tag overlay on photo */
@@ -332,14 +338,51 @@
   margin: 0;
 }
 
-/* Responsive */
+/* Responsive — leadership equal grid */
 @media (max-width: 1024px) {
-  .leadership-grid-equal { grid-template-columns: repeat(2, 1fr); }
+  .leadership-grid-equal {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
 }
-@media (max-width: 640px) {
-  .leadership-grid-equal { grid-template-columns: 1fr; gap: 22px; }
-  .leader-card-photo { height: 260px; }
+
+/* ≤ 600 px  → single column, centred, max 400 px wide, photo 240 px */
+@media (max-width: 600px) {
+  .leadership-grid-equal {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .leader-card-equal .leader-card-photo {
+    height: 240px;
+    background: #0a1030;
+  }
+  .leader-card-equal .leader-card-photo img {
+    object-fit: cover;
+    object-position: center top;
+    width: 100%;
+    height: 100%;
+  }
   .leader-card-body { padding: 22px 22px 26px; }
+  .leader-card-body h3 { font-size: 1.1rem; }
+}
+
+/* ≤ 375 px  → slightly shorter photo (220 px) to save vertical space */
+@media (max-width: 375px) {
+  .leader-card-equal .leader-card-photo { height: 220px; }
+  .leadership-grid-equal {
+    max-width: 100%;   /* full bleed on truly tiny screens */
+  }
+}
+
+/* Standard .leader-card (homepage / about .leadership-grid) */
+@media (max-width: 600px) {
+  .leader-photo { height: 240px; }
+}
+@media (max-width: 375px) {
+  .leader-photo { height: 220px; }
 }
 
 /* ─── ACADEMICS PAGE ─── */

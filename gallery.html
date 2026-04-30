@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="css/style.css?v=6" />
   <link rel="stylesheet" href="css/pages.css?v=6" />
   <link rel="stylesheet" href="css/nav.css?v=6" />
-  <link rel="stylesheet" href="css/mobile.css?v=3" />
-  <link rel="stylesheet" href="css/enhancements.css?v=1" />
+  <link rel="stylesheet" href="css/mobile.css?v=6" />
+  <link rel="stylesheet" href="css/enhancements.css?v=2" />
   <style>
     @media(min-width:1200px){
       .topbar{overflow:visible!important;height:62px!important;display:flex!important;align-items:center!important;}
@@ -178,16 +178,30 @@
         </div>
         <a href="admissions.html#apply" class="topbar-cta">Apply Now</a>
       </div>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </div>
 
-  <!-- NAV OVERLAY (minimal for gallery page) -->
-  <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
-    <div class="nav-right-panel">
-      <button class="nav-close" id="nav-close" aria-label="Close Menu"><span></span><span></span></button>
+  <!-- RIGHT-SIDE NAV RAIL (mobile: horizontal top bar) -->
+  <div class="nav-rail" id="nav-rail" role="button" aria-label="Open Navigation Menu" aria-expanded="false">
+    <div class="nav-rail-inner" id="nav-rail-trigger">
+      <a href="index.html" class="logo-wrap" aria-label="NAIS Home">
+        <img src="images/nais-logo.png" alt="NAIS" style="height:42px;max-height:42px;max-width:190px;width:auto;object-fit:contain;background:#fff;padding:5px 10px;border-radius:5px;" />
+      </a>
+      <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
+        <div class="nav-rail-lines"><span></span><span></span><span></span></div>
+        <span class="nav-rail-label">MENU</span>
+      </button>
+    </div>
+    <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
+    <span id="nav-desktop-label">MENU</span>
+  </div>
+
+  <!-- FULL-SCREEN NAV OVERLAY -->
+  <div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Main Navigation" aria-hidden="true" style="background-color:#0b1230;">
+    <div class="nav-right-panel" style="background-color:#0d1535;">
+      <div class="nav-close" id="nav-close" aria-label="Close Navigation">
+        <button class="nav-close-inner" aria-label="Close Menu">&#x2715;</button>
+      </div>
       <div class="nav-panel">
         <div class="nav-panel-logo">
           <img src="images/nais-logo.png" alt="NAIS Dubai" class="nav-logo-img" />
