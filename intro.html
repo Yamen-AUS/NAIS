@@ -140,6 +140,7 @@
   /* Animated values 0→1 */
   var word0Y    = 0;
   var word1Y    = 0;
+  var word2Y    = 0;
   var tagA      = 0;
   var accentPct = 0;
   var enterA    = 0;
@@ -180,11 +181,35 @@
     ctx.restore();
   }
 
-  /* ── Font size ── */
-  function getFontSize(){ return Math.min(Math.max(W * 0.125, 60*DPR), 190*DPR); }
-
   /* ── Easing ── */
   function easeOut3(t){ return 1 - Math.pow(1-t, 3); }
+
+  /* ── Measure the right font size so the WIDEST word (Succeed.)
+        never exceeds MAX_WORD_RATIO of the canvas width ── */
+  var WORDS          = ["Belong.", "Grow.", "Succeed."];
+  var MAX_WORD_RATIO = 0.72;   /* widest word ≤ 72 % of screen width */
+  var FONT_BASE      = "900 {SIZE}px 'Montserrat', Arial Black, sans-serif";
+
+  function getFontSize(){
+    /* Binary-search: find largest px where widest word still fits */
+    var lo = 24 * DPR, hi = 260 * DPR, mid;
+    for(var i = 0; i < 16; i++){
+      mid = (lo + hi) / 2;
+      ctx.font = FONT_BASE.replace("{SIZE}", mid);
+      var maxW = 0;
+      for(var w = 0; w < WORDS.length; w++){
+        var mw = ctx.measureText(WORDS[w]).width;
+        if(mw > maxW) maxW = mw;
+      }
+      if(maxW > W * MAX_WORD_RATIO) hi = mid;
+      else                          lo = mid;
+    }
+    /* Also cap by height — 3 lines must fit in 55% of screen height */
+    var lineH    = lo * 1.22;
+    var totalH   = lineH * WORDS.length;
+    var maxByH   = (H * 0.55 / WORDS.length) / 1.22;
+    return Math.max(Math.min(lo, maxByH), 28 * DPR);
+  }
 
   /* ── Draw frame ── */
   function frame(ts){
@@ -199,103 +224,109 @@
       if(blendPct >= 1){ blendPct=1; blending=false; curImg=nextImg; }
     }
 
-    /* Update animation values */
-    if(elapsed > 0.3)  word0Y    = Math.min(word0Y    + dt * 3.5, 1);
-    if(elapsed > 0.58) word1Y    = Math.min(word1Y    + dt * 3.5, 1);
-    if(elapsed > 1.15) tagA      = Math.min(tagA      + dt * 2.2, 1);
-    if(elapsed > 1.35) accentPct = Math.min(accentPct + dt * 2.0, 1);
-    if(elapsed > 2.2)  enterA    = Math.min(enterA    + dt * 2.0, 1);
+    /* Staggered word entrance — one word every 0.28 s */
+    if(elapsed > 0.30) word0Y    = Math.min(word0Y    + dt * 4.2, 1);
+    if(elapsed > 0.58) word1Y    = Math.min(word1Y    + dt * 4.2, 1);
+    if(elapsed > 0.86) word2Y    = Math.min(word2Y    + dt * 4.2, 1);
+    if(elapsed > 1.14) tagA      = Math.min(tagA      + dt * 3.0, 1);
+    if(elapsed > 1.36) accentPct = Math.min(accentPct + dt * 2.5, 1);
+    if(elapsed > 2.10) enterA    = Math.min(enterA    + dt * 2.0, 1);
 
     /* ── Clear ── */
     ctx.clearRect(0,0,W,H);
     ctx.fillStyle = "#0A0E1F";
     ctx.fillRect(0,0,W,H);
 
-    /* ── 1. Background images ── */
+    /* ── 1. Background photo ── */
     drawImg(imgs[curImg], blending ? 1 - blendPct : 1);
     if(blending) drawImg(imgs[nextImg], blendPct);
 
-    /* ── 2. Dark gradient overlay ── */
+    /* ── 2. Cinematic dark overlay ── */
     var grad = ctx.createLinearGradient(0, 0, 0, H);
-    grad.addColorStop(0,   "rgba(0,0,0,0.42)");
-    grad.addColorStop(0.45,"rgba(0,0,0,0.20)");
-    grad.addColorStop(1,   "rgba(0,0,0,0.60)");
+    grad.addColorStop(0,    "rgba(0,0,0,0.50)");
+    grad.addColorStop(0.42, "rgba(0,0,0,0.22)");
+    grad.addColorStop(1,    "rgba(0,0,0,0.68)");
     ctx.fillStyle = grad;
     ctx.fillRect(0,0,W,H);
 
-    /* ── 3. Big Words ── */
-    var fz   = getFontSize();
-    var baseY = H * 0.5 + fz * 0.32;
+    /* ── 3. Three stacked words — each on its own line, centred ── */
+    var fz      = getFontSize();
+    var lineH   = fz * 1.22;                       /* line-height             */
+    var totalH  = lineH * WORDS.length - (lineH - fz); /* total block height  */
+    /* Vertically centre the whole block, nudged 10% above centre */
+    var blockTop = H * 0.5 - totalH * 0.5 - H * 0.04;
 
-    ctx.font         = "900 " + fz + "px 'Montserrat', Arial Black, sans-serif";
-    ctx.textBaseline = "alphabetic";
-    ctx.textAlign    = "left";
+    ctx.font         = FONT_BASE.replace("{SIZE}", fz);
+    ctx.textBaseline = "top";
+    ctx.textAlign    = "center";
 
-    var weW    = ctx.measureText("WE").width;
-    var beW    = ctx.measureText("BELIEVE").width;
-    var gap    = fz * 0.19;
-    var totalW = weW + gap + beW;
-    var sx     = (W - totalW) / 2;
+    /* Per-word alpha — each word has its own independent animation */
+    var wordAlphas = [word0Y, word1Y, word2Y];
 
-    /* WE */
-    var off0 = (1 - easeOut3(word0Y)) * fz * 1.4;
-    ctx.save();
-    ctx.globalAlpha  = word0Y;
-    ctx.shadowColor  = "rgba(0,0,0,0.55)";
-    ctx.shadowBlur   = 22 * DPR;
-    ctx.fillStyle    = "#fff";
-    ctx.fillText("WE", sx, baseY + off0);
-    ctx.restore();
+    for(var wi = 0; wi < WORDS.length; wi++){
+      var alpha = Math.max(0, Math.min(1, wordAlphas[wi] - wi * 0.05));
+      if(alpha < 0.01) continue;
 
-    /* BELIEVE */
-    var off1 = (1 - easeOut3(word1Y)) * fz * 1.4;
-    ctx.save();
-    ctx.globalAlpha  = word1Y;
-    ctx.shadowColor  = "rgba(0,0,0,0.55)";
-    ctx.shadowBlur   = 22 * DPR;
-    ctx.fillStyle    = "#fff";
-    ctx.fillText("BELIEVE", sx + weW + gap, baseY + off1);
-    ctx.restore();
+      /* Slide up from below as it fades in */
+      var slideOff = (1 - easeOut3(wordAlphas[wi])) * fz * 1.1;
+      var yPos     = blockTop + wi * lineH + slideOff;
 
-    /* ── 4. Tagline ── */
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.shadowColor = "rgba(0,0,0,0.65)";
+      ctx.shadowBlur  = 32 * DPR;
+      ctx.fillStyle   = "#ffffff";
+      ctx.fillText(WORDS[wi], W / 2, yPos);
+      ctx.restore();
+    }
+
+    /* ── 4. School tagline ── */
+    var tagY  = blockTop + totalH + fz * 0.55;
+    var tagFz = Math.max(Math.round(fz * 0.10), 11 * DPR);
+    /* Make sure tagline fits — shrink if needed */
+    ctx.font  = "700 " + tagFz + "px 'Montserrat', sans-serif";
+    var TAGLINE = "NORTH AMERICAN INTERNATIONAL SCHOOL  ·  DUBAI, UAE";
+    while(ctx.measureText(TAGLINE).width > W * 0.86 && tagFz > 8 * DPR){
+      tagFz -= DPR;
+      ctx.font = "700 " + tagFz + "px 'Montserrat', sans-serif";
+    }
+
     if(tagA > 0.01){
       ctx.save();
       ctx.globalAlpha  = tagA;
-      ctx.font         = "700 " + Math.round(fz * 0.080) + "px 'Montserrat', sans-serif";
       ctx.textAlign    = "center";
-      ctx.textBaseline = "alphabetic";
+      ctx.textBaseline = "top";
       ctx.fillStyle    = "rgba(255,255,255,0.78)";
-      ctx.fillText("NORTH AMERICAN INTERNATIONAL SCHOOL  ·  DUBAI, UAE", W/2, baseY + fz * 0.31);
+      ctx.fillText(TAGLINE, W/2, tagY);
       ctx.restore();
     }
 
     /* ── 5. Red accent line ── */
     if(accentPct > 0){
-      var maxLineW = 58 * DPR;
-      var lineW    = maxLineW * easeOut3(accentPct);
+      var lineLen = Math.round(56 * DPR * easeOut3(accentPct));
       ctx.save();
       ctx.globalAlpha = tagA;
       ctx.fillStyle   = RED;
-      ctx.fillRect(W/2 - lineW/2, baseY + fz * 0.48, lineW, 3 * DPR);
+      ctx.fillRect(W/2 - lineLen/2, tagY + tagFz + Math.round(6 * DPR), lineLen, Math.round(3 * DPR));
       ctx.restore();
     }
 
     /* ── 6. "Enter Site" button ── */
     if(enterA > 0.01){
-      var bx = W/2;
-      var by = H - 76 * DPR;
-      var bw = 218 * DPR;
-      var bh = 46  * DPR;
+      var btnFz = Math.max(Math.round(tagFz * 0.92), 9 * DPR);
+      ctx.font  = "700 " + btnFz + "px 'Montserrat', sans-serif";
+
+      var bw   = Math.round(Math.min(ctx.measureText("ENTER SITE  \u2192").width * 1.7, W * 0.46));
+      var bh   = Math.round(btnFz * 3.0);
+      var bx   = W / 2;
+      var by   = H - Math.round(64 * DPR);
 
       ctx.save();
       ctx.globalAlpha  = enterA;
-      ctx.strokeStyle  = "rgba(255,255,255,0.65)";
+      ctx.strokeStyle  = "rgba(255,255,255,0.68)";
       ctx.lineWidth    = 1.5 * DPR;
-      ctx.beginPath();
-      ctx.rect(bx - bw/2, by - bh/2, bw, bh);
-      ctx.stroke();
-      ctx.fillStyle    = "#fff";
-      ctx.font         = "700 " + Math.round(fz * 0.080) + "px 'Montserrat', sans-serif";
+      ctx.strokeRect(bx - bw/2, by - bh/2, bw, bh);
+      ctx.fillStyle    = "#ffffff";
       ctx.textAlign    = "center";
       ctx.textBaseline = "middle";
       ctx.fillText("ENTER SITE  \u2192", bx, by);
