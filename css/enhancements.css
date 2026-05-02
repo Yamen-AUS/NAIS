@@ -876,6 +876,10 @@ a { transition: color 0.25s ease, opacity 0.25s ease; }
   border-color: var(--red);
   box-shadow: 0 4px 24px rgba(225,27,34,0.12);
 }
+.usp-pillar-icon--featured {
+  background: linear-gradient(135deg, #E11B22, #c0141a) !important;
+  box-shadow: 0 4px 18px rgba(225,27,34,0.35);
+}
 .usp-pillar-icon {
   width: 56px; height: 56px;
   border-radius: 50%;
