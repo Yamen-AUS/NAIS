@@ -91,45 +91,33 @@
     }
     .lbt-label { transition: opacity 0.2s; }
 
-    /* ── LEADER PHOTO ZOOM CURSOR & OVERLAY HINT ── */
-    .leader-card-photo {
+    /* ── LEADER PORTRAIT ZOOM CURSOR & OVERLAY HINT ── */
+    /* Zoom cursor on the portrait frame itself */
+    .leader-card-photo .leader-portrait {
       cursor: zoom-in;
     }
-    .leader-card-photo::after {
+    /* Zoom icon overlaid on the portrait (not on .leader-card-photo
+       which now uses ::after for the wave separator) */
+    .leader-card-photo .leader-portrait::after {
       content: '\f00e'; /* fa-search-plus */
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       position: absolute;
-      top: 12px;
-      right: 14px;
-      width: 32px;
-      height: 32px;
-      background: rgba(0,0,0,0.52);
-      color: #fff;
-      border-radius: 50%;
-      font-size: 0.8rem;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: rgba(0,0,0,0.40);
+      color: #fff;
+      font-size: 1rem;
       opacity: 0;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      transform: scale(0.8);
-      backdrop-filter: blur(4px);
-      line-height: 32px;
-      text-align: center;
-      z-index: 3;
+      transition: opacity 0.25s ease;
+      z-index: 4;
       pointer-events: none;
+      border-radius: 16px;
     }
-    .leader-card-equal:hover .leader-card-photo::after {
+    .leader-card-equal:hover .leader-card-photo .leader-portrait::after {
       opacity: 1;
-      transform: scale(1);
-    }
-    .leader-card-photo img {
-      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s ease !important;
-    }
-    .leader-card-equal:hover .leader-card-photo img {
-      transform: scale(1.08) !important;
-      filter: brightness(1.06) saturate(1.1);
     }
 
     /* ── LEADER LIGHTBOX ── */
@@ -421,7 +409,7 @@
         <img src="images/nais-logo.png" alt="North American International School Dubai" class="topbar-logo-img" style="width:auto;height:56px;max-width:220px;max-height:56px;object-fit:contain;object-position:left center;display:block;" />
       </a>
       <div class="topbar-left">
-        <a href="tel:+97142635456"><i class="fas fa-phone-alt"></i> +971 4 263 5456</a>
+        <a href="tel:+97142884844"><i class="fas fa-phone-alt"></i> +971 4 288 4844</a>
         <a href="mailto:admissions@naischool.ae"><i class="fas fa-envelope"></i> admissions@naischool.ae</a>
         <span><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</span>
       </div>
@@ -501,20 +489,14 @@
             <li class="nav-primary-item" data-item="academics">
               <a href="academics.html" class="nav-primary-link">Academics</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="academics.html#kindergarten" class="nav-subnav-link">Kindergarten</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#elementary" class="nav-subnav-link">Elementary School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link">Middle School <i class="fas fa-chevron-right nav-subnav-arrow"></i></a></li>
-                <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link">High School <i class="fas fa-chevron-right nav-subnav-arrow"></i></a></li>
-                <li class="nav-subnav-item"><a href="academics.html#inclusion" class="nav-subnav-link">Inclusion Program</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link">Kindergarten</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link">Elementary School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link">Middle School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link">High School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link">AP Courses</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=curriculum" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">American Curriculum ★</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;">Academic Results ★</a></li>
                 <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">Project-Based Learning ★</a></li>
-                <li class="nav-subnav-item nav-subnav-item--has-children">
-                  <a href="academics.html#ap" class="nav-subnav-link">AP Courses <i class="fas fa-chevron-right nav-subnav-arrow"></i></a>
-                  <ul class="nav-subnav-level3 nav-subnav-level3-wrap">
-                    <li><a href="academics.html#ap" class="nav-subnav-link">Math &amp; Sciences</a></li>
-                    <li><a href="academics.html#ap" class="nav-subnav-link">Humanities &amp; Languages</a></li>
-                    <li><a href="academics.html#ap" class="nav-subnav-link">Computer Science</a></li>
-                  </ul>
-                </li>
               </ul>
             </li>
             <li class="nav-primary-item" data-item="student-life">
@@ -540,28 +522,7 @@
               </ul>
             </li>
 
-            <li class="nav-primary-item" data-item="curriculum">
-              <a href="curriculum.html" class="nav-primary-link">American Curriculum</a>
-              <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="curriculum.html#grading" class="nav-subnav-link">Grading System</a></li>
-                <li class="nav-subnav-item"><a href="curriculum.html#exams" class="nav-subnav-link">Assessments</a></li>
-                <li class="nav-subnav-item"><a href="curriculum.html#pathways" class="nav-subnav-link">Learning Pathways</a></li>
-                <li class="nav-subnav-item"><a href="parent-faq.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">Parent FAQ ★</a></li>
-              </ul>
-            </li>
 
-            <li class="nav-primary-item" data-item="phase4">
-              <a href="phase4-results.html" class="nav-primary-link" style="color:#4ade80;font-weight:700;"><i class="fas fa-chart-bar" style="margin-right:5px;"></i>Phase 4 Results</a>
-              <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="phase4-results.html#map" class="nav-subnav-link">MAP Growth</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#map-three-year" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">3-Year MAP Attainment ★</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#map-progress" class="nav-subnav-link" style="color:#4ade80;font-weight:700;">MAP Progress ★</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#psat" class="nav-subnav-link">PSAT Data</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#ap" class="nav-subnav-link">AP Courses</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#sat" class="nav-subnav-link">SAT Results</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#ielts" class="nav-subnav-link">IELTS Results</a></li>
-              </ul>
-            </li>
 
               <a href="about.html" class="nav-primary-link">Our School</a>
               <ul class="nav-subnav">
@@ -718,7 +679,9 @@
         <!-- Group CEO -->
         <div class="leader-card-equal">
           <div class="leader-card-photo">
-            <img src="images/group-ceo.jpg" alt="Kelvin Hornsby – Group CEO" />
+            <div class="leader-portrait">
+              <img src="images/group-ceo.jpg" alt="Kelvin Hornsby – Group CEO" />
+            </div>
             <div class="leader-card-role-tag">Group CEO</div>
           </div>
           <div class="leader-card-body">
@@ -740,7 +703,9 @@
         <!-- Executive Director -->
         <div class="leader-card-equal">
           <div class="leader-card-photo">
-            <img src="images/executive-director.jpg" alt="Ms. Arwa A. Taher – Executive Director" />
+            <div class="leader-portrait">
+              <img src="images/executive-director.jpg" alt="Ms. Arwa A. Taher – Executive Director" />
+            </div>
             <div class="leader-card-role-tag">Executive Director</div>
           </div>
           <div class="leader-card-body">
@@ -762,7 +727,9 @@
         <!-- Principal -->
         <div class="leader-card-equal">
           <div class="leader-card-photo">
-            <img src="images/school-01.jpg" alt="Justin McCauley – Principal" />
+            <div class="leader-portrait">
+              <img src="images/school-01.jpg" alt="Justin McCauley – Principal" />
+            </div>
             <div class="leader-card-role-tag">Principal</div>
           </div>
           <div class="leader-card-body">
@@ -785,7 +752,9 @@
         <!-- Vice Principal High School -->
         <div class="leader-card-equal">
           <div class="leader-card-photo">
-            <img src="images/school-02.jpg" alt="Crystal Goodwin – Vice Principal High School" />
+            <div class="leader-portrait">
+              <img src="images/school-02.jpg" alt="Crystal Goodwin – Vice Principal High School" />
+            </div>
             <div class="leader-card-role-tag">Vice Principal</div>
           </div>
           <div class="leader-card-body">
@@ -808,7 +777,9 @@
         <!-- Vice Principal Middle School -->
         <div class="leader-card-equal">
           <div class="leader-card-photo">
-            <img src="images/school-03.jpg" alt="Jonathan D'Avignon – Vice Principal Middle School" />
+            <div class="leader-portrait">
+              <img src="images/school-03.jpg" alt="Jonathan D'Avignon – Vice Principal Middle School" />
+            </div>
             <div class="leader-card-role-tag">Vice Principal</div>
           </div>
           <div class="leader-card-body">
@@ -831,7 +802,9 @@
         <!-- Vice Principal Elementary School -->
         <div class="leader-card-equal">
           <div class="leader-card-photo">
-            <img src="images/school-04.jpg" alt="Jennifer Rose McCauley – Vice Principal Elementary School" />
+            <div class="leader-portrait">
+              <img src="images/school-04.jpg" alt="Jennifer Rose McCauley – Vice Principal Elementary School" />
+            </div>
             <div class="leader-card-role-tag">Vice Principal</div>
           </div>
           <div class="leader-card-body">
@@ -854,7 +827,9 @@
         <!-- Head of Lower Elementary -->
         <div class="leader-card-equal">
           <div class="leader-card-photo">
-            <img src="images/school-05.jpg" alt="Natasha Sorak – Head of Lower Elementary" />
+            <div class="leader-portrait">
+              <img src="images/school-05.jpg" alt="Natasha Sorak – Head of Lower Elementary" />
+            </div>
             <div class="leader-card-role-tag">Head of Department</div>
           </div>
           <div class="leader-card-body">
@@ -877,7 +852,9 @@
         <!-- Head of Inclusive Education -->
         <div class="leader-card-equal">
           <div class="leader-card-photo">
-            <img src="images/school-06.jpg" alt="Noha Shaaban – Head of Inclusive Education" />
+            <div class="leader-portrait">
+              <img src="images/school-06.jpg" alt="Noha Shaaban – Head of Inclusive Education" />
+            </div>
             <div class="leader-card-role-tag">Head of Department</div>
           </div>
           <div class="leader-card-body">
@@ -900,7 +877,9 @@
         <!-- Dean of Students -->
         <div class="leader-card-equal">
           <div class="leader-card-photo">
-            <img src="images/school-07.jpg" alt="Maha El-Tantawy – Dean of Students" />
+            <div class="leader-portrait">
+              <img src="images/school-07.jpg" alt="Maha El-Tantawy – Dean of Students" />
+            </div>
             <div class="leader-card-role-tag">Dean of Students</div>
           </div>
           <div class="leader-card-body">
@@ -1390,7 +1369,7 @@
       </div>
       <div class="footer-col"><h4 class="footer-heading">Quick Links</h4><ul class="footer-links"><li><a href="about.html">About NAIS</a></li><li><a href="academics.html">Academic Programs</a></li><li><a href="admissions.html">Admissions</a></li><li><a href="index.html#student-life">Student Life</a></li><li><a href="index.html#contact">Contact Us</a></li><li><a href="gallery.html" style="color:#E11B22;font-weight:600;"><i class="fas fa-images" style="margin-right:5px;"></i>Photo Gallery</a></li></ul></div>
       <div class="footer-col"><h4 class="footer-heading">Academic Programs</h4><ul class="footer-links"><li><a href="academics.html#kindergarten">Kindergarten</a></li><li><a href="academics.html#elementary">Elementary</a></li><li><a href="academics.html#middle">Middle School</a></li><li><a href="academics.html#high">High School</a></li><li><a href="academics.html#inclusion">Inclusion</a></li></ul></div>
-      <div class="footer-col"><h4 class="footer-heading">Contact</h4><ul class="footer-contact-list"><li><i class="fas fa-map-marker-alt"></i><span>Al Mizhar 1, Mirdif, Dubai, UAE</span></li><li><i class="fas fa-phone-alt"></i><a href="tel:+97142635456">+971 4 263 5456</a></li><li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li></ul><a href="admissions.html" class="btn btn-red-sm">Apply Now <i class="fas fa-arrow-right"></i></a></div>
+      <div class="footer-col"><h4 class="footer-heading">Contact</h4><ul class="footer-contact-list"><li><i class="fas fa-map-marker-alt"></i><span>Al Mizhar 1, Mirdif, Dubai, UAE</span></li><li><i class="fas fa-phone-alt"></i><a href="tel:+97142884844">+971 4 288 4844</a></li><li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li></ul><a href="admissions.html" class="btn btn-red-sm">Apply Now <i class="fas fa-arrow-right"></i></a></div>
     </div></div></div>
     <div class="footer-bottom"><div class="container">
       <p>© 2025 North American International School, Dubai. All Rights Reserved.</p>
@@ -1400,7 +1379,7 @@
 
   <!-- WhatsApp Floating Button -->
   <a href="admissions.html#apply" class="apply-float" aria-label="Apply Now"><i class="fas fa-pen-to-square"></i><span class="apply-float-label">Apply Now</span></a>
-<a href="https://wa.me/97142635456" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+<a href="https://wa.me/97142884844" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
 
   <!-- ── LEADER PHOTO LIGHTBOX ── -->
   <div id="leader-lightbox" role="dialog" aria-modal="true" aria-label="Leader Profile">

@@ -1928,22 +1928,20 @@ body {
   }
 }
 
-/* ≤ 600px — single-column, photo height 240px (also set in pages.css
-   and mobile.css; here we add the background colour guard) */
+/* Portrait-style cards (.leader-card-equal) use auto-height flex strip —
+   no fixed height overrides needed. Only apply background guard for
+   the legacy full-bleed .leader-card-photo (homepage / old cards). */
 @media (max-width: 600px) {
-  .leader-card-photo,
-  .leader-card-equal .leader-card-photo,
-  .leadership-grid-equal .leader-card-photo {
+  .leadership-grid .leader-card-photo,
+  .leader-card .leader-card-photo {
     background: #0a1030 !important;
     height: 240px !important;
   }
 }
 
-/* ≤ 375px — 220px height */
 @media (max-width: 375px) {
-  .leader-card-photo,
-  .leader-card-equal .leader-card-photo,
-  .leadership-grid-equal .leader-card-photo {
+  .leadership-grid .leader-card-photo,
+  .leader-card .leader-card-photo {
     height: 220px !important;
   }
 }

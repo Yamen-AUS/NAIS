@@ -227,60 +227,83 @@
   box-shadow: 0 20px 60px rgba(15,29,82,0.18);
 }
 
-/* Photo area — fixed equal height for all */
+/* ─── PHOTO AREA — compact portrait strip ─── */
 .leader-card-photo {
   position: relative;
-  height: 260px;
+  background: linear-gradient(160deg, #0f1d45 0%, #1a2f6a 60%, #0a1128 100%);
+  padding: 32px 24px 0;          /* top breathing room, sides for centering */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  overflow: visible;             /* wave + badge can bleed */
+}
+
+/* ── Portrait frame — uniform 100×100 px square with rounded corners ── */
+.leader-card-photo .leader-portrait {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
   overflow: hidden;
   flex-shrink: 0;
+  border: 3px solid rgba(255,255,255,0.22);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35),
+              0 0 0 1px rgba(255,255,255,0.07);
+  position: relative;
+  z-index: 2;
   background: #0a1030;
 }
 
-.leader-card-photo img {
+.leader-card-photo .leader-portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center top;   /* keep faces visible */
   display: block;
-  transition: transform 0.5s ease;
+  transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94),
+              filter 0.4s ease;
   transform-origin: center top;
 }
 
-/* Per-person photo positioning — show full face from top */
-.leader-card-equal:nth-child(1) .leader-card-photo img { object-fit: cover; object-position: center top; }
-.leader-card-equal:nth-child(2) .leader-card-photo img { object-position: center top; }
-.leader-card-equal:nth-child(3) .leader-card-photo img { object-position: center top; }
-.leader-card-equal:nth-child(4) .leader-card-photo img { object-position: center top; }
-.leader-card-equal:nth-child(5) .leader-card-photo img { object-position: center top; }
-.leader-card-equal:nth-child(6) .leader-card-photo img { object-position: center top; }
-.leader-card-equal:nth-child(7) .leader-card-photo img { object-position: center top; }
-.leader-card-equal:nth-child(8) .leader-card-photo img { object-position: center top; }
-.leader-card-equal:nth-child(9) .leader-card-photo img { object-position: center top; }
-
-.leader-card-equal:hover .leader-card-photo img {
-  transform: scale(1.03);
+.leader-card-equal:hover .leader-card-photo .leader-portrait img {
+  transform: scale(1.08);
+  filter: brightness(1.06) saturate(1.1);
 }
 
-/* Role tag overlay on photo */
+/* ── Role tag — centred below portrait, sits above the wave ── */
 .leader-card-role-tag {
-  position: absolute;
-  bottom: 14px;
-  left: 14px;
+  position: static;
+  margin-top: 10px;
+  margin-bottom: 0;
+  z-index: 3;
   background: var(--red);
   color: #fff;
-  font-size: 0.65rem;
+  font-family: var(--font-display, 'Montserrat', sans-serif);
+  font-size: 0.60rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
-  padding: 5px 14px;
+  padding: 4px 14px;
   border-radius: 50px;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 12px rgba(225,27,34,0.4);
+  box-shadow: 0 2px 10px rgba(225,27,34,0.38);
+  white-space: nowrap;
 }
 
-/* Card body */
+/* ── Decorative wave separator below portrait + tag ── */
+.leader-card-photo::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 20px;
+  background: var(--white, #fff);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  margin-top: 12px;
+  flex-shrink: 0;
+}
+
+/* ── Card body ── */
 .leader-card-body {
-  padding: 28px 28px 32px;
+  padding: 22px 26px 28px;       /* tighter top — portrait strip already provides separation */
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -289,20 +312,20 @@
 
 .leader-card-body h3 {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   color: var(--navy);
-  margin: 0 0 4px;
+  margin: 0 0 3px;
   line-height: 1.3;
 }
 
 .leader-card-title {
   font-family: var(--font-display);
-  font-size: 0.70rem;
+  font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: var(--red);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 /* Quote block inside card */
@@ -338,7 +361,7 @@
   margin: 0;
 }
 
-/* Responsive — leadership equal grid */
+/* ── Responsive — leadership equal grid ── */
 @media (max-width: 1024px) {
   .leadership-grid-equal {
     grid-template-columns: repeat(2, 1fr);
@@ -346,35 +369,20 @@
   }
 }
 
-/* ≤ 600 px  → single column, centred, max 400 px wide, photo 240 px */
 @media (max-width: 600px) {
   .leadership-grid-equal {
     grid-template-columns: 1fr;
     gap: 20px;
-    max-width: 400px;
+    max-width: 420px;
     margin-left: auto;
     margin-right: auto;
   }
-  .leader-card-equal .leader-card-photo {
-    height: 240px;
-    background: #0a1030;
-  }
-  .leader-card-equal .leader-card-photo img {
-    object-fit: cover;
-    object-position: center top;
-    width: 100%;
-    height: 100%;
-  }
-  .leader-card-body { padding: 22px 22px 26px; }
-  .leader-card-body h3 { font-size: 1.1rem; }
+  .leader-card-body { padding: 20px 20px 24px; }
+  .leader-card-body h3 { font-size: 1.05rem; }
 }
 
-/* ≤ 375 px  → slightly shorter photo (220 px) to save vertical space */
 @media (max-width: 375px) {
-  .leader-card-equal .leader-card-photo { height: 220px; }
-  .leadership-grid-equal {
-    max-width: 100%;   /* full bleed on truly tiny screens */
-  }
+  .leadership-grid-equal { max-width: 100%; }
 }
 
 /* Standard .leader-card (homepage / about .leadership-grid) */
@@ -518,50 +526,74 @@
 .adm-qstat span{display:block;font-size:0.7rem;color:var(--gray-500);margin-top:4px;text-transform:uppercase;letter-spacing:0.06em;}
 
 /* ── Process Steps ── */
-.adm-process-steps{
-  display:grid;
+
+/* Row 1: 4 steps with arrows between them */
+.adm-process-steps {
+  display: grid;
   grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
-  align-items:start;
-  gap:0;
-  margin-top:56px;
+  align-items: start;
+  gap: 0;
+  margin-top: 56px;
 }
-.adm-step{
-  text-align:center;
+
+/* Row 2: 2 steps centred under row 1 */
+.adm-process-steps--row2 {
+  grid-template-columns: 1fr auto 1fr;
+  max-width: calc(50% + 1px);   /* matches 2 of 4 equal columns */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+.adm-step {
+  text-align: center;
   padding: 0 16px;
-  position:relative;
+  position: relative;
 }
-.adm-step-num{
-  font-family:var(--font-display);font-size:2rem;font-weight:900;
-  color:var(--red);margin-bottom:10px;line-height:1;
-  display:block;
+.adm-step-num {
+  font-family: var(--font-display); font-size: 2rem; font-weight: 900;
+  color: var(--red); margin-bottom: 10px; line-height: 1;
+  display: block;
 }
-.adm-step-icon{
-  width:68px;height:68px;border-radius:50%;margin:0 auto 16px;
-  background:var(--white);border:2px solid var(--navy);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;color:var(--navy);
-  box-shadow:var(--shadow-md);transition:var(--transition);
+.adm-step-icon {
+  width: 68px; height: 68px; border-radius: 50%; margin: 0 auto 16px;
+  background: var(--white); border: 2px solid var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; color: var(--navy);
+  box-shadow: var(--shadow-md); transition: var(--transition);
 }
-.adm-step:hover .adm-step-icon{background:var(--navy);color:#fff;transform:scale(1.08);}
-.adm-step-icon--gold{background:var(--red)!important;border-color:var(--red)!important;color:#fff!important;}
-.adm-step h4{font-family:var(--font-display);font-size:0.84rem;font-weight:800;color:var(--navy);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;}
-.adm-step p{font-size:0.80rem;color:var(--gray-500);line-height:1.65;max-width:180px;margin:0 auto;}
-.adm-step-arrow{
-  align-self:center;
-  color:rgba(31,47,110,0.3);
-  font-size:1.2rem;
+.adm-step:hover .adm-step-icon { background: var(--navy); color: #fff; transform: scale(1.08); }
+.adm-step-icon--gold { background: var(--red)!important; border-color: var(--red)!important; color: #fff!important; }
+.adm-step h4 { font-family: var(--font-display); font-size: 0.84rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+.adm-step p { font-size: 0.80rem; color: var(--gray-500); line-height: 1.65; max-width: 180px; margin: 0 auto; }
+.adm-step-arrow {
+  align-self: center;
+  color: rgba(31,47,110,0.3);
+  font-size: 1.2rem;
   padding: 0 8px;
   padding-top: 50px;
 }
-@media(max-width:900px){
-  .adm-process-steps{
-    grid-template-columns:1fr 1fr;
-    gap:32px 16px;
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .adm-process-steps {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 16px;
   }
-  .adm-step-arrow{display:none;}
+  .adm-process-steps--row2 {
+    grid-template-columns: 1fr 1fr;
+    max-width: 100%;
+    margin-top: 0;
+  }
+  .adm-step-arrow { display: none; }
 }
-@media(max-width:600px){
-  .adm-process-steps{grid-template-columns:1fr;gap:28px;}
+@media (max-width: 600px) {
+  .adm-process-steps,
+  .adm-process-steps--row2 {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    max-width: 100%;
+  }
 }
 
 /* ── Why NAIS Section ── */
