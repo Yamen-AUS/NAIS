@@ -10,10 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="shortcut icon" href="images/nais-logo.png?v=3" type="image/png" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/style.css?v=8" />
-  <link rel="stylesheet" href="css/nav.css?v=8" />
-  <link rel="stylesheet" href="css/mobile.css?v=8" />
-  <link rel="stylesheet" href="css/enhancements.css?v=4" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
+  <link rel="stylesheet" href="css/nav.css?v=9" />
+  <link rel="stylesheet" href="css/mobile.css?v=9" />
+  <link rel="stylesheet" href="css/enhancements.css?v=5" />
   <style>
     #site-intro {
       position: fixed;
@@ -141,7 +141,7 @@
     var imgs     = [];
     var curImg   = 0, nextImg = 1;
     var blending = false, blendPct = 0;
-    var word0Y = 0, word1Y = 0;
+    var word0Y = 0, word1Y = 0, word2Y = 0;
     var tagA = 0, accentPct = 0, enterA = 0;
     var dismissed = false;
     var autoTimer, lastTs = null, raf, t0 = null;
@@ -174,7 +174,25 @@
       ctx.restore();
     }
 
-    function getFZ(){ return Math.min(Math.max(W*0.065, 38*DPR), 100*DPR); }
+    /* Calculate font size: widest word ≤ 58% of screen width */
+    function getFZ(){
+      var lo = 24*DPR, hi = 220*DPR, mid;
+      var WORDS = ["Belong.","Grow.","Succeed."];
+      ctx.font = "900 "+hi+"px 'Montserrat',Arial Black,sans-serif";
+      for(var i=0;i<16;i++){
+        mid=(lo+hi)/2;
+        ctx.font="900 "+mid+"px 'Montserrat',Arial Black,sans-serif";
+        var maxW=0;
+        for(var w=0;w<WORDS.length;w++){
+          var mw=ctx.measureText(WORDS[w]).width;
+          if(mw>maxW) maxW=mw;
+        }
+        if(maxW > W*0.58) hi=mid; else lo=mid;
+      }
+      /* also cap by height: 3 lines must fit in 55% of screen */
+      var byH = (H*0.55/3)/1.22;
+      return Math.max(Math.min(lo, byH), 28*DPR);
+    }
     function easeOut(t){ return 1 - Math.pow(1-t, 3); }
 
     function frame(ts){
@@ -185,8 +203,10 @@
 
       if(blending){ blendPct += dt/(SLIDE_MS/1000*0.38); if(blendPct>=1){blendPct=1;blending=false;curImg=nextImg;} }
 
-      if(el>0.30) word0Y    = Math.min(word0Y    + dt*3.5, 1);
-      if(el>0.58) word1Y    = Math.min(word1Y    + dt*3.5, 1);
+      /* staggered word entrance */
+      if(el>0.30) word0Y    = Math.min(word0Y    + dt*4.0, 1);
+      if(el>0.58) word1Y    = Math.min(word1Y    + dt*4.0, 1);
+      if(el>0.86) word2Y    = Math.min(word2Y    + dt*4.0, 1);
       if(el>1.15) tagA      = Math.min(tagA      + dt*2.2, 1);
       if(el>1.35) accentPct = Math.min(accentPct + dt*2.0, 1);
       if(el>2.20) enterA    = Math.min(enterA    + dt*2.0, 1);
@@ -201,44 +221,69 @@
       g.addColorStop(0,"rgba(0,0,0,0.42)"); g.addColorStop(.45,"rgba(0,0,0,0.18)"); g.addColorStop(1,"rgba(0,0,0,0.60)");
       ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
 
-      var fz = getFZ();
-      var baseY = H*0.5 - fz*0.30;
+      var fz     = getFZ();
+      var lineH  = fz * 1.22;
+      var totalH = lineH * 3 - (lineH - fz);
+      /* vertically centre the 3-word block */
+      var blockTop = H*0.5 - totalH*0.5 - H*0.04;
 
-      ctx.textBaseline = "alphabetic"; ctx.textAlign = "center";
+      ctx.font = "900 "+fz+"px 'Montserrat',Arial Black,sans-serif";
+      ctx.textBaseline = "top";
+      ctx.textAlign    = "center";
 
-      // Line 1: "Belong. Grow. Succeed."  — white (enlarged)
-      ctx.save();
-      ctx.globalAlpha = word0Y;
-      ctx.shadowColor = "rgba(0,0,0,0.65)"; ctx.shadowBlur = 28*DPR;
-      ctx.font = "900 "+Math.round(fz*1.50)+"px 'Montserrat',Arial Black,sans-serif";
-      ctx.fillStyle = "#fff";
-      ctx.fillText("Belong. Grow. Succeed.", W/2, baseY + (1-easeOut(word0Y))*fz*1.2);
-      ctx.restore();
+      var WORDS   = ["Belong.","Grow.","Succeed."];
+      var wordAni = [word0Y, word1Y, word2Y];
 
-      // Tagline (enlarged)
-      if(tagA>0.01){
-        ctx.save(); ctx.globalAlpha=tagA;
-        ctx.font="700 "+Math.round(fz*0.130)+"px 'Montserrat',sans-serif";
-        ctx.textAlign="center"; ctx.textBaseline="alphabetic"; ctx.fillStyle="rgba(255,255,255,0.88)";
-        ctx.fillText("NORTH AMERICAN INTERNATIONAL SCHOOL  \u00B7  DUBAI, UAE", W/2, baseY+fz*1.55);
+      for(var wi=0; wi<3; wi++){
+        var alpha = Math.max(0, Math.min(1, wordAni[wi]));
+        if(alpha < 0.01) continue;
+        var slideOff = (1 - easeOut(wordAni[wi])) * fz * 1.1;
+        var yPos = blockTop + wi*lineH + slideOff;
+        ctx.save();
+        ctx.globalAlpha  = alpha;
+        ctx.shadowColor  = "rgba(0,0,0,0.65)";
+        ctx.shadowBlur   = 28*DPR;
+        ctx.fillStyle    = "#ffffff";
+        ctx.fillText(WORDS[wi], W/2, yPos);
         ctx.restore();
       }
 
-      // Red line
+      /* Tagline */
+      var tagY  = blockTop + totalH + fz*0.55;
+      var tagFz = Math.max(Math.round(fz*0.115), 10*DPR);
+      ctx.font = "700 "+tagFz+"px 'Montserrat',sans-serif";
+      var TAGLINE = "NORTH AMERICAN INTERNATIONAL SCHOOL  \u00B7  DUBAI, UAE";
+      while(ctx.measureText(TAGLINE).width > W*0.82 && tagFz > 8*DPR){
+        tagFz -= DPR;
+        ctx.font="700 "+tagFz+"px 'Montserrat',sans-serif";
+      }
+      if(tagA>0.01){
+        ctx.save(); ctx.globalAlpha=tagA;
+        ctx.textAlign="center"; ctx.textBaseline="top";
+        ctx.fillStyle="rgba(255,255,255,0.85)";
+        ctx.fillText(TAGLINE, W/2, tagY);
+        ctx.restore();
+      }
+
+      /* Red accent line */
       if(accentPct>0){
         var lw = 58*DPR*easeOut(accentPct);
         ctx.save(); ctx.globalAlpha=tagA; ctx.fillStyle=RED;
-        ctx.fillRect(W/2-lw/2, baseY+fz*2.18, lw, 3*DPR);
+        ctx.fillRect(W/2-lw/2, tagY+tagFz+6*DPR, lw, 3*DPR);
         ctx.restore();
       }
 
-      // Enter button (enlarged)
+      /* Enter button */
       if(enterA>0.01){
-        var bx=W/2, by=H-82*DPR, bw=320*DPR, bh=68*DPR;
+        var btnFz = Math.max(Math.round(tagFz*0.95), 9*DPR);
+        ctx.font="700 "+btnFz+"px 'Montserrat',sans-serif";
+        var bw=Math.round(Math.min(ctx.measureText("ENTER SITE  \u2192").width*1.7, W*0.42));
+        var bh=Math.round(btnFz*3.0);
+        var bx=W/2, by=H-72*DPR;
         ctx.save(); ctx.globalAlpha=enterA;
-        ctx.strokeStyle="rgba(255,255,255,0.80)"; ctx.lineWidth=2*DPR;
+        ctx.strokeStyle="rgba(255,255,255,0.78)"; ctx.lineWidth=1.5*DPR;
         ctx.strokeRect(bx-bw/2, by-bh/2, bw, bh);
-        ctx.fillStyle="#fff"; ctx.font="700 "+Math.round(fz*0.135)+"px 'Montserrat',sans-serif";
+        ctx.fillStyle="#fff";
         ctx.textAlign="center"; ctx.textBaseline="middle";
         ctx.fillText("ENTER SITE  \u2192", bx, by);
         ctx.restore();
@@ -624,7 +669,7 @@
       </div>
       <div class="why-grid">
         <div class="why-card">
-          <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+          <div class="why-icon"><i class="fas fa-shield"></i></div>
           <h3>KHDA Licensed &amp; Accredited</h3>
           <p>Fully licensed by Dubai's Knowledge &amp; Human Development Authority. Internationally accredited by AdvancED and NEASC — recognized worldwide.</p>
         </div>
@@ -1363,9 +1408,11 @@
 
         <div class="usp-pillar usp-pillar--featured">
           <div class="usp-pillar-icon usp-pillar-icon--featured">
-            <i class="fas fa-shield-alt"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="22" height="22" aria-hidden="true">
+              <path d="M12 1L3 5v6c0 5.25 3.75 10.15 9 11.25C17.25 21.15 21 16.25 21 11V5L12 1zm0 4l6 2.67V11c0 3.72-2.55 7.2-6 8.27C8.55 18.2 6 14.72 6 11V7.67L12 5z"/>
+            </svg>
           </div>
-          <div class="usp-pillar-tag">Pillar 02</div>
+          <div class="usp-pillar-tag" style="color:#E11B22;">Pillar 02</div>
           <h3>Safe &amp; Anti-Bullying Culture</h3>
           <p>Relationship-based education is at our core. A proven zero-tolerance anti-bullying framework means students feel safe, respected, and empowered every single day.</p>
           <div class="usp-pillar-accent"></div>
@@ -1671,7 +1718,7 @@
             </div>
             <img src="images/campus-playground.jpg" alt="NAIS Dubai KG Playground – Colorful Safe Play Area" class="tour-campus-photo" />
             <div class="tour-photo-caption">
-              <i class="fas fa-shield-alt"></i> Fully Shaded · Safety-Certified · Dedicated KG Play Zone
+              <i class="fas fa-shield"></i> Fully Shaded · Safety-Certified · Dedicated KG Play Zone
             </div>
           </div>
           <div class="tour-info-card">
@@ -2118,7 +2165,7 @@
         <div class="title-ornament centered-ornament"></div>
       </div>
       <div class="accreditation-logos">
-        <div class="accred-item"><div class="accred-badge"><i class="fas fa-shield-alt"></i><span>KHDA</span></div><p>Knowledge &amp; Human Development Authority</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-shield"></i><span>KHDA</span></div><p>Knowledge &amp; Human Development Authority</p></div>
         <div class="accred-item"><div class="accred-badge"><i class="fas fa-star"></i><span>AdvancED</span></div><p>Accreditation Commission</p></div>
         <div class="accred-item"><div class="accred-badge"><i class="fas fa-globe-americas"></i><span>NEASC</span></div><p>New England Association of Schools &amp; Colleges</p></div>
         <div class="accred-item"><div class="accred-badge"><i class="fas fa-university"></i><span>College Board</span></div><p>Advanced Placement Program Member</p></div>
