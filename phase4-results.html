@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/nav.css?v=9" />
   <link rel="stylesheet" href="css/mobile.css?v=9" />
   <link rel="stylesheet" href="css/enhancements.css?v=5" />
+  <link rel="stylesheet" href="css/rtl.css?v=1" />
   <style>
     /* ── TOPBAR FIX ── */
     @media (min-width: 1200px) {
@@ -482,7 +483,7 @@
     }
   </style>
 </head>
-<body>
+<body data-page-title="page.title.results">
 
   <!-- ══ TOP BAR ══ -->
   <div class="topbar" id="main-topbar">
@@ -493,14 +494,20 @@
       <div class="topbar-left">
         <a href="tel:+97142884844"><i class="fas fa-phone-alt"></i> +971 4 288 4844</a>
         <a href="mailto:admissions@naischool.ae"><i class="fas fa-envelope"></i> admissions@naischool.ae</a>
-        <span><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</span>
+        <span><i class="fas fa-map-marker-alt"></i> <span data-i18n="topbar.address">Al Mizhar 1, Dubai, UAE</span></span>
       </div>
       <div class="topbar-right">
-        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">Parent Portal</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.portal">Parent Portal</a>
         <span class="topbar-divider">|</span>
-        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">E-Learning</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.elearning">E-Learning</a>
         <span class="topbar-divider">|</span>
-        <a href="mailto:careers@naischool.ae" class="topbar-link">Careers</a>
+        <a href="mailto:careers@naischool.ae" class="topbar-link" data-i18n="topbar.careers">Careers</a>
+        <span class="topbar-divider">|</span>
+        <div class="lang-switcher-wrap">
+          <button class="lang-switcher active" data-lang="en" aria-pressed="true" title="English">EN</button>
+          <span class="lang-switcher-divider">|</span>
+          <button class="lang-switcher" data-lang="ar" aria-pressed="false" title="العربية">ع</button>
+        </div>
         <div class="topbar-social">
           <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -520,11 +527,11 @@
       </a>
       <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
         <div class="nav-rail-lines"><span></span><span></span><span></span></div>
-        <span class="nav-rail-label">MENU</span>
+        <span class="nav-rail-label" data-i18n="nav.menu">MENU</span>
       </button>
     </div>
     <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
-    <span id="nav-desktop-label">MENU</span>
+    <span id="nav-desktop-label" data-i18n="nav.menu">MENU</span>
   </div>
 
   <!-- ══ FULL-SCREEN NAV OVERLAY ══ -->
@@ -536,16 +543,16 @@
           <img src="images/nais-logo.png" alt="North American International School" style="height:72px;max-width:300px;width:auto;object-fit:contain;display:block;" />
         </a>
         <div class="nav-left-tagline">
-          <div class="nav-left-tagline-top">Est. 2005 · Dubai, UAE</div>
-          <div class="nav-left-tagline-title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
-          <p class="nav-left-tagline-sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
+          <div class="nav-left-tagline-top" data-i18n="nav.tagline.est">Est. 2005 · Dubai, UAE</div>
+          <div class="nav-left-tagline-title" data-i18n-html="nav.tagline.title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
+          <p class="nav-left-tagline-sub" data-i18n="nav.tagline.sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
         </div>
         <div class="nav-left-spacer"></div>
         <div class="nav-promo-card">
-          <div class="nav-promo-card-label">Open Enrollment</div>
-          <div class="nav-promo-card-title">Apply for <span>2026–2027</span></div>
-          <p class="nav-promo-card-desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
-          <a href="admissions.html" class="nav-promo-card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <div class="nav-promo-card-label" data-i18n="nav.promo.label">Open Enrollment</div>
+          <div class="nav-promo-card-title" data-i18n="nav.promo.title">Apply for 2026–2027</div>
+          <p class="nav-promo-card-desc" data-i18n="nav.promo.desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
+          <a href="admissions.html" class="nav-promo-card-link" data-i18n="nav.promo.link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -557,56 +564,56 @@
         <nav aria-label="Main Navigation">
           <ul class="nav-primary-list">
             <li class="nav-primary-item" data-item="about">
-              <a href="about.html" class="nav-primary-link">About</a>
+              <a href="about.html" class="nav-primary-link" data-i18n="nav.about">About</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link">Mission &amp; Vision</a></li>
-                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">School Leadership</a></li>
-                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link">Core Values — CARE</a></li>
-                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link">Our Campus</a></li>
-                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link">Accreditation</a></li>
+                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link" data-i18n="nav.sub.mission">Mission &amp; Vision</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.leadership">School Leadership</a></li>
+                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link" data-i18n="nav.sub.values">Core Values — CARE</a></li>
+                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link" data-i18n="nav.sub.campus">Our Campus</a></li>
+                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link" data-i18n="nav.sub.accreditation">Accreditation</a></li>
               </ul>
             </li>
             <li class="nav-primary-item active" data-item="academics">
-              <a href="academics.html" class="nav-primary-link">Academics</a>
+              <a href="academics.html" class="nav-primary-link" data-i18n="nav.academics">Academics</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="academics.html#kindergarten" class="nav-subnav-link">Kindergarten</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#elementary" class="nav-subnav-link">Elementary School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link">Middle School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link">High School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#ap" class="nav-subnav-link">AP Courses</a></li>
-                <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">Project-Based Learning &#9733;</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html" class="nav-subnav-link" style="color:#4ade80;font-weight:700;" aria-current="page">Academic Results &#9733;</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link" data-i18n="nav.sub.kg">Kindergarten</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link" data-i18n="nav.sub.elementary">Elementary School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link" data-i18n="nav.sub.high">High School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link" data-i18n="nav.sub.ap">AP Courses</a></li>
+                <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.pbl">Project-Based Learning ★</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;" aria-current="page" data-i18n="nav.sub.results">Academic Results ★</a></li>
               </ul>
             </li>
             <li class="nav-primary-item" data-item="student-life">
-              <a href="index.html#student-life" class="nav-primary-link">Student Life</a>
+              <a href="index.html#student-life" class="nav-primary-link" data-i18n="nav.student-life">Student Life</a>
             </li>
             <li class="nav-primary-item" data-item="admissions">
-              <a href="admissions.html" class="nav-primary-link">Admissions</a>
+              <a href="admissions.html" class="nav-primary-link" data-i18n="nav.admissions">Admissions</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link">How to Apply</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link">Tuition &amp; Fees</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link">Apply Now</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link" data-i18n="nav.sub.how-apply">How to Apply</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link" data-i18n="nav.sub.fees">Tuition &amp; Fees</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link" data-i18n="nav.apply-now">Apply Now</a></li>
               </ul>
             </li>
             <li class="nav-primary-item" data-item="our-school">
-              <a href="about.html" class="nav-primary-link">Our School</a>
+              <a href="about.html" class="nav-primary-link" data-i18n="nav.our-school">Our School</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Life at NAIS</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link">Middle School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link">Upper School</a></li>
-                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">Parent Community</a></li>
-                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link">Contact Us</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.life">Life at NAIS</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link" data-i18n="nav.sub.upper">Upper School</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.parents">Parent Community</a></li>
+                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.contact">Contact Us</a></li>
               </ul>
             </li>
             <li class="nav-primary-item">
-              <a href="gallery.html" class="nav-primary-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:6px;"></i>Gallery</a>
+              <a href="gallery.html" class="nav-primary-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:6px;"></i><span data-i18n="nav.sub.gallery">Gallery</span></a>
             </li>
           </ul>
         </nav>
         <div class="nav-panel-bottom">
           <div class="nav-bottom-careers">
-            <span class="nav-careers-label">Career Opportunities</span>
+            <span class="nav-careers-label" data-i18n="nav.careers">Career Opportunities</span>
             <div class="nav-bottom-social">
               <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="https://twitter.com/NAISDubai" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
@@ -616,13 +623,13 @@
             </div>
           </div>
           <div class="nav-bottom-search">
-            <span class="nav-search-label">Search</span>
+            <span class="nav-search-label" data-i18n="nav.search">Search</span>
             <div class="nav-search-form">
-              <input type="text" class="nav-search-input" placeholder="Keyword" aria-label="Search" />
+              <input type="text" class="nav-search-input" data-i18n-placeholder="nav.search-placeholder" placeholder="Keyword" aria-label="Search" />
               <button class="nav-search-btn" aria-label="Submit Search"><i class="fas fa-search"></i></button>
             </div>
           </div>
-          <a href="admissions.html" class="nav-apply-btn">Apply Now</a>
+          <a href="admissions.html" class="nav-apply-btn" data-i18n="nav.apply-now">Apply Now</a>
         </div>
       </div>
     </div>
@@ -637,35 +644,35 @@
 
       <div class="res-hero-badge">
         <i class="fas fa-chart-line"></i>
-        Academic Year 2024 – 2025 &nbsp;·&nbsp; External Assessment Results
+        <span data-i18n="res.hero.badge">Proven Track Record</span>
       </div>
 
-      <h1>Our Students.<br/>Our <em>Achievements.</em></h1>
-      <p class="res-hero-sub">
-        A clear picture of academic progress at NAIS Dubai — measured through independent international assessments and presented for our school community.
+      <h1 data-i18n-html="res.hero.h1">Academic<br/><em>Results &amp; Achievements</em></h1>
+      <p class="res-hero-sub" data-i18n="res.hero.sub">
+        Transparent, independently verified academic performance data demonstrating consistent excellence across all grade levels at NAIS Dubai.
       </p>
 
       <!-- KPI Strip -->
       <div class="res-hero-kpis">
         <div class="res-hero-kpi">
           <span class="res-kpi-num kpi-green">+35pp</span>
-          <span class="res-kpi-lbl">Science Growth<br/>3 Years</span>
+          <span class="res-kpi-lbl" data-i18n="acad.kpi.sci">Science Growth<br/>3 Years</span>
         </div>
         <div class="res-hero-kpi">
           <span class="res-kpi-num kpi-gold">68%</span>
-          <span class="res-kpi-lbl">AP Pass Rate<br/>Score 3+</span>
+          <span class="res-kpi-lbl" data-i18n="res.kpi.ap">AP Pass Rate<br/>Score 3+</span>
         </div>
         <div class="res-hero-kpi">
           <span class="res-kpi-num kpi-red">1080</span>
-          <span class="res-kpi-lbl">SAT Average<br/>2024–25</span>
+          <span class="res-kpi-lbl" data-i18n="res.kpi.sat">SAT Average<br/>2024–25</span>
         </div>
         <div class="res-hero-kpi">
           <span class="res-kpi-num kpi-blue">6.4</span>
-          <span class="res-kpi-lbl">IELTS Average<br/>Band Score</span>
+          <span class="res-kpi-lbl" data-i18n="res.kpi.ielts">IELTS Average<br/>Band Score</span>
         </div>
         <div class="res-hero-kpi">
           <span class="res-kpi-num kpi-white">78%</span>
-          <span class="res-kpi-lbl">University Entry<br/>IELTS Band 6+</span>
+          <span class="res-kpi-lbl" data-i18n="res.kpi.uni">University Entry<br/>IELTS Band 6+</span>
         </div>
       </div>
 
@@ -679,11 +686,11 @@
     <div class="container">
       <div class="centered">
         <div class="res-sec-label" style="justify-content:center;color:var(--navy);">
-          <i class="fas fa-chart-line" style="color:var(--red);"></i> MAP Growth Assessments
+          <i class="fas fa-chart-line" style="color:var(--red);"></i> <span data-i18n="ph4.map.label">MAP Assessment Data</span>
         </div>
-        <h2 class="res-sec-title">Measuring <em>Real Growth</em></h2>
+        <h2 class="res-sec-title" data-i18n-html="ph4.map.h2">MAP Growth<br/><em>2024–2025</em></h2>
         <div class="res-divider"></div>
-        <p class="res-sec-sub">MAP (Measures of Academic Progress) is an internationally recognised assessment used to track student growth over time. Our Grade 9 results for 2025–26 set a strong baseline in Algebra and Life Science.</p>
+        <p class="res-sec-sub" data-i18n="ph4.map.sub">MAP (Measures of Academic Progress) is an internationally recognised assessment used to track student growth over time. Our Grade 9 results for 2025–26 set a strong baseline in Algebra and Life Science.</p>
       </div>
 
       <div style="margin-top:48px;">
@@ -785,11 +792,11 @@
     <div class="container">
       <div class="centered">
         <div class="res-sec-label" style="justify-content:center;color:rgba(255,255,255,0.5);">
-          <i class="fas fa-history" style="color:var(--gold);"></i> 3-Year Attainment · 2022–23 → 2024–25
+          <i class="fas fa-history" style="color:var(--gold);"></i> <span data-i18n="ph4.trend.label">3-Year Trend Analysis</span>
         </div>
-        <h2 class="res-sec-title res-sec-title--white">Consistent Growth <em>Year After Year</em></h2>
+        <h2 class="res-sec-title res-sec-title--white" data-i18n-html="ph4.trend.h2">3-Year MAP<br/><em>Attainment Trend</em></h2>
         <div class="res-divider" style="background:linear-gradient(90deg,var(--gold),transparent);"></div>
-        <p class="res-sec-sub res-sec-sub--white">Tracking students performing at or above national norm across all phases. Every subject shows upward momentum over three consecutive academic years.</p>
+        <p class="res-sec-sub res-sec-sub--white" data-i18n="ph4.trend.sub">Tracking students performing at or above national norm across all phases. Every subject shows upward momentum over three consecutive academic years.</p>
       </div>
 
       <!-- Science -->
@@ -888,11 +895,11 @@
     <div class="container">
       <div class="centered">
         <div class="res-sec-label" style="justify-content:center;color:var(--navy);">
-          <i class="fas fa-trophy" style="color:var(--gold);"></i> Advanced Placement · SAT · IELTS
+          <i class="fas fa-trophy" style="color:var(--gold);"></i> <span data-i18n="ph4.ap.label">AP Performance 2024–25</span>
         </div>
-        <h2 class="res-sec-title">College Readiness &amp; <em>International Excellence</em></h2>
+        <h2 class="res-sec-title" data-i18n-html="ph4.ap.h2">Advanced Placement<br/><em>Exam Results</em></h2>
         <div class="res-divider"></div>
-        <p class="res-sec-sub">Our high school students sit internationally recognised examinations that open doors to universities around the world.</p>
+        <p class="res-sec-sub" data-i18n="ph4.ap.sub">Our high school students sit internationally recognised examinations that open doors to universities around the world.</p>
       </div>
 
       <div style="margin-top:52px;">
@@ -1020,11 +1027,11 @@
         <!-- Left: text -->
         <div>
           <div class="res-sec-label" style="color:var(--navy);">
-            <i class="fas fa-pencil-alt" style="color:#7c3aed;"></i> PSAT — College Readiness Benchmark
+            <i class="fas fa-pencil-alt" style="color:#7c3aed;"></i> <span data-i18n="ph4.psat.label">PSAT Performance</span>
           </div>
-          <h2 class="res-sec-title">PSAT Results — <em>Year-on-Year Gains</em></h2>
+          <h2 class="res-sec-title" data-i18n-html="ph4.psat.h2">PSAT Results<br/><em>Grade 11 · 2024–2025</em></h2>
           <div class="res-divider"></div>
-          <p class="res-sec-sub">NAIS students in Grades 10 and 11 sit the PSAT (Preliminary SAT) as a college readiness benchmark. Both years show meaningful score improvements, placing our students on a strong trajectory toward university success.</p>
+          <p class="res-sec-sub" data-i18n="ph4.psat.sub">NAIS students in Grades 10 and 11 sit the PSAT (Preliminary SAT) as a college readiness benchmark. Both years show meaningful score improvements, placing our students on a strong trajectory toward university success.</p>
 
           <div class="hl-banner" style="margin-top:28px;">
             <i class="fas fa-arrow-up" style="color:#7c3aed;"></i>
@@ -1082,10 +1089,10 @@
         <div class="res-sec-label" style="justify-content:center;color:rgba(255,255,255,0.5);">
           <i class="fas fa-award" style="color:var(--gold);"></i> The Ultimate Measure
         </div>
-        <h2 class="res-sec-title res-sec-title--white" style="font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:14px;">
-          <em style="color:var(--gold);">100%</em> University Acceptance
+        <h2 class="res-sec-title res-sec-title--white" style="font-size:clamp(2rem,4.5vw,3.2rem);margin-bottom:14px;" data-i18n-html="res.uni.h2">
+          <em style="color:var(--gold);">100%</em> University<br/><em>Acceptance Rate</em>
         </h2>
-        <p class="res-sec-sub res-sec-sub--white" style="font-size:1rem;margin:0 auto 40px;">
+        <p class="res-sec-sub res-sec-sub--white" style="font-size:1rem;margin:0 auto 40px;" data-i18n="res.uni.p">
           Every NAIS graduate gains admission to a university. Our dedicated counselling team guides students to top universities in North America, the United Kingdom, Australia, and beyond.
         </p>
         <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:40px;">
@@ -1111,13 +1118,13 @@
   ══════════════════════════════════════════════════ -->
   <section class="res-cta">
     <div class="container">
-      <h2>See the <em>NAIS Difference</em> for Yourself</h2>
-      <p>Book a personal campus tour and meet our leadership team. We would love to show you what makes NAIS Dubai's most trusted American school.</p>
+      <h2 data-i18n-html="acad.cta.h3">Start Your Child's Journey at NAIS</h2>
+      <p data-i18n="acad.cta.p">Enrollment open for 2026–2027. Join our community of 900+ students from 45+ nationalities.</p>
       <div class="res-cta-btns">
-        <a href="admissions.html#apply" class="btn-cta-primary">
+        <a href="admissions.html#apply" class="btn-cta-primary" data-i18n-html="btn.apply-now">
           <i class="fas fa-paper-plane"></i> Apply Now
         </a>
-        <a href="admissions.html" class="btn-cta-outline">
+        <a href="admissions.html" class="btn-cta-outline" data-i18n-html="adm.tour">
           <i class="fas fa-calendar-check"></i> Book a Campus Tour
         </a>
       </div>
@@ -1135,7 +1142,7 @@
             <div class="footer-logo">
               <img src="images/nais-logo.png" alt="NAIS Dubai Logo" class="footer-logo-img" />
             </div>
-            <p class="footer-tagline">North American International School — inspiring excellence, building character, shaping global leaders since 2005.</p>
+            <p class="footer-tagline" data-i18n="cur.footer.desc">North American International School — inspiring excellence, building character, shaping global leaders since 2005.</p>
             <div class="footer-social">
               <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -1145,36 +1152,36 @@
             </div>
           </div>
           <div class="footer-col">
-            <h4 class="footer-heading">Quick Links</h4>
+            <h4 class="footer-heading" data-i18n="footer.links">Quick Links</h4>
             <ul class="footer-links">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About NAIS</a></li>
-              <li><a href="academics.html">Academics</a></li>
-              <li><a href="admissions.html">Admissions</a></li>
-              <li><a href="phase4-results.html">Academic Results</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="index.html" data-i18n="legal.home">Home</a></li>
+              <li><a href="about.html" data-i18n="footer.ql.about">About NAIS</a></li>
+              <li><a href="academics.html" data-i18n="footer.ql.academics">Academics</a></li>
+              <li><a href="admissions.html" data-i18n="footer.ql.admissions">Admissions</a></li>
+              <li><a href="phase4-results.html" data-i18n="nav.sub.results">Academic Results</a></li>
+              <li><a href="gallery.html" data-i18n="footer.ql.gallery">Gallery</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4 class="footer-heading">Academics</h4>
+            <h4 class="footer-heading" data-i18n="footer.ac.programs">Academics</h4>
             <ul class="footer-links">
-              <li><a href="academics.html#kindergarten">Kindergarten</a></li>
-              <li><a href="academics.html#elementary">Elementary School</a></li>
-              <li><a href="academics.html#middle">Middle School</a></li>
-              <li><a href="academics.html#high">High School</a></li>
-              <li><a href="pbl.html">Project-Based Learning</a></li>
-              <li><a href="curriculum.html">Curriculum</a></li>
+              <li><a href="academics.html#kindergarten" data-i18n="footer.al.kg">Kindergarten</a></li>
+              <li><a href="academics.html#elementary" data-i18n="footer.al.elem">Elementary School</a></li>
+              <li><a href="academics.html#middle" data-i18n="footer.al.mid">Middle School</a></li>
+              <li><a href="academics.html#high" data-i18n="footer.al.high">High School</a></li>
+              <li><a href="pbl.html" data-i18n="nav.sub.pbl">Project-Based Learning</a></li>
+              <li><a href="curriculum.html" data-i18n="nav.sub.curriculum">Curriculum</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4 class="footer-heading">Contact</h4>
+            <h4 class="footer-heading" data-i18n="footer.contact">Contact</h4>
             <ul class="footer-contact-list">
-              <li><i class="fas fa-map-marker-alt"></i><span>Al Mizhar 1, Mirdif, Dubai, UAE</span></li>
+              <li><i class="fas fa-map-marker-alt"></i><span data-i18n="footer.addr">Al Mizhar 1, Mirdif, Dubai, UAE</span></li>
               <li><i class="fas fa-phone-alt"></i><a href="tel:+97142884844">+971 4 288 4844</a></li>
               <li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li>
-              <li><i class="fas fa-clock"></i><span>Sun – Thu: 8:00 AM – 3:30 PM</span></li>
+              <li><i class="fas fa-clock"></i><span data-i18n="footer.hours">Sun – Thu: 8:00 AM – 3:30 PM</span></li>
             </ul>
-            <a href="admissions.html" class="btn btn-red-sm">Apply Now <i class="fas fa-arrow-right"></i></a>
+            <a href="admissions.html" class="btn btn-red-sm"><span data-i18n="footer.apply.btn">Apply Now</span> <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -1182,12 +1189,12 @@
     <div class="footer-bottom">
       <div class="container">
         <div class="footer-bottom-container">
-          <p class="footer-copy">&copy; 2025 North American International School Dubai. All rights reserved.</p>
+          <p class="footer-copy" data-i18n="footer.copy">&copy; 2025 North American International School Dubai. All rights reserved.</p>
           <ul class="footer-bottom-links">
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-            <li><a href="terms-of-use.html">Terms of Use</a></li>
-            <li><a href="safeguarding.html">Safeguarding</a></li>
-            <li><a href="sitemap.html">Sitemap</a></li>
+            <li><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+            <li><a href="terms-of-use.html" data-i18n="footer.terms">Terms of Use</a></li>
+            <li><a href="safeguarding.html" data-i18n="footer.safeguarding">Safeguarding</a></li>
+            <li><a href="sitemap.html" data-i18n="footer.sitemap">Sitemap</a></li>
           </ul>
         </div>
       </div>
@@ -1218,6 +1225,7 @@
   <script src="js/nav.js"></script>
   <script src="js/img-fallback.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
 
   <!-- Animate progress bars on scroll -->
   <script>

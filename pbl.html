@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/nav.css?v=9" />
   <link rel="stylesheet" href="css/mobile.css?v=9" />
   <link rel="stylesheet" href="css/enhancements.css?v=5" />
+  <link rel="stylesheet" href="css/rtl.css?v=1" />
   <style>
     /* TOPBAR LOGO FIX — desktop only */
     @media (min-width: 1200px) {
@@ -392,7 +393,7 @@
     .pbl-cta-btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
   </style>
 </head>
-<body>
+<body data-page-title="page.title.pbl">
 
   <!-- TOP BAR -->
   <div class="topbar" id="main-topbar">
@@ -403,14 +404,20 @@
       <div class="topbar-left">
         <a href="tel:+97142884844"><i class="fas fa-phone-alt"></i> +971 4 288 4844</a>
         <a href="mailto:admissions@naischool.ae"><i class="fas fa-envelope"></i> admissions@naischool.ae</a>
-        <span><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</span>
+        <span><i class="fas fa-map-marker-alt"></i> <span data-i18n="topbar.address">Al Mizhar 1, Dubai, UAE</span></span>
       </div>
       <div class="topbar-right">
-        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">Parent Portal</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.portal">Parent Portal</a>
         <span class="topbar-divider">|</span>
-        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">E-Learning</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.elearning">E-Learning</a>
         <span class="topbar-divider">|</span>
-        <a href="mailto:careers@naischool.ae" class="topbar-link">Careers</a>
+        <a href="mailto:careers@naischool.ae" class="topbar-link" data-i18n="topbar.careers">Careers</a>
+        <span class="topbar-divider">|</span>
+        <div class="lang-switcher-wrap">
+          <button class="lang-switcher active" data-lang="en" aria-pressed="true" title="English">EN</button>
+          <span class="lang-switcher-divider">|</span>
+          <button class="lang-switcher" data-lang="ar" aria-pressed="false" title="العربية">ع</button>
+        </div>
         <div class="topbar-social">
           <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -430,11 +437,11 @@
       </a>
       <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
         <div class="nav-rail-lines"><span></span><span></span><span></span></div>
-        <span class="nav-rail-label">MENU</span>
+        <span class="nav-rail-label" data-i18n="nav.menu">MENU</span>
       </button>
     </div>
     <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
-    <span id="nav-desktop-label">MENU</span>
+    <span id="nav-desktop-label" data-i18n="nav.menu">MENU</span>
   </div>
 
   <!-- FULL-SCREEN NAV OVERLAY -->
@@ -448,16 +455,16 @@
           <img src="images/nais-logo.png" alt="North American International School" style="height:72px;max-width:300px;width:auto;object-fit:contain;display:block;" />
         </a>
         <div class="nav-left-tagline">
-          <div class="nav-left-tagline-top">Est. 2005 · Dubai, UAE</div>
-          <div class="nav-left-tagline-title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
-          <p class="nav-left-tagline-sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
+          <div class="nav-left-tagline-top" data-i18n="nav.tagline.est">Est. 2005 · Dubai, UAE</div>
+          <div class="nav-left-tagline-title" data-i18n-html="nav.tagline.title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
+          <p class="nav-left-tagline-sub" data-i18n="nav.tagline.sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
         </div>
         <div class="nav-left-spacer"></div>
         <div class="nav-promo-card">
-          <div class="nav-promo-card-label">Open Enrollment</div>
-          <div class="nav-promo-card-title">Apply for <span>2025–2026</span></div>
-          <p class="nav-promo-card-desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
-          <a href="admissions.html" class="nav-promo-card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <div class="nav-promo-card-label" data-i18n="nav.promo.label">Open Enrollment</div>
+          <div class="nav-promo-card-title" data-i18n="nav.promo.title">Apply for 2026–2027</div>
+          <p class="nav-promo-card-desc" data-i18n="nav.promo.desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
+          <a href="admissions.html" class="nav-promo-card-link" data-i18n="nav.promo.link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -471,69 +478,59 @@
         <nav aria-label="Main Navigation">
           <ul class="nav-primary-list">
             <li class="nav-primary-item" data-item="about">
-              <a href="about.html" class="nav-primary-link">About</a>
+              <a href="about.html" class="nav-primary-link" data-i18n="nav.about">About</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link">Mission &amp; Vision</a></li>
-                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">School Leadership</a></li>
-                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link">Core Values — CARE</a></li>
-                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link">Our Campus</a></li>
-                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link">Accreditation</a></li>
+                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link" data-i18n="nav.sub.mission">Mission &amp; Vision</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.leadership">School Leadership</a></li>
+                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link" data-i18n="nav.sub.values">Core Values — CARE</a></li>
+                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link" data-i18n="nav.sub.campus">Our Campus</a></li>
+                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link" data-i18n="nav.sub.accreditation">Accreditation</a></li>
               </ul>
             </li>
             <li class="nav-primary-item" data-item="academics">
-              <a href="academics.html" class="nav-primary-link">Academics</a>
+              <a href="academics.html" class="nav-primary-link" data-i18n="nav.academics">Academics</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link">Kindergarten</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link">Elementary School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link">Middle School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link">High School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link">AP Courses</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=curriculum" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">American Curriculum ★</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;">Academic Results ★</a></li>
-                <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" aria-current="page">Project-Based Learning ★</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link" data-i18n="nav.sub.kg">Kindergarten</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link" data-i18n="nav.sub.elementary">Elementary School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link" data-i18n="nav.sub.high">High School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link" data-i18n="nav.sub.ap">AP Courses</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=curriculum" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.curriculum">American Curriculum ★</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;" data-i18n="nav.sub.results">Academic Results ★</a></li>
+                <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" aria-current="page" data-i18n="nav.sub.pbl">Project-Based Learning ★</a></li>
               </ul>
             </li>
             <li class="nav-primary-item" data-item="student-life">
-              <a href="index.html#student-life" class="nav-primary-link">Student Life</a>
+              <a href="index.html#student-life" class="nav-primary-link" data-i18n="nav.student-life">Student Life</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Arts &amp; Culture</a></li>
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Athletics &amp; Sports</a></li>
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Clubs &amp; Activities</a></li>
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Community Service</a></li>
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Student Council</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.arts">Arts &amp; Culture</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.athletics">Athletics &amp; Sports</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.clubs">Clubs &amp; Activities</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.service">Community Service</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.council">Student Council</a></li>
               </ul>
             </li>
             <li class="nav-primary-item" data-item="admissions">
-              <a href="admissions.html" class="nav-primary-link">Admissions</a>
+              <a href="admissions.html" class="nav-primary-link" data-i18n="nav.admissions">Admissions</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link">How to Apply</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link">Tuition &amp; Fees</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link">Required Documents</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#faq" class="nav-subnav-link">Admissions FAQ</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link">Apply Now</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link" data-i18n="nav.sub.how-apply">How to Apply</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link" data-i18n="nav.sub.fees">Tuition &amp; Fees</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link" data-i18n="nav.sub.documents">Required Documents</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#faq" class="nav-subnav-link" data-i18n="nav.sub.faq">Admissions FAQ</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link" data-i18n="nav.apply-now">Apply Now</a></li>
               </ul>
             </li>
-
-
             <li class="nav-primary-item" data-item="news">
-              <a href="index.html#news" class="nav-primary-link">News &amp; Events</a>
-              <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link">Latest News</a></li>
-                <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link">Events Calendar</a></li>
-                <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link">Announcements</a></li>
-                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link">Contact Us</a></li>
-                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link">Visit Campus</a></li>
-              </ul>
+              <a href="index.html#news" class="nav-primary-link" data-i18n="nav.sub.news">News &amp; Events</a>
             </li>
-
             <li class="nav-primary-item">
-              <a href="gallery.html" class="nav-primary-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:6px;"></i>Gallery</a>
+              <a href="gallery.html" class="nav-primary-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:6px;"></i><span data-i18n="nav.sub.gallery">Gallery</span></a>
             </li>
           </ul>
         </nav>
         <div class="nav-panel-bottom">
           <div class="nav-bottom-careers">
-            <span class="nav-careers-label">Career Opportunities</span>
+            <span class="nav-careers-label" data-i18n="nav.careers">Career Opportunities</span>
             <div class="nav-bottom-social">
               <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="https://twitter.com/NAISDubai" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -543,13 +540,13 @@
             </div>
           </div>
           <div class="nav-bottom-search">
-            <span class="nav-search-label">Search</span>
+            <span class="nav-search-label" data-i18n="nav.search">Search</span>
             <div class="nav-search-form">
-              <input type="text" class="nav-search-input" placeholder="Keyword" aria-label="Search" />
+              <input type="text" class="nav-search-input" data-i18n-placeholder="nav.search-placeholder" placeholder="Keyword" aria-label="Search" />
               <button class="nav-search-btn" aria-label="Submit Search"><i class="fas fa-search"></i></button>
             </div>
           </div>
-          <a href="admissions.html" class="nav-apply-btn">Apply Now</a>
+          <a href="admissions.html" class="nav-apply-btn" data-i18n="nav.apply-now">Apply Now</a>
         </div>
       </div>
     </div>
@@ -558,12 +555,12 @@
   <!-- QUICK LINKS BAR -->
   <nav class="quick-links-bar" aria-label="Quick Access Links">
     <div class="quick-links-inner">
-      <a href="admissions.html#apply" class="quick-link-item highlight"><i class="fas fa-user-plus"></i> Apply Now</a>
-      <a href="#what-is-pbl"  class="quick-link-item"><i class="fas fa-lightbulb"></i> What is PBL?</a>
-      <a href="#pbl-pillars"  class="quick-link-item"><i class="fas fa-layer-group"></i> Core Pillars</a>
-      <a href="#pbl-skills"   class="quick-link-item"><i class="fas fa-brain"></i> Key Skills</a>
-      <a href="#pbl-process"  class="quick-link-item"><i class="fas fa-tasks"></i> How It Works</a>
-      <a href="academics.html" class="quick-link-item"><i class="fas fa-graduation-cap"></i> Academics</a>
+      <a href="admissions.html#apply" class="quick-link-item highlight"><i class="fas fa-user-plus"></i> <span data-i18n="nav.apply-now">Apply Now</span></a>
+      <a href="#what-is-pbl"  class="quick-link-item"><i class="fas fa-lightbulb"></i> <span data-i18n="pbl.quick.what">What is PBL?</span></a>
+      <a href="#pbl-pillars"  class="quick-link-item"><i class="fas fa-layer-group"></i> <span data-i18n="pbl.quick.pillars">Core Pillars</span></a>
+      <a href="#pbl-skills"   class="quick-link-item"><i class="fas fa-brain"></i> <span data-i18n="pbl.quick.skills">Key Skills</span></a>
+      <a href="#pbl-process"  class="quick-link-item"><i class="fas fa-tasks"></i> <span data-i18n="pbl.quick.process">How It Works</span></a>
+      <a href="academics.html" class="quick-link-item"><i class="fas fa-graduation-cap"></i> <span data-i18n="nav.academics">Academics</span></a>
     </div>
   </nav>
 
@@ -575,14 +572,14 @@
     <div class="page-hero-overlay"></div>
     <div class="page-hero-content">
       <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="index.html">Home</a>
+        <a href="index.html" data-i18n="legal.home">Home</a>
         <span>/</span>
-        <a href="academics.html">Academics</a>
+        <a href="academics.html" data-i18n="nav.academics">Academics</a>
         <span>/</span>
-        <span>Project-Based Learning</span>
+        <span data-i18n="nav.sub.pbl">Project-Based Learning</span>
       </nav>
-      <h1 class="page-hero-title">Project-Based <em>Learning</em></h1>
-      <p class="page-hero-subtitle">At NAIS, students don't just learn information — they <strong>use it</strong>. PBL empowers every learner to investigate, collaborate, and create real-world solutions.</p>
+      <h1 class="page-hero-title" data-i18n-html="pbl.hero.h1">Project-Based<br/><em>Learning at NAIS</em></h1>
+      <p class="page-hero-subtitle" data-i18n="pbl.hero.sub">Developing critical thinkers, creative problem-solvers, and collaborative leaders through hands-on, real-world learning experiences.</p>
     </div>
     <div class="page-hero-accent">PBL @ NAIS</div>
   </section>
@@ -597,13 +594,13 @@
 
         <!-- LEFT: TEXT -->
         <div class="animate-fade-up">
-          <div class="section-label">Our Teaching Philosophy</div>
-          <h2 class="section-title">What is Project-Based<br/><em>Learning?</em></h2>
+          <div class="section-label" data-i18n="pbl.label">Our Teaching Philosophy</div>
+          <h2 class="section-title" data-i18n-html="pbl.hero.h1">Project-Based<br/><em>Learning at NAIS</em></h2>
           <div class="title-ornament"></div>
-          <p style="font-size:1.05rem;line-height:1.8;color:#3a4a6b;margin-bottom:18px;">
+          <p style="font-size:1.05rem;line-height:1.8;color:#3a4a6b;margin-bottom:18px;" data-i18n="pbl.intro.p1">
             Project-Based Learning is an approach where students learn by actively working on real-world, meaningful projects rather than only listening to lessons or memorizing information.
           </p>
-          <p style="font-size:0.95rem;line-height:1.8;color:#5a6a8a;">
+          <p style="font-size:0.95rem;line-height:1.8;color:#5a6a8a;" data-i18n="pbl.intro.p2">
             Instead of only learning concepts in isolation, students at NAIS engage with authentic challenges that require them to think critically, ask deep questions, and collaborate with their peers — building skills that last a lifetime.
           </p>
 
@@ -621,8 +618,8 @@
           <div class="pbl-intro-visual">
             <img src="images/school-19.jpg" alt="Students collaborating on a project at NAIS" />
             <div class="pbl-intro-badge">
-              <div class="pbl-intro-badge-label">Learning Approach</div>
-              <div class="pbl-intro-badge-value">Hands-On &amp; Real-World</div>
+              <div class="pbl-intro-badge-label" data-i18n="pbl.badge.label">Learning Approach</div>
+              <div class="pbl-intro-badge-value" data-i18n-html="pbl.badge.value">Hands-On &amp; Real-World</div>
             </div>
           </div>
         </div>
@@ -638,10 +635,10 @@
   <section class="section-pad" id="pbl-pillars" style="background:#f7f8fc;">
     <div class="container">
       <div style="text-align:center;max-width:680px;margin:0 auto;" class="animate-fade-up">
-        <div class="section-label">The Four Pillars</div>
-        <h2 class="section-title">Instead of Just Learning Concepts,<br/>Students <em>Do</em> More</h2>
+        <div class="section-label" data-i18n="pbl.pillars.label">The Four Pillars</div>
+        <h2 class="section-title" data-i18n-html="pbl.pillars.h2">Instead of Just Learning Concepts,<br/>Students <em>Do</em> More</h2>
         <div class="title-ornament" style="margin:0 auto 24px;"></div>
-        <p style="color:#5a6a8a;font-size:0.95rem;line-height:1.75;">
+        <p style="color:#5a6a8a;font-size:0.95rem;line-height:1.75;" data-i18n="pbl.pillars.sub">
           At NAIS, PBL is built on four core student actions that transform passive learning into active discovery.
         </p>
       </div>
@@ -650,26 +647,26 @@
 
         <article class="pbl-pillar-card animate-fade-up">
           <div class="pbl-pillar-icon"><i class="fas fa-search"></i></div>
-          <h3 class="pbl-pillar-title">Investigate Real-Life Problems</h3>
-          <p class="pbl-pillar-desc">Students tackle genuine, meaningful challenges that connect to the world beyond the classroom — making learning relevant and motivating.</p>
+          <h3 class="pbl-pillar-title" data-i18n="pbl.p1.h3">Investigate Real-Life Problems</h3>
+          <p class="pbl-pillar-desc" data-i18n="pbl.p1.p">Students tackle genuine, meaningful challenges that connect to the world beyond the classroom — making learning relevant and motivating.</p>
         </article>
 
         <article class="pbl-pillar-card animate-fade-up" style="transition-delay:0.1s;">
           <div class="pbl-pillar-icon"><i class="fas fa-users"></i></div>
-          <h3 class="pbl-pillar-title">Work Collaboratively</h3>
-          <p class="pbl-pillar-desc">Teamwork is at the heart of PBL. Students practise communication, compromise, and cooperation — skills essential for university and career success.</p>
+          <h3 class="pbl-pillar-title" data-i18n="pbl.p2.h3">Work Collaboratively</h3>
+          <p class="pbl-pillar-desc" data-i18n="pbl.p2.p">Teamwork is at the heart of PBL. Students practise communication, compromise, and cooperation — skills essential for university and career success.</p>
         </article>
 
         <article class="pbl-pillar-card animate-fade-up" style="transition-delay:0.2s;">
           <div class="pbl-pillar-icon"><i class="fas fa-project-diagram"></i></div>
-          <h3 class="pbl-pillar-title">Apply Knowledge Across Subjects</h3>
-          <p class="pbl-pillar-desc">PBL naturally integrates multiple disciplines — science, math, English, and more — so students see how knowledge connects in real situations.</p>
+          <h3 class="pbl-pillar-title" data-i18n="pbl.p3.h3">Apply Knowledge Across Subjects</h3>
+          <p class="pbl-pillar-desc" data-i18n="pbl.p3.p">PBL naturally integrates multiple disciplines — science, math, English, and more — so students see how knowledge connects in real situations.</p>
         </article>
 
         <article class="pbl-pillar-card animate-fade-up" style="transition-delay:0.3s;">
           <div class="pbl-pillar-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-          <h3 class="pbl-pillar-title">Create Presentations &amp; Solutions</h3>
-          <p class="pbl-pillar-desc">Projects culminate in tangible products — presentations, prototypes, campaigns, or reports — giving students a real sense of achievement and ownership.</p>
+          <h3 class="pbl-pillar-title" data-i18n-html="pbl.p4.h3">Create Presentations &amp; Solutions</h3>
+          <p class="pbl-pillar-desc" data-i18n="pbl.p4.p">Projects culminate in tangible products — presentations, prototypes, campaigns, or reports — giving students a real sense of achievement and ownership.</p>
         </article>
 
       </div>
@@ -682,13 +679,13 @@
   ══════════════════════════════════════════ -->
   <section class="pbl-tagline-section" aria-label="PBL Philosophy">
     <div class="pbl-tagline-inner animate-fade-up">
-      <p class="pbl-tagline-quote">
+      <p class="pbl-tagline-quote" data-i18n-html="pbl.quote">
         "PBL encourages students to <em>think critically</em>, ask questions, and take <em>ownership</em> of their learning."
       </p>
-      <p class="pbl-tagline-sub">
+      <p class="pbl-tagline-sub" data-i18n="pbl.quote.sub">
         At NAIS Dubai, Project-Based Learning is not an add-on — it is woven into the fabric of daily classroom life, from Kindergarten through Grade 12.
       </p>
-      <a href="admissions.html#apply" class="pbl-tagline-cta">
+      <a href="admissions.html#apply" class="pbl-tagline-cta" data-i18n-html="pbl.quote.cta">
         <i class="fas fa-user-plus"></i> Apply &amp; Join NAIS
       </a>
     </div>
@@ -712,10 +709,10 @@
 
         <!-- RIGHT: SKILLS LIST -->
         <div class="animate-fade-up" style="transition-delay:0.2s;">
-          <div class="section-label">Building for the Future</div>
-          <h2 class="section-title">Essential Skills for University<br/>&amp; <em>Future Careers</em></h2>
+          <div class="section-label" data-i18n="pbl.skills.label">Building for the Future</div>
+          <h2 class="section-title" data-i18n-html="pbl.skills.h2">Essential Skills for University<br/>&amp; <em>Future Careers</em></h2>
           <div class="title-ornament"></div>
-          <p style="font-size:0.95rem;line-height:1.8;color:#5a6a8a;margin-bottom:8px;">
+          <p style="font-size:0.95rem;line-height:1.8;color:#5a6a8a;margin-bottom:8px;" data-i18n="pbl.skills.sub">
             PBL at NAIS builds the four essential skills that top universities and global employers consistently cite as most critical for success.
           </p>
 
@@ -724,32 +721,32 @@
             <div class="pbl-skill-item">
               <div class="pbl-skill-icon"><i class="fas fa-puzzle-piece"></i></div>
               <div>
-                <div class="pbl-skill-name">Problem-Solving</div>
-                <div class="pbl-skill-desc">Students learn to break down complex challenges, think analytically, and devise creative solutions — a core skill for every career path.</div>
+                <div class="pbl-skill-name" data-i18n="pbl.sk1.name">Problem-Solving</div>
+                <div class="pbl-skill-desc" data-i18n="pbl.sk1.desc">Students learn to break down complex challenges, think analytically, and devise creative solutions — a core skill for every career path.</div>
               </div>
             </div>
 
             <div class="pbl-skill-item">
               <div class="pbl-skill-icon"><i class="fas fa-comments"></i></div>
               <div>
-                <div class="pbl-skill-name">Communication</div>
-                <div class="pbl-skill-desc">From written reports to oral presentations, students develop confidence in expressing their ideas clearly and persuasively to any audience.</div>
+                <div class="pbl-skill-name" data-i18n="pbl.sk2.name">Communication</div>
+                <div class="pbl-skill-desc" data-i18n="pbl.sk2.desc">From written reports to oral presentations, students develop confidence in expressing their ideas clearly and persuasively to any audience.</div>
               </div>
             </div>
 
             <div class="pbl-skill-item">
               <div class="pbl-skill-icon"><i class="fas fa-lightbulb"></i></div>
               <div>
-                <div class="pbl-skill-name">Creativity</div>
-                <div class="pbl-skill-desc">Open-ended projects give students the freedom to innovate, experiment, and explore original ideas — nurturing the creative thinkers of tomorrow.</div>
+                <div class="pbl-skill-name" data-i18n="pbl.sk3.name">Creativity</div>
+                <div class="pbl-skill-desc" data-i18n="pbl.sk3.desc">Open-ended projects give students the freedom to innovate, experiment, and explore original ideas — nurturing the creative thinkers of tomorrow.</div>
               </div>
             </div>
 
             <div class="pbl-skill-item">
               <div class="pbl-skill-icon"><i class="fas fa-handshake"></i></div>
               <div>
-                <div class="pbl-skill-name">Teamwork</div>
-                <div class="pbl-skill-desc">Collaborating on shared goals teaches students to listen, lead, compromise, and celebrate success together — mirroring the real workplace.</div>
+                <div class="pbl-skill-name" data-i18n="pbl.sk4.name">Teamwork</div>
+                <div class="pbl-skill-desc" data-i18n="pbl.sk4.desc">Collaborating on shared goals teaches students to listen, lead, compromise, and celebrate success together — mirroring the real workplace.</div>
               </div>
             </div>
 
@@ -767,10 +764,10 @@
   <section class="section-pad" id="pbl-process" style="background:#f7f8fc;">
     <div class="container">
       <div style="text-align:center;max-width:680px;margin:0 auto;" class="animate-fade-up">
-        <div class="section-label">The PBL Journey</div>
-        <h2 class="section-title">How Project-Based Learning<br/><em>Works at NAIS</em></h2>
+        <div class="section-label" data-i18n="pbl.process.label">The PBL Journey</div>
+        <h2 class="section-title" data-i18n-html="pbl.process.h2">How Project-Based Learning<br/><em>Works at NAIS</em></h2>
         <div class="title-ornament" style="margin:0 auto 24px;"></div>
-        <p style="color:#5a6a8a;font-size:0.95rem;line-height:1.75;">
+        <p style="color:#5a6a8a;font-size:0.95rem;line-height:1.75;" data-i18n="pbl.process.sub">
           Every PBL project follows a carefully structured journey that guides students from curiosity to creation.
         </p>
       </div>
@@ -780,43 +777,43 @@
         <article class="pbl-process-card animate-fade-up">
           <div class="pbl-process-step">01</div>
           <div class="pbl-process-icon"><i class="fas fa-question-circle"></i></div>
-          <h3 class="pbl-process-title">Ask the Driving Question</h3>
-          <p class="pbl-process-desc">Every project begins with a compelling, open-ended question rooted in a real-world context — sparking curiosity and giving learning a clear purpose.</p>
+          <h3 class="pbl-process-title" data-i18n="pbl.step1.h3">Ask the Driving Question</h3>
+          <p class="pbl-process-desc" data-i18n="pbl.step1.p">Every project begins with a compelling, open-ended question rooted in a real-world context — sparking curiosity and giving learning a clear purpose.</p>
         </article>
 
         <article class="pbl-process-card animate-fade-up" style="transition-delay:0.1s;">
           <div class="pbl-process-step">02</div>
           <div class="pbl-process-icon"><i class="fas fa-book-open"></i></div>
-          <h3 class="pbl-process-title">Research &amp; Investigate</h3>
-          <p class="pbl-process-desc">Students gather information, conduct research, interview experts, and analyse data — building genuine subject knowledge in context.</p>
+          <h3 class="pbl-process-title" data-i18n-html="pbl.step2.h3">Research &amp; Investigate</h3>
+          <p class="pbl-process-desc" data-i18n="pbl.step2.p">Students gather information, conduct research, interview experts, and analyse data — building genuine subject knowledge in context.</p>
         </article>
 
         <article class="pbl-process-card animate-fade-up" style="transition-delay:0.2s;">
           <div class="pbl-process-step">03</div>
           <div class="pbl-process-icon"><i class="fas fa-users"></i></div>
-          <h3 class="pbl-process-title">Collaborate &amp; Plan</h3>
-          <p class="pbl-process-desc">Working in teams, students plan their approach, divide responsibilities, and set goals — learning the dynamics of effective collaboration.</p>
+          <h3 class="pbl-process-title" data-i18n-html="pbl.step3.h3">Collaborate &amp; Plan</h3>
+          <p class="pbl-process-desc" data-i18n="pbl.step3.p">Working in teams, students plan their approach, divide responsibilities, and set goals — learning the dynamics of effective collaboration.</p>
         </article>
 
         <article class="pbl-process-card animate-fade-up" style="transition-delay:0.3s;">
           <div class="pbl-process-step">04</div>
           <div class="pbl-process-icon"><i class="fas fa-paint-brush"></i></div>
-          <h3 class="pbl-process-title">Create &amp; Build</h3>
-          <p class="pbl-process-desc">Students design, build, or produce their solution — whether it's a prototype, a campaign, a report, a video, or a community presentation.</p>
+          <h3 class="pbl-process-title" data-i18n-html="pbl.step4.h3">Create &amp; Build</h3>
+          <p class="pbl-process-desc" data-i18n="pbl.step4.p">Students design, build, or produce their solution — whether it's a prototype, a campaign, a report, a video, or a community presentation.</p>
         </article>
 
         <article class="pbl-process-card animate-fade-up" style="transition-delay:0.4s;">
           <div class="pbl-process-step">05</div>
           <div class="pbl-process-icon"><i class="fas fa-redo-alt"></i></div>
-          <h3 class="pbl-process-title">Reflect &amp; Revise</h3>
-          <p class="pbl-process-desc">Continuous feedback loops — from teachers and peers — encourage students to reflect, improve, and embrace the iterative nature of real problem-solving.</p>
+          <h3 class="pbl-process-title" data-i18n-html="pbl.step5.h3">Reflect &amp; Revise</h3>
+          <p class="pbl-process-desc" data-i18n="pbl.step5.p">Continuous feedback loops — from teachers and peers — encourage students to reflect, improve, and embrace the iterative nature of real problem-solving.</p>
         </article>
 
         <article class="pbl-process-card animate-fade-up" style="transition-delay:0.5s;">
           <div class="pbl-process-step">06</div>
           <div class="pbl-process-icon"><i class="fas fa-star"></i></div>
-          <h3 class="pbl-process-title">Present &amp; Celebrate</h3>
-          <p class="pbl-process-desc">Projects culminate in a public presentation to an authentic audience, giving students a meaningful sense of accomplishment and real-world impact.</p>
+          <h3 class="pbl-process-title" data-i18n-html="pbl.step6.h3">Present &amp; Celebrate</h3>
+          <p class="pbl-process-desc" data-i18n="pbl.step6.p">Projects culminate in a public presentation to an authentic audience, giving students a meaningful sense of accomplishment and real-world impact.</p>
         </article>
 
       </div>
@@ -829,13 +826,13 @@
   ══════════════════════════════════════════ -->
   <section class="pbl-cta-strip" aria-label="Call to Action">
     <div class="container">
-      <h2>Experience PBL at <em>NAIS Dubai</em></h2>
-      <p>Join a school where your child will be challenged, inspired, and empowered to make a real difference — from day one.</p>
+      <h2 data-i18n-html="pbl.cta.h2">Experience PBL at <em>NAIS Dubai</em></h2>
+      <p data-i18n="pbl.cta.p">Join a school where your child will be challenged, inspired, and empowered to make a real difference — from day one.</p>
       <div class="pbl-cta-strip-btns">
-        <a href="admissions.html#apply" class="pbl-cta-btn-white">
+        <a href="admissions.html#apply" class="pbl-cta-btn-white" data-i18n-html="pbl.cta.apply">
           <i class="fas fa-user-plus"></i> Apply Now
         </a>
-        <a href="academics.html" class="pbl-cta-btn-outline">
+        <a href="academics.html" class="pbl-cta-btn-outline" data-i18n-html="pbl.cta.academics">
           <i class="fas fa-graduation-cap"></i> Explore Academics
         </a>
       </div>
@@ -878,7 +875,7 @@
         <div class="footer-grid">
           <div class="footer-col footer-brand">
             <a href="index.html"><img src="images/nais-logo.png" alt="NAIS Dubai" style="height:56px;width:auto;object-fit:contain;background:#fff;padding:8px 14px;border-radius:8px;display:block;margin-bottom:20px;" /></a>
-            <p>North American International School Dubai — inspiring excellence and building tomorrow's leaders through a rigorous American curriculum and a vibrant international community.</p>
+            <p data-i18n="pbl.footer.desc">North American International School Dubai — inspiring excellence and building tomorrow's leaders through a rigorous American curriculum and a vibrant international community.</p>
             <div class="footer-social">
               <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -888,47 +885,47 @@
             </div>
           </div>
           <div class="footer-col">
-            <h4>Quick Links</h4>
+            <h4 data-i18n="footer.links">Quick Links</h4>
             <ul>
-              <li><a href="about.html">About NAIS</a></li>
-              <li><a href="academics.html">Academics</a></li>
-              <li><a href="pbl.html">Project-Based Learning</a></li>
-              <li><a href="curriculum.html">American Curriculum</a></li>
-              <li><a href="admissions.html">Admissions</a></li>
-              <li><a href="parent-faq.html">Parent FAQ</a></li>
-              <li><a href="gallery.html" style="color:#E11B22;font-weight:600;"><i class="fas fa-images" style="margin-right:5px;"></i>Photo Gallery</a></li>
+              <li><a href="about.html" data-i18n="footer.ql.about">About NAIS</a></li>
+              <li><a href="academics.html" data-i18n="footer.ql.academics">Academics</a></li>
+              <li><a href="pbl.html" data-i18n="pbl.footer.pbl">Project-Based Learning</a></li>
+              <li><a href="curriculum.html" data-i18n="pbl.footer.cur">American Curriculum</a></li>
+              <li><a href="admissions.html" data-i18n="footer.ql.admissions">Admissions</a></li>
+              <li><a href="parent-faq.html" data-i18n="pbl.footer.faq">Parent FAQ</a></li>
+              <li><a href="gallery.html" style="color:#E11B22;font-weight:600;"><i class="fas fa-images" style="margin-right:5px;"></i><span data-i18n="footer.ql.gallery">Photo Gallery</span></a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4>Academics</h4>
+            <h4 data-i18n="footer.ac.programs">Academics</h4>
             <ul>
-              <li><a href="academics.html#kindergarten">Kindergarten</a></li>
-              <li><a href="academics.html#elementary">Elementary</a></li>
-              <li><a href="academics.html#middle">Middle School</a></li>
-              <li><a href="academics.html#high">High School</a></li>
-              <li><a href="academics.html#ap">AP Courses</a></li>
-              <li><a href="pbl.html">PBL Program</a></li>
+              <li><a href="academics.html#kindergarten" data-i18n="footer.al.kg">Kindergarten</a></li>
+              <li><a href="academics.html#elementary" data-i18n="footer.al.elem">Elementary</a></li>
+              <li><a href="academics.html#middle" data-i18n="footer.al.mid">Middle School</a></li>
+              <li><a href="academics.html#high" data-i18n="footer.al.high">High School</a></li>
+              <li><a href="academics.html#ap" data-i18n="footer.al.ap">AP Courses</a></li>
+              <li><a href="pbl.html" data-i18n="pbl.footer.pbl.prog">PBL Program</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4>Contact Us</h4>
+            <h4 data-i18n="footer.contact">Contact Us</h4>
             <ul class="footer-contact-list">
-              <li><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</li>
+              <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.addr">Al Mizhar 1, Dubai, UAE</span></li>
               <li><i class="fas fa-phone-alt"></i> <a href="tel:+97142884844">+971 4 288 4844</a></li>
               <li><i class="fas fa-envelope"></i> <a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li>
             </ul>
-            <a href="admissions.html#apply" class="btn btn-primary" style="margin-top:20px;display:inline-block;">Apply Now</a>
+            <a href="admissions.html#apply" class="btn btn-primary" style="margin-top:20px;display:inline-block;" data-i18n="footer.apply.btn">Apply Now</a>
           </div>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p>&copy; 2025 North American International School Dubai. All rights reserved.</p>
+        <p data-i18n="footer.copy">&copy; 2025 North American International School Dubai. All rights reserved.</p>
         <div class="footer-bottom-links">
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="terms-of-use.html">Terms of Use</a>
-          <a href="sitemap.html">Sitemap</a>
+          <a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a>
+          <a href="terms-of-use.html" data-i18n="footer.terms">Terms of Use</a>
+          <a href="sitemap.html" data-i18n="footer.sitemap">Sitemap</a>
         </div>
       </div>
     </div>
@@ -936,6 +933,7 @@
 
   <script src="js/nav.js"></script>
   <script src="js/img-fallback.js"></script>
+  <script src="js/i18n.js"></script>
   <script>
     // ── Scroll Animation Observer ──
     const animEls = document.querySelectorAll('.animate-fade-up');

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>American Curriculum | North American International School Dubai</title>
+  <meta name="page-title-key" content="page.title.curriculum" />
   <meta name="description" content="Understand how the American Curriculum works at NAIS Dubai — grading, assessments, AP courses, university preparation, and why it's the right choice for your child." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,6 +16,7 @@
   <link rel="stylesheet" href="css/nav.css?v=9" />
   <link rel="stylesheet" href="css/mobile.css?v=9" />
   <link rel="stylesheet" href="css/enhancements.css?v=5" />
+  <link rel="stylesheet" href="css/rtl.css?v=1" />
   <style>
     /* ── TOPBAR FIX ── */
     @media (min-width: 1200px) {
@@ -765,7 +767,7 @@
     }
   </style>
 </head>
-<body>
+<body data-page-title="page.title.curriculum">
 
   <!-- ══ TOP BAR ══ -->
   <div class="topbar" id="main-topbar">
@@ -776,14 +778,20 @@
       <div class="topbar-left">
         <a href="tel:+97142884844"><i class="fas fa-phone-alt"></i> +971 4 288 4844</a>
         <a href="mailto:admissions@naischool.ae"><i class="fas fa-envelope"></i> admissions@naischool.ae</a>
-        <span><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</span>
+        <span><i class="fas fa-map-marker-alt"></i> <span data-i18n="topbar.address">Al Mizhar 1, Dubai, UAE</span></span>
       </div>
       <div class="topbar-right">
-        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">Parent Portal</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.portal">Parent Portal</a>
         <span class="topbar-divider">|</span>
-        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">E-Learning</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.elearning">E-Learning</a>
         <span class="topbar-divider">|</span>
-        <a href="mailto:careers@naischool.ae" class="topbar-link">Careers</a>
+        <a href="mailto:careers@naischool.ae" class="topbar-link" data-i18n="topbar.careers">Careers</a>
+        <span class="topbar-divider">|</span>
+        <div class="lang-switcher-wrap">
+          <button class="lang-switcher active" data-lang="en" aria-pressed="true" title="English">EN</button>
+          <span class="lang-switcher-divider">|</span>
+          <button class="lang-switcher" data-lang="ar" aria-pressed="false" title="العربية">ع</button>
+        </div>
         <div class="topbar-social">
           <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -803,11 +811,11 @@
       </a>
       <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
         <div class="nav-rail-lines"><span></span><span></span><span></span></div>
-        <span class="nav-rail-label">MENU</span>
+        <span class="nav-rail-label" data-i18n="nav.menu">MENU</span>
       </button>
     </div>
     <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
-    <span id="nav-desktop-label">MENU</span>
+    <span id="nav-desktop-label" data-i18n="nav.menu">MENU</span>
   </div>
 
   <!-- ══ FULL-SCREEN NAV OVERLAY ══ -->
@@ -819,16 +827,16 @@
           <img src="images/nais-logo.png" alt="North American International School" style="height:72px;max-width:300px;width:auto;object-fit:contain;display:block;" />
         </a>
         <div class="nav-left-tagline">
-          <div class="nav-left-tagline-top">Est. 2005 · Dubai, UAE</div>
-          <div class="nav-left-tagline-title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
-          <p class="nav-left-tagline-sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
+          <div class="nav-left-tagline-top" data-i18n="nav.tagline.est">Est. 2005 · Dubai, UAE</div>
+          <div class="nav-left-tagline-title" data-i18n-html="nav.tagline.title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
+          <p class="nav-left-tagline-sub" data-i18n="nav.tagline.sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
         </div>
         <div class="nav-left-spacer"></div>
         <div class="nav-promo-card">
-          <div class="nav-promo-card-label">Open Enrollment</div>
-          <div class="nav-promo-card-title">Apply for <span>2025–2026</span></div>
-          <p class="nav-promo-card-desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
-          <a href="admissions.html" class="nav-promo-card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <div class="nav-promo-card-label" data-i18n="nav.promo.label">Open Enrollment</div>
+          <div class="nav-promo-card-title" data-i18n="nav.promo.title">Apply for 2026–2027</div>
+          <p class="nav-promo-card-desc" data-i18n="nav.promo.desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
+          <a href="admissions.html" class="nav-promo-card-link" data-i18n="nav.promo.link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -840,63 +848,63 @@
         <nav aria-label="Main Navigation">
           <ul class="nav-primary-list">
             <li class="nav-primary-item" data-item="about">
-              <a href="about.html" class="nav-primary-link">About</a>
+              <a href="about.html" class="nav-primary-link" data-i18n="nav.about">About</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link">Mission &amp; Vision</a></li>
-                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">School Leadership</a></li>
-                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link">Core Values — CARE</a></li>
-                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link">Our Campus</a></li>
-                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link">Accreditation</a></li>
+                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link" data-i18n="nav.sub.mission">Mission &amp; Vision</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.leadership">School Leadership</a></li>
+                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link" data-i18n="nav.sub.values">Core Values — CARE</a></li>
+                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link" data-i18n="nav.sub.campus">Our Campus</a></li>
+                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link" data-i18n="nav.sub.accreditation">Accreditation</a></li>
               </ul>
             </li>
             <li class="nav-primary-item" data-item="academics">
-              <a href="academics.html" class="nav-primary-link">Academics</a>
+              <a href="academics.html" class="nav-primary-link" data-i18n="nav.academics">Academics</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="academics.html#kindergarten" class="nav-subnav-link">Kindergarten</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#elementary" class="nav-subnav-link">Elementary School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link">Middle School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link">High School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html#ap" class="nav-subnav-link">AP Courses</a></li>
-                <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">Project-Based Learning &#9733;</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html" class="nav-subnav-link" style="color:#4ade80;font-weight:700;">Academic Results &#9733;</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link" data-i18n="nav.sub.kg">Kindergarten</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link" data-i18n="nav.sub.elementary">Elementary School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link" data-i18n="nav.sub.high">High School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link" data-i18n="nav.sub.ap">AP Courses</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=curriculum" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.curriculum">American Curriculum ★</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;" data-i18n="nav.sub.results">Academic Results ★</a></li>
+                <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.pbl">Project-Based Learning ★</a></li>
               </ul>
-            </li>
-            <li class="nav-primary-item" data-item="curriculum" style="border-left:3px solid #F5A623;">
-              <a href="curriculum.html" class="nav-primary-link" aria-current="page" style="color:#F5A623;">American Curriculum</a>
             </li>
             <li class="nav-primary-item" data-item="student-life">
-              <a href="index.html#student-life" class="nav-primary-link">Student Life</a>
+              <a href="index.html#student-life" class="nav-primary-link" data-i18n="nav.student-life">Student Life</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.arts">Arts &amp; Culture</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.athletics">Athletics &amp; Sports</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.clubs">Clubs &amp; Activities</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.service">Community Service</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.council">Student Council</a></li>
+              </ul>
             </li>
             <li class="nav-primary-item" data-item="admissions">
-              <a href="admissions.html" class="nav-primary-link">Admissions</a>
+              <a href="admissions.html" class="nav-primary-link" data-i18n="nav.admissions">Admissions</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link">How to Apply</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link">Tuition &amp; Fees</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link">Apply Now</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link" data-i18n="nav.sub.how-apply">How to Apply</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link" data-i18n="nav.sub.fees">Tuition &amp; Fees</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link" data-i18n="nav.sub.tours">Campus Tours</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link" data-i18n="nav.sub.documents">Required Documents</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link" data-i18n="nav.apply-now">Apply Now</a></li>
               </ul>
             </li>
-
-            <li class="nav-primary-item" data-item="phase4">
-              <a href="phase4-results.html" class="nav-primary-link" style="color:#4ade80;font-weight:700;"><i class="fas fa-chart-bar" style="margin-right:5px;"></i>Phase 4 Results</a>
+            <li class="nav-primary-item" data-item="our-school">
+              <a href="about.html" class="nav-primary-link" data-i18n="nav.our-school">Our School</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="phase4-results.html#map" class="nav-subnav-link">MAP Growth</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#map-three-year" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">3-Year MAP Attainment ★</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#map-progress" class="nav-subnav-link" style="color:#4ade80;font-weight:700;">MAP Progress ★</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#psat" class="nav-subnav-link">PSAT Data</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#ap" class="nav-subnav-link">AP Courses</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#sat" class="nav-subnav-link">SAT Results</a></li>
-                <li class="nav-subnav-item"><a href="phase4-results.html#ielts" class="nav-subnav-link">IELTS Results</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.life">Life at NAIS</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.parents">Parent Community</a></li>
+                <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link" data-i18n="nav.sub.news">News &amp; Events</a></li>
+                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.contact">Contact Us</a></li>
+                <li class="nav-subnav-item"><a href="gallery.html" class="nav-subnav-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:5px;"></i><span data-i18n="nav.sub.gallery">Photo Gallery ✦</span></a></li>
               </ul>
-            </li>
-
-            <li class="nav-primary-item">
-              <a href="gallery.html" class="nav-primary-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:6px;"></i>Gallery</a>
             </li>
           </ul>
         </nav>
         <div class="nav-panel-bottom">
           <div class="nav-bottom-careers">
-            <span class="nav-careers-label">Career Opportunities</span>
+            <span class="nav-careers-label" data-i18n="nav.careers">Career Opportunities</span>
             <div class="nav-bottom-social">
               <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="https://twitter.com/NAISDubai" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -906,13 +914,13 @@
             </div>
           </div>
           <div class="nav-bottom-search">
-            <span class="nav-search-label">Search</span>
+            <span class="nav-search-label" data-i18n="nav.search">Search</span>
             <div class="nav-search-form">
-              <input type="text" class="nav-search-input" placeholder="Keyword" aria-label="Search" />
+              <input type="text" class="nav-search-input" data-i18n-placeholder="nav.search-placeholder" placeholder="Keyword" aria-label="Search" />
               <button class="nav-search-btn" aria-label="Submit Search"><i class="fas fa-search"></i></button>
             </div>
           </div>
-          <a href="admissions.html" class="nav-apply-btn">Apply Now</a>
+          <a href="admissions.html" class="nav-apply-btn" data-i18n="nav.apply-now">Apply Now</a>
         </div>
       </div>
     </div>
@@ -924,25 +932,25 @@
   <section class="cur-hero">
     <div class="cur-hero-bg-img"></div>
     <div class="container" style="position:relative;z-index:1;">
-      <div class="cur-hero-badge"><i class="fas fa-graduation-cap"></i> American Curriculum</div>
-      <h1>Understanding the<br/><em>American Curriculum</em> at NAIS</h1>
-      <p>A flexible, student-centered education system built on continuous growth, critical thinking, and genuine preparation for university and life beyond school.</p>
+      <div class="cur-hero-badge"><i class="fas fa-graduation-cap"></i> <span data-i18n="cur.hero.badge">American Curriculum Overview</span></div>
+      <h1 data-i18n-html="cur.hero.h1">The American<br/><em>Curriculum at NAIS</em></h1>
+      <p data-i18n="cur.hero.sub">A world-class, rigorous academic framework preparing students from KG through Grade 12 for success at the world's leading universities.</p>
       <div class="cur-hero-kpis">
         <div class="cur-hero-kpi">
           <span class="kpi-n">KG–12</span>
-          <span class="kpi-l">Full Programme</span>
+          <span class="kpi-l" data-i18n="cur.kpi.kg12">Full Programme</span>
         </div>
         <div class="cur-hero-kpi">
           <span class="kpi-n">80/20</span>
-          <span class="kpi-l">Coursework / Exam Split</span>
+          <span class="kpi-l" data-i18n="cur.kpi.8020">Coursework / Exam Split</span>
         </div>
         <div class="cur-hero-kpi">
           <span class="kpi-n">AP</span>
-          <span class="kpi-l">College-Level Courses</span>
+          <span class="kpi-l" data-i18n="cur.kpi.ap">College-Level Courses</span>
         </div>
         <div class="cur-hero-kpi">
           <span class="kpi-n">GPA</span>
-          <span class="kpi-l">University-Ready Tracking</span>
+          <span class="kpi-l" data-i18n="cur.kpi.gpa">University-Ready Tracking</span>
         </div>
       </div>
     </div>
@@ -952,13 +960,13 @@
   <nav class="cur-anchor-bar" aria-label="Page sections">
     <div class="container">
       <div class="cur-anchor-inner">
-        <a href="#grading"    class="cur-anchor-link active"><i class="fas fa-star-half-alt"></i> Grading</a>
-        <a href="#exams"      class="cur-anchor-link"><i class="fas fa-file-alt"></i> Assessments</a>
-        <a href="#difference" class="cur-anchor-link"><i class="fas fa-exchange-alt"></i> How It's Different</a>
-        <a href="#skills"     class="cur-anchor-link"><i class="fas fa-brain"></i> Skills</a>
-        <a href="#pathways"   class="cur-anchor-link"><i class="fas fa-road"></i> Pathways</a>
-        <a href="#why"        class="cur-anchor-link"><i class="fas fa-heart"></i> Why Choose NAIS</a>
-        <a href="#faq"        class="cur-anchor-link"><i class="fas fa-question-circle"></i> FAQ</a>
+        <a href="#grading"    class="cur-anchor-link active"><i class="fas fa-star-half-alt"></i> <span data-i18n="cur.anchor.grading">Grading</span></a>
+        <a href="#exams"      class="cur-anchor-link"><i class="fas fa-file-alt"></i> <span data-i18n="cur.anchor.exams">Assessments</span></a>
+        <a href="#difference" class="cur-anchor-link"><i class="fas fa-exchange-alt"></i> <span data-i18n="cur.anchor.difference">How It's Different</span></a>
+        <a href="#skills"     class="cur-anchor-link"><i class="fas fa-brain"></i> <span data-i18n="cur.anchor.skills">Skills</span></a>
+        <a href="#pathways"   class="cur-anchor-link"><i class="fas fa-road"></i> <span data-i18n="cur.anchor.pathways">Pathways</span></a>
+        <a href="#why"        class="cur-anchor-link"><i class="fas fa-heart"></i> <span data-i18n="cur.anchor.why">Why Choose NAIS</span></a>
+        <a href="#faq"        class="cur-anchor-link"><i class="fas fa-question-circle"></i> <span data-i18n="cur.anchor.faq">FAQ</span></a>
       </div>
     </div>
   </nav>
@@ -969,9 +977,10 @@
   <section class="cur-section cur-section--white" id="grading">
     <div class="container">
       <div class="cur-section-header">
-        <div class="cur-section-label"><i class="fas fa-star-half-alt"></i> How We Grade</div>
-        <h2 class="cur-section-title">Continuous, Transparent &amp; <em>Fair Assessment</em></h2>
-        <p class="cur-section-sub">At NAIS, students are never defined by a single exam. Grading reflects what they know, how they think, and how they grow over time.</p>
+        <div class="cur-section-label"><i class="fas fa-star-half-alt"></i> <span data-i18n="cur.grade.label">How We Grade</span></div>
+        <h2 class="cur-section-title" data-i18n-html="cur.grade.h2">Continuous, Transparent &amp; <em>Fair Assessment</em></h2>
+        <p class="cur-section-sub" data-i18n="cur.grade.sub">At NAIS, students are never defined by a single exam. Grading reflects what they know, how they think, and how they grow over time.</p>
+
       </div>
 
       <div class="grading-split">
@@ -980,9 +989,9 @@
         <div class="grading-card">
           <h3>
             <span class="card-icon"><i class="fas fa-child"></i></span>
-            Elementary School (KG–Grade 5)
+            <span data-i18n="cur.grade.elem.h3">Elementary School (KG–Grade 5)</span>
           </h3>
-          <p style="font-size:0.9rem;color:#4b5563;line-height:1.7;margin-bottom:20px;">Grades are based <strong>100% on ongoing performance</strong> — no high-stakes exams. Students are assessed through consistent daily engagement, projects, and teacher observations.</p>
+          <p style="font-size:0.9rem;color:#4b5563;line-height:1.7;margin-bottom:20px;" data-i18n="cur.grade.elem.p">Grades are based 100% on ongoing performance — no high-stakes exams. Students are assessed through consistent daily engagement, projects, and teacher observations.</p>
           <div style="background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border-radius:14px;padding:20px 24px;border:1px solid #c8e6c9;">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
               <div style="width:44px;height:44px;border-radius:50%;background:var(--cur-green);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;font-weight:800;flex-shrink:0;">100%</div>
@@ -1003,9 +1012,9 @@
         <div class="grading-card accent-red">
           <h3>
             <span class="card-icon"><i class="fas fa-user-graduate"></i></span>
-            Secondary School (Grades 6–12)
+            <span data-i18n="cur.grade.sec.h3">Secondary School (Grades 6–12)</span>
           </h3>
-          <p style="font-size:0.9rem;color:#4b5563;line-height:1.7;margin-bottom:20px;">The 80/20 model balances consistent coursework with formal examinations, ensuring a fair and well-rounded picture of every student's ability.</p>
+          <p style="font-size:0.9rem;color:#4b5563;line-height:1.7;margin-bottom:20px;" data-i18n="cur.grade.sec.p">The 80/20 model balances consistent coursework with formal examinations, ensuring a fair and well-rounded picture of every student's ability.</p>
           <div class="grade-donut-wrap">
             <div class="grade-donut"></div>
             <div class="grade-donut-legend">
@@ -1061,9 +1070,10 @@
   <section class="cur-section cur-section--light" id="exams">
     <div class="container">
       <div class="cur-section-header">
-        <div class="cur-section-label"><i class="fas fa-file-alt"></i> Assessment Philosophy</div>
-        <h2 class="cur-section-title">Balanced &amp; <em>Meaningful</em> Assessment</h2>
-        <p class="cur-section-sub">Unlike exam-heavy systems, NAIS uses multiple assessment methods throughout the semester, designed using Bloom's Taxonomy to ensure deep, meaningful learning.</p>
+        <div class="cur-section-label"><i class="fas fa-file-alt"></i> <span data-i18n="cur.assess.label">Assessment Philosophy</span></div>
+        <h2 class="cur-section-title" data-i18n-html="cur.assess.h2">Balanced &amp; <em>Meaningful</em> Assessment</h2>
+        <p class="cur-section-sub" data-i18n="cur.assess.sub">Unlike exam-heavy systems, NAIS uses multiple assessment methods throughout the semester, designed using Bloom's Taxonomy to ensure deep, meaningful learning.</p>
+
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
@@ -1143,9 +1153,9 @@
   <section class="cur-section cur-section--white" id="difference">
     <div class="container">
       <div class="cur-section-header">
-        <div class="cur-section-label"><i class="fas fa-exchange-alt"></i> Curriculum Comparison</div>
-        <h2 class="cur-section-title">How the American Curriculum <em>Stands Apart</em></h2>
-        <p class="cur-section-sub">Flexible, student-centered, and skills-based — here is how the American curriculum compares to more traditional, exam-focused systems.</p>
+        <div class="cur-section-label"><i class="fas fa-exchange-alt"></i> <span data-i18n="cur.compare.label">Curriculum Comparison</span></div>
+        <h2 class="cur-section-title" data-i18n-html="cur.compare.h2">How the American Curriculum <em>Stands Apart</em></h2>
+        <p class="cur-section-sub" data-i18n="cur.compare.sub">Flexible, student-centered, and skills-based — here is how the American curriculum compares to more traditional, exam-focused systems.</p>
       </div>
 
       <div class="compare-table-wrap">
@@ -1215,51 +1225,52 @@
   <section class="cur-section cur-section--light" id="skills">
     <div class="container">
       <div class="cur-section-header">
-        <div class="cur-section-label"><i class="fas fa-brain"></i> What Students Develop</div>
-        <h2 class="cur-section-title">Skills for the <em>Real World</em></h2>
-        <p class="cur-section-sub">The American curriculum replaces rote memorization with genuine, transferable life skills that prepare students for university, career, and citizenship.</p>
+        <div class="cur-section-label"><i class="fas fa-brain"></i> <span data-i18n="cur.skills.label">What Students Develop</span></div>
+        <h2 class="cur-section-title" data-i18n-html="cur.skills.h2">Skills for the <em>Real World</em></h2>
+        <p class="cur-section-sub" data-i18n="cur.skills.sub">The American curriculum replaces rote memorization with genuine, transferable life skills that prepare students for university, career, and citizenship.</p>
+
       </div>
 
       <div class="skills-grid">
         <div class="skill-card">
           <div class="sk-icon" style="background:var(--cur-navy);"><i class="fas fa-lightbulb"></i></div>
-          <h4>Critical Thinking</h4>
-          <p>Students question, analyze, and evaluate information — never accepting things at face value.</p>
+          <h4 data-i18n="cur.skill1.h4">Critical Thinking</h4>
+          <p data-i18n="cur.skill1.p">Students question, analyze, and evaluate information — never accepting things at face value.</p>
         </div>
         <div class="skill-card">
           <div class="sk-icon" style="background:var(--cur-red);"><i class="fas fa-palette"></i></div>
-          <h4>Creativity</h4>
-          <p>Open-ended projects and flexible assessments encourage original ideas and innovative solutions.</p>
+          <h4 data-i18n="cur.skill2.h4">Creativity</h4>
+          <p data-i18n="cur.skill2.p">Open-ended projects and flexible assessments encourage original ideas and innovative solutions.</p>
         </div>
         <div class="skill-card">
           <div class="sk-icon" style="background:var(--cur-gold);"><i class="fas fa-comments"></i></div>
-          <h4>Communication</h4>
-          <p>Presentations, debates, and research tasks build confident, articulate expression in every student.</p>
+          <h4 data-i18n="cur.skill3.h4">Communication</h4>
+          <p data-i18n="cur.skill3.p">Presentations, debates, and research tasks build confident, articulate expression in every student.</p>
         </div>
         <div class="skill-card">
           <div class="sk-icon" style="background:var(--cur-green);"><i class="fas fa-puzzle-piece"></i></div>
-          <h4>Problem-Solving</h4>
-          <p>Real-world challenges across subjects teach students to think strategically and find solutions.</p>
+          <h4 data-i18n="cur.skill4.h4">Problem-Solving</h4>
+          <p data-i18n="cur.skill4.p">Real-world challenges across subjects teach students to think strategically and find solutions.</p>
         </div>
         <div class="skill-card">
           <div class="sk-icon" style="background:var(--cur-teal);"><i class="fas fa-users"></i></div>
-          <h4>Collaboration</h4>
-          <p>Group projects and team assessments build the interpersonal skills every employer values.</p>
+          <h4 data-i18n="cur.skill5.h4">Collaboration</h4>
+          <p data-i18n="cur.skill5.p">Group projects and team assessments build the interpersonal skills every employer values.</p>
         </div>
         <div class="skill-card">
           <div class="sk-icon" style="background:var(--cur-purple);"><i class="fas fa-globe-americas"></i></div>
-          <h4>Global Awareness</h4>
-          <p>A diverse campus community and internationally focused curriculum builds global citizens.</p>
+          <h4 data-i18n="cur.skill6.h4">Global Awareness</h4>
+          <p data-i18n="cur.skill6.p">A diverse campus community and internationally focused curriculum builds global citizens.</p>
         </div>
         <div class="skill-card">
           <div class="sk-icon" style="background:#0f766e;"><i class="fas fa-laptop-code"></i></div>
-          <h4>Digital Literacy</h4>
-          <p>Technology is embedded across subjects, preparing students for a digitally connected world.</p>
+          <h4 data-i18n="cur.skill7.h4">Digital Literacy</h4>
+          <p data-i18n="cur.skill7.p">Technology is embedded across subjects, preparing students for a digitally connected world.</p>
         </div>
         <div class="skill-card">
           <div class="sk-icon" style="background:#b45309;"><i class="fas fa-star"></i></div>
-          <h4>Independence &amp; Ownership</h4>
-          <p>Students learn to take charge of their own learning journey and take responsibility for their progress.</p>
+          <h4 data-i18n-html="cur.skill8.h4">Independence &amp; Ownership</h4>
+          <p data-i18n="cur.skill8.p">Students learn to take charge of their own learning journey and take responsibility for their progress.</p>
         </div>
       </div>
     </div>
@@ -1271,35 +1282,35 @@
   <section class="cur-section cur-section--white" id="pathways">
     <div class="container">
       <div class="cur-section-header">
-        <div class="cur-section-label"><i class="fas fa-road"></i> Flexible Pathways</div>
-        <h2 class="cur-section-title">A Journey Built Around <em>Every Child</em></h2>
-        <p class="cur-section-sub">From Kindergarten through Grade 12, NAIS tailors each stage to meet students where they are — offering personalised support, advanced opportunities, and a clear route to university.</p>
+        <div class="cur-section-label"><i class="fas fa-road"></i> <span data-i18n="cur.path.label">Flexible Pathways</span></div>
+        <h2 class="cur-section-title" data-i18n-html="cur.path.h2">A Journey Built Around <em>Every Child</em></h2>
+        <p class="cur-section-sub" data-i18n="cur.path.sub">From Kindergarten through Grade 12, NAIS tailors each stage to meet students where they are — offering personalised support, advanced opportunities, and a clear route to university.</p>
       </div>
 
       <div class="pathway-timeline">
         <div class="path-step">
           <div class="path-step-dot" style="background:var(--cur-green);"><i class="fas fa-seedling"></i></div>
           <span class="path-grades">KG1 – KG2</span>
-          <h4>Foundation</h4>
-          <p>Play-based, inquiry-led learning. Building literacy, numeracy, and love of learning.</p>
+          <h4 data-i18n="cur.path.kg">Foundation</h4>
+          <p data-i18n="cur.path.kg.p">Play-based, inquiry-led learning. Building literacy, numeracy, and love of learning.</p>
         </div>
         <div class="path-step">
           <div class="path-step-dot" style="background:var(--cur-teal);"><i class="fas fa-book-reader"></i></div>
           <span class="path-grades">Grades 1 – 5</span>
-          <h4>Elementary</h4>
-          <p>100% coursework-based. Core subjects plus arts, science, and physical education.</p>
+          <h4 data-i18n="cur.path.elem">Elementary</h4>
+          <p data-i18n="cur.path.elem.p">100% coursework-based. Core subjects plus arts, science, and physical education.</p>
         </div>
         <div class="path-step">
           <div class="path-step-dot" style="background:var(--cur-navy);"><i class="fas fa-microscope"></i></div>
           <span class="path-grades">Grades 6 – 8</span>
-          <h4>Middle School</h4>
-          <p>80/20 grading model introduced. Electives and deeper subject specialization begin.</p>
+          <h4 data-i18n="cur.path.mid">Middle School</h4>
+          <p data-i18n="cur.path.mid.p">80/20 grading model introduced. Electives and deeper subject specialization begin.</p>
         </div>
         <div class="path-step">
           <div class="path-step-dot" style="background:var(--cur-red);"><i class="fas fa-university"></i></div>
           <span class="path-grades">Grades 9 – 12</span>
-          <h4>High School</h4>
-          <p>GPA tracking, AP courses, SAT/PSAT prep, IELTS, and full university counseling.</p>
+          <h4 data-i18n="cur.path.high">High School</h4>
+          <p data-i18n="cur.path.high.p">GPA tracking, AP courses, SAT/PSAT prep, IELTS, and full university counseling.</p>
         </div>
       </div>
 
@@ -1336,26 +1347,26 @@
   <section class="cur-section cur-section--navy" id="why">
     <div class="container">
       <div class="cur-section-header">
-        <div class="cur-section-label"><i class="fas fa-heart"></i> Why Choose NAIS</div>
-        <h2 class="cur-section-title">Choosing the American Curriculum<br/>Means Choosing the <em>Whole Child</em></h2>
-        <p class="cur-section-sub">At NAIS, we focus on academic success, global readiness, confidence, independence, and balanced personal growth — not just test scores.</p>
+        <div class="cur-section-label"><i class="fas fa-heart"></i> <span data-i18n="cur.why.label">Why Choose NAIS</span></div>
+        <h2 class="cur-section-title" data-i18n-html="cur.why.h2">Choosing the American Curriculum<br/>Means Choosing the <em>Whole Child</em></h2>
+        <p class="cur-section-sub" data-i18n="cur.why.sub">At NAIS, we focus on academic success, global readiness, confidence, independence, and balanced personal growth — not just test scores.</p>
       </div>
 
       <div class="why-grid">
         <div class="why-card">
           <div class="why-card-icon"><i class="fas fa-chart-line"></i></div>
-          <h4>Academic Success</h4>
-          <p>Students build strong foundations in literacy, mathematics, and science while developing the higher-order thinking skills universities demand.</p>
+          <h4 data-i18n="cur.why1.h4">Academic Success</h4>
+          <p data-i18n="cur.why1.p">Students build strong foundations in literacy, mathematics, and science while developing the higher-order thinking skills universities demand.</p>
         </div>
         <div class="why-card">
           <div class="why-card-icon"><i class="fas fa-globe"></i></div>
-          <h4>Global Readiness</h4>
-          <p>The curriculum prepares students for universities around the world — especially in the U.S. and Canada — through SAT, AP, and internationally recognized qualifications.</p>
+          <h4 data-i18n="cur.why2.h4">Global Readiness</h4>
+          <p data-i18n="cur.why2.p">The curriculum prepares students for universities around the world — especially in the U.S. and Canada — through SAT, AP, and internationally recognized qualifications.</p>
         </div>
         <div class="why-card">
           <div class="why-card-icon"><i class="fas fa-fist-raised"></i></div>
-          <h4>Confidence &amp; Independence</h4>
-          <p>Students learn how to think critically, express ideas with clarity, and take ownership of their own educational journey.</p>
+          <h4 data-i18n-html="cur.why3.h4">Confidence &amp; Independence</h4>
+          <p data-i18n="cur.why3.p">Students learn how to think critically, express ideas with clarity, and take ownership of their own educational journey.</p>
           <ul>
             <li>Think critically &amp; creatively</li>
             <li>Express ideas clearly</li>
@@ -1364,26 +1375,26 @@
         </div>
         <div class="why-card">
           <div class="why-card-icon"><i class="fas fa-balance-scale"></i></div>
-          <h4>Balanced Learning</h4>
-          <p>With a rich mix of academics, real-world projects, and extracurricular activities, students develop both intellectually and personally.</p>
+          <h4 data-i18n="cur.why4.h4">Balanced Learning</h4>
+          <p data-i18n="cur.why4.p">With a rich mix of academics, real-world projects, and extracurricular activities, students develop both intellectually and personally.</p>
         </div>
         <div class="why-card">
           <div class="why-card-icon"><i class="fas fa-arrow-up"></i></div>
-          <h4>Growth-Focused Approach</h4>
-          <p>Because students are assessed continuously throughout the year, they are encouraged to improve over time — never defined by one single exam result.</p>
+          <h4 data-i18n="cur.why5.h4">Growth-Focused Approach</h4>
+          <p data-i18n="cur.why5.p">Because students are assessed continuously throughout the year, they are encouraged to improve over time — never defined by one single exam result.</p>
         </div>
         <div class="why-card">
           <div class="why-card-icon"><i class="fas fa-handshake"></i></div>
-          <h4>Community &amp; Support</h4>
-          <p>A caring, diverse community of 45+ nationalities and 60+ expert faculty members ensures every student feels seen, supported, and inspired.</p>
+          <h4 data-i18n-html="cur.why6.h4">Community &amp; Support</h4>
+          <p data-i18n="cur.why6.p">A caring, diverse community of 45+ nationalities and 60+ expert faculty members ensures every student feels seen, supported, and inspired.</p>
         </div>
       </div>
 
       <!-- University destinations banner -->
       <div style="margin-top:48px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);border-radius:18px;padding:36px 40px;text-align:center;">
-        <div style="font-size:0.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--cur-gold);margin-bottom:16px;"><i class="fas fa-university" style="margin-right:6px;"></i>University Destinations</div>
-        <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;font-weight:700;margin-bottom:12px;">NAIS Graduates Are Accepted Into Universities <em style="color:var(--cur-gold);">Worldwide</em></h3>
-        <p style="color:rgba(255,255,255,0.7);font-size:0.92rem;line-height:1.7;max-width:600px;margin:0 auto 28px;">The American curriculum's GPA system, AP credits, and standardized test preparation open doors to institutions across the United States, Canada, UK, Australia, and beyond.</p>
+        <div style="font-size:0.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--cur-gold);margin-bottom:16px;"><i class="fas fa-university" style="margin-right:6px;"></i><span data-i18n="cur.uni.label">University Destinations</span></div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;font-weight:700;margin-bottom:12px;" data-i18n-html="cur.uni.h3">NAIS Graduates Are Accepted Into Universities <em style="color:var(--cur-gold);">Worldwide</em></h3>
+        <p style="color:rgba(255,255,255,0.7);font-size:0.92rem;line-height:1.7;max-width:600px;margin:0 auto 28px;" data-i18n="cur.uni.p">The American curriculum's GPA system, AP credits, and standardized test preparation open doors to institutions across the United States, Canada, UK, Australia, and beyond.</p>
         <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
           <span style="background:rgba(245,166,35,0.18);border:1px solid rgba(245,166,35,0.35);color:#fbbf24;padding:8px 20px;border-radius:50px;font-size:0.82rem;font-weight:700;"><i class="fas fa-flag-usa" style="margin-right:6px;"></i>USA</span>
           <span style="background:rgba(245,166,35,0.18);border:1px solid rgba(245,166,35,0.35);color:#fbbf24;padding:8px 20px;border-radius:50px;font-size:0.82rem;font-weight:700;"><i class="fas fa-maple-leaf" style="margin-right:6px;"></i>Canada</span>
@@ -1401,16 +1412,16 @@
   <section class="cur-section cur-section--light" id="faq">
     <div class="container">
       <div class="cur-section-header">
-        <div class="cur-section-label"><i class="fas fa-question-circle"></i> Common Questions</div>
-        <h2 class="cur-section-title">Parents Ask, <em>We Answer</em></h2>
-        <p class="cur-section-sub">Everything families need to know about how the American curriculum works at NAIS Dubai.</p>
+        <div class="cur-section-label"><i class="fas fa-question-circle"></i> <span data-i18n="cur.faq.label">Common Questions</span></div>
+        <h2 class="cur-section-title" data-i18n-html="cur.faq.h2">Parents Ask, <em>We Answer</em></h2>
+        <p class="cur-section-sub" data-i18n="cur.faq.sub">Everything families need to know about how the American curriculum works at NAIS Dubai.</p>
       </div>
 
       <div class="faq-list">
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            How does grading work in the American curriculum?
+            <span data-i18n="cur.faq.q1">How does grading work in the American curriculum?</span>
             <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
@@ -1428,7 +1439,7 @@
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            How much of the grade is based on exams?
+            <span data-i18n="cur.faq.q2">How much of the grade is based on exams?</span>
             <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
@@ -1440,7 +1451,7 @@
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            What is the difference between formative and summative assessment?
+            <span data-i18n="cur.faq.q3">What is the difference between formative and summative assessment?</span>
             <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
@@ -1456,7 +1467,7 @@
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            What are AP courses and who can take them?
+            <span data-i18n="cur.faq.q4">What are AP courses and who can take them?</span>
             <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
@@ -1474,7 +1485,7 @@
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            How does the American curriculum prepare students for university?
+            <span data-i18n="cur.faq.q5">How does the American curriculum prepare students for university?</span>
             <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
@@ -1493,7 +1504,7 @@
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false">
-            Is the American curriculum right for my child if they learn differently?
+            <span data-i18n="cur.faq.q6">Is the American curriculum right for my child if they learn differently?</span>
             <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span>
           </button>
           <div class="faq-answer">
@@ -1521,12 +1532,12 @@
     <div class="container">
       <div class="cta-banner">
         <div>
-          <h3>Ready to Give Your Child a <em>World-Class Education?</em></h3>
-          <p>Join a community of 900+ students from 45+ nationalities at NAIS Dubai — where the American curriculum meets individual care, rigorous academics, and genuine preparation for the future.</p>
+          <h3 data-i18n-html="cur.cta.h3">Ready to Give Your Child a <em>World-Class Education?</em></h3>
+          <p data-i18n="cur.cta.p">Join a community of 900+ students from 45+ nationalities at NAIS Dubai — where the American curriculum meets individual care, rigorous academics, and genuine preparation for the future.</p>
         </div>
         <div class="cta-banner-btns">
-          <a href="admissions.html#apply" class="cta-btn-white"><i class="fas fa-pen-to-square"></i> Apply Now</a>
-          <a href="admissions.html" class="cta-btn-outline"><i class="fas fa-info-circle"></i> Learn About Admissions</a>
+          <a href="admissions.html#apply" class="cta-btn-white"><i class="fas fa-pen-to-square"></i> <span data-i18n="cur.cta.apply">Apply Now</span></a>
+          <a href="admissions.html" class="cta-btn-outline"><i class="fas fa-info-circle"></i> <span data-i18n="cur.cta.admissions">Learn About Admissions</span></a>
         </div>
       </div>
     </div>
@@ -1565,7 +1576,7 @@
         <div class="footer-logo">
           <img src="images/nais-logo.png" alt="NAIS Dubai Logo" class="footer-logo-img" />
         </div>
-        <p class="footer-desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
+        <p class="footer-desc" data-i18n="cur.footer.desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
         <div class="footer-social">
           <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -1574,49 +1585,50 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4 class="footer-heading">Quick Links</h4>
+        <h4 class="footer-heading" data-i18n="footer.quick.links">Quick Links</h4>
         <ul class="footer-links">
-          <li><a href="about.html">About NAIS</a></li>
-          <li><a href="academics.html">Academic Programs</a></li>
-          <li><a href="curriculum.html">American Curriculum</a></li>
-          <li><a href="admissions.html">Admissions</a></li>
-          <li><a href="index.html#contact">Contact Us</a></li>
-          <li><a href="gallery.html" style="color:#E11B22;font-weight:600;"><i class="fas fa-images" style="margin-right:5px;"></i>Photo Gallery</a></li>
+          <li><a href="about.html" data-i18n="footer.about">About NAIS</a></li>
+          <li><a href="academics.html" data-i18n="footer.academics">Academic Programs</a></li>
+          <li><a href="curriculum.html" data-i18n="footer.cur">American Curriculum</a></li>
+          <li><a href="admissions.html" data-i18n="footer.admissions.lnk">Admissions</a></li>
+          <li><a href="index.html#contact" data-i18n="footer.contact.us">Contact Us</a></li>
+          <li><a href="gallery.html" style="color:#E11B22;font-weight:600;"><i class="fas fa-images" style="margin-right:5px;"></i><span data-i18n="footer.gallery.lnk">Photo Gallery</span></a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4 class="footer-heading">Academic Programs</h4>
+        <h4 class="footer-heading" data-i18n="footer.acad.programs">Academic Programs</h4>
         <ul class="footer-links">
-          <li><a href="academics.html#kindergarten">Kindergarten</a></li>
-          <li><a href="academics.html#elementary">Elementary</a></li>
-          <li><a href="academics.html#middle">Middle School</a></li>
-          <li><a href="academics.html#high">High School</a></li>
-          <li><a href="academics.html#ap">AP Courses</a></li>
+          <li><a href="academics.html#kindergarten" data-i18n="footer.kg">Kindergarten</a></li>
+          <li><a href="academics.html#elementary" data-i18n="footer.elementary">Elementary</a></li>
+          <li><a href="academics.html#middle" data-i18n="footer.middle">Middle School</a></li>
+          <li><a href="academics.html#high" data-i18n="footer.high">High School</a></li>
+          <li><a href="academics.html#ap" data-i18n="footer.ap">AP Courses</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4 class="footer-heading">Contact</h4>
+        <h4 class="footer-heading" data-i18n="footer.contact.head2">Contact</h4>
         <ul class="footer-contact-list">
-          <li><i class="fas fa-map-marker-alt"></i><span>Al Mizhar 1, Mirdif, Dubai, UAE</span></li>
+          <li><i class="fas fa-map-marker-alt"></i><span data-i18n="footer.addr">Al Mizhar 1, Mirdif, Dubai, UAE</span></li>
           <li><i class="fas fa-phone-alt"></i><a href="tel:+97142884844">+971 4 288 4844</a></li>
           <li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li>
         </ul>
-        <a href="admissions.html" class="btn btn-red-sm" style="margin-top:16px;display:inline-flex;align-items:center;gap:6px;">Apply Now <i class="fas fa-arrow-right"></i></a>
+        <a href="admissions.html" class="btn btn-red-sm" style="margin-top:16px;display:inline-flex;align-items:center;gap:6px;"><span data-i18n="footer.apply.btn">Apply Now</span> <i class="fas fa-arrow-right"></i></a>
       </div>
     </div></div></div>
     <div class="footer-bottom"><div class="container">
-      <p>© 2025 North American International School, Dubai. All Rights Reserved.</p>
-      <div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a><a href="safeguarding.html">Safeguarding</a></div>
+      <p data-i18n="footer.copyright">© 2025 North American International School Dubai. All rights reserved.</p>
+      <div class="footer-bottom-links"><a href="privacy-policy.html" data-i18n="footer.privacy.lnk">Privacy Policy</a><a href="terms-of-use.html" data-i18n="footer.terms.lnk">Terms of Use</a><a href="safeguarding.html" data-i18n="footer.safeguarding.lnk">Safeguarding</a></div>
     </div></div>
   </footer>
 
   <!-- Floating buttons -->
-  <a href="admissions.html#apply" class="apply-float" aria-label="Apply Now"><i class="fas fa-pen-to-square"></i><span class="apply-float-label">Apply Now</span></a>
+  <a href="admissions.html#apply" class="apply-float" data-i18n-aria="aria.back-top"><i class="fas fa-pen-to-square"></i><span class="apply-float-label" data-i18n="float.apply">Apply Now</span></a>
   <a href="https://wa.me/97142884844" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
   <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
 
   <script src="js/nav.js"></script>
   <script src="js/img-fallback.js"></script>
+  <script src="js/i18n.js"></script>
   <script>
     // ── FAQ Accordion ──
     document.querySelectorAll('.faq-question').forEach(btn => {

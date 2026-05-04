@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="css/nav.css?v=9" />
   <link rel="stylesheet" href="css/mobile.css?v=9" />
   <link rel="stylesheet" href="css/enhancements.css?v=5" />
+  <link rel="stylesheet" href="css/rtl.css?v=1" />
   <style>
     /* ── TOPBAR FIX ── */
     @media (min-width: 1200px) {
@@ -908,7 +909,7 @@
     }
   </style>
 </head>
-<body>
+<body data-page-title="page.title.academics">
 
   <!-- TOP BAR -->
   <div class="topbar" id="main-topbar">
@@ -919,14 +920,20 @@
       <div class="topbar-left">
         <a href="tel:+97142884844"><i class="fas fa-phone-alt"></i> +971 4 288 4844</a>
         <a href="mailto:admissions@naischool.ae"><i class="fas fa-envelope"></i> admissions@naischool.ae</a>
-        <span><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</span>
+        <span><i class="fas fa-map-marker-alt"></i> <span data-i18n="topbar.address">Al Mizhar 1, Dubai, UAE</span></span>
       </div>
       <div class="topbar-right">
-        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">Parent Portal</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.portal">Parent Portal</a>
         <span class="topbar-divider">|</span>
-        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">E-Learning</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.elearning">E-Learning</a>
         <span class="topbar-divider">|</span>
-        <a href="mailto:careers@naischool.ae" class="topbar-link">Careers</a>
+        <a href="mailto:careers@naischool.ae" class="topbar-link" data-i18n="topbar.careers">Careers</a>
+        <span class="topbar-divider">|</span>
+        <div class="lang-switcher-wrap">
+          <button class="lang-switcher active" data-lang="en" aria-pressed="true" title="English">EN</button>
+          <span class="lang-switcher-divider">|</span>
+          <button class="lang-switcher" data-lang="ar" aria-pressed="false" title="العربية">ع</button>
+        </div>
         <div class="topbar-social">
           <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -946,30 +953,38 @@
       </a>
       <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
         <div class="nav-rail-lines"><span></span><span></span><span></span></div>
-        <span class="nav-rail-label">MENU</span>
+        <span class="nav-rail-label" data-i18n="nav.menu">MENU</span>
       </button>
     </div>
     <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
-    <span id="nav-desktop-label">MENU</span>
+    <span id="nav-desktop-label" data-i18n="nav.menu">MENU</span>
   </div>
 
   <!-- FULL-SCREEN NAV OVERLAY -->
   <div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Main Navigation" aria-hidden="true" style="background-color:#0b1230;">
+    <!-- LEFT VISUAL PANEL -->
     <div class="nav-left-panel" aria-hidden="true" style="background-color:#0a1128;position:relative;flex-shrink:0;">
       <div class="nav-left-bg" style="position:absolute;inset:0;background:linear-gradient(155deg,#0f1d45 0%,#1e3175 40%,#0a1128 100%);z-index:0;"></div>
       <div class="nav-left-content">
         <a href="index.html" class="nav-left-logo">
-          <img src="images/nais-logo.png" alt="NAIS Dubai" style="height:52px;width:auto;object-fit:contain;background:#fff;padding:7px 12px;border-radius:8px;" />
+          <img src="images/nais-logo.png" alt="North American International School" style="height:72px;max-width:300px;width:auto;object-fit:contain;display:block;" />
         </a>
-        <p class="nav-left-tagline">Inspiring excellence, building character, shaping global leaders.</p>
+        <div class="nav-left-tagline">
+          <div class="nav-left-tagline-top" data-i18n="nav.tagline.est">Est. 2005 · Dubai, UAE</div>
+          <div class="nav-left-tagline-title" data-i18n-html="nav.tagline.title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
+          <p class="nav-left-tagline-sub" data-i18n="nav.tagline.sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
+        </div>
+        <div class="nav-left-spacer"></div>
         <div class="nav-promo-card">
-          <div class="nav-promo-year">2026 – 2027</div>
-          <div class="nav-promo-title">Enrollment Now Open</div>
-          <a href="admissions.html" class="nav-promo-link">Apply Today <i class="fas fa-arrow-right"></i></a>
+          <div class="nav-promo-card-label" data-i18n="nav.promo.label">Open Enrollment</div>
+          <div class="nav-promo-card-title" data-i18n="nav.promo.title">Apply for 2026–2027</div>
+          <p class="nav-promo-card-desc" data-i18n="nav.promo.desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
+          <a href="admissions.html" class="nav-promo-card-link" data-i18n="nav.promo.link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
-    <div class="nav-right-panel">
+    <!-- RIGHT NAV PANEL -->
+    <div class="nav-right-panel" style="background-color:#0d1535;">
       <div class="nav-close" id="nav-close" aria-label="Close Navigation">
         <button class="nav-close-inner" aria-label="Close Menu">&#x2715;</button>
       </div>
@@ -977,63 +992,68 @@
         <nav aria-label="Main Navigation">
           <ul class="nav-primary-list">
           <li class="nav-primary-item" data-item="about">
-            <a href="about.html" class="nav-primary-link">About</a>
+            <a href="about.html" class="nav-primary-link" data-i18n="nav.about">About</a>
             <ul class="nav-subnav">
-              <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link">Mission &amp; Vision</a></li>
-              <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">School Leadership</a></li>
-              <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link">Core Values — CARE</a></li>
-              <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link">Our Campus</a></li>
-              <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link">Accreditation</a></li>
+              <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link" data-i18n="nav.sub.mission">Mission &amp; Vision</a></li>
+              <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.leadership">School Leadership</a></li>
+              <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link" data-i18n="nav.sub.values">Core Values — CARE</a></li>
+              <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link" data-i18n="nav.sub.campus">Our Campus</a></li>
+              <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link" data-i18n="nav.sub.accreditation">Accreditation</a></li>
             </ul>
           </li>
           <li class="nav-primary-item" data-item="academics">
-            <a href="academics.html" class="nav-primary-link">Academics</a>
+            <a href="academics.html" class="nav-primary-link" data-i18n="nav.academics">Academics</a>
             <ul class="nav-subnav">
-              <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link">Kindergarten</a></li>
-              <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link">Elementary School</a></li>
-              <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link">Middle School</a></li>
-              <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link">High School</a></li>
-              <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link">AP Courses</a></li>
-              <li class="nav-subnav-item"><a href="academics.html?tab=curriculum" class="nav-subnav-link" style="color:var(--hub-gold,#F5A623);font-weight:700;">American Curriculum ★</a></li>
-              <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;">Academic Results ★</a></li>
-              <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">Project-Based Learning ★</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link" data-i18n="nav.sub.kg">Kindergarten</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link" data-i18n="nav.sub.elementary">Elementary School</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link" data-i18n="nav.sub.high">High School</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link" data-i18n="nav.sub.ap">AP Courses</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=curriculum" class="nav-subnav-link" style="color:var(--hub-gold,#F5A623);font-weight:700;" data-i18n="nav.sub.curriculum">American Curriculum ★</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;" data-i18n="nav.sub.results">Academic Results ★</a></li>
+              <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.pbl">Project-Based Learning ★</a></li>
             </ul>
           </li>
           <li class="nav-primary-item" data-item="student-life">
-            <a href="index.html#student-life" class="nav-primary-link">Student Life</a>
+            <a href="index.html#student-life" class="nav-primary-link" data-i18n="nav.student-life">Student Life</a>
             <ul class="nav-subnav">
-              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Arts &amp; Culture</a></li>
-              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Athletics &amp; Sports</a></li>
-              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Clubs &amp; Activities</a></li>
-              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Community Service</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.arts">Arts &amp; Culture</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.athletics">Athletics &amp; Sports</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.clubs">Clubs &amp; Activities</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.service">Community Service</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.council">Student Council</a></li>
             </ul>
           </li>
           <li class="nav-primary-item" data-item="admissions">
-            <a href="admissions.html" class="nav-primary-link">Admissions</a>
+            <a href="admissions.html" class="nav-primary-link" data-i18n="nav.admissions">Admissions</a>
             <ul class="nav-subnav">
-              <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link">How to Apply</a></li>
-              <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link">Tuition &amp; Fees</a></li>
-              <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link">Required Documents</a></li>
-              <li class="nav-subnav-item"><a href="admissions.html#faq" class="nav-subnav-link">Admissions FAQ</a></li>
-              <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link">Apply Now</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link" data-i18n="nav.sub.how-apply">How to Apply</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link" data-i18n="nav.sub.fees">Tuition &amp; Fees</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link" data-i18n="nav.sub.tours">Campus Tours</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link" data-i18n="nav.sub.request-info">Request Information</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link" data-i18n="nav.sub.documents">Required Documents</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link" data-i18n="nav.apply-now">Apply Now</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#faq" class="nav-subnav-link" data-i18n="nav.sub.faq">Admissions FAQ</a></li>
             </ul>
           </li>
-          <li class="nav-primary-item" data-item="news">
-            <a href="index.html#news" class="nav-primary-link">News &amp; Events</a>
+          <li class="nav-primary-item" data-item="our-school">
+            <a href="about.html" class="nav-primary-link" data-i18n="nav.our-school">Our School</a>
             <ul class="nav-subnav">
-              <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link">Latest News</a></li>
-              <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link">Events Calendar</a></li>
-              <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link">Contact Us</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.life">Life at NAIS</a></li>
+              <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School</a></li>
+              <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link" data-i18n="nav.sub.upper">Upper School</a></li>
+              <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.parents">Parent Community</a></li>
+              <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link" data-i18n="nav.sub.news">News &amp; Events</a></li>
+              <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.contact">Contact Us</a></li>
+              <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.visit">Visit Campus</a></li>
+              <li class="nav-subnav-item"><a href="gallery.html" class="nav-subnav-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:5px;"></i><span data-i18n="nav.sub.gallery">Photo Gallery ✦</span></a></li>
             </ul>
-          </li>
-          <li class="nav-primary-item">
-            <a href="gallery.html" class="nav-primary-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:6px;"></i>Gallery</a>
           </li>
         </ul>
         </nav>
         <div class="nav-panel-bottom">
           <div class="nav-bottom-careers">
-            <span class="nav-careers-label">Career Opportunities</span>
+            <span class="nav-careers-label" data-i18n="nav.careers">Career Opportunities</span>
             <div class="nav-bottom-social">
               <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="https://twitter.com/NAISDubai" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
@@ -1043,13 +1063,13 @@
             </div>
           </div>
           <div class="nav-bottom-search">
-            <span class="nav-search-label">Search</span>
+            <span class="nav-search-label" data-i18n="nav.search">Search</span>
             <div class="nav-search-form">
-              <input type="text" class="nav-search-input" placeholder="Keyword" aria-label="Search" />
+              <input type="text" class="nav-search-input" data-i18n-placeholder="nav.search-placeholder" placeholder="Keyword" aria-label="Search" />
               <button class="nav-search-btn" aria-label="Submit Search"><i class="fas fa-search"></i></button>
             </div>
           </div>
-          <a href="admissions.html" class="nav-apply-btn">Apply Now</a>
+          <a href="admissions.html" class="nav-apply-btn" data-i18n="nav.apply-now">Apply Now</a>
         </div>
       </div>
     </div>
@@ -1064,40 +1084,40 @@
     <div class="hub-container hub-hero-inner">
 
       <nav class="breadcrumb" style="justify-content:center;margin-bottom:22px;">
-        <a href="index.html" style="color:rgba(255,255,255,0.5);">Home</a>
+        <a href="index.html" style="color:rgba(255,255,255,0.5);" data-i18n="legal.home">Home</a>
         <span style="color:rgba(255,255,255,0.3);">/</span>
-        <span style="color:rgba(255,255,255,0.85);">Academics</span>
+        <span style="color:rgba(255,255,255,0.85);" data-i18n="nav.academics">Academics</span>
       </nav>
 
       <div class="hub-hero-badge">
         <i class="fas fa-graduation-cap"></i>
-        KG – Grade 12 · American Curriculum · Dubai, UAE
+        <span data-i18n="acad.hero.badge">KG – Grade 12 · American Curriculum · Dubai, UAE</span>
       </div>
 
-      <h1>Where <em>Learning</em> Becomes<br/>a Lifelong Advantage</h1>
-      <p class="hub-hero-sub">A rigorous American curriculum, world-class faculty, and exceptional results — from Kindergarten through Grade 12.</p>
+      <h1 data-i18n-html="acad.hero.h1">Where <em>Learning</em> Becomes<br/>a Lifelong Advantage</h1>
+      <p class="hub-hero-sub" data-i18n="acad.hero.sub">A rigorous American curriculum, world-class faculty, and exceptional results — from Kindergarten through Grade 12.</p>
 
       <!-- KPI bar -->
       <div class="hub-kpi-row">
         <div class="hub-kpi">
           <span class="hub-kpi-num kpi-green">100%</span>
-          <span class="hub-kpi-lbl">University<br/>Acceptance</span>
+          <span class="hub-kpi-lbl" data-i18n-html="acad.kpi.uni">University<br/>Acceptance</span>
         </div>
         <div class="hub-kpi">
           <span class="hub-kpi-num kpi-gold">68%</span>
-          <span class="hub-kpi-lbl">AP Pass Rate<br/>Score 3+</span>
+          <span class="hub-kpi-lbl" data-i18n-html="acad.kpi.ap">AP Pass Rate<br/>Score 3+</span>
         </div>
         <div class="hub-kpi">
           <span class="hub-kpi-num kpi-blue">1080</span>
-          <span class="hub-kpi-lbl">SAT Average<br/>2024–25</span>
+          <span class="hub-kpi-lbl" data-i18n-html="acad.kpi.sat">SAT Average<br/>2024–25</span>
         </div>
         <div class="hub-kpi">
           <span class="hub-kpi-num kpi-white">+35pp</span>
-          <span class="hub-kpi-lbl">Science Growth<br/>3 Years</span>
+          <span class="hub-kpi-lbl" data-i18n-html="acad.kpi.sci">Science Growth<br/>3 Years</span>
         </div>
         <div class="hub-kpi">
           <span class="hub-kpi-num kpi-red">KG–12</span>
-          <span class="hub-kpi-lbl">Complete<br/>Pathway</span>
+          <span class="hub-kpi-lbl" data-i18n-html="acad.kpi.path">Complete<br/>Pathway</span>
         </div>
       </div>
     </div>
@@ -1110,16 +1130,16 @@
     <div class="hub-tabs-inner">
       <button class="hub-tab active" data-tab="programs" aria-selected="true">
         <span class="tab-icon"><i class="fas fa-book-open"></i></span>
-        Academic Programs
+        <span data-i18n="acad.tab.programs">Academic Programs</span>
         <span class="tab-badge tab-badge-navy">KG–12</span>
       </button>
       <button class="hub-tab" data-tab="curriculum" aria-selected="false">
         <span class="tab-icon"><i class="fas fa-flag-usa"></i></span>
-        American Curriculum
+        <span data-i18n="acad.tab.curriculum">American Curriculum</span>
       </button>
       <button class="hub-tab" data-tab="results" aria-selected="false">
         <span class="tab-icon"><i class="fas fa-chart-line"></i></span>
-        Academic Results
+        <span data-i18n="acad.tab.results">Academic Results</span>
         <span class="tab-badge tab-badge-green">2024–25</span>
       </button>
     </div>
@@ -1134,10 +1154,10 @@
     <section class="prog-section prog-section--white" id="programs">
       <div class="hub-container">
         <div class="sec-header centered">
-          <div class="sec-label-shared"><i class="fas fa-layer-group"></i> Grade-Level Programs</div>
-          <h2 class="sec-title-shared">A Complete Academic <em>Journey</em></h2>
+          <div class="sec-label-shared"><i class="fas fa-layer-group"></i> <span data-i18n="acad.prog.label">Academic Programs</span></div>
+          <h2 class="sec-title-shared" data-i18n-html="acad.prog.h2">Programs for Every<br/><em>Stage of Learning</em></h2>
           <div class="sec-divider"></div>
-          <p class="sec-sub-shared">From the joy of Kindergarten to university-preparatory High School, every stage of learning is thoughtfully designed to develop the whole child.</p>
+          <p class="sec-sub-shared" data-i18n="acad.prog.intro">From the joy of Kindergarten to university-preparatory High School, every stage of learning is thoughtfully designed to develop the whole child.</p>
         </div>
 
         <div class="grade-hub-grid">
@@ -1148,14 +1168,14 @@
               <img src="images/school-23.jpg" alt="Kindergarten at NAIS Dubai" loading="lazy" onerror="this.closest('.grade-card-img').style.background='#e2e8f4'" />
             </div>
             <div class="grade-card-body b-gold">
-              <span class="grade-card-tag t-gold">Early Years · KG 1 &amp; KG 2</span>
-              <h3 class="grade-card-title">Kindergarten</h3>
-              <p class="grade-card-desc">Play-based learning in a warm, nurturing environment where young learners build foundational literacy, numeracy, and social-emotional skills.</p>
+              <span class="grade-card-tag t-gold" data-i18n="acad.card.kg.tag">Early Years · KG 1 &amp; KG 2</span>
+              <h3 class="grade-card-title" data-i18n="acad.card.kg.title">Kindergarten</h3>
+              <p class="grade-card-desc" data-i18n="acad.card.kg.desc">Play-based learning in a warm, nurturing environment where young learners build foundational literacy, numeracy, and social-emotional skills.</p>
               <div class="grade-card-feats">
-                <div class="grade-feat"><i class="fas fa-circle"></i> Phonics &amp; early literacy</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> Numeracy &amp; math concepts</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> Arabic language introduction</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> Arts, music &amp; movement</div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.kg.f1">Phonics &amp; early literacy</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.kg.f2">Numeracy &amp; math concepts</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.kg.f3">Arabic language introduction</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.kg.f4">Arts, music &amp; movement</span></div>
               </div>
             </div>
           </article>
@@ -1166,14 +1186,14 @@
               <img src="images/school-22.jpg" alt="Elementary students at NAIS Dubai" loading="lazy" onerror="this.closest('.grade-card-img').style.background='#e2e8f4'" />
             </div>
             <div class="grade-card-body b-navy">
-              <span class="grade-card-tag t-navy">Grades 1 – 5</span>
-              <h3 class="grade-card-title">Elementary School</h3>
-              <p class="grade-card-desc">Core subject mastery meets creative, interdisciplinary exploration. Small classes ensure every student is truly known and supported.</p>
+              <span class="grade-card-tag t-navy" data-i18n="acad.card.elem.tag">Grades 1 – 5</span>
+              <h3 class="grade-card-title" data-i18n="acad.card.elem.title">Elementary School</h3>
+              <p class="grade-card-desc" data-i18n="acad.card.elem.desc">Core subject mastery meets creative, interdisciplinary exploration. Small classes ensure every student is truly known and supported.</p>
               <div class="grade-card-feats">
-                <div class="grade-feat"><i class="fas fa-circle"></i> English Language Arts (ELA)</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> Mathematics (Common Core)</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> Science &amp; STEM projects</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> Arabic &amp; Islamic Studies</div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.elem.f1">English Language Arts (ELA)</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.elem.f2">Mathematics (Common Core)</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.elem.f3">Science &amp; STEM projects</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.elem.f4">Arabic &amp; Islamic Studies</span></div>
               </div>
             </div>
           </article>
@@ -1184,14 +1204,14 @@
               <img src="images/school-19.jpg" alt="Middle School at NAIS Dubai" loading="lazy" onerror="this.closest('.grade-card-img').style.background='#e2e8f4'" />
             </div>
             <div class="grade-card-body">
-              <span class="grade-card-tag">Grades 6 – 8</span>
-              <h3 class="grade-card-title">Middle School</h3>
-              <p class="grade-card-desc">Academic challenge with exceptional pastoral support. Project-based learning and leadership opportunities help students discover their strengths.</p>
+              <span class="grade-card-tag" data-i18n="acad.card.mid.tag">Grades 6 – 8</span>
+              <h3 class="grade-card-title" data-i18n="acad.card.mid.title">Middle School</h3>
+              <p class="grade-card-desc" data-i18n="acad.card.mid.desc">Academic challenge with exceptional pastoral support. Project-based learning and leadership opportunities help students discover their strengths.</p>
               <div class="grade-card-feats">
-                <div class="grade-feat"><i class="fas fa-circle"></i> Pre-Algebra &amp; Algebra 1</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> Life &amp; Physical Sciences</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> Project-based learning</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> Leadership development</div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.mid.f1">Pre-Algebra &amp; Algebra 1</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.mid.f2">Life &amp; Physical Sciences</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.mid.f3">Project-based learning</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.mid.f4">Leadership development</span></div>
               </div>
             </div>
           </article>
@@ -1202,14 +1222,14 @@
               <img src="images/school-15.jpg" alt="High School at NAIS Dubai" loading="lazy" onerror="this.closest('.grade-card-img').style.background='#e2e8f4'" />
             </div>
             <div class="grade-card-body b-green">
-              <span class="grade-card-tag t-green">Grades 9 – 12</span>
-              <h3 class="grade-card-title">High School</h3>
-              <p class="grade-card-desc">College-preparatory excellence with AP courses, university counseling from Grade 9, and a 100% university acceptance record.</p>
+              <span class="grade-card-tag t-green" data-i18n="acad.card.high.tag">Grades 9 – 12</span>
+              <h3 class="grade-card-title" data-i18n="acad.card.high.title">High School</h3>
+              <p class="grade-card-desc" data-i18n="acad.card.high.desc">College-preparatory excellence with AP courses, university counseling from Grade 9, and a 100% university acceptance record.</p>
               <div class="grade-card-feats">
-                <div class="grade-feat"><i class="fas fa-circle"></i> 10+ AP Courses</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> SAT/ACT preparation</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> University counseling Gr 9–12</div>
-                <div class="grade-feat"><i class="fas fa-circle"></i> Lab Sciences (Bio, Chem, Physics)</div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.high.f1">10+ AP Courses</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.high.f2">SAT/ACT preparation</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.high.f3">University counseling Gr 9–12</span></div>
+                <div class="grade-feat"><i class="fas fa-circle"></i> <span data-i18n="acad.feat.high.f4">Lab Sciences (Bio, Chem, Physics)</span></div>
               </div>
             </div>
           </article>
@@ -1221,22 +1241,22 @@
     <section class="prog-section prog-section--dark" id="ap">
       <div class="hub-container">
         <div class="sec-header centered">
-          <div class="sec-label-shared lbl-gold"><i class="fas fa-award"></i> College Board Approved</div>
-          <h2 class="sec-title-shared t-white">Advanced Placement <em>AP Courses</em></h2>
+          <div class="sec-label-shared lbl-gold"><i class="fas fa-award"></i> <span data-i18n="acad.ap.label">College Board Approved</span></div>
+          <h2 class="sec-title-shared t-white" data-i18n-html="acad.ap.h2">Advanced Placement <em>AP Courses</em></h2>
           <div class="sec-divider d-gold" style="margin-left:auto;margin-right:auto;"></div>
-          <p class="sec-sub-shared sub-white">10+ AP courses across sciences, humanities, and technology — giving students the opportunity to earn university credit and stand out in admissions worldwide.</p>
+          <p class="sec-sub-shared sub-white" data-i18n="acad.ap.intro">10+ AP courses across sciences, humanities, and technology — giving students the opportunity to earn university credit and stand out in admissions worldwide.</p>
         </div>
 
         <div class="ap-hub-grid" style="margin-top:48px;">
           <div class="ap-hub-card">
-            <h4><i class="fas fa-book"></i> English &amp; Language Arts</h4>
+            <h4><i class="fas fa-book"></i> <span data-i18n="acad.ap.cat.english">English &amp; Language Arts</span></h4>
             <ul>
               <li>AP English Language &amp; Composition</li>
               <li>AP English Literature &amp; Composition</li>
             </ul>
           </div>
           <div class="ap-hub-card">
-            <h4><i class="fas fa-square-root-alt"></i> Mathematics</h4>
+            <h4><i class="fas fa-square-root-alt"></i> <span data-i18n="acad.ap.cat.math">Mathematics</span></h4>
             <ul>
               <li>AP Calculus AB</li>
               <li>AP Calculus BC</li>
@@ -1244,7 +1264,7 @@
             </ul>
           </div>
           <div class="ap-hub-card">
-            <h4><i class="fas fa-flask"></i> Sciences</h4>
+            <h4><i class="fas fa-flask"></i> <span data-i18n="acad.ap.cat.science">Sciences</span></h4>
             <ul>
               <li>AP Biology</li>
               <li>AP Chemistry</li>
@@ -1253,7 +1273,7 @@
             </ul>
           </div>
           <div class="ap-hub-card">
-            <h4><i class="fas fa-landmark"></i> History &amp; Social Studies</h4>
+            <h4><i class="fas fa-landmark"></i> <span data-i18n="acad.ap.cat.history">History &amp; Social Studies</span></h4>
             <ul>
               <li>AP US History</li>
               <li>AP World History</li>
@@ -1262,14 +1282,14 @@
             </ul>
           </div>
           <div class="ap-hub-card">
-            <h4><i class="fas fa-laptop-code"></i> Computer Science</h4>
+            <h4><i class="fas fa-laptop-code"></i> <span data-i18n="acad.ap.cat.cs">Computer Science</span></h4>
             <ul>
               <li>AP Computer Science A</li>
               <li>AP Computer Science Principles</li>
             </ul>
           </div>
           <div class="ap-hub-card">
-            <h4><i class="fas fa-globe"></i> Economics &amp; Languages</h4>
+            <h4><i class="fas fa-globe"></i> <span data-i18n="acad.ap.cat.econ">Economics &amp; Languages</span></h4>
             <ul>
               <li>AP Economics (Macro/Micro)</li>
               <li>AP Spanish Language</li>
@@ -1282,15 +1302,15 @@
         <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;margin-top:44px;">
           <div style="text-align:center;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px 36px;">
             <div style="font-family:'Montserrat',sans-serif;font-size:2.6rem;font-weight:900;color:#F5A623;line-height:1;">68%</div>
-            <div style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;">AP Pass Rate · Score 3+</div>
+            <div style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;" data-i18n="acad.ap.stat1.lbl">AP Pass Rate · Score 3+</div>
           </div>
           <div style="text-align:center;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px 36px;">
             <div style="font-family:'Montserrat',sans-serif;font-size:2.6rem;font-weight:900;color:#a78bfa;line-height:1;">80%</div>
-            <div style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;">AP Psychology Pass Rate</div>
+            <div style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;" data-i18n="acad.ap.stat2.lbl">AP Psychology Pass Rate</div>
           </div>
           <div style="text-align:center;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px 36px;">
             <div style="font-family:'Montserrat',sans-serif;font-size:2.6rem;font-weight:900;color:#4ade80;line-height:1;">78%</div>
-            <div style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;">AP Comp. Science Pass Rate</div>
+            <div style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:6px;" data-i18n="acad.ap.stat3.lbl">AP Comp. Science Pass Rate</div>
           </div>
         </div>
       </div>
@@ -1301,20 +1321,20 @@
       <div class="hub-container">
         <div class="incl-strip">
           <div>
-            <div class="sec-label-shared"><i class="fas fa-hands-helping"></i> Every Child Belongs</div>
-            <h2 class="sec-title-shared">Inclusion <em>Program</em></h2>
+            <div class="sec-label-shared"><i class="fas fa-hands-helping"></i> <span data-i18n="acad.incl.label">Every Child Belongs</span></div>
+            <h2 class="sec-title-shared" data-i18n-html="acad.incl.h2">Inclusion <em>Program</em></h2>
             <div class="sec-divider"></div>
-            <p style="font-family:'Inter',sans-serif;font-size:0.94rem;color:var(--hub-text);line-height:1.8;margin-bottom:20px;">NAIS is committed to inclusive education. Our dedicated Inclusion Program ensures students with diverse learning needs receive individualized support, IEPs, and a true sense of belonging.</p>
-            <a href="admissions.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;">Learn More <i class="fas fa-arrow-right"></i></a>
+            <p style="font-family:'Inter',sans-serif;font-size:0.94rem;color:var(--hub-text);line-height:1.8;margin-bottom:20px;" data-i18n="acad.incl.p">NAIS is committed to inclusive education. Our dedicated Inclusion Program ensures students with diverse learning needs receive individualized support, IEPs, and a true sense of belonging.</p>
+            <a href="admissions.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;" data-i18n="btn.learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
           </div>
           <div>
             <div class="incl-feat-grid">
-              <div class="incl-feat"><i class="fas fa-file-alt"></i><span>Individualized Education Plans (IEPs)</span></div>
-              <div class="incl-feat"><i class="fas fa-user-graduate"></i><span>Learning support specialists</span></div>
-              <div class="incl-feat"><i class="fas fa-comments"></i><span>Speech &amp; language therapy</span></div>
-              <div class="incl-feat"><i class="fas fa-hands"></i><span>Occupational therapy support</span></div>
-              <div class="incl-feat"><i class="fas fa-chalkboard-teacher"></i><span>Co-teaching classroom model</span></div>
-              <div class="incl-feat"><i class="fas fa-sliders-h"></i><span>Differentiated instruction</span></div>
+              <div class="incl-feat"><i class="fas fa-file-alt"></i><span data-i18n="acad.incl.f1">Individualized Education Plans (IEPs)</span></div>
+              <div class="incl-feat"><i class="fas fa-user-graduate"></i><span data-i18n="acad.incl.f2">Learning support specialists</span></div>
+              <div class="incl-feat"><i class="fas fa-comments"></i><span data-i18n="acad.incl.f3">Speech &amp; language therapy</span></div>
+              <div class="incl-feat"><i class="fas fa-hands"></i><span data-i18n="acad.incl.f4">Occupational therapy support</span></div>
+              <div class="incl-feat"><i class="fas fa-chalkboard-teacher"></i><span data-i18n="acad.incl.f5">Co-teaching classroom model</span></div>
+              <div class="incl-feat"><i class="fas fa-sliders-h"></i><span data-i18n="acad.incl.f6">Differentiated instruction</span></div>
             </div>
           </div>
         </div>
@@ -1325,11 +1345,11 @@
     <section class="prog-section prog-section--white">
       <div class="hub-container">
         <div class="prog-cta">
-          <h3>Start Your Child's Journey at NAIS</h3>
-          <p>Enrollment is open for the 2026–2027 academic year. Join our community of inspired learners from 45+ nationalities.</p>
+          <h3 data-i18n="acad.cta.h3">Start Your Child's Journey at NAIS</h3>
+          <p data-i18n="acad.cta.p">Enrollment is open for the 2026–2027 academic year. Join our community of inspired learners from 45+ nationalities.</p>
           <div class="prog-cta-btns">
-            <a href="admissions.html#apply" class="btn-white"><i class="fas fa-pen-to-square"></i> Apply Now</a>
-            <a href="index.html#contact" class="btn-white-outline"><i class="fas fa-phone"></i> Contact Admissions</a>
+            <a href="admissions.html#apply" class="btn-white"><i class="fas fa-pen-to-square"></i> <span data-i18n="btn.apply-now">Apply Now</span></a>
+            <a href="index.html#contact" class="btn-white-outline"><i class="fas fa-phone"></i> <span data-i18n="btn.contact">Contact Admissions</span></a>
           </div>
         </div>
       </div>
@@ -1366,42 +1386,42 @@
     <section class="cur-section cur-section--white" id="curriculum">
       <div class="hub-container">
         <div class="sec-header centered">
-          <div class="sec-label-shared"><i class="fas fa-flag-usa"></i> Our Approach</div>
-          <h2 class="sec-title-shared">The American Curriculum <em>Advantage</em></h2>
+          <div class="sec-label-shared"><i class="fas fa-flag-usa"></i> <span data-i18n="cur.advantages.label">Why American Curriculum?</span></div>
+          <h2 class="sec-title-shared" data-i18n-html="cur.advantages.h2">Built for the<br/><em>World's Best Universities</em></h2>
           <div class="sec-divider" style="margin-left:auto;margin-right:auto;"></div>
-          <p class="sec-sub-shared">The same rigorous standard used by top schools across the United States — enhanced by our international community and Dubai's global perspective.</p>
+          <p class="sec-sub-shared" data-i18n="acad.prog.intro">The same rigorous standard used by top schools across the United States — enhanced by our international community and Dubai's global perspective.</p>
         </div>
 
         <div class="why-grid">
           <div class="why-card wc-red">
             <div class="why-icon wi-red"><i class="fas fa-globe-americas"></i></div>
-            <h3>Global University Recognition</h3>
-            <p>The American curriculum is recognized by universities in the US, UK, Canada, Australia, Europe and the UAE — opening doors worldwide for every NAIS graduate.</p>
+            <h3 data-i18n="cur.adv1.title">Global University Recognition</h3>
+            <p data-i18n="cur.adv1.p">The American curriculum is recognized by universities in the US, UK, Canada, Australia, Europe and the UAE — opening doors worldwide for every NAIS graduate.</p>
           </div>
           <div class="why-card wc-gold">
             <div class="why-icon wi-gold"><i class="fas fa-flask"></i></div>
-            <h3>STEM &amp; Critical Thinking</h3>
-            <p>From inquiry-based science in KG to AP Physics and Calculus in Grade 12, students build genuine analytical skills through hands-on, project-based learning.</p>
+            <h3 data-i18n="cur.adv2.title">STEM &amp; Critical Thinking</h3>
+            <p data-i18n="cur.adv2.p">From inquiry-based science in KG to AP Physics and Calculus in Grade 12, students build genuine analytical skills through hands-on, project-based learning.</p>
           </div>
           <div class="why-card wc-green">
             <div class="why-icon wi-green"><i class="fas fa-users"></i></div>
-            <h3>Whole-Child Development</h3>
-            <p>Academic excellence balanced with character education, arts, athletics, and social-emotional learning — nurturing confident, compassionate global citizens.</p>
+            <h3 data-i18n="cur.adv3.title">Whole-Child Development</h3>
+            <p data-i18n="cur.adv3.p">Academic excellence balanced with character education, arts, athletics, and social-emotional learning — nurturing confident, compassionate global citizens.</p>
           </div>
           <div class="why-card wc-navy">
             <div class="why-icon wi-navy"><i class="fas fa-chalkboard-teacher"></i></div>
-            <h3>Small Class Sizes</h3>
-            <p>With a maximum of 22 students per class, every teacher genuinely knows each learner — enabling personalized support, challenge, and authentic relationships.</p>
+            <h3 data-i18n="cur.adv4.title">Small Class Sizes</h3>
+            <p data-i18n="cur.adv4.p">With a maximum of 22 students per class, every teacher genuinely knows each learner — enabling personalized support, challenge, and authentic relationships.</p>
           </div>
           <div class="why-card wc-purple">
             <div class="why-icon wi-purple"><i class="fas fa-university"></i></div>
-            <h3>AP College Credit</h3>
-            <p>Over 10 College Board AP courses allow High School students to earn university credit before graduation — reducing tuition costs and accelerating degree completion.</p>
+            <h3 data-i18n="cur.adv5.title">AP College Credit</h3>
+            <p data-i18n="cur.adv5.p">Over 10 College Board AP courses allow High School students to earn university credit before graduation — reducing tuition costs and accelerating degree completion.</p>
           </div>
           <div class="why-card wc-teal">
             <div class="why-icon wi-teal"><i class="fas fa-chart-line"></i></div>
-            <h3>Measurable Progress</h3>
-            <p>Internationally benchmarked assessments (MAP, SAT, AP, IELTS) provide clear, transparent data — so families always know exactly where their child stands.</p>
+            <h3 data-i18n="cur.adv6.title">Measurable Progress</h3>
+            <p data-i18n="cur.adv6.p">Internationally benchmarked assessments (MAP, SAT, AP, IELTS) provide clear, transparent data — so families always know exactly where their child stands.</p>
           </div>
         </div>
       </div>
@@ -1411,10 +1431,10 @@
     <section class="cur-section cur-section--light" id="grading">
       <div class="hub-container">
         <div class="sec-header centered">
-          <div class="sec-label-shared"><i class="fas fa-star-half-alt"></i> Grading &amp; Assessment</div>
-          <h2 class="sec-title-shared">Transparent Grading <em>System</em></h2>
+          <div class="sec-label-shared"><i class="fas fa-star-half-alt"></i> <span data-i18n="acad.grade.label">Grading &amp; Assessment</span></div>
+          <h2 class="sec-title-shared" data-i18n-html="acad.grade.h2">Transparent Grading <em>System</em></h2>
           <div class="sec-divider" style="margin-left:auto;margin-right:auto;"></div>
-          <p class="sec-sub-shared">Clear, consistent grading aligned to US standards — so families always understand how their child is performing and progressing.</p>
+          <p class="sec-sub-shared" data-i18n="acad.grade.intro">Clear, consistent grading aligned to US standards — so families always understand how their child is performing and progressing.</p>
         </div>
 
         <div class="grade-system-grid">
@@ -1422,38 +1442,38 @@
           <div class="gsys-card gt-red">
             <h3>
               <span class="gsys-icon gsi-red"><i class="fas fa-font"></i></span>
-              Letter Grade Scale
+              <span data-i18n="acad.grade.scale.title">Letter Grade Scale</span>
             </h3>
             <div class="grade-scale">
               <div class="grade-row">
                 <span class="grade-letter" style="color:#27AE60;">A+</span>
                 <span class="grade-range">97 – 100%</span>
-                <span class="grade-label" style="color:#27AE60;">Exceptional</span>
+                <span class="grade-label" style="color:#27AE60;" data-i18n="acad.grade.a.plus">Exceptional</span>
               </div>
               <div class="grade-row">
                 <span class="grade-letter" style="color:#27AE60;">A</span>
                 <span class="grade-range">90 – 96%</span>
-                <span class="grade-label" style="color:#27AE60;">Excellent</span>
+                <span class="grade-label" style="color:#27AE60;" data-i18n="acad.grade.a">Excellent</span>
               </div>
               <div class="grade-row">
                 <span class="grade-letter" style="color:#3b82f6;">B</span>
                 <span class="grade-range">80 – 89%</span>
-                <span class="grade-label" style="color:#3b82f6;">Above Average</span>
+                <span class="grade-label" style="color:#3b82f6;" data-i18n="acad.grade.b">Above Average</span>
               </div>
               <div class="grade-row">
                 <span class="grade-letter" style="color:#F5A623;">C</span>
                 <span class="grade-range">70 – 79%</span>
-                <span class="grade-label" style="color:#F5A623;">Average</span>
+                <span class="grade-label" style="color:#F5A623;" data-i18n="acad.grade.c">Average</span>
               </div>
               <div class="grade-row">
                 <span class="grade-letter" style="color:#f97316;">D</span>
                 <span class="grade-range">60 – 69%</span>
-                <span class="grade-label" style="color:#f97316;">Below Average</span>
+                <span class="grade-label" style="color:#f97316;" data-i18n="acad.grade.d">Below Average</span>
               </div>
               <div class="grade-row">
                 <span class="grade-letter" style="color:#E11B22;">F</span>
                 <span class="grade-range">Below 60%</span>
-                <span class="grade-label" style="color:#E11B22;">Failing</span>
+                <span class="grade-label" style="color:#E11B22;" data-i18n="acad.grade.f">Failing</span>
               </div>
             </div>
           </div>
@@ -1462,35 +1482,35 @@
           <div class="gsys-card gt-gold">
             <h3>
               <span class="gsys-icon gsi-gold"><i class="fas fa-award"></i></span>
-              GPA &amp; Assessment Types
+              <span data-i18n="acad.grade.gpa.title">GPA &amp; Assessment Types</span>
             </h3>
             <div style="margin-bottom:20px;">
-              <p style="font-family:'Inter',sans-serif;font-size:0.85rem;color:var(--hub-text);line-height:1.7;margin-bottom:16px;">The American GPA system (0.0 – 4.0 scale) is used for High School. AP courses carry weighted GPA (up to 5.0), rewarding academic challenge.</p>
+              <p style="font-family:'Inter',sans-serif;font-size:0.85rem;color:var(--hub-text);line-height:1.7;margin-bottom:16px;" data-i18n="acad.grade.gpa.p">The American GPA system (0.0 – 4.0 scale) is used for High School. AP courses carry weighted GPA (up to 5.0), rewarding academic challenge.</p>
               <div class="grade-scale">
                 <div class="grade-row">
                   <span style="font-family:'Montserrat',sans-serif;font-weight:800;color:var(--hub-navy);">4.0</span>
-                  <span class="grade-range">A · Outstanding</span>
-                  <span class="grade-label" style="color:#c47f08;">Honor Roll</span>
+                  <span class="grade-range" data-i18n="label.a.gpa">A · Outstanding</span>
+                  <span class="grade-label" style="color:#c47f08;" data-i18n="label.honor.roll">Honor Roll</span>
                 </div>
                 <div class="grade-row">
                   <span style="font-family:'Montserrat',sans-serif;font-weight:800;color:var(--hub-navy);">5.0</span>
-                  <span class="grade-range">AP Weighted GPA</span>
-                  <span class="grade-label" style="color:#c47f08;">AP Bonus</span>
+                  <span class="grade-range" data-i18n="label.ap.gpa">AP Weighted GPA</span>
+                  <span class="grade-label" style="color:#c47f08;" data-i18n="label.ap.bonus">AP Bonus</span>
                 </div>
               </div>
             </div>
-            <p style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hub-text);margin-bottom:10px;">Assessment Breakdown</p>
+            <p style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--hub-text);margin-bottom:10px;" data-i18n="acad.grade.breakdown.title">Assessment Breakdown</p>
             <div style="display:flex;flex-direction:column;gap:8px;">
               <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--hub-light);border-radius:10px;">
-                <span style="font-family:'Inter',sans-serif;font-size:0.83rem;">Formative (quizzes, classwork)</span>
+                <span style="font-family:'Inter',sans-serif;font-size:0.83rem;" data-i18n="label.form.40">Formative (quizzes, classwork)</span>
                 <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.83rem;color:var(--hub-navy);">40%</span>
               </div>
               <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--hub-light);border-radius:10px;">
-                <span style="font-family:'Inter',sans-serif;font-size:0.83rem;">Summative (tests, projects)</span>
+                <span style="font-family:'Inter',sans-serif;font-size:0.83rem;" data-i18n="label.summ.40">Summative (tests, projects)</span>
                 <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.83rem;color:var(--hub-navy);">40%</span>
               </div>
               <div style="display:flex;justify-content:space-between;padding:8px 12px;background:var(--hub-light);border-radius:10px;">
-                <span style="font-family:'Inter',sans-serif;font-size:0.83rem;">Final Examinations</span>
+                <span style="font-family:'Inter',sans-serif;font-size:0.83rem;" data-i18n="label.final.20">Final Examinations</span>
                 <span style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.83rem;color:var(--hub-navy);">20%</span>
               </div>
             </div>
@@ -1500,24 +1520,24 @@
           <div class="gsys-card gt-green">
             <h3>
               <span class="gsys-icon gsi-green"><i class="fas fa-clipboard-list"></i></span>
-              External Assessments
+              <span data-i18n="acad.grade.ext.title">External Assessments</span>
             </h3>
             <div style="display:flex;flex-direction:column;gap:10px;">
               <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--hub-border);">
                 <div style="width:30px;height:30px;border-radius:8px;background:#3b82f6;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.75rem;flex-shrink:0;"><i class="fas fa-chart-bar"></i></div>
-                <div><strong style="font-size:0.85rem;color:var(--hub-navy);">MAP Assessment</strong><br/><span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#6b7280;">Measures academic growth across all grades — tracked yearly.</span></div>
+                <div><strong style="font-size:0.85rem;color:var(--hub-navy);" data-i18n="acad.ext.map.name">MAP Assessment</strong><br/><span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#6b7280;" data-i18n="acad.ext.map.desc">Measures academic growth across all grades — tracked yearly.</span></div>
               </div>
               <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--hub-border);">
                 <div style="width:30px;height:30px;border-radius:8px;background:#7c3aed;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.75rem;flex-shrink:0;"><i class="fas fa-university"></i></div>
-                <div><strong style="font-size:0.85rem;color:var(--hub-navy);">AP Exams (Gr 10–12)</strong><br/><span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#6b7280;">College Board exams. Score 3+ earns university credit globally.</span></div>
+                <div><strong style="font-size:0.85rem;color:var(--hub-navy);" data-i18n="acad.ext.ap.name">AP Exams (Gr 10–12)</strong><br/><span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#6b7280;" data-i18n="acad.ext.ap.desc">College Board exams. Score 3+ earns university credit globally.</span></div>
               </div>
               <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--hub-border);">
                 <div style="width:30px;height:30px;border-radius:8px;background:var(--hub-gold);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.75rem;flex-shrink:0;"><i class="fas fa-pencil-alt"></i></div>
-                <div><strong style="font-size:0.85rem;color:var(--hub-navy);">SAT (Gr 11–12)</strong><br/><span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#6b7280;">2024–25 Average: 1,080. Year-on-year improvement of +48 pts.</span></div>
+                <div><strong style="font-size:0.85rem;color:var(--hub-navy);" data-i18n="acad.ext.sat.name">SAT (Gr 11–12)</strong><br/><span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#6b7280;" data-i18n="acad.ext.sat.desc">2024–25 Average: 1,080. Year-on-year improvement of +48 pts.</span></div>
               </div>
               <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 0;">
                 <div style="width:30px;height:30px;border-radius:8px;background:var(--hub-teal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.75rem;flex-shrink:0;"><i class="fas fa-language"></i></div>
-                <div><strong style="font-size:0.85rem;color:var(--hub-navy);">IELTS</strong><br/><span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#6b7280;">78% of students achieve Band 6.0+ (university entry level).</span></div>
+                <div><strong style="font-size:0.85rem;color:var(--hub-navy);" data-i18n="acad.ext.ielts.name">IELTS</strong><br/><span style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#6b7280;" data-i18n="acad.ext.ielts.desc">78% of students achieve Band 6.0+ (university entry level).</span></div>
               </div>
             </div>
           </div>
@@ -1526,17 +1546,17 @@
           <div class="gsys-card gt-teal">
             <h3>
               <span class="gsys-icon gsi-teal"><i class="fas fa-route"></i></span>
-              University Pathways
+              <span data-i18n="acad.grade.uni.title">University Pathways</span>
             </h3>
-            <p style="font-family:'Inter',sans-serif;font-size:0.86rem;color:var(--hub-text);line-height:1.7;margin-bottom:16px;">NAIS graduates are accepted to leading universities across North America, the UK, Europe, and Australia — with dedicated university counseling starting in Grade 9.</p>
+            <p style="font-family:'Inter',sans-serif;font-size:0.86rem;color:var(--hub-text);line-height:1.7;margin-bottom:16px;" data-i18n="acad.grade.uni.p">NAIS graduates are accepted to leading universities across North America, the UK, Europe, and Australia — with dedicated university counseling starting in Grade 9.</p>
             <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
-              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);">University of Toronto</span>
-              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);">New York University</span>
-              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);">UCL London</span>
-              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);">McGill University</span>
-              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);">King's College London</span>
-              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);">Boston University</span>
-              <span style="background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.3);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:800;color:#15803d;">+ 100% Acceptance Rate</span>
+              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);" data-i18n="label.uni.toronto">University of Toronto</span>
+              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);" data-i18n="label.uni.nyu">New York University</span>
+              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);" data-i18n="label.uni.ucl">UCL London</span>
+              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);" data-i18n="label.uni.mcgill">McGill University</span>
+              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);" data-i18n="label.uni.kings">King's College London</span>
+              <span style="background:var(--hub-light);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:700;color:var(--hub-navy);" data-i18n="label.uni.boston">Boston University</span>
+              <span style="background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.3);border-radius:8px;padding:6px 12px;font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:800;color:#15803d;" data-i18n="label.uni.accept">+ 100% Acceptance Rate</span>
             </div>
           </div>
         </div>
@@ -1547,8 +1567,8 @@
     <section class="cur-section cur-section--navy">
       <div class="hub-container">
         <div class="sec-header centered">
-          <div class="sec-label-shared lbl-gold"><i class="fas fa-balance-scale"></i> Why Choose American?</div>
-          <h2 class="sec-title-shared t-white">American Curriculum vs. <em>Other Systems</em></h2>
+          <div class="sec-label-shared lbl-gold"><i class="fas fa-balance-scale"></i> <span data-i18n="acad.compare.label">Why Choose American?</span></div>
+          <h2 class="sec-title-shared t-white" data-i18n-html="acad.compare.h2">American Curriculum vs. <em>Other Systems</em></h2>
           <div class="sec-divider d-gold" style="margin-left:auto;margin-right:auto;"></div>
         </div>
 
@@ -1556,42 +1576,42 @@
           <table class="compare-table">
             <thead>
               <tr>
-                <th>Feature</th>
-                <th>American Curriculum</th>
-                <th>British Curriculum</th>
-                <th>IB Programme</th>
+                <th data-i18n="acad.compare.th.feature">Feature</th>
+                <th data-i18n="acad.compare.th.american">American Curriculum</th>
+                <th data-i18n="acad.compare.th.british">British Curriculum</th>
+                <th data-i18n="acad.compare.th.ib">IB Programme</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Global University Recognition</td>
-                <td class="ct-check"><i class="fas fa-check-circle"></i> Excellent — 50+ countries</td>
-                <td>Good — UK &amp; Commonwealth</td>
-                <td class="ct-gold"><i class="fas fa-star"></i> Excellent</td>
+                <td data-i18n="acad.compare.row1.feat">Global University Recognition</td>
+                <td class="ct-check"><i class="fas fa-check-circle"></i> <span data-i18n="acad.compare.row1.amer">Excellent — 50+ countries</span></td>
+                <td data-i18n="acad.compare.row1.brit">Good — UK &amp; Commonwealth</td>
+                <td class="ct-gold"><i class="fas fa-star"></i> <span data-i18n="acad.compare.row1.ib">Excellent</span></td>
               </tr>
               <tr>
-                <td>University Credit (Pre-graduation)</td>
-                <td class="ct-check"><i class="fas fa-check-circle"></i> Yes — via AP courses</td>
-                <td>No direct equivalent</td>
-                <td>Limited — via HL exams</td>
+                <td data-i18n="acad.compare.row2.feat">University Credit (Pre-graduation)</td>
+                <td class="ct-check"><i class="fas fa-check-circle"></i> <span data-i18n="acad.compare.row2.amer">Yes — via AP courses</span></td>
+                <td data-i18n="acad.compare.row2.brit">No direct equivalent</td>
+                <td data-i18n="acad.compare.row2.ib">Limited — via HL exams</td>
               </tr>
               <tr>
-                <td>Subject Flexibility</td>
-                <td class="ct-check"><i class="fas fa-check-circle"></i> High — wide elective choice</td>
-                <td>Medium</td>
-                <td>Medium — fixed structure</td>
+                <td data-i18n="acad.compare.row3.feat">Subject Flexibility</td>
+                <td class="ct-check"><i class="fas fa-check-circle"></i> <span data-i18n="acad.compare.row3.amer">High — wide elective choice</span></td>
+                <td data-i18n="acad.compare.row3.brit">Medium</td>
+                <td data-i18n="acad.compare.row3.ib">Medium — fixed structure</td>
               </tr>
               <tr>
-                <td>Student Wellbeing Focus</td>
-                <td class="ct-check"><i class="fas fa-check-circle"></i> Whole-child emphasis</td>
-                <td>Good</td>
-                <td class="ct-gold"><i class="fas fa-star"></i> Very strong</td>
+                <td data-i18n="acad.compare.row4.feat">Student Wellbeing Focus</td>
+                <td class="ct-check"><i class="fas fa-check-circle"></i> <span data-i18n="acad.compare.row4.amer">Whole-child emphasis</span></td>
+                <td data-i18n="acad.compare.row4.brit">Good</td>
+                <td class="ct-gold"><i class="fas fa-star"></i> <span data-i18n="acad.compare.row4.ib">Very strong</span></td>
               </tr>
               <tr>
-                <td>Arabic &amp; Islamic Studies</td>
-                <td class="ct-check"><i class="fas fa-check-circle"></i> Integrated (UAE requirement)</td>
-                <td class="ct-check"><i class="fas fa-check-circle"></i> Integrated</td>
-                <td>School dependent</td>
+                <td data-i18n="acad.compare.row5.feat">Arabic &amp; Islamic Studies</td>
+                <td class="ct-check"><i class="fas fa-check-circle"></i> <span data-i18n="acad.compare.row5.amer">Integrated (UAE requirement)</span></td>
+                <td class="ct-check"><i class="fas fa-check-circle"></i> <span data-i18n="acad.compare.row5.brit">Integrated</span></td>
+                <td data-i18n="acad.compare.row5.ib">School dependent</td>
               </tr>
             </tbody>
           </table>
@@ -1603,52 +1623,52 @@
     <section class="cur-section cur-section--white" id="faq">
       <div class="hub-container">
         <div class="sec-header centered">
-          <div class="sec-label-shared"><i class="fas fa-question-circle"></i> Parent Questions</div>
-          <h2 class="sec-title-shared">Common <em>Questions</em></h2>
+          <div class="sec-label-shared"><i class="fas fa-question-circle"></i> <span data-i18n="acad.faq.label">Parent Questions</span></div>
+          <h2 class="sec-title-shared" data-i18n-html="acad.faq.h2">Common <em>Questions</em></h2>
           <div class="sec-divider" style="margin-left:auto;margin-right:auto;"></div>
         </div>
 
         <div style="max-width:760px;margin:44px auto 0;display:flex;flex-direction:column;gap:14px;">
           <details style="background:var(--hub-light);border-radius:16px;border:1px solid var(--hub-border);overflow:hidden;">
             <summary style="padding:20px 24px;font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:700;color:var(--hub-navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-              Is the American diploma recognized in UAE universities?
+              <span data-i18n="acad.faq.q1">Is the American diploma recognized in UAE universities?</span>
               <i class="fas fa-chevron-down" style="color:var(--hub-red);font-size:0.75rem;transition:transform 0.2s;"></i>
             </summary>
-            <div style="padding:0 24px 20px;font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--hub-text);line-height:1.8;border-top:1px solid var(--hub-border);">
+            <div style="padding:0 24px 20px;font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--hub-text);line-height:1.8;border-top:1px solid var(--hub-border);" data-i18n="acad.faq.a1">
               Yes. The American High School Diploma is fully recognized by all major UAE universities, including AUS, AUD, UAEU, Khalifa University, and NYU Abu Dhabi. It is also accepted globally across 50+ countries.
             </div>
           </details>
           <details style="background:var(--hub-light);border-radius:16px;border:1px solid var(--hub-border);overflow:hidden;">
             <summary style="padding:20px 24px;font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:700;color:var(--hub-navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-              How are students assessed — exams or coursework?
+              <span data-i18n="acad.faq.q2">How are students assessed — exams or coursework?</span>
               <i class="fas fa-chevron-down" style="color:var(--hub-red);font-size:0.75rem;"></i>
             </summary>
-            <div style="padding:0 24px 20px;font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--hub-text);line-height:1.8;border-top:1px solid var(--hub-border);">
+            <div style="padding:0 24px 20px;font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--hub-text);line-height:1.8;border-top:1px solid var(--hub-border);" data-i18n="acad.faq.a2">
               Assessment is a healthy balance of both: formative (ongoing classwork, quizzes) at 40%, summative (projects, tests) at 40%, and final examinations at 20%. This continuous approach reduces exam anxiety and gives a complete picture of each student's progress.
             </div>
           </details>
           <details style="background:var(--hub-light);border-radius:16px;border:1px solid var(--hub-border);overflow:hidden;">
             <summary style="padding:20px 24px;font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:700;color:var(--hub-navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-              What is an AP course and is it mandatory?
+              <span data-i18n="acad.faq.q3">What is an AP course and is it mandatory?</span>
               <i class="fas fa-chevron-down" style="color:var(--hub-red);font-size:0.75rem;"></i>
             </summary>
-            <div style="padding:0 24px 20px;font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--hub-text);line-height:1.8;border-top:1px solid var(--hub-border);">
+            <div style="padding:0 24px 20px;font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--hub-text);line-height:1.8;border-top:1px solid var(--hub-border);" data-i18n="acad.faq.a3">
               AP (Advanced Placement) are College Board university-level courses available in Grades 10–12. They are optional but highly recommended for academically motivated students. A score of 3 or above (out of 5) on AP exams earns university credit — saving families tuition costs and time.
             </div>
           </details>
           <details style="background:var(--hub-light);border-radius:16px;border:1px solid var(--hub-border);overflow:hidden;">
             <summary style="padding:20px 24px;font-family:'Montserrat',sans-serif;font-size:0.88rem;font-weight:700;color:var(--hub-navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;">
-              When does university counseling begin?
+              <span data-i18n="acad.faq.q4">When does university counseling begin?</span>
               <i class="fas fa-chevron-down" style="color:var(--hub-red);font-size:0.75rem;"></i>
             </summary>
-            <div style="padding:0 24px 20px;font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--hub-text);line-height:1.8;border-top:1px solid var(--hub-border);">
+            <div style="padding:0 24px 20px;font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--hub-text);line-height:1.8;border-top:1px solid var(--hub-border);" data-i18n="acad.faq.a4">
               University counseling at NAIS begins in Grade 9. Our dedicated counselors guide students through course selection, extracurricular planning, personal statement writing, and application strategy — ensuring every student is fully prepared by Grade 12.
             </div>
           </details>
         </div>
 
         <div style="text-align:center;margin-top:36px;">
-          <a href="parent-faq.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;"><i class="fas fa-list"></i> View All Parent FAQs</a>
+          <a href="parent-faq.html" class="btn btn-primary" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;"><i class="fas fa-list"></i> <span data-i18n="acad.faq.all">View All Parent FAQs</span></a>
         </div>
       </div>
     </section>
@@ -1664,31 +1684,31 @@
     <div style="background:linear-gradient(135deg,#060d22 0%,#0B1230 60%,#152050 100%);padding:52px 0 0;">
       <div class="hub-container" style="text-align:center;padding-bottom:0;">
         <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(225,27,34,0.15);border:1px solid rgba(225,27,34,0.35);color:#ff8a8a;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:7px 22px;border-radius:50px;margin-bottom:24px;">
-          <i class="fas fa-chart-line"></i> Academic Year 2024 – 2025 &nbsp;·&nbsp; External Assessment Results
+          <i class="fas fa-chart-line"></i> <span data-i18n="acad.res.hero.badge">Academic Year 2024–2025 · External Assessment Results</span>
         </div>
-        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);color:#fff;font-weight:700;margin-bottom:14px;line-height:1.2;">Our Students. Our <em style="color:var(--hub-gold);">Achievements.</em></h2>
-        <p style="font-family:'Inter',sans-serif;font-size:0.96rem;color:rgba(255,255,255,0.6);max-width:560px;margin:0 auto 44px;line-height:1.8;">Clear, independent evidence of academic progress at NAIS Dubai — measured through internationally recognised assessments.</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,3rem);color:#fff;font-weight:700;margin-bottom:14px;line-height:1.2;" data-i18n-html="acad.res.hero.h2">Our Students. Our <em style="color:var(--hub-gold);">Achievements.</em></h2>
+        <p style="font-family:'Inter',sans-serif;font-size:0.96rem;color:rgba(255,255,255,0.6);max-width:560px;margin:0 auto 44px;line-height:1.8;" data-i18n="acad.res.hero.sub">Clear, independent evidence of academic progress at NAIS Dubai — measured through internationally recognised assessments.</p>
 
         <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:0;max-width:820px;margin:0 auto;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:18px 18px 0 0;overflow:hidden;">
           <div style="flex:1;min-width:130px;padding:26px 16px;text-align:center;border-right:1px solid rgba(255,255,255,0.07);">
             <span style="display:block;font-family:'Montserrat',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:#4ade80;line-height:1;margin-bottom:6px;">+35pp</span>
-            <span style="display:block;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);">Science Growth<br/>3 Years</span>
+            <span style="display:block;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);" data-i18n-html="acad.res.hero.s1lbl">Science Growth<br/>3 Years</span>
           </div>
           <div style="flex:1;min-width:130px;padding:26px 16px;text-align:center;border-right:1px solid rgba(255,255,255,0.07);">
             <span style="display:block;font-family:'Montserrat',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:var(--hub-gold);line-height:1;margin-bottom:6px;">68%</span>
-            <span style="display:block;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);">AP Pass Rate<br/>Score 3+</span>
+            <span style="display:block;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);" data-i18n-html="acad.res.hero.s2lbl">AP Pass Rate<br/>Score 3+</span>
           </div>
           <div style="flex:1;min-width:130px;padding:26px 16px;text-align:center;border-right:1px solid rgba(255,255,255,0.07);">
             <span style="display:block;font-family:'Montserrat',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:#ff6b6b;line-height:1;margin-bottom:6px;">1080</span>
-            <span style="display:block;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);">SAT Average<br/>2024–25</span>
+            <span style="display:block;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);" data-i18n-html="acad.res.hero.s3lbl">SAT Average<br/>2024–25</span>
           </div>
           <div style="flex:1;min-width:130px;padding:26px 16px;text-align:center;border-right:1px solid rgba(255,255,255,0.07);">
             <span style="display:block;font-family:'Montserrat',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:#60a5fa;line-height:1;margin-bottom:6px;">6.4</span>
-            <span style="display:block;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);">IELTS Average<br/>Band Score</span>
+            <span style="display:block;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);" data-i18n-html="acad.res.hero.s4lbl">IELTS Average<br/>Band Score</span>
           </div>
           <div style="flex:1;min-width:130px;padding:26px 16px;text-align:center;">
             <span style="display:block;font-family:'Montserrat',sans-serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:#fff;line-height:1;margin-bottom:6px;">78%</span>
-            <span style="display:block;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);">University Entry<br/>IELTS Band 6+</span>
+            <span style="display:block;font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);" data-i18n-html="acad.res.hero.s5lbl">University Entry<br/>IELTS Band 6+</span>
           </div>
         </div>
       </div>
@@ -1698,61 +1718,61 @@
     <section class="res-section res-section--white" id="map">
       <div class="hub-container">
         <div class="sec-header centered">
-          <div class="sec-label-shared lbl-green"><i class="fas fa-chart-line"></i> MAP Growth Assessments</div>
-          <h2 class="sec-title-shared">Measuring <em>Real Growth</em></h2>
+          <div class="sec-label-shared lbl-green"><i class="fas fa-chart-line"></i> <span data-i18n="acad.map.label">MAP Growth Assessments</span></div>
+          <h2 class="sec-title-shared" data-i18n-html="acad.map.h2">Measuring <em>Real Growth</em></h2>
           <div class="sec-divider" style="margin-left:auto;margin-right:auto;"></div>
-          <p class="sec-sub-shared">MAP (Measures of Academic Progress) is an internationally recognised benchmark assessment used to track individual student growth each year.</p>
+          <p class="sec-sub-shared" data-i18n="acad.map.intro">MAP (Measures of Academic Progress) is an internationally recognised benchmark assessment used to track individual student growth each year.</p>
         </div>
 
         <div class="ach-grid">
           <div class="ach-card ac-blue">
             <div class="ach-icon ai-blue"><i class="fas fa-square-root-alt"></i></div>
-            <span class="ach-tag at-blue">Algebra 1 MAP · Grade 9</span>
-            <h3>Strong Algebra Foundation</h3>
-            <p>Grade 9 students performed strongly in their first Algebra 1 MAP baseline — setting a clear benchmark for tracking future growth, aligned to California Standards.</p>
+            <span class="ach-tag at-blue" data-i18n="acad.map.card1.tag">Algebra 1 MAP · Grade 9</span>
+            <h3 data-i18n="acad.map.card1.h3">Strong Algebra Foundation</h3>
+            <p data-i18n="acad.map.card1.p">Grade 9 students performed strongly in their first Algebra 1 MAP baseline — setting a clear benchmark for tracking future growth, aligned to California Standards.</p>
             <div class="stat-row">
-              <div class="stat-chip"><span class="stat-num sn-blue">62%</span><span class="stat-lbl">At/Above Norm</span></div>
-              <div class="stat-chip"><span class="stat-num sn-blue">38%</span><span class="stat-lbl">Above Norm</span></div>
-              <div class="stat-chip"><span class="stat-num sn-blue">24%</span><span class="stat-lbl">Top Quartile</span></div>
+              <div class="stat-chip"><span class="stat-num sn-blue">62%</span><span class="stat-lbl" data-i18n="acad.map.card1.s1lbl">At/Above Norm</span></div>
+              <div class="stat-chip"><span class="stat-num sn-blue">38%</span><span class="stat-lbl" data-i18n="acad.map.card1.s2lbl">Above Norm</span></div>
+              <div class="stat-chip"><span class="stat-num sn-blue">24%</span><span class="stat-lbl" data-i18n="acad.map.card1.s3lbl">Top Quartile</span></div>
             </div>
           </div>
 
           <div class="ach-card ac-teal">
             <div class="ach-icon ai-teal"><i class="fas fa-dna"></i></div>
-            <span class="ach-tag at-teal">Life Science MAP · Grade 9</span>
-            <h3>Biology Baseline Established</h3>
-            <p>Life Science MAP results show a healthy first-year baseline aligned with Grade 8/9 Biology standards — directly informing targeted teaching for 2026.</p>
+            <span class="ach-tag at-teal" data-i18n="acad.map.card2.tag">Life Science MAP · Grade 9</span>
+            <h3 data-i18n="acad.map.card2.h3">Biology Baseline Established</h3>
+            <p data-i18n="acad.map.card2.p">Life Science MAP results show a healthy first-year baseline aligned with Grade 8/9 Biology standards — directly informing targeted teaching for 2026.</p>
             <div class="stat-row">
-              <div class="stat-chip"><span class="stat-num sn-teal">57%</span><span class="stat-lbl">At/Above Norm</span></div>
-              <div class="stat-chip"><span class="stat-num sn-teal">31%</span><span class="stat-lbl">Above Norm</span></div>
-              <div class="stat-chip"><span class="stat-num sn-teal">18%</span><span class="stat-lbl">Top Quartile</span></div>
+              <div class="stat-chip"><span class="stat-num sn-teal">57%</span><span class="stat-lbl" data-i18n="acad.map.card1.s1lbl">At/Above Norm</span></div>
+              <div class="stat-chip"><span class="stat-num sn-teal">31%</span><span class="stat-lbl" data-i18n="acad.map.card1.s2lbl">Above Norm</span></div>
+              <div class="stat-chip"><span class="stat-num sn-teal">18%</span><span class="stat-lbl" data-i18n="acad.map.card1.s3lbl">Top Quartile</span></div>
             </div>
           </div>
 
           <div class="ach-card ac-green">
             <div class="ach-icon ai-green"><i class="fas fa-star"></i></div>
-            <span class="ach-tag at-green">MAP Progress Ratings</span>
-            <h3>Outstanding Progress<br/>in Key Subjects</h3>
-            <p>NAIS students demonstrate exceptional learning velocity — rated <strong>Outstanding</strong> in Mathematics and <strong>Very Good</strong> in Science across all phases.</p>
+            <span class="ach-tag at-green" data-i18n="acad.map.card3.tag">MAP Progress Ratings</span>
+            <h3 data-i18n-html="acad.map.card3.h3">Outstanding Progress<br/>in Key Subjects</h3>
+            <p data-i18n="acad.map.card3.p">NAIS students demonstrate exceptional learning velocity — rated <strong>Outstanding</strong> in Mathematics and <strong>Very Good</strong> in Science across all phases.</p>
             <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px;">
               <div class="prog-item">
                 <div class="prog-top">
-                  <span class="prog-label-txt">Science Progress (Gr 9–12)</span>
-                  <span class="r-badge very-good"><i class="fas fa-star"></i> Very Good — 76%</span>
+                  <span class="prog-label-txt" data-i18n="acad.prog.bar.sci912">Science Progress (Gr 9–12)</span>
+                  <span class="r-badge very-good"><i class="fas fa-star"></i> <span data-i18n="acad.prog.badge.vg">Very Good — 76%</span></span>
                 </div>
                 <div class="prog-track"><div class="prog-fill" style="width:76%;background:#3b82f6;"></div></div>
               </div>
               <div class="prog-item">
                 <div class="prog-top">
-                  <span class="prog-label-txt">Mathematics Progress (Gr 9–12)</span>
-                  <span class="r-badge outstanding"><i class="fas fa-star"></i> Outstanding — 84%</span>
+                  <span class="prog-label-txt" data-i18n="acad.prog.bar.math912">Mathematics Progress (Gr 9–12)</span>
+                  <span class="r-badge outstanding"><i class="fas fa-star"></i> <span data-i18n="acad.prog.badge.out84">Outstanding — 84%</span></span>
                 </div>
                 <div class="prog-track"><div class="prog-fill" style="width:84%;background:#27AE60;"></div></div>
               </div>
               <div class="prog-item">
                 <div class="prog-top">
-                  <span class="prog-label-txt">Science Progress (Gr 1–5)</span>
-                  <span class="r-badge outstanding"><i class="fas fa-star"></i> Outstanding — 96%</span>
+                  <span class="prog-label-txt" data-i18n="acad.prog.bar.sci15">Science Progress (Gr 1–5)</span>
+                  <span class="r-badge outstanding"><i class="fas fa-star"></i> <span data-i18n="acad.prog.badge.out96">Outstanding — 96%</span></span>
                 </div>
                 <div class="prog-track"><div class="prog-fill" style="width:96%;background:#27AE60;"></div></div>
               </div>
@@ -1766,15 +1786,15 @@
     <section class="res-section res-section--dark" id="trend">
       <div class="hub-container">
         <div class="sec-header centered">
-          <div class="sec-label-shared lbl-white"><i class="fas fa-history" style="color:var(--hub-gold);"></i> 3-Year Attainment · 2022–23 → 2024–25</div>
-          <h2 class="sec-title-shared t-white">Consistent Growth <em>Year After Year</em></h2>
+          <div class="sec-label-shared lbl-white"><i class="fas fa-history" style="color:var(--hub-gold);"></i> <span data-i18n="acad.trend.label">3-Year Attainment · 2022–23 → 2024–25</span></div>
+          <h2 class="sec-title-shared t-white" data-i18n-html="acad.trend.h2">Consistent Growth <em>Year After Year</em></h2>
           <div class="sec-divider d-gold" style="margin-left:auto;margin-right:auto;"></div>
-          <p class="sec-sub-shared sub-white">Students performing at or above national norm. Every subject shows upward momentum across three consecutive academic years.</p>
+          <p class="sec-sub-shared sub-white" data-i18n="acad.trend.intro">Students performing at or above national norm. Every subject shows upward momentum across three consecutive academic years.</p>
         </div>
 
         <!-- Science -->
         <div style="margin-top:52px;">
-          <p style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:20px;text-align:center;"><i class="fas fa-flask" style="margin-right:6px;color:#4ade80;"></i>Science — At or Above National Norm</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:20px;text-align:center;"><i class="fas fa-flask" style="margin-right:6px;color:#4ade80;"></i><span data-i18n="acad.trend.sci.head">Science — At or Above National Norm</span></p>
           <div class="trend-grid">
             <div class="trend-card">
               <div class="trend-subject">Phase 2 · Gr 1–5</div>
@@ -1783,7 +1803,7 @@
               <div class="trend-arrow"><i class="fas fa-long-arrow-alt-down"></i></div>
               <div class="trend-to" style="color:#4ade80;">84%</div>
               <div class="trend-gain"><i class="fas fa-arrow-up"></i> +35 pp</div>
-              <div class="trend-phase">Best improvement</div>
+              <div class="trend-phase" data-i18n="acad.trend.best">Best improvement</div>
             </div>
             <div class="trend-card">
               <div class="trend-subject">Phase 3 · Gr 6–8</div>
@@ -1792,7 +1812,7 @@
               <div class="trend-arrow"><i class="fas fa-long-arrow-alt-down"></i></div>
               <div class="trend-to" style="color:#60a5fa;">58%</div>
               <div class="trend-gain"><i class="fas fa-arrow-up"></i> +10 pp</div>
-              <div class="trend-phase">Steady growth</div>
+              <div class="trend-phase" data-i18n="acad.trend.steady">Steady growth</div>
             </div>
             <div class="trend-card">
               <div class="trend-subject">Phase 4 · Gr 9–12</div>
@@ -1801,7 +1821,7 @@
               <div class="trend-arrow"><i class="fas fa-long-arrow-alt-down"></i></div>
               <div class="trend-to" style="color:#4ade80;">71%</div>
               <div class="trend-gain"><i class="fas fa-arrow-up"></i> +9 pp</div>
-              <div class="trend-phase">DSIB: Good</div>
+              <div class="trend-phase" data-i18n="acad.trend.dsib.good">DSIB: Good</div>
             </div>
             <div class="trend-card">
               <div class="trend-subject">Phase 4 · Above Norm</div>
@@ -1810,14 +1830,14 @@
               <div class="trend-arrow"><i class="fas fa-long-arrow-alt-down"></i></div>
               <div class="trend-to" style="color:#F5A623;">54%</div>
               <div class="trend-gain"><i class="fas fa-arrow-up"></i> +17 pp</div>
-              <div class="trend-phase">High performers ↑</div>
+              <div class="trend-phase" data-i18n="acad.trend.high.perf">High performers ↑</div>
             </div>
           </div>
         </div>
 
         <!-- Mathematics -->
         <div style="margin-top:44px;">
-          <p style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:20px;text-align:center;"><i class="fas fa-calculator" style="margin-right:6px;color:#F5A623;"></i>Mathematics — At or Above National Norm</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:20px;text-align:center;"><i class="fas fa-calculator" style="margin-right:6px;color:#F5A623;"></i><span data-i18n="acad.trend.math.head">Mathematics — At or Above National Norm</span></p>
           <div class="trend-grid">
             <div class="trend-card">
               <div class="trend-subject">Phase 2 · Gr 1–5</div>
@@ -1826,7 +1846,7 @@
               <div class="trend-arrow"><i class="fas fa-long-arrow-alt-down"></i></div>
               <div class="trend-to" style="color:#4ade80;">79%</div>
               <div class="trend-gain"><i class="fas fa-arrow-up"></i> +27 pp</div>
-              <div class="trend-phase">Outstanding</div>
+              <div class="trend-phase" data-i18n="acad.trend.outstanding">Outstanding</div>
             </div>
             <div class="trend-card">
               <div class="trend-subject">Phase 3 · Gr 6–8</div>
@@ -1835,7 +1855,7 @@
               <div class="trend-arrow"><i class="fas fa-long-arrow-alt-down"></i></div>
               <div class="trend-to" style="color:#60a5fa;">71%</div>
               <div class="trend-gain"><i class="fas fa-arrow-up"></i> +13 pp</div>
-              <div class="trend-phase">Very Good</div>
+              <div class="trend-phase" data-i18n="acad.trend.very.good">Very Good</div>
             </div>
             <div class="trend-card">
               <div class="trend-subject">Phase 4 · Gr 9–12</div>
@@ -1844,7 +1864,7 @@
               <div class="trend-arrow"><i class="fas fa-long-arrow-alt-down"></i></div>
               <div class="trend-to" style="color:#4ade80;">76%</div>
               <div class="trend-gain"><i class="fas fa-arrow-up"></i> +13 pp</div>
-              <div class="trend-phase">Outstanding</div>
+              <div class="trend-phase" data-i18n="acad.trend.outstanding">Outstanding</div>
             </div>
             <div class="trend-card">
               <div class="trend-subject">Phase 4 · Above Norm</div>
@@ -1853,7 +1873,7 @@
               <div class="trend-arrow"><i class="fas fa-long-arrow-alt-down"></i></div>
               <div class="trend-to" style="color:#F5A623;">57%</div>
               <div class="trend-gain"><i class="fas fa-arrow-up"></i> +16 pp</div>
-              <div class="trend-phase">High performers ↑</div>
+              <div class="trend-phase" data-i18n="acad.trend.high.perf">High performers ↑</div>
             </div>
           </div>
         </div>
@@ -1864,35 +1884,35 @@
     <section class="res-section res-section--light" id="ap-sat-ielts">
       <div class="hub-container">
         <div class="sec-header centered">
-          <div class="sec-label-shared"><i class="fas fa-trophy" style="color:var(--hub-gold);"></i> AP · SAT · IELTS</div>
-          <h2 class="sec-title-shared">College Readiness &amp; <em>International Excellence</em></h2>
+          <div class="sec-label-shared"><i class="fas fa-trophy" style="color:var(--hub-gold);"></i> <span data-i18n="acad.extern.label">AP · SAT · IELTS</span></div>
+          <h2 class="sec-title-shared" data-i18n-html="acad.extern.h2">College Readiness &amp; <em>International Excellence</em></h2>
           <div class="sec-divider" style="margin-left:auto;margin-right:auto;"></div>
-          <p class="sec-sub-shared">High school students sit internationally recognised examinations that open doors to universities across the world.</p>
+          <p class="sec-sub-shared" data-i18n="acad.extern.intro">High school students sit internationally recognised examinations that open doors to universities across the world.</p>
         </div>
 
         <div class="ach-grid">
           <!-- AP -->
           <div class="ach-card ac-purple">
             <div class="ach-icon ai-purple"><i class="fas fa-university"></i></div>
-            <span class="ach-tag at-purple">Advanced Placement · Gr 10–12</span>
-            <h3>AP — University-Level Results</h3>
-            <p>College Board examinations. A score of 3+ earns university credit worldwide. NAIS offers 10+ AP courses across sciences, humanities &amp; technology.</p>
+            <span class="ach-tag at-purple" data-i18n="acad.res.ap.tag">Advanced Placement · Gr 10–12</span>
+            <h3 data-i18n="acad.res.ap.h3">AP — University-Level Results</h3>
+            <p data-i18n="acad.res.ap.p">College Board examinations. A score of 3+ earns university credit worldwide. NAIS offers 10+ AP courses across sciences, humanities &amp; technology.</p>
             <div class="stat-row" style="margin-bottom:16px;">
-              <div class="stat-chip"><span class="stat-num sn-purple">68%</span><span class="stat-lbl">Overall Pass Rate</span></div>
-              <div class="stat-chip"><span class="stat-num sn-purple">80%</span><span class="stat-lbl">Psychology Pass</span></div>
-              <div class="stat-chip"><span class="stat-num sn-purple">78%</span><span class="stat-lbl">Comp Sci Pass</span></div>
+              <div class="stat-chip"><span class="stat-num sn-purple">68%</span><span class="stat-lbl" data-i18n="acad.res.ap.s1">Overall Pass Rate</span></div>
+              <div class="stat-chip"><span class="stat-num sn-purple">80%</span><span class="stat-lbl" data-i18n="acad.res.ap.s2">Psychology Pass</span></div>
+              <div class="stat-chip"><span class="stat-num sn-purple">78%</span><span class="stat-lbl" data-i18n="acad.res.ap.s3">Comp Sci Pass</span></div>
             </div>
             <div style="display:flex;flex-direction:column;gap:7px;">
               <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--hub-border);">
-                <span style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--hub-text);">AP Psychology</span>
+                <span style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--hub-text);" data-i18n="acad.res.ap.psych">AP Psychology</span>
                 <span style="font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:800;color:var(--hub-green);">80% pass</span>
               </div>
               <div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--hub-border);">
-                <span style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--hub-text);">AP Computer Science</span>
+                <span style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--hub-text);" data-i18n="acad.res.ap.cs">AP Computer Science</span>
                 <span style="font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:800;color:var(--hub-green);">78% pass</span>
               </div>
               <div style="display:flex;justify-content:space-between;padding:7px 0;">
-                <span style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--hub-text);">AP Physics 1</span>
+                <span style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--hub-text);" data-i18n="acad.res.ap.phys">AP Physics 1</span>
                 <span style="font-family:'Montserrat',sans-serif;font-size:0.75rem;font-weight:800;color:#c47f08;">58% pass</span>
               </div>
             </div>
@@ -1901,30 +1921,30 @@
           <!-- SAT -->
           <div class="ach-card ac-gold">
             <div class="ach-icon ai-gold"><i class="fas fa-pencil-alt"></i></div>
-            <span class="ach-tag at-gold">SAT · Grades 11–12</span>
-            <h3>SAT — 3 Years of Growth</h3>
-            <p>Consistent year-on-year improvement in both Reading/Writing and Math — with total scores rising 48 points in 2024–25 alone.</p>
+            <span class="ach-tag at-gold" data-i18n="acad.res.sat.tag">SAT · Grades 11–12</span>
+            <h3 data-i18n="acad.res.sat.h3">SAT — 3 Years of Growth</h3>
+            <p data-i18n="acad.res.sat.p">Consistent year-on-year improvement in both Reading/Writing and Math — with total scores rising 48 points in 2024–25 alone.</p>
             <div class="stat-row" style="margin-bottom:18px;">
-              <div class="stat-chip"><span class="stat-num sn-gold">1080</span><span class="stat-lbl">2024–25 Average</span></div>
-              <div class="stat-chip"><span class="stat-num sn-gold">+48</span><span class="stat-lbl">Points Gained</span></div>
+              <div class="stat-chip"><span class="stat-num sn-gold">1080</span><span class="stat-lbl" data-i18n="acad.res.sat.avg">2024–25 Average</span></div>
+              <div class="stat-chip"><span class="stat-num sn-gold">+48</span><span class="stat-lbl" data-i18n="acad.res.sat.gain">Points Gained</span></div>
             </div>
             <div style="display:flex;flex-direction:column;gap:7px;">
               <div class="score-row">
-                <span class="lbl">EBRW Average</span>
+                <span class="lbl" data-i18n="acad.res.sat.ebrw">EBRW Average</span>
                 <div style="display:flex;align-items:center;gap:8px;">
                   <span class="val">560</span>
                   <span class="chg">↑ +22</span>
                 </div>
               </div>
               <div class="score-row">
-                <span class="lbl">Math Average</span>
+                <span class="lbl" data-i18n="acad.res.sat.math">Math Average</span>
                 <div style="display:flex;align-items:center;gap:8px;">
                   <span class="val">520</span>
                   <span class="chg">↑ +12</span>
                 </div>
               </div>
               <div class="score-row" style="border-bottom:none;">
-                <span class="lbl">Scoring 1200+</span>
+                <span class="lbl" data-i18n="acad.res.sat.1200">Scoring 1200+</span>
                 <div style="display:flex;align-items:center;gap:8px;">
                   <span class="val">43%</span>
                   <span class="chg">↑ +10pp</span>
@@ -1936,17 +1956,17 @@
           <!-- IELTS -->
           <div class="ach-card ac-red">
             <div class="ach-icon ai-red"><i class="fas fa-language"></i></div>
-            <span class="ach-tag at-red">IELTS · 2024–25</span>
-            <h3>IELTS — University Entry Ready</h3>
-            <p>78% of NAIS students achieve IELTS Band 6.0+ — the entry standard for most universities worldwide. 42% reach Band 7.0+ for top-ranked institutions.</p>
+            <span class="ach-tag at-red" data-i18n="acad.res.ielts.tag">IELTS · 2024–25</span>
+            <h3 data-i18n="acad.res.ielts.h3">IELTS — University Entry Ready</h3>
+            <p data-i18n="acad.res.ielts.p">78% of NAIS students achieve IELTS Band 6.0+ — the entry standard for most universities worldwide. 42% reach Band 7.0+ for top-ranked institutions.</p>
             <div class="stat-row" style="margin-bottom:18px;">
-              <div class="stat-chip"><span class="stat-num sn-red">6.4</span><span class="stat-lbl">Average Band</span></div>
-              <div class="stat-chip"><span class="stat-num sn-red">78%</span><span class="stat-lbl">Band 6.0+</span></div>
-              <div class="stat-chip"><span class="stat-num sn-red">42%</span><span class="stat-lbl">Band 7.0+</span></div>
+              <div class="stat-chip"><span class="stat-num sn-red">6.4</span><span class="stat-lbl" data-i18n="acad.res.ielts.avg">Average Band</span></div>
+              <div class="stat-chip"><span class="stat-num sn-red">78%</span><span class="stat-lbl" data-i18n="acad.res.ielts.b6">Band 6.0+</span></div>
+              <div class="stat-chip"><span class="stat-num sn-red">42%</span><span class="stat-lbl" data-i18n="acad.res.ielts.b7">Band 7.0+</span></div>
             </div>
             <div style="background:var(--hub-light);border-radius:12px;padding:14px 16px;">
-              <p style="font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:800;color:var(--hub-navy);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">What This Means</p>
-              <p style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--hub-text);line-height:1.6;margin:0;">Band 6.0+ meets English-language requirements at universities including UCL, Manchester, Toronto, and UAE institutions.</p>
+              <p style="font-family:'Montserrat',sans-serif;font-size:0.7rem;font-weight:800;color:var(--hub-navy);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;" data-i18n="acad.res.ielts.means">What This Means</p>
+              <p style="font-family:'Inter',sans-serif;font-size:0.82rem;color:var(--hub-text);line-height:1.6;margin:0;" data-i18n="acad.res.ielts.means.p">Band 6.0+ meets English-language requirements at universities including UCL, Manchester, Toronto, and UAE institutions.</p>
             </div>
           </div>
         </div>
@@ -1954,47 +1974,47 @@
         <!-- PSAT -->
         <div class="exam-two-col" style="margin-top:40px;">
           <div class="exam-card et-gold">
-            <h3><i class="fas fa-pencil-ruler" style="background:var(--hub-gold);width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;flex-shrink:0;"></i> PSAT — Grade 11 (2024–25)</h3>
+            <h3><i class="fas fa-pencil-ruler" style="background:var(--hub-gold);width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;flex-shrink:0;"></i> <span data-i18n="acad.res.psat.tag">PSAT — Grade 11 (2024–25)</span></h3>
             <div style="display:flex;gap:28px;flex-wrap:wrap;margin-bottom:20px;">
               <div>
                 <div class="score-big">510</div>
-                <div class="score-sub">EBRW Score (+22 pts from last year)</div>
+                <div class="score-sub" data-i18n="acad.res.psat.ebrw.sc">EBRW Score (+22 pts from last year)</div>
               </div>
               <div>
                 <div class="score-big">455</div>
-                <div class="score-sub">Math Score (+23 pts from last year)</div>
+                <div class="score-sub" data-i18n="acad.res.psat.math.sc">Math Score (+23 pts from last year)</div>
               </div>
             </div>
             <div style="display:flex;flex-direction:column;gap:7px;">
               <div class="score-row">
-                <span class="lbl">EBRW Benchmark Met</span>
-                <div style="display:flex;align-items:center;gap:8px;"><span class="val">61%</span><span class="chg">↑ improved</span></div>
+                <span class="lbl" data-i18n="acad.res.psat.ebrw.bm">EBRW Benchmark Met</span>
+                <div style="display:flex;align-items:center;gap:8px;"><span class="val">61%</span><span class="chg" data-i18n="label.improved">↑ improved</span></div>
               </div>
               <div class="score-row" style="border-bottom:none;">
-                <span class="lbl">Math Benchmark Met</span>
-                <div style="display:flex;align-items:center;gap:8px;"><span class="val">44%</span><span class="chg">↑ improved</span></div>
+                <span class="lbl" data-i18n="acad.res.psat.math.bm">Math Benchmark Met</span>
+                <div style="display:flex;align-items:center;gap:8px;"><span class="val">44%</span><span class="chg" data-i18n="label.improved">↑ improved</span></div>
               </div>
             </div>
           </div>
 
           <div class="exam-card et-green">
-            <h3><i class="fas fa-graduation-cap" style="background:var(--hub-green);width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;flex-shrink:0;"></i> University Acceptance — 100%</h3>
+            <h3><i class="fas fa-graduation-cap" style="background:var(--hub-green);width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.85rem;flex-shrink:0;"></i> <span data-i18n="acad.res.uni.tag">University Acceptance — 100%</span></h3>
             <div style="text-align:center;padding:20px 0;">
               <div style="font-family:'Montserrat',sans-serif;font-size:4rem;font-weight:900;color:var(--hub-green);line-height:1;">100%</div>
-              <div style="font-family:'Inter',sans-serif;font-size:0.9rem;color:#6b7280;margin-top:6px;">of graduates admitted to their chosen university</div>
+              <div style="font-family:'Inter',sans-serif;font-size:0.9rem;color:#6b7280;margin-top:6px;" data-i18n="acad.res.uni.sub">of graduates admitted to their chosen university</div>
             </div>
             <div style="display:flex;flex-direction:column;gap:7px;">
               <div class="score-row">
-                <span class="lbl">North America (US/Canada)</span><span class="val">✓</span>
+                <span class="lbl" data-i18n="acad.res.uni.na">North America (US/Canada)</span><span class="val">✓</span>
               </div>
               <div class="score-row">
-                <span class="lbl">United Kingdom</span><span class="val">✓</span>
+                <span class="lbl" data-i18n="acad.res.uni.uk">United Kingdom</span><span class="val">✓</span>
               </div>
               <div class="score-row">
-                <span class="lbl">Australia</span><span class="val">✓</span>
+                <span class="lbl" data-i18n="acad.res.uni.aus">Australia</span><span class="val">✓</span>
               </div>
               <div class="score-row" style="border-bottom:none;">
-                <span class="lbl">UAE &amp; Europe</span><span class="val">✓</span>
+                <span class="lbl" data-i18n="acad.res.uni.uae">UAE &amp; Europe</span><span class="val">✓</span>
               </div>
             </div>
           </div>
@@ -2007,9 +2027,9 @@
       <div class="hub-container">
         <div class="uni-accept-strip">
           <div class="uni-accept-num">100%</div>
-          <div class="uni-accept-label">University Acceptance — Class of 2025</div>
-          <p class="uni-accept-sub">Every NAIS graduate who applied was accepted to a university of their choice. Our counseling program begins in Grade 9 and leaves nothing to chance.</p>
-          <a href="admissions.html#apply" class="btn-white" style="position:relative;z-index:2;"><i class="fas fa-pen-to-square"></i> Apply for 2026–27</a>
+          <div class="uni-accept-label" data-i18n="acad.uni.label">University Acceptance — Class of 2025</div>
+          <p class="uni-accept-sub" data-i18n="acad.uni.p">Every NAIS graduate who applied was accepted to a university of their choice. Our counseling program begins in Grade 9 and leaves nothing to chance.</p>
+          <a href="admissions.html#apply" class="btn-white" style="position:relative;z-index:2;"><i class="fas fa-pen-to-square"></i> <span data-i18n="acad.uni.btn">Apply for 2026–27</span></a>
         </div>
       </div>
     </section>
@@ -2021,7 +2041,7 @@
     <div class="footer-top"><div class="container"><div class="footer-grid">
       <div class="footer-brand">
         <div class="footer-logo"><img src="images/nais-logo.png" alt="NAIS Dubai Logo" class="footer-logo-img" /></div>
-        <p class="footer-desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow.</p>
+        <p class="footer-desc" data-i18n="cur.footer.desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow.</p>
         <div class="footer-social">
           <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -2030,37 +2050,42 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4 class="footer-heading">Academics</h4>
+        <h4 class="footer-heading" data-i18n="footer.ac.programs">Academics</h4>
         <ul class="footer-links">
-          <li><a href="academics.html?tab=programs">Academic Programs</a></li>
-          <li><a href="academics.html?tab=curriculum">American Curriculum</a></li>
-          <li><a href="academics.html?tab=results">Academic Results</a></li>
-          <li><a href="pbl.html">Project-Based Learning</a></li>
+          <li><a href="academics.html?tab=programs" data-i18n="acad.tab.programs">Academic Programs</a></li>
+          <li><a href="academics.html?tab=curriculum" data-i18n="acad.tab.curriculum">American Curriculum</a></li>
+          <li><a href="academics.html?tab=results" data-i18n="acad.tab.results">Academic Results</a></li>
+          <li><a href="pbl.html" data-i18n="nav.sub.pbl">Project-Based Learning</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4 class="footer-heading">Programs</h4>
+        <h4 class="footer-heading" data-i18n="acad.prog.label">Programs</h4>
         <ul class="footer-links">
-          <li><a href="academics.html?tab=programs#kindergarten">Kindergarten</a></li>
-          <li><a href="academics.html?tab=programs#elementary">Elementary</a></li>
-          <li><a href="academics.html?tab=programs#middle">Middle School</a></li>
-          <li><a href="academics.html?tab=programs#high">High School</a></li>
-          <li><a href="academics.html?tab=programs#ap">AP Courses</a></li>
+          <li><a href="academics.html?tab=programs#kindergarten" data-i18n="footer.al.kg">Kindergarten</a></li>
+          <li><a href="academics.html?tab=programs#elementary" data-i18n="footer.al.elem">Elementary</a></li>
+          <li><a href="academics.html?tab=programs#middle" data-i18n="footer.al.mid">Middle School</a></li>
+          <li><a href="academics.html?tab=programs#high" data-i18n="footer.al.high">High School</a></li>
+          <li><a href="academics.html?tab=programs#ap" data-i18n="footer.al.ap">AP Courses</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4 class="footer-heading">Contact</h4>
+        <h4 class="footer-heading" data-i18n="footer.contact">Contact</h4>
         <ul class="footer-contact-list">
-          <li><i class="fas fa-map-marker-alt"></i><span>Al Mizhar 1, Mirdif, Dubai, UAE</span></li>
+          <li><i class="fas fa-map-marker-alt"></i><span data-i18n="footer.addr">Al Mizhar 1, Mirdif, Dubai, UAE</span></li>
           <li><i class="fas fa-phone-alt"></i><a href="tel:+97142884844">+971 4 288 4844</a></li>
           <li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li>
         </ul>
-        <a href="admissions.html" class="btn btn-red-sm">Apply Now <i class="fas fa-arrow-right"></i></a>
+        <a href="admissions.html" class="btn btn-red-sm"><span data-i18n="footer.apply.btn">Apply Now</span> <i class="fas fa-arrow-right"></i></a>
       </div>
     </div></div></div>
-    <div class="footer-bottom"><div class="container"><p>© 2025 North American International School, Dubai. All Rights Reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a><a href="safeguarding.html">Safeguarding</a></div></div></div>
+    <div class="footer-bottom"><div class="container"><p data-i18n="footer.copy">© 2025 North American International School, Dubai. All Rights Reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a><a href="terms-of-use.html" data-i18n="footer.terms">Terms of Use</a><a href="safeguarding.html" data-i18n="footer.safeguarding">Safeguarding</a></div></div></div>
   </footer>
 
+  <!-- Language Float Pill (Mobile) -->
+  <div class="lang-float-pill" aria-label="Language switcher">
+    <button class="lang-switcher" data-lang="en" title="English">EN</button>
+    <button class="lang-switcher" data-lang="ar" title="العربية">عر</button>
+  </div>
   <!-- Floating Buttons -->
   <a href="admissions.html#apply" class="apply-float" aria-label="Apply Now"><i class="fas fa-pen-to-square"></i><span class="apply-float-label">Apply Now</span></a>
   <a href="https://wa.me/97142884844" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
@@ -2069,6 +2094,7 @@
   <script src="js/nav.js"></script>
   <script src="js/img-fallback.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
 
   <script>
     // ── TAB SYSTEM ──────────────────────────────────────────

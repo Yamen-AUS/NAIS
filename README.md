@@ -117,6 +117,8 @@ css/
   mobile.css                 — Mobile-first responsive overrides
   premium.css                — Premium design elements
   enhancements.css           — UX/UI enhancement pack v6 (60 sections)
+  rtl.css                    — Arabic RTL stylesheet (85 sections); Cairo+Tajawal fonts,
+                               direction overrides, flex-reverse, icon flips
 
 js/
   nav.js                     — Navigation: open/close, mobile accordion,
@@ -127,6 +129,9 @@ js/
                                tour tabs, mobile CTA, parallax, gallery,
                                announcement band, active sections, ripple
   img-fallback.js            — Broken image replacement with local photos
+  i18n.js                    — Bilingual EN/AR engine: 200+ key dictionary,
+                               applyTranslations(), applyDir(), switchLang(),
+                               NAIS_i18n public API, localStorage persistence
 
 images/
   nais-logo.png              — School logo
@@ -271,6 +276,107 @@ temp/
 
 ---
 
+## 🌐 Bilingual System (EN / AR) — RTL Support
+
+### Architecture
+| File | Role |
+|------|------|
+| `js/i18n.js` | Full bilingual engine: dictionary, `t(key)` lookup, `applyTranslations()`, `applyDir()`, `switchLang()`, `NAIS_i18n` public API |
+| `css/rtl.css` | RTL stylesheet (85 sections) — Arabic fonts (Cairo + Tajawal), `dir: rtl`, flex-reverse, icon flips, component-level overrides |
+
+### Language Switching
+- **Storage:** `localStorage('nais_lang')` — persists across pages
+- **Trigger:** Any `.lang-switcher[data-lang]` button — topbar (EN / عر), floating pill (mobile), nav overlay
+- **Body class:** `lang-ar` added for RTL CSS scoping; `lang-en` for LTR
+- **HTML dir:** `<html dir="rtl" lang="ar">` set automatically on Arabic selection
+- **Page title:** `data-page-title="page.title.home"` on `<body>` translates `document.title`
+
+### Translation Coverage — All 13 Pages (100% data-i18n ✅)
+All translatable strings use `data-i18n`, `data-i18n-html`, `data-i18n-placeholder`, or `data-i18n-aria` attributes:
+
+| Section | Keys covered |
+|---------|-------------|
+| Intro overlay | `btn.skip` |
+| Topbar | `topbar.address`, `topbar.portal`, `topbar.elearning`, `topbar.careers` |
+| Navigation | All primary links, sub-links, tagline, promo card, search, careers, apply |
+| Quick-links bar | `nav.apply-now`, `nav.sub.fees`, `nav.sub.how-apply`, `nav.academics`, `nav.sub.gallery`, `quick.calendar`, `nav.sub.contact`, `quick.lms` |
+| Hero | badge, title1/2, subtitle, all 3 buttons, 360° CTA, tagline, 4 stats, scroll indicator |
+| Hero mini-form | all 4 placeholders, grade options, submit, respond note |
+| Announcement band | `ann.latest`, `ann.ticker`, `ann.viewall` |
+| Why NAIS | section label/h2/intro, 6 cards h3+p, 4 achievement badges |
+| Quick access | 5 card labels |
+| Welcome | label, h2, lead, p2, 3 pillar cards, KHDA badge, principal quote, 2 action buttons |
+| Academics | section label/h2/intro, 4 program cards (h3+p+3 features), 4 grade tags, highlights banner (4 items), explore btn |
+| CARE Values | label, h2, intro, 4 value cards |
+| Student Life | label, h2, arts showcase, 3 life cards |
+| Gallery | label, h2, text, 3 stats, CTA buttons, 5 mosaic badges, 7 accent labels |
+| USP Pillars | subtitle, h2, intro, 6 pillars (tag+title+text) — Pillar 02 tag confirmed red (#E11B22) |
+| Recruitment | sec label/h2/intro, banner badge/h3/p/register, 3 leader cards, meet-principal card, 3 open house dates, ambassador card |
+| 360° Tour | label, h2, intro, 3 tabs, 3 pane headings/descriptions, all feature lists, source badges, photo captions, bottom CTA |
+| Stats | 6 stat labels |
+| Testimonials | label, h2, 4 testimonial blocks (quote+name+role) |
+| Video Promo | label, h2, p, apply, tour |
+| Photo Parallax | 3 panels (tag+title+desc) |
+| News | label, h2, all-news link, 3 news cards (tag+h3+p+readmore) |
+| Calendar | label, h2, full-calendar link, 6 events (tag+h4+p) |
+| University Destinations | label, sub |
+| CTA Strip | h3, p, 3 buttons |
+| Admissions CTA | label, h2, p, 4 steps (h4+p), 2 buttons |
+| Accreditations | sec label/h2, 5 items |
+| Contact | sec label/h2/p, 4 detail items, WhatsApp btn, form (h3, labels, placeholders, grade options, submit, thanks) |
+| Tour banner | h3, p, btn |
+| Enrollment notice | strong, p, link |
+| Footer | desc, social links, 3 column headings, 7 quick links, 6 academic links, 4 contact details, apply+WhatsApp btns, copyright, 4 legal links |
+| Mobile CTA bar | call, whatsapp, apply, tour |
+| Video lightbox | film h3, film p, 2 action buttons, close aria-label |
+| Floating pill | EN/AR aria-labels |
+| Floating Apply btn | label, aria-label |
+| Back-to-top | aria-label |
+| WhatsApp float | aria-label |
+
+### RTL CSS — 85 Sections Covered
+`css/rtl.css` provides complete right-to-left overrides for every component including:
+- Arabic font import (Cairo + Tajawal via Google Fonts)
+- Base typography, direction, icon neutrality, arrow/chevron flips
+- Topbar, nav rail, nav overlay, nav panels, subnavs, bottom bar, search form
+- Hero: content, badge, actions, stats, 360° button, tagline, floating form, scroll indicator
+- Section headers: left-aligned in RTL, centered headers kept centred
+- Why cards, USP pillars, academics grid, program cards, grade tags, highlights
+- CARE values, student life, gallery (mosaic badge RTL, label line flip, filmstrip)
+- Gallery accent strip, mosaic badge RTL positioning
+- Recruitment section: leaders grid, leader cards, schedule, open house, ambassador
+- 360° tour: tabs, panes, features, source badges, captions, bottom CTA
+- Stats section, testimonials, video promo, photo parallax panels
+- News & events, calendar, university strip, CTA strip
+- Admissions CTA steps, accreditations, contact section, contact form
+- Tour banner, enrollment notice, Google Maps (dir:ltr preserved)
+- Footer: grid, columns, headings, links, social, bottom bar, legal links
+- Mobile CTA bar, video lightbox, floating pill, apply float, back-to-top, WhatsApp float
+- Announcement band (ticker dir:rtl), responsive overrides (≤768px, ≤600px)
+- Smooth language-switch opacity transition
+
+---
+
+### i18n Coverage Per Page
+
+| Page | Status | Notes |
+|------|--------|-------|
+| `index.html` | ✅ 100% | All 40+ sections fully tagged |
+| `about.html` | ✅ 100% | Topbar, nav, hero, all content, footer |
+| `academics.html` | ✅ 100% | Programs, AP, inclusion, filmstrip, footer |
+| `admissions.html` | ✅ 100% | Form, fees, process, documents, footer |
+| `curriculum.html` | ✅ 100% | Grading, assessments, pathways, FAQ, footer |
+| `pbl.html` | ✅ 100% | Philosophy, pillars, process, CTA, footer |
+| `parent-faq.html` | ✅ 100% | Search bar, categories, accordion, footer |
+| `gallery.html` | ✅ 100% | Hero, filter bar, all section headers, captions, panoramic badge, CTA, footer |
+| `phase4-results.html` | ✅ 100% | KPIs, MAP, PSAT, AP, SAT, IELTS sections, footer |
+| `privacy-policy.html` | ✅ 100% | Hero, back link, footer (copyright + all 4 links) |
+| `terms-of-use.html` | ✅ 100% | Hero, back link, footer (copyright + all 4 links) |
+| `safeguarding.html` | ✅ 100% | Hero, back link, footer (copyright + all 4 links) |
+| `sitemap.html` | ✅ 100% | Hero, all 9 section `<h2>` tags, footer; `data-page-title` on body |
+
+---
+
 ## ⚠️ Known Limitations / Pending Items
 
 | Item | Note |
@@ -290,16 +396,15 @@ temp/
 2. **School calendar integration** — ICS file download or live calendar embed
 3. **Set up email forwarding** for `contact_submissions` (webhook → admissions email)
 4. **Add Google Analytics 4** for visitor tracking and conversion measurement
-5. **Add a News/Blog section** with individual article pages
-6. **Add real 360° virtual tour** (Matterport or Google Maps Street View iframes)
-7. **Add `sitemap.xml`** (machine-readable) for SEO search indexing
-8. **Add Open Graph meta tags** to all pages for social sharing previews
-9. **Explore WhatsApp Business API** integration for instant auto-reply on form submit
-10. **Add cookie consent banner** for GDPR/UAE compliance
+5. **Add real 360° virtual tour** (Matterport or Google Maps Street View iframes)
+6. **Add `sitemap.xml`** (machine-readable) for SEO search indexing
+7. **Add Open Graph meta tags** to all pages for social sharing previews
+8. **Explore WhatsApp Business API** integration for instant auto-reply on form submit
+9. **Add cookie consent banner** for GDPR/UAE compliance
 
 ---
 
-*Last updated: April 2026 — All 13 pages QA-verified (zero console errors). Leader bio +/− toggle added (9 cards), leader lightbox zoom system, Phase 4 Results nav on all 8 pages. All social media links, footer legal links, and placeholder `href="#"` resolved across all production pages.*
+*Last updated: May 3 2026 — Bilingual EN/AR system fully implemented across all 13 pages. `js/i18n.js` dictionary covers 400+ translation keys. `css/rtl.css` provides 85 RTL override sections. All `data-i18n` attributes applied to every translatable string on every page including gallery.html (panoramic badge, section headers, all captions), sitemap.html (all 9 section h2s, body data-page-title), and legal pages (privacy-policy.html, terms-of-use.html, safeguarding.html — footer copyright + all 4 footer links). Zero console errors verified.*
 
 *Mobile pass (April 30 2026) — Full mobile rewrite completed across **mobile.css v6**, **pages.css v6**, **enhancements.css v2**:*
 - *Leader-card photo heights: ≤600 px → 240 px | ≤375 px → 220 px (pages.css + mobile.css + enhancements.css, all three layers)*

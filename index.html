@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/nav.css?v=9" />
   <link rel="stylesheet" href="css/mobile.css?v=9" />
   <link rel="stylesheet" href="css/enhancements.css?v=5" />
+  <link rel="stylesheet" href="css/rtl.css?v=1" />
   <style>
     #site-intro {
       position: fixed;
@@ -93,7 +94,7 @@
     @media (min-width: 1500px) { .hero-floating-cta { display: block !important; } }
   </style>
 </head>
-<body>
+<body data-page-title="page.title.home">
 
   <!-- ══════════════════════════════════════
        INTRO OVERLAY — appears on first load
@@ -101,7 +102,7 @@
   <div id="site-intro">
     <canvas id="intro-canvas"></canvas>
     <img src="images/nais-logo.png" id="intro-logo-img" alt="NAIS Dubai" />
-    <button id="intro-skip">SKIP &nbsp;✕</button>
+    <button id="intro-skip" data-i18n="btn.skip">SKIP &nbsp;✕</button>
     <div id="intro-progbar"></div>
   </div>
 
@@ -344,14 +345,20 @@
       <div class="topbar-left">
         <a href="tel:+97142884844"><i class="fas fa-phone-alt"></i> +971 4 288 4844</a>
         <a href="mailto:admissions@naischool.ae"><i class="fas fa-envelope"></i> admissions@naischool.ae</a>
-        <span><i class="fas fa-map-marker-alt"></i> Al Mizhar 1, Dubai, UAE</span>
+        <span><i class="fas fa-map-marker-alt"></i> <span data-i18n="topbar.address">Al Mizhar 1, Dubai, UAE</span></span>
       </div>
       <div class="topbar-right">
-        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">Parent Portal</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.portal">Parent Portal</a>
         <span class="topbar-divider">|</span>
-        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link">E-Learning</a>
+        <a href="https://edunation.me" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.elearning">E-Learning</a>
         <span class="topbar-divider">|</span>
-        <a href="mailto:careers@naischool.ae" class="topbar-link">Careers</a>
+        <a href="mailto:careers@naischool.ae" class="topbar-link" data-i18n="topbar.careers">Careers</a>
+        <span class="topbar-divider">|</span>
+        <div class="lang-switcher-wrap">
+          <button class="lang-switcher active" data-lang="en" aria-pressed="true" title="English">EN</button>
+          <span class="lang-switcher-divider">|</span>
+          <button class="lang-switcher" data-lang="ar" aria-pressed="false" title="العربية">ع</button>
+        </div>
         <div class="topbar-social">
           <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -376,13 +383,13 @@
       </a>
       <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
         <div class="nav-rail-lines"><span></span><span></span><span></span></div>
-        <span class="nav-rail-label">MENU</span>
+        <span class="nav-rail-label" data-i18n="nav.menu">MENU</span>
       </button>
     </div>
 
     <!-- Desktop only: hamburger icon + vertical MENU label -->
     <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
-    <span id="nav-desktop-label">MENU</span>
+    <span id="nav-desktop-label" data-i18n="nav.menu">MENU</span>
 
   </div>
 
@@ -401,16 +408,16 @@
           <img src="images/nais-logo.png" alt="North American International School" style="height:72px;max-width:300px;width:auto;object-fit:contain;display:block;" />
         </a>
         <div class="nav-left-tagline">
-          <div class="nav-left-tagline-top">Est. 2005 · Dubai, UAE</div>
-          <div class="nav-left-tagline-title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
-          <p class="nav-left-tagline-sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
+          <div class="nav-left-tagline-top" data-i18n="nav.tagline.est">Est. 2005 · Dubai, UAE</div>
+          <div class="nav-left-tagline-title" data-i18n-html="nav.tagline.title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
+          <p class="nav-left-tagline-sub" data-i18n="nav.tagline.sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
         </div>
         <div class="nav-left-spacer"></div>
         <div class="nav-promo-card">
-          <div class="nav-promo-card-label">Open Enrollment</div>
-          <div class="nav-promo-card-title">Apply for <span>2026–2027</span></div>
-          <p class="nav-promo-card-desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
-          <a href="admissions.html" class="nav-promo-card-link">Learn More <i class="fas fa-arrow-right"></i></a>
+          <div class="nav-promo-card-label" data-i18n="nav.promo.label">Open Enrollment</div>
+          <div class="nav-promo-card-title" data-i18n="nav.promo.title">Apply for 2026–2027</div>
+          <p class="nav-promo-card-desc" data-i18n="nav.promo.desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
+          <a href="admissions.html" class="nav-promo-card-link" data-i18n="nav.promo.link">Learn More <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
@@ -429,54 +436,54 @@
 
             <!-- ABOUT -->
             <li class="nav-primary-item" data-item="about">
-              <a href="about.html" class="nav-primary-link">About</a>
+              <a href="about.html" class="nav-primary-link" data-i18n="nav.about">About</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link">Mission &amp; Vision</a></li>
-                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">School Leadership</a></li>
-                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link">Core Values — CARE</a></li>
-                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link">Our Campus</a></li>
-                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link">Accreditation</a></li>
+                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link" data-i18n="nav.sub.mission">Mission &amp; Vision</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.leadership">School Leadership</a></li>
+                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link" data-i18n="nav.sub.values">Core Values — CARE</a></li>
+                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link" data-i18n="nav.sub.campus">Our Campus</a></li>
+                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link" data-i18n="nav.sub.accreditation">Accreditation</a></li>
               </ul>
             </li>
 
             <!-- ACADEMICS -->
             <li class="nav-primary-item" data-item="academics">
-              <a href="academics.html" class="nav-primary-link">Academics</a>
+              <a href="academics.html" class="nav-primary-link" data-i18n="nav.academics">Academics</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link">Kindergarten</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link">Elementary School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link">Middle School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link">High School</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link">AP Courses</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=curriculum" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">American Curriculum ★</a></li>
-                <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;">Academic Results ★</a></li>
-                <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;">Project-Based Learning ★</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link" data-i18n="nav.sub.kg">Kindergarten</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link" data-i18n="nav.sub.elementary">Elementary School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link" data-i18n="nav.sub.high">High School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link" data-i18n="nav.sub.ap">AP Courses</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=curriculum" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.curriculum">American Curriculum ★</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;" data-i18n="nav.sub.results">Academic Results ★</a></li>
+                <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.pbl">Project-Based Learning ★</a></li>
               </ul>
             </li>
 
             <!-- STUDENT LIFE -->
             <li class="nav-primary-item" data-item="student-life">
-              <a href="index.html#student-life" class="nav-primary-link">Student Life</a>
+              <a href="index.html#student-life" class="nav-primary-link" data-i18n="nav.student-life">Student Life</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Arts &amp; Culture</a></li>
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Athletics &amp; Sports</a></li>
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Clubs &amp; Activities</a></li>
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Community Service</a></li>
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Student Council</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.arts">Arts &amp; Culture</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.athletics">Athletics &amp; Sports</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.clubs">Clubs &amp; Activities</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.service">Community Service</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.council">Student Council</a></li>
               </ul>
             </li>
 
             <!-- ADMISSIONS -->
             <li class="nav-primary-item" data-item="admissions">
-              <a href="admissions.html" class="nav-primary-link">Admissions</a>
+              <a href="admissions.html" class="nav-primary-link" data-i18n="nav.admissions">Admissions</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link">How to Apply</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link">Tuition &amp; Fees</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link">Campus Tours</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link">Request Information</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link">Required Documents</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link">Apply Now</a></li>
-                <li class="nav-subnav-item"><a href="admissions.html#faq" class="nav-subnav-link">Admissions FAQ</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link" data-i18n="nav.sub.how-apply">How to Apply</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link" data-i18n="nav.sub.fees">Tuition &amp; Fees</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link" data-i18n="nav.sub.tours">Campus Tours</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link" data-i18n="nav.sub.request-info">Request Information</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link" data-i18n="nav.sub.documents">Required Documents</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#apply" class="nav-subnav-link" data-i18n="nav.apply-now">Apply Now</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#faq" class="nav-subnav-link" data-i18n="nav.sub.faq">Admissions FAQ</a></li>
               </ul>
             </li>
 
@@ -485,20 +492,20 @@
 
             <!-- OUR SCHOOL -->
             <li class="nav-primary-item" data-item="our-school">
-              <a href="about.html" class="nav-primary-link">Our School</a>
+              <a href="about.html" class="nav-primary-link" data-i18n="nav.our-school">Our School</a>
               <ul class="nav-subnav">
-                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link">Life at NAIS</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.life">Life at NAIS</a></li>
                 <li class="nav-subnav-item">
-                  <a href="academics.html#middle" class="nav-subnav-link">Middle School <i class="fas fa-chevron-right nav-subnav-arrow"></i></a>
+                  <a href="academics.html#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School <i class="fas fa-chevron-right nav-subnav-arrow"></i></a>
                 </li>
                 <li class="nav-subnav-item">
-                  <a href="academics.html#high" class="nav-subnav-link">Upper School <i class="fas fa-chevron-right nav-subnav-arrow"></i></a>
+                  <a href="academics.html#high" class="nav-subnav-link" data-i18n="nav.sub.upper">Upper School <i class="fas fa-chevron-right nav-subnav-arrow"></i></a>
                 </li>
-                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link">Parent Community</a></li>
-                <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link">News &amp; Events</a></li>
-                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link">Contact Us</a></li>
-                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link">Visit Campus</a></li>
-                <li class="nav-subnav-item"><a href="gallery.html" class="nav-subnav-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:5px;"></i>Photo Gallery ✦</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.parents">Parent Community</a></li>
+                <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link" data-i18n="nav.sub.news">News &amp; Events</a></li>
+                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.contact">Contact Us</a></li>
+                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.visit">Visit Campus</a></li>
+                <li class="nav-subnav-item"><a href="gallery.html" class="nav-subnav-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:5px;"></i><span data-i18n="nav.sub.gallery">Photo Gallery ✦</span></a></li>
               </ul>
             </li>
 
@@ -508,7 +515,7 @@
         <!-- Bottom bar: Career Opps + Social + Search + Apply Now -->
         <div class="nav-panel-bottom">
           <div class="nav-bottom-careers">
-            <span class="nav-careers-label">Career Opportunities</span>
+            <span class="nav-careers-label" data-i18n="nav.careers">Career Opportunities</span>
             <div class="nav-bottom-social">
               <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="https://twitter.com/NAISDubai" target="_blank" rel="noopener" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
@@ -518,13 +525,13 @@
             </div>
           </div>
           <div class="nav-bottom-search">
-            <span class="nav-search-label">Search</span>
+            <span class="nav-search-label" data-i18n="nav.search">Search</span>
             <div class="nav-search-form">
-              <input type="text" class="nav-search-input" placeholder="Keyword" aria-label="Search" />
+              <input type="text" class="nav-search-input" data-i18n-placeholder="nav.search-placeholder" placeholder="Keyword" data-i18n-aria="nav.search" aria-label="Search" />
               <button class="nav-search-btn" aria-label="Submit Search"><i class="fas fa-search"></i></button>
             </div>
           </div>
-          <a href="admissions.html" class="nav-apply-btn">Apply Now</a>
+          <a href="admissions.html" class="nav-apply-btn" data-i18n="nav.apply-now">Apply Now</a>
         </div>
 
       </div><!-- /.nav-panel -->
@@ -535,14 +542,14 @@
   <!-- ─── QUICK LINKS BAR ─── -->
   <nav class="quick-links-bar" aria-label="Quick Access Links">
     <div class="quick-links-inner">
-      <a href="admissions.html#apply" class="quick-link-item highlight"><i class="fas fa-user-plus"></i> Apply Now</a>
-      <a href="admissions.html#fees" class="quick-link-item"><i class="fas fa-dollar-sign"></i> Tuition Fees</a>
-      <a href="admissions.html#process" class="quick-link-item"><i class="fas fa-route"></i> Admissions Process</a>
-      <a href="academics.html" class="quick-link-item"><i class="fas fa-graduation-cap"></i> Academics</a>
-      <a href="gallery.html" class="quick-link-item" style="color:#E11B22;font-weight:600;"><i class="fas fa-images"></i> Gallery</a>
-      <a href="#calendar" class="quick-link-item"><i class="fas fa-calendar-alt"></i> School Calendar</a>
-      <a href="#contact" class="quick-link-item"><i class="fas fa-phone-alt"></i> Contact Us</a>
-      <a href="https://edunation.me" target="_blank" rel="noopener" class="quick-link-item"><i class="fas fa-external-link-alt"></i> LMS Login</a>
+      <a href="admissions.html#apply" class="quick-link-item highlight"><i class="fas fa-user-plus"></i> <span data-i18n="nav.apply-now">Apply Now</span></a>
+      <a href="admissions.html#fees" class="quick-link-item"><i class="fas fa-dollar-sign"></i> <span data-i18n="nav.sub.fees">Tuition Fees</span></a>
+      <a href="admissions.html#process" class="quick-link-item"><i class="fas fa-route"></i> <span data-i18n="nav.sub.how-apply">Admissions Process</span></a>
+      <a href="academics.html" class="quick-link-item"><i class="fas fa-graduation-cap"></i> <span data-i18n="nav.academics">Academics</span></a>
+      <a href="gallery.html" class="quick-link-item" style="color:#E11B22;font-weight:600;"><i class="fas fa-images"></i> <span data-i18n="nav.sub.gallery">Gallery</span></a>
+      <a href="#calendar" class="quick-link-item"><i class="fas fa-calendar-alt"></i> <span data-i18n="quick.calendar">School Calendar</span></a>
+      <a href="#contact" class="quick-link-item"><i class="fas fa-phone-alt"></i> <span data-i18n="nav.sub.contact">Contact Us</span></a>
+      <a href="https://edunation.me" target="_blank" rel="noopener" class="quick-link-item"><i class="fas fa-external-link-alt"></i> <span data-i18n="quick.lms">LMS Login</span></a>
     </div>
   </nav>
 
@@ -558,59 +565,59 @@
     <div class="hero-content">
       <div class="hero-badge">
         <span class="badge-star">★</span>
-        <span>Premier American Education in Dubai</span>
+        <span data-i18n="hero.badge">Premier American Education in Dubai</span>
         <span class="badge-star">★</span>
       </div>
       <h1 class="hero-title">
-        <span class="hero-title-line">Progress You Can See.</span>
-        <span class="hero-title-line hero-title-accent">Care You Can Feel.</span>
+        <span class="hero-title-line" data-i18n="hero.title1">Progress You Can See.</span>
+        <span class="hero-title-line hero-title-accent" data-i18n="hero.title2">Care You Can Feel.</span>
       </h1>
       <div class="hero-title-divider"></div>
-      <p class="hero-subtitle">
+      <p class="hero-subtitle" data-i18n="hero.subtitle">
         North American International School provides an exceptional American curriculum education for students from Kindergarten through Grade 12 in the heart of Dubai.
       </p>
       <div class="hero-actions">
         <a href="admissions.html" class="btn btn-hero-primary">
-          <span>Apply Now</span>
+          <span data-i18n="hero.btn.apply">Apply Now</span>
           <i class="fas fa-arrow-right"></i>
         </a>
         <a href="#tour" class="btn btn-hero-outline">
           <i class="fas fa-map-marker-alt"></i>
-          <span>Book a Campus Tour</span>
+          <span data-i18n="hero.btn.tour">Book a Campus Tour</span>
         </a>
         <a href="#contact" class="btn btn-hero-outline" style="background:rgba(37,211,102,0.15);border-color:rgba(37,211,102,0.5);">
           <i class="fab fa-whatsapp" style="color:#4CD964;"></i>
-          <span>WhatsApp Us</span>
+          <span data-i18n="hero.btn.whatsapp">WhatsApp Us</span>
         </a>
       </div>
       <!-- 360° Campus Tour CTA -->
       <a href="#campus-360" class="btn-360-hero">
         <span class="btn-360-ring"><i class="fas fa-street-view"></i></span>
         <span class="btn-360-text">
-          <strong>Explore Our Campus in 360°</strong>
-          <small>Classrooms · Labs · Playgrounds</small>
+          <strong data-i18n="hero.btn.360">Explore Our Campus in 360°</strong>
+          <small data-i18n="hero.btn.360sub">Classrooms · Labs · Playgrounds</small>
         </span>
         <i class="fas fa-chevron-right btn-360-arrow"></i>
       </a>
-      <p class="hero-sub-tagline">KHDA Licensed &nbsp;·&nbsp; American Curriculum KG–12 &nbsp;·&nbsp; Dubai, UAE</p>
+      <p class="hero-sub-tagline" data-i18n="hero.tagline">KHDA Licensed &nbsp;·&nbsp; American Curriculum KG–12 &nbsp;·&nbsp; Dubai, UAE</p>
     </div>
 
     <div class="hero-stats">
       <div class="stat-item">
         <span class="stat-number" data-target="900">0</span><span class="stat-suffix">+</span>
-        <span class="stat-label">Students Enrolled</span>
+        <span class="stat-label" data-i18n="hero.stat.students">Students Enrolled</span>
       </div>
       <div class="stat-item">
         <span class="stat-number" data-target="60">0</span><span class="stat-suffix">+</span>
-        <span class="stat-label">Expert Faculty</span>
+        <span class="stat-label" data-i18n="hero.stat.faculty">Expert Faculty</span>
       </div>
       <div class="stat-item">
         <span class="stat-number" data-target="45">0</span><span class="stat-suffix">+</span>
-        <span class="stat-label">Nationalities</span>
+        <span class="stat-label" data-i18n="hero.stat.nations">Nationalities</span>
       </div>
       <div class="stat-item">
         <span class="stat-number" data-target="20">0</span><span class="stat-suffix">+</span>
-        <span class="stat-label">Years of Excellence</span>
+        <span class="stat-label" data-i18n="hero.stat.years">Years of Excellence</span>
       </div>
     </div>
 
@@ -622,27 +629,27 @@
 
     <!-- Floating Lead Form (desktop only) -->
     <div class="hero-floating-cta">
-      <h4><i class="fas fa-paper-plane" style="color:var(--red);margin-right:6px;"></i> Request Information</h4>
+      <h4><i class="fas fa-paper-plane" style="color:var(--red);margin-right:6px;"></i> <span data-i18n="form.request-info">Request Information</span></h4>
       <form class="mini-form" id="hero-mini-form" novalidate>
-        <input type="text" placeholder="Parent Name *" required />
-        <input type="tel" placeholder="Phone / WhatsApp *" required />
-        <input type="email" placeholder="Email Address *" required />
+        <input type="text" data-i18n-placeholder="form.parent-name" placeholder="Parent Name *" required />
+        <input type="tel" data-i18n-placeholder="form.phone" placeholder="Phone / WhatsApp *" required />
+        <input type="email" data-i18n-placeholder="form.email-addr" placeholder="Email Address *" required />
         <select style="padding:11px 14px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:var(--radius-sm);color:#fff;font-size:0.85rem;outline:none;">
-          <option value="" style="color:#000">Grade Level</option>
-          <option style="color:#000">Kindergarten</option>
-          <option style="color:#000">Elementary (Gr. 1–5)</option>
-          <option style="color:#000">Middle School (Gr. 6–8)</option>
-          <option style="color:#000">High School (Gr. 9–12)</option>
+          <option value="" style="color:#000" data-i18n="form.grade">Grade Level</option>
+          <option style="color:#000" data-i18n="form.grade.kg">Kindergarten</option>
+          <option style="color:#000" data-i18n="form.grade.elem">Elementary (Gr. 1–5)</option>
+          <option style="color:#000" data-i18n="form.grade.middle">Middle School (Gr. 6–8)</option>
+          <option style="color:#000" data-i18n="form.grade.high">High School (Gr. 9–12)</option>
         </select>
-        <button type="submit" class="btn-cta-mini"><i class="fas fa-paper-plane"></i> Get Information</button>
+        <button type="submit" class="btn-cta-mini"><i class="fas fa-paper-plane"></i> <span data-i18n="form.submit">Get Information</span></button>
       </form>
-      <p class="mini-form-note">We respond within 24 hours</p>
+      <p class="mini-form-note" data-i18n="form.respond">We respond within 24 hours</p>
     </div>
 
     <!-- Scroll Indicator -->
     <div class="hero-scroll-indicator">
       <div class="scroll-mouse"></div>
-      <span>Scroll</span>
+      <span data-i18n="hero.scroll">Scroll</span>
     </div>
 
   </section>
@@ -650,11 +657,11 @@
   <!-- ─── ANNOUNCEMENT BAND ─── -->
   <div class="announcement-band">
     <div class="announcement-inner">
-      <span class="ann-tag"><i class="fas fa-bell"></i> Latest</span>
+      <span class="ann-tag"><i class="fas fa-bell"></i> <span data-i18n="ann.latest">Latest</span></span>
       <div class="ann-ticker">
-        <span>📅 Open House – Register Now for Academic Year 2026–2027 &nbsp;|&nbsp; 🎓 Latest School News – Stay Updated with NAIS Highlights &nbsp;|&nbsp; 🏆 NAIS Students Win Regional Science Fair – Congratulations! &nbsp;|&nbsp; ⭐ Enrollment Now Open – Book Your Tour Today</span>
+        <span data-i18n="ann.ticker">📅 Open House – Register Now for Academic Year 2026–2027 &nbsp;|&nbsp; 🎓 Latest School News – Stay Updated with NAIS Highlights &nbsp;|&nbsp; 🏆 NAIS Students Win Regional Science Fair – Congratulations! &nbsp;|&nbsp; ⭐ Enrollment Now Open – Book Your Tour Today</span>
       </div>
-      <a href="#news" class="ann-more">View All <i class="fas fa-arrow-right"></i></a>
+      <a href="#news" class="ann-more" data-i18n="ann.viewall">View All</a>
     </div>
   </div>
 
@@ -662,50 +669,50 @@
   <section class="why-section" id="why-us">
     <div class="container">
       <div class="section-header centered">
-        <div class="section-label">Why Families Choose Us</div>
-        <h2 class="section-title">What Makes NAIS <em>Different</em></h2>
+        <div class="section-label" data-i18n="why.section.label">Why Families Choose Us</div>
+        <h2 class="section-title" data-i18n-html="why.section.h2">What Makes NAIS <em>Different</em></h2>
         <div class="title-ornament centered-ornament"></div>
-        <p class="section-intro">Families from 45+ nationalities choose NAIS for our unique combination of academic excellence, character development, and an inclusive, inspiring community.</p>
+        <p class="section-intro" data-i18n="why.section.intro">Families from 45+ nationalities choose NAIS for our unique combination of academic excellence, character development, and an inclusive, inspiring community.</p>
       </div>
       <div class="why-grid">
         <div class="why-card">
           <div class="why-icon"><i class="fas fa-shield"></i></div>
-          <h3>KHDA Licensed &amp; Accredited</h3>
-          <p>Fully licensed by Dubai's Knowledge &amp; Human Development Authority. Internationally accredited by AdvancED and NEASC — recognized worldwide.</p>
+          <h3 data-i18n="why.c1.h3">KHDA Licensed &amp; Accredited</h3>
+          <p data-i18n="why.c1.p">Fully licensed by Dubai's Knowledge &amp; Human Development Authority. Internationally accredited by AdvancED and NEASC — recognized worldwide.</p>
         </div>
         <div class="why-card">
           <div class="why-icon"><i class="fas fa-users"></i></div>
-          <h3>Small Class Sizes</h3>
-          <p>With an average of just 22 students per class, every child receives the personal attention and individualized support they deserve to thrive.</p>
+          <h3 data-i18n="why.c2.h3">Small Class Sizes</h3>
+          <p data-i18n="why.c2.p">With an average of just 22 students per class, every child receives the personal attention and individualized support they deserve to thrive.</p>
         </div>
         <div class="why-card">
           <div class="why-icon"><i class="fas fa-graduation-cap"></i></div>
-          <h3>100% University Acceptance</h3>
-          <p>Every NAIS graduate gains admission to a university. Our dedicated counseling team guides students to top universities in North America, UK, and beyond.</p>
+          <h3 data-i18n="why.c3.h3">100% University Acceptance</h3>
+          <p data-i18n="why.c3.p">Every NAIS graduate gains admission to a university. Our dedicated counseling team guides students to top universities in North America, UK, and beyond.</p>
         </div>
         <div class="why-card">
           <div class="why-icon"><i class="fas fa-globe-americas"></i></div>
-          <h3>Truly International</h3>
-          <p>45+ nationalities create a rich, multicultural environment that prepares students to thrive in today's global world with empathy and confidence.</p>
+          <h3 data-i18n="why.c4.h3">Truly International</h3>
+          <p data-i18n="why.c4.p">45+ nationalities create a rich, multicultural environment that prepares students to thrive in today's global world with empathy and confidence.</p>
         </div>
         <div class="why-card">
           <div class="why-icon"><i class="fas fa-laptop-code"></i></div>
-          <h3>15+ AP Courses</h3>
-          <p>College-preparatory Advanced Placement courses in sciences, humanities, arts, and computer science — giving students a head start on university success.</p>
+          <h3 data-i18n="why.c5.h3">15+ AP Courses</h3>
+          <p data-i18n="why.c5.p">College-preparatory Advanced Placement courses in sciences, humanities, arts, and computer science — giving students a head start on university success.</p>
         </div>
         <div class="why-card">
           <div class="why-icon"><i class="fas fa-heart"></i></div>
-          <h3>Whole-Child Development</h3>
-          <p>Our CARE values — Community, Awareness, Resilience, Engagement — guide every aspect of school life, developing character alongside academics.</p>
+          <h3 data-i18n="why.c6.h3">Whole-Child Development</h3>
+          <p data-i18n="why.c6.p">Our CARE values — Community, Awareness, Resilience, Engagement — guide every aspect of school life, developing character alongside academics.</p>
         </div>
       </div>
 
       <!-- Achievement Badges -->
       <div class="achievement-badges" style="justify-content:center;margin-top:40px;">
-        <div class="achievement-badge"><i class="fas fa-award"></i><div><strong>KHDA Rated Good</strong><span>Official Dubai Rating</span></div></div>
-        <div class="achievement-badge"><i class="fas fa-star"></i><div><strong>AdvancED Accredited</strong><span>International Standard</span></div></div>
-        <div class="achievement-badge"><i class="fas fa-university"></i><div><strong>College Board Member</strong><span>AP Program Provider</span></div></div>
-        <div class="achievement-badge"><i class="fas fa-flag"></i><div><strong>MoE UAE Licensed</strong><span>Ministry Approved</span></div></div>
+        <div class="achievement-badge"><i class="fas fa-award"></i><div><strong data-i18n="badge.khda">KHDA Rated Good</strong><span data-i18n="badge.khda.sub">Official Dubai Rating</span></div></div>
+        <div class="achievement-badge"><i class="fas fa-star"></i><div><strong data-i18n="badge.advanced">AdvancED Accredited</strong><span data-i18n="badge.advanced.sub">International Standard</span></div></div>
+        <div class="achievement-badge"><i class="fas fa-university"></i><div><strong data-i18n="badge.cb">College Board Member</strong><span data-i18n="badge.cb.sub">AP Program Provider</span></div></div>
+        <div class="achievement-badge"><i class="fas fa-flag"></i><div><strong data-i18n="badge.moe">MoE UAE Licensed</strong><span data-i18n="badge.moe.sub">Ministry Approved</span></div></div>
       </div>
     </div>
   </section>
@@ -716,23 +723,23 @@
       <div class="quick-access-grid">
         <a href="admissions.html#apply" class="quick-access-card">
           <div class="quick-access-icon"><i class="fas fa-file-alt"></i></div>
-          <span>Apply Now</span>
+          <span data-i18n="quick.apply">Apply Now</span>
         </a>
         <a href="admissions.html#fees" class="quick-access-card">
           <div class="quick-access-icon"><i class="fas fa-dollar-sign"></i></div>
-          <span>Tuition &amp; Fees</span>
+          <span data-i18n="quick.fees">Tuition &amp; Fees</span>
         </a>
         <a href="#calendar" class="quick-access-card">
           <div class="quick-access-icon"><i class="fas fa-calendar-check"></i></div>
-          <span>School Calendar</span>
+          <span data-i18n="quick.calendar">School Calendar</span>
         </a>
         <a href="https://edunation.me" target="_blank" rel="noopener" class="quick-access-card">
           <div class="quick-access-icon"><i class="fas fa-sign-in-alt"></i></div>
-          <span>LMS Login</span>
+          <span data-i18n="quick.lms">LMS Login</span>
         </a>
         <a href="admissions.html#documents" class="quick-access-card">
           <div class="quick-access-icon"><i class="fas fa-folder-open"></i></div>
-          <span>Documents &amp; Forms</span>
+          <span data-i18n="quick.docs">Documents &amp; Forms</span>
         </a>
       </div>
     </div>
@@ -747,53 +754,53 @@
             <img src="images/school-19.jpg" alt="NAIS students learning" loading="lazy" style="object-fit:cover;width:100%;height:100%;" />
             <div class="welcome-image-badge">
               <div class="badge-icon"><i class="fas fa-award"></i></div>
-              <div class="badge-text">KHDA Rated<br/><strong>Good</strong></div>
+              <div class="badge-text"><span data-i18n="welcome.khda.badge">KHDA Rated</span><br/><strong data-i18n="welcome.khda.rating">Good</strong></div>
             </div>
           </div>
           <div class="welcome-quote-box">
             <i class="fas fa-quote-left quote-icon"></i>
-            <p>"At NAIS, every student is known, valued, and challenged to reach their fullest potential. We build not just academic excellence but leaders of character."</p>
+            <p data-i18n="welcome.quote">"At NAIS, every student is known, valued, and challenged to reach their fullest potential. We build not just academic excellence but leaders of character."</p>
             <div class="quote-principal">
               <img src="images/school-01.jpg" alt="Justin McCauley" class="quote-principal-img" style="object-fit:cover;object-position:center top;" />
-              <cite>Justin McCauley<br/><small>Principal, NAIS Dubai</small></cite>
+              <cite>Justin McCauley<br/><small data-i18n="leader.prin.title">Principal, NAIS Dubai</small></cite>
             </div>
           </div>
         </div>
 
         <div class="welcome-content-col">
-          <div class="section-label">Welcome to NAIS</div>
-          <h2 class="section-title">A School That<br/><em>Transforms Lives</em></h2>
+          <div class="section-label" data-i18n="welcome.label">Welcome to NAIS</div>
+          <h2 class="section-title" data-i18n-html="welcome.h2">A School That<br/><em>Transforms Lives</em></h2>
           <div class="title-ornament"></div>
-          <p class="lead-text">North American International School is Dubai's premier American curriculum institution, dedicated to developing every student's intellectual curiosity, moral character, and global perspective.</p>
-          <p>From Kindergarten through Grade 12, our students benefit from small class sizes, highly qualified faculty, and a rigorous yet nurturing environment that prepares them for the world's top universities and beyond.</p>
+          <p class="lead-text" data-i18n="welcome.lead">North American International School is Dubai's premier American curriculum institution, dedicated to developing every student's intellectual curiosity, moral character, and global perspective.</p>
+          <p data-i18n="welcome.p2">From Kindergarten through Grade 12, our students benefit from small class sizes, highly qualified faculty, and a rigorous yet nurturing environment that prepares them for the world's top universities and beyond.</p>
 
           <div class="welcome-pillars">
             <div class="pillar-card">
               <div class="pillar-icon"><i class="fas fa-graduation-cap"></i></div>
               <div class="pillar-info">
-                <h4>Academic Excellence</h4>
-                <p>American curriculum with AP courses and dedicated university counseling</p>
+                <h4 data-i18n="welcome.p1.h4">Academic Excellence</h4>
+                <p data-i18n="welcome.p1.p">American curriculum with AP courses and dedicated university counseling</p>
               </div>
             </div>
             <div class="pillar-card">
               <div class="pillar-icon"><i class="fas fa-globe-americas"></i></div>
               <div class="pillar-info">
-                <h4>Global Perspective</h4>
-                <p>45+ nationalities creating a truly international community</p>
+                <h4 data-i18n="welcome.p2.h4">Global Perspective</h4>
+                <p data-i18n="welcome.p2.p">45+ nationalities creating a truly international community</p>
               </div>
             </div>
             <div class="pillar-card">
               <div class="pillar-icon"><i class="fas fa-heart"></i></div>
               <div class="pillar-info">
-                <h4>Character First</h4>
-                <p>CARE values: Community, Awareness, Resilience, Engagement</p>
+                <h4 data-i18n="welcome.p3.h4">Character First</h4>
+                <p data-i18n="welcome.p3.p">CARE values: Community, Awareness, Resilience, Engagement</p>
               </div>
             </div>
           </div>
 
           <div class="welcome-actions">
-            <a href="about.html" class="btn btn-primary">Discover Our Story</a>
-            <button class="btn btn-text video-play-btn" type="button"><i class="fas fa-play-circle"></i> Watch School Film</button>
+            <a href="about.html" class="btn btn-primary" data-i18n="welcome.btn.story">Discover Our Story</a>
+            <button class="btn btn-text video-play-btn" type="button"><i class="fas fa-play-circle"></i> <span data-i18n="welcome.btn.film">Watch School Film</span></button>
           </div>
         </div>
       </div>
@@ -805,10 +812,10 @@
     <div class="container">
 
       <div class="section-header centered">
-        <div class="section-label">Academic Programs</div>
-        <h2 class="section-title">Education for Every<br/><em>Stage of Growth</em></h2>
+        <div class="section-label" data-i18n="acad.sec.label">Academic Programs</div>
+        <h2 class="section-title" data-i18n-html="acad.sec.h2">Education for Every<br/><em>Stage of Growth</em></h2>
         <div class="title-ornament centered-ornament"></div>
-        <p class="section-intro">Our American curriculum programs are thoughtfully designed to meet each student's developmental stage — nurturing curiosity, building skills, and inspiring achievement from Kindergarten through Grade 12.</p>
+        <p class="section-intro" data-i18n="acad.sec.intro">Our American curriculum programs are thoughtfully designed to meet each student's developmental stage — nurturing curiosity, building skills, and inspiring achievement from Kindergarten through Grade 12.</p>
       </div>
 
       <!-- ── PROGRAM CARDS GRID ── -->
@@ -818,18 +825,18 @@
         <article class="program-card animate-fade-up">
           <div class="program-card-image">
             <img src="images/school-23.jpg" alt="Kindergarten at NAIS Dubai" loading="lazy" />
-            <div class="program-grade-tag">KG 1 – KG 2</div>
+            <div class="program-grade-tag" data-i18n="acad.grade.kg">KG 1 – KG 2</div>
           </div>
           <div class="program-card-body">
             <div class="program-icon"><i class="fas fa-star"></i></div>
-            <h3>Kindergarten</h3>
-            <p>Nurturing a love of learning through play-based exploration, foundational literacy, and social-emotional development in a warm, joyful environment.</p>
+            <h3 data-i18n="acad.kg.h3">Kindergarten</h3>
+            <p data-i18n="acad.kg.p">Nurturing a love of learning through play-based exploration, foundational literacy, and social-emotional development in a warm, joyful environment.</p>
             <ul class="program-features">
-              <li><i class="fas fa-check-circle"></i> Play-based learning</li>
-              <li><i class="fas fa-check-circle"></i> Literacy &amp; numeracy foundations</li>
-              <li><i class="fas fa-check-circle"></i> Social-emotional growth</li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.kg.f1">Play-based learning</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.kg.f2">Literacy &amp; numeracy foundations</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.kg.f3">Social-emotional growth</span></li>
             </ul>
-            <a href="academics.html#kindergarten" class="program-link">Explore Program <i class="fas fa-arrow-right"></i></a>
+            <a href="academics.html#kindergarten" class="program-link" data-i18n="acad.explore">Explore Program</a>
           </div>
         </article>
 
@@ -837,18 +844,18 @@
         <article class="program-card animate-fade-up" style="transition-delay:0.1s">
           <div class="program-card-image">
             <img src="images/school-19.jpg" alt="Elementary School at NAIS Dubai" loading="lazy" />
-            <div class="program-grade-tag">Grades 1 – 5</div>
+            <div class="program-grade-tag" data-i18n="acad.grade.elem">Grades 1 – 5</div>
           </div>
           <div class="program-card-body">
             <div class="program-icon"><i class="fas fa-book-open"></i></div>
-            <h3>Elementary School</h3>
-            <p>Building strong academic foundations in core subjects while developing critical thinking, creativity, and confident communication skills.</p>
+            <h3 data-i18n="acad.elem.h3">Elementary School</h3>
+            <p data-i18n="acad.elem.p">Building strong academic foundations in core subjects while developing critical thinking, creativity, and confident communication skills.</p>
             <ul class="program-features">
-              <li><i class="fas fa-check-circle"></i> Core curriculum excellence</li>
-              <li><i class="fas fa-check-circle"></i> STEM integration</li>
-              <li><i class="fas fa-check-circle"></i> Creative arts &amp; music</li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.elem.f1">Core curriculum excellence</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.elem.f2">STEM integration</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.elem.f3">Creative arts &amp; music</span></li>
             </ul>
-            <a href="academics.html#elementary" class="program-link">Explore Program <i class="fas fa-arrow-right"></i></a>
+            <a href="academics.html#elementary" class="program-link" data-i18n="acad.explore">Explore Program</a>
           </div>
         </article>
 
@@ -856,18 +863,18 @@
         <article class="program-card animate-fade-up" style="transition-delay:0.2s">
           <div class="program-card-image">
             <img src="images/school-22.jpg" alt="Middle School at NAIS Dubai" loading="lazy" />
-            <div class="program-grade-tag">Grades 6 – 8</div>
+            <div class="program-grade-tag" data-i18n="acad.grade.mid">Grades 6 – 8</div>
           </div>
           <div class="program-card-body">
             <div class="program-icon"><i class="fas fa-flask"></i></div>
-            <h3>Middle School</h3>
-            <p>Challenging students with rigorous academics, project-based learning, and leadership opportunities that foster independence and resilience.</p>
+            <h3 data-i18n="acad.mid.h3">Middle School</h3>
+            <p data-i18n="acad.mid.p">Challenging students with rigorous academics, project-based learning, and leadership opportunities that foster independence and resilience.</p>
             <ul class="program-features">
-              <li><i class="fas fa-check-circle"></i> Project-based learning</li>
-              <li><i class="fas fa-check-circle"></i> Advanced science labs</li>
-              <li><i class="fas fa-check-circle"></i> Leadership programs</li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.mid.f1">Project-based learning</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.mid.f2">Advanced science labs</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.mid.f3">Leadership programs</span></li>
             </ul>
-            <a href="academics.html#middle" class="program-link">Explore Program <i class="fas fa-arrow-right"></i></a>
+            <a href="academics.html#middle" class="program-link" data-i18n="acad.explore">Explore Program</a>
           </div>
         </article>
 
@@ -875,18 +882,18 @@
         <article class="program-card animate-fade-up" style="transition-delay:0.3s">
           <div class="program-card-image">
             <img src="images/school-15.jpg" alt="High School students" loading="lazy" />
-            <div class="program-grade-tag">Grades 9 – 12</div>
+            <div class="program-grade-tag" data-i18n="acad.grade.high">Grades 9 – 12</div>
           </div>
           <div class="program-card-body">
             <div class="program-icon"><i class="fas fa-university"></i></div>
-            <h3>High School</h3>
-            <p>College-preparatory excellence with AP courses, robust counseling, and a track record of placing students in top universities worldwide.</p>
+            <h3 data-i18n="acad.high.h3">High School</h3>
+            <p data-i18n="acad.high.p">College-preparatory excellence with AP courses, robust counseling, and a track record of placing students in top universities worldwide.</p>
             <ul class="program-features">
-              <li><i class="fas fa-check-circle"></i> Advanced Placement (AP)</li>
-              <li><i class="fas fa-check-circle"></i> University counseling</li>
-              <li><i class="fas fa-check-circle"></i> Global opportunities</li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.hi.ap">Advanced Placement (AP)</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.hi.counsel">University counseling</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="acad.hi.global">Global opportunities</span></li>
             </ul>
-            <a href="academics.html#high" class="program-link">Explore Program <i class="fas fa-arrow-right"></i></a>
+            <a href="academics.html#high" class="program-link" data-i18n="acad.explore">Explore Program</a>
           </div>
         </article>
 
@@ -897,38 +904,38 @@
         <div class="acad-highlight-item">
           <i class="fas fa-award"></i>
           <div>
-            <strong>AP Courses</strong>
-            <span>15+ Advanced Placement subjects offered</span>
+            <strong data-i18n="acad.hl.ap">AP Courses</strong>
+            <span data-i18n="acad.hl.ap.sub">15+ Advanced Placement subjects offered</span>
           </div>
         </div>
         <div class="acad-highlight-divider"></div>
         <div class="acad-highlight-item">
           <i class="fas fa-globe-americas"></i>
           <div>
-            <strong>45+ Nationalities</strong>
-            <span>A truly diverse, multicultural community</span>
+            <strong data-i18n="acad.hl.nations">45+ Nationalities</strong>
+            <span data-i18n="acad.hl.nations.sub">A truly diverse, multicultural community</span>
           </div>
         </div>
         <div class="acad-highlight-divider"></div>
         <div class="acad-highlight-item">
           <i class="fas fa-graduation-cap"></i>
           <div>
-            <strong>University Acceptance</strong>
-            <span>100% of graduates admitted to universities</span>
+            <strong data-i18n="acad.hl.uni">University Acceptance</strong>
+            <span data-i18n="acad.hl.uni.sub">100% of graduates admitted to universities</span>
           </div>
         </div>
         <div class="acad-highlight-divider"></div>
         <div class="acad-highlight-item">
           <i class="fas fa-microscope"></i>
           <div>
-            <strong>STEM Focus</strong>
-            <span>State-of-the-art labs &amp; innovation hub</span>
+            <strong data-i18n="acad.hl.stem">STEM Focus</strong>
+            <span data-i18n="acad.hl.stem.sub">State-of-the-art labs &amp; innovation hub</span>
           </div>
         </div>
       </div>
 
       <div class="academics-cta">
-        <a href="academics.html" class="btn btn-primary">View Full Academic Overview</a>
+        <a href="academics.html" class="btn btn-primary" data-i18n="acad.explore-all">View Full Academic Overview</a>
       </div>
 
     </div>
@@ -939,34 +946,34 @@
     <div class="values-bg-overlay"></div>
     <div class="container">
       <div class="values-header">
-        <div class="section-label light">Our Core Values</div>
-        <h2 class="section-title light" style="font-size:clamp(2.4rem,5vw,3.8rem);letter-spacing:-0.01em;">At NAIS, We <em>CARE</em></h2>
+        <div class="section-label light" data-i18n="care.label">Our Core Values</div>
+        <h2 class="section-title light" style="font-size:clamp(2.4rem,5vw,3.8rem);letter-spacing:-0.01em;" data-i18n-html="care.h2">At NAIS, We <em>CARE</em></h2>
         <div class="title-ornament centered-ornament light-ornament"></div>
-        <p class="section-intro light" style="font-size:clamp(1rem,2vw,1.22rem);max-width:700px;margin-left:auto;margin-right:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Our CARE framework guides every interaction, decision, and relationship — creating a culture of excellence and belonging.</p>
+        <p class="section-intro light" style="font-size:clamp(1rem,2vw,1.22rem);max-width:700px;margin-left:auto;margin-right:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" data-i18n="care.intro">Our CARE framework guides every interaction, decision, and relationship — creating a culture of excellence and belonging.</p>
       </div>
       <div class="care-grid">
         <div class="care-card">
           <div class="care-letter">C</div>
-          <h3>Community</h3>
-          <p>We cultivate a warm, inclusive community where every student feels known, respected, and connected — across classrooms, hallways, and beyond.</p>
+          <h3 data-i18n="care.c.h3">Community</h3>
+          <p data-i18n="care.c.p">We cultivate a warm, inclusive community where every student feels known, respected, and connected — across classrooms, hallways, and beyond.</p>
           <div class="care-line"></div>
         </div>
         <div class="care-card">
           <div class="care-letter">A</div>
-          <h3>Awareness</h3>
-          <p>We develop mindful, empathetic learners who are aware of themselves, their environment, and their responsibility to the global community.</p>
+          <h3 data-i18n="care.a.h3">Awareness</h3>
+          <p data-i18n="care.a.p">We develop mindful, empathetic learners who are aware of themselves, their environment, and their responsibility to the global community.</p>
           <div class="care-line"></div>
         </div>
         <div class="care-card">
           <div class="care-letter">R</div>
-          <h3>Resilience</h3>
-          <p>We nurture the strength and grit to overcome challenges, learn from setbacks, and emerge more confident and capable with every experience.</p>
+          <h3 data-i18n="care.r.h3">Resilience</h3>
+          <p data-i18n="care.r.p">We nurture the strength and grit to overcome challenges, learn from setbacks, and emerge more confident and capable with every experience.</p>
           <div class="care-line"></div>
         </div>
         <div class="care-card">
           <div class="care-letter">E</div>
-          <h3>Engagement</h3>
-          <p>We inspire deep, active engagement in learning, school life, and community — building students who are passionate and purposeful in all they do.</p>
+          <h3 data-i18n="care.e.h3">Engagement</h3>
+          <p data-i18n="care.e.p">We inspire deep, active engagement in learning, school life, and community — building students who are passionate and purposeful in all they do.</p>
           <div class="care-line"></div>
         </div>
       </div>
@@ -978,8 +985,8 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <div class="section-label">Beyond the Classroom</div>
-          <h2 class="section-title">A Vibrant <em>Student Life</em></h2>
+          <div class="section-label" data-i18n="life.label">Beyond the Classroom</div>
+          <h2 class="section-title" data-i18n-html="life.h2">A Vibrant <em>Student Life</em></h2>
           <div class="title-ornament"></div>
         </div>
       </div>
@@ -987,32 +994,32 @@
         <div class="life-feature-main">
           <img src="images/school-14.jpg" alt="Arts program at NAIS" loading="lazy" />
           <div class="life-feature-overlay">
-            <span class="life-tag">Arts &amp; Culture</span>
-            <h3>Discover Your Creative Voice</h3>
-            <p>From visual arts to performing arts, our programs inspire students to express themselves boldly and develop a lifelong appreciation for the arts.</p>
-            <a href="index.html#student-life" class="btn btn-white-sm">Learn More</a>
+            <span class="life-tag" data-i18n="life.arts.tag">Arts &amp; Culture</span>
+            <h3 data-i18n="life.arts.h3">Discover Your Creative Voice</h3>
+            <p data-i18n="life.arts.p">From visual arts to performing arts, our programs inspire students to express themselves boldly and develop a lifelong appreciation for the arts.</p>
+            <a href="index.html#student-life" class="btn btn-white-sm" data-i18n="btn.learn-more">Learn More</a>
           </div>
         </div>
         <div class="life-grid-side">
           <div class="life-card">
             <img src="images/school-13.jpg" alt="Athletics at NAIS" loading="lazy" />
             <div class="life-card-overlay">
-              <h4>Athletics &amp; Sports</h4>
-              <p>Competitive sports that build teamwork, discipline, and excellence on and off the field.</p>
+              <h4 data-i18n="life.sports.h4">Athletics &amp; Sports</h4>
+              <p data-i18n="life.sports.p">Competitive sports that build teamwork, discipline, and excellence on and off the field.</p>
             </div>
           </div>
           <div class="life-card">
             <img src="images/school-10.jpg" alt="Clubs and activities at NAIS" loading="lazy" />
             <div class="life-card-overlay">
-              <h4>Clubs &amp; Societies</h4>
-              <p>30+ clubs letting students explore passions, develop leadership, and build friendships.</p>
+              <h4 data-i18n="life.clubs.h4">Clubs &amp; Societies</h4>
+              <p data-i18n="life.clubs.p">30+ clubs letting students explore passions, develop leadership, and build friendships.</p>
             </div>
           </div>
           <div class="life-card">
             <img src="images/school-11.jpg" alt="Community service at NAIS" loading="lazy" />
             <div class="life-card-overlay">
-              <h4>Community Service</h4>
-              <p>Instilling a spirit of giving and global citizenship through meaningful service.</p>
+              <h4 data-i18n="life.service.h4">Community Service</h4>
+              <p data-i18n="life.service.p">Instilling a spirit of giving and global citizenship through meaningful service.</p>
             </div>
           </div>
         </div>
@@ -1302,26 +1309,26 @@
     <div class="hg-main">
       <!-- Info panel -->
       <div class="hg-info">
-        <div class="hg-label">Life at NAIS Dubai</div>
-        <h2 class="hg-title">Every Moment <em>Matters</em></h2>
-        <p class="hg-text">From morning assembly to sports day, science fairs to cultural celebrations — our campus is alive with curiosity, creativity, and community. Explore life at NAIS through our lens.</p>
+        <div class="hg-label" data-i18n="gallery.label">Life at NAIS Dubai</div>
+        <h2 class="hg-title" data-i18n-html="gallery.h2">Every Moment <em>Matters</em></h2>
+        <p class="hg-text" data-i18n="gallery.text">From morning assembly to sports day, science fairs to cultural celebrations — our campus is alive with curiosity, creativity, and community. Explore life at NAIS through our lens.</p>
         <div class="hg-stats-row">
           <div class="hg-stat">
             <span class="hg-stat-num">14</span>
-            <span class="hg-stat-lbl">Photos</span>
+            <span class="hg-stat-lbl" data-i18n="gallery.stat.photos">Photos</span>
           </div>
           <div class="hg-stat">
             <span class="hg-stat-num">6</span>
-            <span class="hg-stat-lbl">Categories</span>
+            <span class="hg-stat-lbl" data-i18n="gallery.stat.categories">Categories</span>
           </div>
           <div class="hg-stat">
             <span class="hg-stat-num">2025</span>
-            <span class="hg-stat-lbl">Academic Year</span>
+            <span class="hg-stat-lbl" data-i18n="gallery.stat.year">Academic Year</span>
           </div>
         </div>
         <div class="hg-cta-row">
-          <a href="gallery.html" class="btn btn-red"><i class="fas fa-images"></i> View Full Gallery</a>
-          <a href="admissions.html" class="btn btn-outline-navy" style="border-color:rgba(255,255,255,0.25);color:#fff;">Book a Tour <i class="fas fa-arrow-right"></i></a>
+          <a href="gallery.html" class="btn btn-red" data-i18n="gallery.btn"><i class="fas fa-images"></i> View Full Gallery</a>
+          <a href="admissions.html" class="btn btn-outline-navy" style="border-color:rgba(255,255,255,0.25);color:#fff;" data-i18n="hero.btn.tour">Book a Tour</a>
         </div>
       </div>
 
@@ -1329,23 +1336,23 @@
       <div class="hg-mosaic">
         <div class="hg-mosaic-item big" onclick="window.location='gallery.html'">
           <img src="images/school-17.jpg" alt="Sports Day at NAIS Dubai" loading="lazy" />
-          <div class="hg-mosaic-badge">Sports & Athletics</div>
+          <div class="hg-mosaic-badge" data-i18n="gal.badge.sports">Sports & Athletics</div>
         </div>
         <div class="hg-mosaic-item" onclick="window.location='gallery.html'">
           <img src="images/school-22.jpg" alt="Science Lab NAIS" loading="lazy" />
-          <div class="hg-mosaic-badge">STEM Labs</div>
+          <div class="hg-mosaic-badge" data-i18n="gal.badge.stem">STEM Labs</div>
         </div>
         <div class="hg-mosaic-item" onclick="window.location='gallery.html'">
           <img src="images/school-21.jpg" alt="UAE National Day" loading="lazy" />
-          <div class="hg-mosaic-badge">Cultural Events</div>
+          <div class="hg-mosaic-badge" data-i18n="gal.badge.culture">Cultural Events</div>
         </div>
         <div class="hg-mosaic-item" onclick="window.location='gallery.html'">
           <img src="images/school-19.jpg" alt="Learning at NAIS" loading="lazy" />
-          <div class="hg-mosaic-badge">Classroom Life</div>
+          <div class="hg-mosaic-badge" data-i18n="gal.badge.class">Classroom Life</div>
         </div>
         <div class="hg-mosaic-item" onclick="window.location='gallery.html'">
           <img src="images/school-23.jpg" alt="Young Scientists NAIS" loading="lazy" />
-          <div class="hg-mosaic-badge">Early Years Science</div>
+          <div class="hg-mosaic-badge" data-i18n="gal.badge.science">Early Years Science</div>
         </div>
       </div>
     </div>
@@ -1354,31 +1361,31 @@
     <div class="hg-accent-strip" aria-hidden="true">
       <div class="hg-accent-photo" onclick="window.location='gallery.html'">
         <img src="images/school-16.jpg" alt="" loading="lazy" />
-        <span class="accent-label">Sports</span>
+        <span class="accent-label" data-i18n="gal.accent.sports">Sports</span>
       </div>
       <div class="hg-accent-photo" onclick="window.location='gallery.html'">
         <img src="images/school-18.jpg" alt="" loading="lazy" />
-        <span class="accent-label">Events</span>
+        <span class="accent-label" data-i18n="gal.accent.events">Events</span>
       </div>
       <div class="hg-accent-photo" onclick="window.location='gallery.html'">
         <img src="images/school-24.jpg" alt="" loading="lazy" />
-        <span class="accent-label">Community</span>
+        <span class="accent-label" data-i18n="gal.accent.community">Community</span>
       </div>
       <div class="hg-accent-photo" onclick="window.location='gallery.html'">
         <img src="images/school-25.jpg" alt="" loading="lazy" />
-        <span class="accent-label">UAE Spirit</span>
+        <span class="accent-label" data-i18n="gal.accent.uae">UAE Spirit</span>
       </div>
       <div class="hg-accent-photo" onclick="window.location='gallery.html'">
         <img src="images/school-19.jpg" alt="" loading="lazy" />
-        <span class="accent-label">Learning</span>
+        <span class="accent-label" data-i18n="gal.accent.learning">Learning</span>
       </div>
       <div class="hg-accent-photo" onclick="window.location='gallery.html'">
         <img src="images/school-20.jpg" alt="" loading="lazy" />
-        <span class="accent-label">Community</span>
+        <span class="accent-label" data-i18n="gal.accent.community">Community</span>
       </div>
       <div class="hg-accent-photo" onclick="window.location='gallery.html'">
         <img src="images/school-23.jpg" alt="" loading="lazy" />
-        <span class="accent-label">Classrooms</span>
+        <span class="accent-label" data-i18n="gal.accent.classrooms">Classrooms</span>
       </div>
     </div>
 
@@ -1388,10 +1395,10 @@
   <section class="usp-section section-pad" id="usp">
     <div class="container">
       <div class="section-header centered">
-        <div class="section-label"><i class="fas fa-star"></i> What Sets Us Apart</div>
-        <h2 class="section-title">Our Core <em>Strengths</em></h2>
+        <div class="section-label"><i class="fas fa-star"></i> <span data-i18n="usp.subtitle">What Sets Us Apart</span></div>
+        <h2 class="section-title" data-i18n-html="usp.h2">Our Core <em>Strengths</em></h2>
         <div class="title-ornament"></div>
-        <p class="section-intro">Recognised by independent inspection entities, these are the pillars that define the NAIS experience and make us uniquely positioned in Dubai's education landscape.</p>
+        <p class="section-intro" data-i18n="usp.intro">Recognised by independent inspection entities, these are the pillars that define the NAIS experience and make us uniquely positioned in Dubai's education landscape.</p>
       </div>
 
       <div class="usp-pillars-grid">
@@ -1400,9 +1407,9 @@
           <div class="usp-pillar-icon">
             <i class="fas fa-hand-holding-heart"></i>
           </div>
-          <div class="usp-pillar-tag">Pillar 01</div>
-          <h3>Inclusive Education</h3>
-          <p>Every student belongs. Our inclusive model ensures learners of all abilities thrive together in a supportive, differentiated environment — celebrated, not separated.</p>
+          <div class="usp-pillar-tag" data-i18n="usp.p1.tag">Pillar 01</div>
+          <h3 data-i18n="usp.p1.title">Inclusive Education</h3>
+          <p data-i18n="usp.p1.text">Every student belongs. Our inclusive model ensures learners of all abilities thrive together in a supportive, differentiated environment — celebrated, not separated.</p>
           <div class="usp-pillar-accent"></div>
         </div>
 
@@ -1412,9 +1419,9 @@
               <path d="M12 1L3 5v6c0 5.25 3.75 10.15 9 11.25C17.25 21.15 21 16.25 21 11V5L12 1zm0 4l6 2.67V11c0 3.72-2.55 7.2-6 8.27C8.55 18.2 6 14.72 6 11V7.67L12 5z"/>
             </svg>
           </div>
-          <div class="usp-pillar-tag" style="color:#E11B22;">Pillar 02</div>
-          <h3>Safe &amp; Anti-Bullying Culture</h3>
-          <p>Relationship-based education is at our core. A proven zero-tolerance anti-bullying framework means students feel safe, respected, and empowered every single day.</p>
+          <div class="usp-pillar-tag" style="color:#E11B22;" data-i18n="usp.p2.tag">Pillar 02</div>
+          <h3 data-i18n="usp.p2.title">Safe &amp; Anti-Bullying Culture</h3>
+          <p data-i18n="usp.p2.text">Relationship-based education is at our core. A proven zero-tolerance anti-bullying framework means students feel safe, respected, and empowered every single day.</p>
           <div class="usp-pillar-accent"></div>
         </div>
 
@@ -1422,9 +1429,9 @@
           <div class="usp-pillar-icon">
             <i class="fas fa-heart"></i>
           </div>
-          <div class="usp-pillar-tag">Pillar 03</div>
-          <h3>High Parent Satisfaction</h3>
-          <p>Our families are our strongest advocates. Independently verified high levels of parent satisfaction reflect the trust built through transparent communication and genuine partnership.</p>
+          <div class="usp-pillar-tag" data-i18n="usp.p3.tag">Pillar 03</div>
+          <h3 data-i18n="usp.p3.title">High Parent Satisfaction</h3>
+          <p data-i18n="usp.p3.text">Our families are our strongest advocates. Independently verified high levels of parent satisfaction reflect the trust built through transparent communication and genuine partnership.</p>
           <div class="usp-pillar-accent"></div>
         </div>
 
@@ -1432,9 +1439,9 @@
           <div class="usp-pillar-icon">
             <i class="fas fa-chart-line"></i>
           </div>
-          <div class="usp-pillar-tag">Pillar 04</div>
-          <h3>Measurable Academic Growth</h3>
-          <p>Clear, data-driven evidence of academic improvement for every student — tracked, reported, and acted upon. Progress is visible, personal, and celebrated.</p>
+          <div class="usp-pillar-tag" data-i18n="usp.p4.tag">Pillar 04</div>
+          <h3 data-i18n="usp.p4.title">Measurable Academic Growth</h3>
+          <p data-i18n="usp.p4.text">Clear, data-driven evidence of academic improvement for every student — tracked, reported, and acted upon. Progress is visible, personal, and celebrated.</p>
           <div class="usp-pillar-accent"></div>
         </div>
 
@@ -1442,9 +1449,9 @@
           <div class="usp-pillar-icon">
             <i class="fas fa-moon"></i>
           </div>
-          <div class="usp-pillar-tag">Pillar 05</div>
-          <h3>Emirati &amp; Islamic Values</h3>
-          <p>Deeply woven into school life, our commitment to UAE national identity and Islamic values ensures students grow with strong cultural roots alongside global academic ambition.</p>
+          <div class="usp-pillar-tag" data-i18n="usp.p5.tag">Pillar 05</div>
+          <h3 data-i18n="usp.p5.title">Emirati &amp; Islamic Values</h3>
+          <p data-i18n="usp.p5.text">Deeply woven into school life, our commitment to UAE national identity and Islamic values ensures students grow with strong cultural roots alongside global academic ambition.</p>
           <div class="usp-pillar-accent"></div>
         </div>
 
@@ -1452,9 +1459,9 @@
           <div class="usp-pillar-icon">
             <i class="fas fa-star"></i>
           </div>
-          <div class="usp-pillar-tag">Pillar 06</div>
-          <h3>Whole-Child Excellence</h3>
-          <p>We nurture every dimension of a child's development — academic, social, emotional, and physical — producing confident, compassionate graduates ready for life beyond school.</p>
+          <div class="usp-pillar-tag" data-i18n="usp.p6.tag">Pillar 06</div>
+          <h3 data-i18n="usp.p6.title">Whole-Child Excellence</h3>
+          <p data-i18n="usp.p6.text">We nurture every dimension of a child's development — academic, social, emotional, and physical — producing confident, compassionate graduates ready for life beyond school.</p>
           <div class="usp-pillar-accent"></div>
         </div>
 
@@ -1468,10 +1475,10 @@
     <div class="container">
 
       <div class="section-header centered">
-        <div class="section-label"><i class="fas fa-calendar-check"></i> Recruitment &amp; Visits</div>
-        <h2 class="section-title">Meet Our <em>Principal</em> &amp; Open House</h2>
+        <div class="section-label"><i class="fas fa-calendar-check"></i> <span data-i18n="recruit.sec.label">Recruitment &amp; Visits</span></div>
+        <h2 class="section-title" data-i18n-html="recruit.sec.h2">Meet Our <em>Principal</em> &amp; Open House</h2>
         <div class="title-ornament"></div>
-        <p class="section-intro">Experience NAIS first-hand. Meet our Principal, tour the campus, and discover why families choose us — no obligation, just an honest conversation.</p>
+        <p class="section-intro" data-i18n="recruit.sec.intro">Experience NAIS first-hand. Meet our Principal, tour the campus, and discover why families choose us — no obligation, just an honest conversation.</p>
       </div>
 
       <!-- Open House Visual Banner -->
@@ -1483,10 +1490,10 @@
           onerror="this.parentElement.style.display='none'"
         />
         <div class="recruit-banner-overlay">
-          <div class="recruit-banner-badge"><i class="fas fa-door-open"></i> Open House 2026</div>
-          <h3>Experience NAIS — See It for Yourself</h3>
-          <p>Meet students, tour classrooms, and speak directly with our Principal and faculty.</p>
-          <a href="admissions.html#apply" class="btn btn-red">Register Now <i class="fas fa-arrow-right"></i></a>
+          <div class="recruit-banner-badge"><i class="fas fa-door-open"></i> <span data-i18n="recruit.badge.open">Open House 2026</span></div>
+          <h3 data-i18n="recruit.banner.h3">Experience NAIS — See It for Yourself</h3>
+          <p data-i18n="recruit.banner.p">Meet students, tour classrooms, and speak directly with our Principal and faculty.</p>
+          <a href="admissions.html#apply" class="btn btn-red" data-i18n="recruit.register">Register Now</a>
         </div>
       </div>
 
@@ -1497,16 +1504,16 @@
         <div class="recruit-leader-card">
           <div class="recruit-leader-photo">
             <img src="images/group-ceo.jpg" alt="Kelvin Hornsby – Group CEO" />
-            <div class="recruit-leader-role-tag">Group CEO</div>
+            <div class="recruit-leader-role-tag" data-i18n="leader.ceo.tag">Group CEO</div>
           </div>
           <div class="recruit-leader-body">
             <h3>Kelvin Hornsby</h3>
-            <div class="recruit-leader-title">Group Chief Executive Officer</div>
+            <div class="recruit-leader-title" data-i18n="leader.ceo.title">Group Chief Executive Officer</div>
             <blockquote class="recruit-leader-quote">
               <i class="fas fa-quote-left"></i>
-              <p>"Our mission is to create world-class schools where every child is inspired to achieve their greatest potential."</p>
+              <p data-i18n="leader.ceo.quote">"Our mission is to create world-class schools where every child is inspired to achieve their greatest potential."</p>
             </blockquote>
-            <a href="about.html#leadership" class="recruit-leader-link">About Our Group <i class="fas fa-arrow-right"></i></a>
+            <a href="about.html#leadership" class="recruit-leader-link" data-i18n="leader.ceo.link">About Our Group</a>
           </div>
         </div>
 
@@ -1514,16 +1521,16 @@
         <div class="recruit-leader-card">
           <div class="recruit-leader-photo">
             <img src="images/executive-director.jpg" alt="Ms. Arwa A. Taher – Executive Director" />
-            <div class="recruit-leader-role-tag">Executive Director</div>
+            <div class="recruit-leader-role-tag" data-i18n="leader.ed.tag">Executive Director</div>
           </div>
           <div class="recruit-leader-body">
             <h3>Ms. Arwa A. Taher</h3>
-            <div class="recruit-leader-title">Executive Director, NAIS Dubai</div>
+            <div class="recruit-leader-title" data-i18n="leader.ed.title">Executive Director, NAIS Dubai</div>
             <blockquote class="recruit-leader-quote">
               <i class="fas fa-quote-left"></i>
-              <p>"At NAIS, we nurture every child's unique potential within a safe, inclusive, and values-driven environment."</p>
+              <p data-i18n="leader.ed.quote">"At NAIS, we nurture every child's unique potential within a safe, inclusive, and values-driven environment."</p>
             </blockquote>
-            <a href="about.html#leadership" class="recruit-leader-link">About Leadership <i class="fas fa-arrow-right"></i></a>
+            <a href="about.html#leadership" class="recruit-leader-link" data-i18n="leader.ed.link">About Leadership</a>
           </div>
         </div>
 
@@ -1531,16 +1538,16 @@
         <div class="recruit-leader-card">
           <div class="recruit-leader-photo">
             <img src="images/school-01.jpg" alt="Justin McCauley – Principal" style="object-fit:cover;object-position:center top;" />
-            <div class="recruit-leader-role-tag">Principal</div>
+            <div class="recruit-leader-role-tag" data-i18n="leader.prin.tag">Principal</div>
           </div>
           <div class="recruit-leader-body">
             <h3>Justin McCauley</h3>
-            <div class="recruit-leader-title">Principal, NAIS Dubai</div>
+            <div class="recruit-leader-title" data-i18n="leader.prin.title">Principal, NAIS Dubai</div>
             <blockquote class="recruit-leader-quote">
               <i class="fas fa-quote-left"></i>
-              <p>"Every student at NAIS is known, valued, and challenged to become a leader of character ready for the world."</p>
+              <p data-i18n="leader.prin.quote">"Every student at NAIS is known, valued, and challenged to become a leader of character ready for the world."</p>
             </blockquote>
-            <a href="admissions.html#apply" class="recruit-leader-link">Book a Visit <i class="fas fa-arrow-right"></i></a>
+            <a href="admissions.html#apply" class="recruit-leader-link" data-i18n="recruit.book.visit">Book a Visit</a>
           </div>
         </div>
 
@@ -1555,14 +1562,14 @@
               <img src="images/school-01.jpg" alt="Justin McCauley – Principal, NAIS Dubai" style="object-fit:cover;object-position:center top;" />
             </div>
             <div>
-              <h3>Meet the Principal</h3>
+              <h3 data-i18n="recruit.meet.h3">Meet the Principal</h3>
               <p class="recruit-card-tagline">Justin McCauley</p>
-              <p class="recruit-card-tagline" style="opacity:0.65;font-size:0.78rem;">Weekly Walk-In Sessions — No Appointment Needed</p>
+              <p class="recruit-card-tagline" style="opacity:0.65;font-size:0.78rem;" data-i18n="recruit.meet.sub">Weekly Walk-In Sessions — No Appointment Needed</p>
             </div>
           </div>
           <div class="recruit-schedule">
             <div class="recruit-day-block">
-              <div class="recruit-day-name"><i class="fas fa-calendar-day"></i> Tuesdays</div>
+              <div class="recruit-day-name"><i class="fas fa-calendar-day"></i> <span data-i18n="recruit.tue">Tuesdays</span></div>
               <div class="recruit-times">
                 <span class="time-badge"><i class="far fa-clock"></i> 10:00 – 11:30 am</span>
                 <span class="time-badge"><i class="far fa-clock"></i> 3:00 – 5:30 pm</span>
@@ -1570,14 +1577,14 @@
             </div>
             <div class="recruit-day-divider"></div>
             <div class="recruit-day-block">
-              <div class="recruit-day-name"><i class="fas fa-calendar-day"></i> Thursdays</div>
+              <div class="recruit-day-name"><i class="fas fa-calendar-day"></i> <span data-i18n="recruit.thu">Thursdays</span></div>
               <div class="recruit-times">
                 <span class="time-badge"><i class="far fa-clock"></i> 10:00 – 11:30 am</span>
                 <span class="time-badge"><i class="far fa-clock"></i> 3:00 – 5:30 pm</span>
               </div>
             </div>
           </div>
-          <a href="admissions.html#apply" class="btn btn-primary recruit-btn">Book Your Visit <i class="fas fa-arrow-right"></i></a>
+          <a href="admissions.html#apply" class="btn btn-primary recruit-btn" data-i18n="recruit.book.visit">Book Your Visit</a>
         </div>
 
         <!-- Open House Dates -->
@@ -1585,8 +1592,8 @@
           <div class="recruit-card-header">
             <div class="recruit-card-icon recruit-card-icon--red"><i class="fas fa-door-open"></i></div>
             <div>
-              <h3>Open House Saturdays</h3>
-              <p class="recruit-card-tagline">Tour the campus with the whole family</p>
+              <h3 data-i18n="recruit.openhouse.h3">Open House Saturdays</h3>
+              <p class="recruit-card-tagline" data-i18n="recruit.openhouse.sub">Tour the campus with the whole family</p>
             </div>
           </div>
           <div class="openhouse-dates">
@@ -1596,8 +1603,8 @@
                 <span class="oh-month">May</span>
               </div>
               <div class="oh-date-info">
-                <strong>Open House Saturday</strong>
-                <span>10:00 am – 2:00 pm</span>
+                <strong data-i18n="recruit.oh.title">Open House Saturday</strong>
+                <span data-i18n="recruit.oh.time">10:00 am – 2:00 pm</span>
               </div>
               <div class="oh-date-arrow"><i class="fas fa-chevron-right"></i></div>
             </div>
@@ -1607,8 +1614,8 @@
                 <span class="oh-month">May</span>
               </div>
               <div class="oh-date-info">
-                <strong>Open House Saturday</strong>
-                <span>10:00 am – 2:00 pm</span>
+                <strong data-i18n="recruit.oh.title">Open House Saturday</strong>
+                <span data-i18n="recruit.oh.time">10:00 am – 2:00 pm</span>
               </div>
               <div class="oh-date-arrow"><i class="fas fa-chevron-right"></i></div>
             </div>
@@ -1618,13 +1625,13 @@
                 <span class="oh-month">Jun</span>
               </div>
               <div class="oh-date-info">
-                <strong>Open House Saturday</strong>
-                <span>10:00 am – 2:00 pm</span>
+                <strong data-i18n="recruit.oh.title">Open House Saturday</strong>
+                <span data-i18n="recruit.oh.time">10:00 am – 2:00 pm</span>
               </div>
               <div class="oh-date-arrow"><i class="fas fa-chevron-right"></i></div>
             </div>
           </div>
-          <a href="admissions.html#apply" class="btn btn-red recruit-btn">Register for Open House <i class="fas fa-arrow-right"></i></a>
+          <a href="admissions.html#apply" class="btn btn-red recruit-btn" data-i18n="recruit.register.oh">Register for Open House</a>
         </div>
 
         <!-- Parent Ambassador -->
@@ -1632,19 +1639,19 @@
           <div class="recruit-card-header">
             <div class="recruit-card-icon recruit-card-icon--gold"><i class="fas fa-star"></i></div>
             <div>
-              <h3>Parent Ambassador Programme</h3>
-              <p class="recruit-card-tagline">Refer a family. Earn AED 500.</p>
+              <h3 data-i18n="recruit.amb.h3">Parent Ambassador Programme</h3>
+              <p class="recruit-card-tagline" data-i18n="recruit.amb.sub">Refer a family. Earn AED 500.</p>
             </div>
           </div>
-          <p class="recruit-card-body">Love NAIS? Share it. When your referred family enrols, you receive <strong>AED 500</strong> as our way of saying thank you for being an ambassador of our school community.</p>
+          <p class="recruit-card-body" data-i18n-html="recruit.amb.p">Love NAIS? Share it. When your referred family enrols, you receive <strong>AED 500</strong> as our way of saying thank you for being an ambassador of our school community.</p>
           <div class="ambassador-reward">
             <i class="fas fa-hand-holding-dollar"></i>
             <div>
               <strong>AED 500</strong>
-              <span>Per successful referral</span>
+              <span data-i18n="recruit.amb.reward">Per successful referral</span>
             </div>
           </div>
-          <a href="admissions.html#apply" class="btn btn-gold recruit-btn">Refer a Family <i class="fas fa-arrow-right"></i></a>
+          <a href="admissions.html#apply" class="btn btn-gold recruit-btn" data-i18n="recruit.amb.btn">Refer a Family</a>
         </div>
 
       </div><!-- /.recruit-grid -->
@@ -1658,25 +1665,25 @@
 
       <!-- Header -->
       <div class="campus-360-header">
-        <div class="section-label light"><i class="fas fa-street-view" style="margin-right:6px;"></i> Virtual Campus Tour</div>
-        <h2 class="section-title light">Explore Our Campus <em>in 360°</em></h2>
+        <div class="section-label light"><i class="fas fa-street-view" style="margin-right:6px;"></i> <span data-i18n="tour360.label">Virtual Campus Tour</span></div>
+        <h2 class="section-title light" data-i18n-html="tour360.h2">Explore Our Campus <em>in 360°</em></h2>
         <div class="title-ornament centered-ornament light-ornament"></div>
-        <p class="section-intro light">Step inside a real school — classrooms, science labs, and playgrounds — from anywhere in the world. These are live 360° walkthroughs of actual school spaces.</p>
+        <p class="section-intro light" data-i18n="tour360.intro">Step inside a real school — classrooms, science labs, and playgrounds — from anywhere in the world. These are live 360° walkthroughs of actual school spaces.</p>
       </div>
 
       <!-- Space Selector Tabs -->
       <div class="tour-tabs" id="tourTabs">
         <button class="tour-tab active" data-tour="classroom">
           <i class="fas fa-school"></i>
-          <span>Main Entrance</span>
+          <span data-i18n="tour360.tab1">Main Entrance</span>
         </button>
         <button class="tour-tab" data-tour="lab">
           <i class="fas fa-child"></i>
-          <span>KG Playground</span>
+          <span data-i18n="tour360.tab2">KG Playground</span>
         </button>
         <button class="tour-tab" data-tour="playground">
           <i class="fas fa-futbol"></i>
-          <span>Sports Field</span>
+          <span data-i18n="tour360.tab3">Sports Field</span>
         </button>
       </div>
 
@@ -1688,24 +1695,24 @@
           <div class="tour-iframe-box tour-photo-box">
             <div class="tour-source-badge">
               <i class="fas fa-school" style="margin-right:5px;"></i>
-              <span>NAIS Dubai · Main Entrance – Al Mizhar 1</span>
+              <span data-i18n="tour.src.entrance">NAIS Dubai · Main Entrance – Al Mizhar 1</span>
             </div>
             <img src="images/campus-main.jpg" alt="NAIS Dubai Main Entrance – North American International School" class="tour-campus-photo" />
             <div class="tour-photo-caption">
-              <i class="fas fa-map-marker-alt"></i> North American International School · Al Mizhar 1, Dubai
+              <i class="fas fa-map-marker-alt"></i> <span data-i18n="tour.cap.entrance">North American International School · Al Mizhar 1, Dubai</span>
             </div>
           </div>
           <div class="tour-info-card">
             <div class="tour-info-icon"><i class="fas fa-school"></i></div>
-            <h3>Our NAIS Campus</h3>
-            <p>The iconic NAIS Dubai main building in Al Mizhar 1 — a welcoming, purpose-built school designed to inspire every student from the moment they arrive.</p>
+            <h3 data-i18n="tour360.campus.h3">Our NAIS Campus</h3>
+            <p data-i18n="tour360.campus.p">The iconic NAIS Dubai main building in Al Mizhar 1 — a welcoming, purpose-built school designed to inspire every student from the moment they arrive.</p>
             <ul class="tour-features">
-              <li><i class="fas fa-check-circle"></i> Purpose-Built School Campus</li>
-              <li><i class="fas fa-check-circle"></i> Al Mizhar 1, Mirdif, Dubai</li>
-              <li><i class="fas fa-check-circle"></i> Secure, Gated Entrance</li>
-              <li><i class="fas fa-check-circle"></i> Ample Parking &amp; Drop-Off</li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.campus.f1">Purpose-Built School Campus</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.campus.f2">Al Mizhar 1, Mirdif, Dubai</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.campus.f3">Secure, Gated Entrance</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.campus.f4">Ample Parking &amp; Drop-Off</span></li>
             </ul>
-            <a href="admissions.html" class="btn btn-red-sm">Book a Campus Tour <i class="fas fa-arrow-right"></i></a>
+            <a href="admissions.html" class="btn btn-red-sm" data-i18n="tour360.book">Book a Campus Tour <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -1714,24 +1721,24 @@
           <div class="tour-iframe-box tour-photo-box">
             <div class="tour-source-badge">
               <i class="fas fa-child" style="margin-right:5px;"></i>
-              <span>NAIS Dubai · KG Playground – Shaded &amp; Safe</span>
+              <span data-i18n="tour.src.kg">NAIS Dubai · KG Playground – Shaded &amp; Safe</span>
             </div>
             <img src="images/campus-playground.jpg" alt="NAIS Dubai KG Playground – Colorful Safe Play Area" class="tour-campus-photo" />
             <div class="tour-photo-caption">
-              <i class="fas fa-shield"></i> Fully Shaded · Safety-Certified · Dedicated KG Play Zone
+              <i class="fas fa-shield"></i> <span data-i18n="tour.cap.kg">Fully Shaded · Safety-Certified · Dedicated KG Play Zone</span>
             </div>
           </div>
           <div class="tour-info-card">
             <div class="tour-info-icon"><i class="fas fa-child"></i></div>
-            <h3>KG Playground</h3>
-            <p>Our vibrant, fully shaded Kindergarten play area is a safe haven of joy and discovery — colourful play equipment, soft rubberised flooring, and age-appropriate activities designed for our youngest learners.</p>
+            <h3 data-i18n="tour360.kg.h3">KG Playground</h3>
+            <p data-i18n="tour360.kg.p">Our vibrant, fully shaded Kindergarten play area is a safe haven of joy and discovery — colourful play equipment, soft rubberised flooring, and age-appropriate activities designed for our youngest learners.</p>
             <ul class="tour-features">
-              <li><i class="fas fa-check-circle"></i> Fully Shaded Canopy</li>
-              <li><i class="fas fa-check-circle"></i> Safety-Certified Rubber Flooring</li>
-              <li><i class="fas fa-check-circle"></i> Age-Appropriate Play Equipment</li>
-              <li><i class="fas fa-check-circle"></i> Supervised at All Times</li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.kg.f1">Fully Shaded Canopy</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.kg.f2">Safety-Certified Rubber Flooring</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.kg.f3">Age-Appropriate Play Equipment</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.kg.f4">Supervised at All Times</span></li>
             </ul>
-            <a href="academics.html#kindergarten" class="btn btn-red-sm">KG Programme <i class="fas fa-arrow-right"></i></a>
+            <a href="academics.html#kindergarten" class="btn btn-red-sm" data-i18n="tour.kg.btn">KG Programme <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -1740,24 +1747,24 @@
           <div class="tour-iframe-box tour-photo-box">
             <div class="tour-source-badge">
               <i class="fas fa-futbol" style="margin-right:5px;"></i>
-              <span>NAIS Dubai · Football Field – Shaded Artificial Turf</span>
+              <span data-i18n="tour.src.sports">NAIS Dubai · Football Field – Shaded Artificial Turf</span>
             </div>
             <img src="images/campus-sports.jpg" alt="NAIS Dubai Football Field – Full-Size Shaded Sports Pitch" class="tour-campus-photo" />
             <div class="tour-photo-caption">
-              <i class="fas fa-running"></i> Full-Size Pitch · Premium Artificial Turf · Shaded Canopy
+              <i class="fas fa-running"></i> <span data-i18n="tour.cap.sports">Full-Size Pitch · Premium Artificial Turf · Shaded Canopy</span>
             </div>
           </div>
           <div class="tour-info-card">
             <div class="tour-info-icon"><i class="fas fa-futbol"></i></div>
-            <h3>Sports Field</h3>
-            <p>Our full-size, premium artificial turf football pitch with a grand shaded canopy — the perfect arena for competitive sports, PE lessons, and school tournaments all year round.</p>
+            <h3 data-i18n="tour360.sports.h3">Sports Field</h3>
+            <p data-i18n="tour360.sports.p">Our full-size, premium artificial turf football pitch with a grand shaded canopy — the perfect arena for competitive sports, PE lessons, and school tournaments all year round.</p>
             <ul class="tour-features">
-              <li><i class="fas fa-check-circle"></i> Full-Size Artificial Turf Pitch</li>
-              <li><i class="fas fa-check-circle"></i> Large Shaded Canopy</li>
-              <li><i class="fas fa-check-circle"></i> Football, Basketball &amp; Athletics</li>
-              <li><i class="fas fa-check-circle"></i> Fenced &amp; Fully Enclosed</li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.sports.f1">Full-Size Artificial Turf Pitch</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.sports.f2">Large Shaded Canopy</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.sports.f3">Football, Basketball &amp; Athletics</span></li>
+              <li><i class="fas fa-check-circle"></i> <span data-i18n="tour.sports.f4">Fenced &amp; Fully Enclosed</span></li>
             </ul>
-            <a href="index.html#student-life" class="btn btn-red-sm">Student Life <i class="fas fa-arrow-right"></i></a>
+            <a href="index.html#student-life" class="btn btn-red-sm" data-i18n="tour.sports.btn">Student Life <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
 
@@ -1768,11 +1775,11 @@
         <div class="tour-bottom-text">
           <i class="fas fa-calendar-check"></i>
           <div>
-            <strong>Prefer a real visit?</strong>
-            <span>Our campus tours run every weekday — meet the Principal and see NAIS in person.</span>
+            <strong data-i18n="tour360.real.strong">Prefer a real visit?</strong>
+            <span data-i18n="tour360.real.span">Our campus tours run every weekday — meet the Principal and see NAIS in person.</span>
           </div>
         </div>
-        <a href="admissions.html#apply" class="btn btn-white">Book a Campus Tour <i class="fas fa-arrow-right"></i></a>
+        <a href="admissions.html#apply" class="btn btn-white" data-i18n="tour360.book">Book a Campus Tour</a>
       </div>
 
     </div>
@@ -1785,32 +1792,32 @@
         <div class="stat-full-item">
           <div class="stat-icon"><i class="fas fa-users"></i></div>
           <div class="stat-count" data-target="900">0</div><div class="stat-unit">+</div>
-          <div class="stat-name">Students</div>
+          <div class="stat-name" data-i18n="stats.students">Students</div>
         </div>
         <div class="stat-full-item">
           <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
           <div class="stat-count" data-target="60">0</div><div class="stat-unit">+</div>
-          <div class="stat-name">Qualified Teachers</div>
+          <div class="stat-name" data-i18n="stats.teachers">Qualified Teachers</div>
         </div>
         <div class="stat-full-item">
           <div class="stat-icon"><i class="fas fa-globe"></i></div>
           <div class="stat-count" data-target="45">0</div><div class="stat-unit">+</div>
-          <div class="stat-name">Nationalities</div>
+          <div class="stat-name" data-i18n="stats.nations">Nationalities</div>
         </div>
         <div class="stat-full-item">
           <div class="stat-icon"><i class="fas fa-award"></i></div>
           <div class="stat-count" data-target="100">0</div><div class="stat-unit">%</div>
-          <div class="stat-name">University Acceptance</div>
+          <div class="stat-name" data-i18n="stats.uni">University Acceptance</div>
         </div>
         <div class="stat-full-item">
           <div class="stat-icon"><i class="fas fa-book"></i></div>
           <div class="stat-count" data-target="20">0</div><div class="stat-unit">+</div>
-          <div class="stat-name">Years of Excellence</div>
+          <div class="stat-name" data-i18n="stats.years">Years of Excellence</div>
         </div>
         <div class="stat-full-item">
           <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
           <div class="stat-count" data-target="22">0</div><div class="stat-unit"></div>
-          <div class="stat-name">Students per Class</div>
+          <div class="stat-name" data-i18n="stats.graduates">Students per Class</div>
         </div>
       </div>
     </div>
@@ -1820,42 +1827,42 @@
   <section class="testimonials-section section-pad bg-light" id="testimonials">
     <div class="container">
       <div class="section-header centered">
-        <div class="section-label">Voices of Our Community</div>
-        <h2 class="section-title">What Our Families <em>Say</em></h2>
+        <div class="section-label" data-i18n="test.label">Voices of Our Community</div>
+        <h2 class="section-title" data-i18n-html="test.h2">What Our Families <em>Say</em></h2>
         <div class="title-ornament centered-ornament"></div>
       </div>
       <div class="testimonials-slider">
         <div class="testimonial-track">
           <div class="testimonial-card active">
             <div class="testimonial-stars">★★★★★</div>
-            <blockquote>"NAIS has been transformative for our children. The teachers genuinely care about each student as an individual. The American curriculum combined with the diverse international community has prepared our daughter beautifully for university in the United States."</blockquote>
+            <blockquote data-i18n="test.1.q">"NAIS has been transformative for our children. The teachers genuinely care about each student as an individual. The American curriculum combined with the diverse international community has prepared our daughter beautifully for university in the United States."</blockquote>
             <div class="testimonial-author">
               <div class="author-avatar">SR</div>
-              <div class="author-info"><strong>Sarah R.</strong><span>Parent of Grade 11 Student</span></div>
+              <div class="author-info"><strong data-i18n="test.1.name">Sarah R.</strong><span data-i18n="test.1.role">Parent of Grade 11 Student</span></div>
             </div>
           </div>
           <div class="testimonial-card">
             <div class="testimonial-stars">★★★★★</div>
-            <blockquote>"The small class sizes mean every child gets personal attention. My son struggled in his previous school but at NAIS he has thrived — academically and socially. The inclusion program is outstanding."</blockquote>
+            <blockquote data-i18n="test.2.q">"The small class sizes mean every child gets personal attention. My son struggled in his previous school but at NAIS he has thrived — academically and socially. The inclusion program is outstanding."</blockquote>
             <div class="testimonial-author">
               <div class="author-avatar">AM</div>
-              <div class="author-info"><strong>Ahmed M.</strong><span>Parent of Grade 7 Student</span></div>
+              <div class="author-info"><strong data-i18n="test.2.name">Ahmed M.</strong><span data-i18n="test.2.role">Parent of Grade 7 Student</span></div>
             </div>
           </div>
           <div class="testimonial-card">
             <div class="testimonial-stars">★★★★★</div>
-            <blockquote>"As a NAIS graduate, I can say the school shaped who I am today. The CARE values aren't just words — they're genuinely lived every day. I was accepted to my dream university in Canada thanks to the incredible guidance I received."</blockquote>
+            <blockquote data-i18n="test.3.q">"As a NAIS graduate, I can say the school shaped who I am today. The CARE values aren't just words — they're genuinely lived every day. I was accepted to my dream university in Canada thanks to the incredible guidance I received."</blockquote>
             <div class="testimonial-author">
               <div class="author-avatar">LK</div>
-              <div class="author-info"><strong>Lena K.</strong><span>Class of 2023 – University of Toronto</span></div>
+              <div class="author-info"><strong data-i18n="test.3.name">Lena K.</strong><span data-i18n="test.3.role">Class of 2023 – University of Toronto</span></div>
             </div>
           </div>
           <div class="testimonial-card">
             <div class="testimonial-stars">★★★★★</div>
-            <blockquote>"We relocated from New York and were anxious about finding the right school in Dubai. NAIS immediately felt like home. The American curriculum seamlessly continued our daughter's education and the community welcomed us warmly."</blockquote>
+            <blockquote data-i18n="test.4.q">"We relocated from New York and were anxious about finding the right school in Dubai. NAIS immediately felt like home. The American curriculum seamlessly continued our daughter's education and the community welcomed us warmly."</blockquote>
             <div class="testimonial-author">
               <div class="author-avatar">JP</div>
-              <div class="author-info"><strong>Jennifer P.</strong><span>Parent of Grade 4 &amp; Grade 9 Students</span></div>
+              <div class="author-info"><strong data-i18n="test.4.name">Jennifer P.</strong><span data-i18n="test.4.role">Parent of Grade 4 &amp; Grade 9 Students</span></div>
             </div>
           </div>
         </div>
@@ -1878,12 +1885,12 @@
     <div class="video-promo-bg"></div>
     <div class="video-promo-content">
       <div class="video-promo-text">
-        <div class="section-label light">Experience NAIS</div>
-        <h2>See Our <em>Campus</em> Come Alive</h2>
-        <p>Discover what makes NAIS Dubai's most trusted American school. Watch our school film to meet our faculty, students, and the vibrant community that defines our unique spirit.</p>
+        <div class="section-label light" data-i18n="video.label">Experience NAIS</div>
+        <h2 data-i18n-html="video.h2">See Our <em>Campus</em> Come Alive</h2>
+        <p data-i18n="video.p">Discover what makes NAIS Dubai's most trusted American school. Watch our school film to meet our faculty, students, and the vibrant community that defines our unique spirit.</p>
         <div class="hero-actions" style="margin-top:28px;">
-          <a href="admissions.html#apply" class="btn btn-red">Apply for 2026–2027 <i class="fas fa-arrow-right"></i></a>
-          <a href="#tour" class="btn btn-outline-white">Book a Tour</a>
+          <a href="admissions.html#apply" class="btn btn-red" data-i18n="video.apply">Apply for 2026–2027</a>
+          <a href="#tour" class="btn btn-outline-white" data-i18n="video.tour">Book a Tour</a>
         </div>
       </div>
       <button class="video-play-btn" id="video-play-btn" type="button" aria-label="Watch school film"><i class="fas fa-play"></i></button>
@@ -1938,9 +1945,9 @@
         <span class="ppx-panel-num">01</span>
         <div class="ppx-panel-arrow"><i class="fas fa-arrow-right"></i></div>
         <div class="ppx-panel-content">
-          <span class="ppx-panel-tag">Campus Life</span>
-          <div class="ppx-panel-title">Our World-Class<br/>Al Mizhar Campus</div>
-          <div class="ppx-panel-desc">Modern facilities, green spaces, and state-of-the-art classrooms designed to inspire every learner.</div>
+          <span class="ppx-panel-tag" data-i18n="ppx.tag1">Campus Life</span>
+          <div class="ppx-panel-title" data-i18n-html="ppx.title1">Our World-Class<br/>Al Mizhar Campus</div>
+          <div class="ppx-panel-desc" data-i18n="ppx.desc1">Modern facilities, green spaces, and state-of-the-art classrooms designed to inspire every learner.</div>
         </div>
       </div>
       <div class="ppx-panel" onclick="window.location='gallery.html'">
@@ -1949,9 +1956,9 @@
         <span class="ppx-panel-num">02</span>
         <div class="ppx-panel-arrow"><i class="fas fa-arrow-right"></i></div>
         <div class="ppx-panel-content">
-          <span class="ppx-panel-tag">Academics</span>
-          <div class="ppx-panel-title">STEM, Arts &amp;<br/>Beyond the Classroom</div>
-          <div class="ppx-panel-desc">Hands-on labs, project-based learning, and AP courses preparing students for top universities worldwide.</div>
+          <span class="ppx-panel-tag" data-i18n="ppx.tag2">Academics</span>
+          <div class="ppx-panel-title" data-i18n-html="ppx.title2">STEM, Arts &amp;<br/>Beyond the Classroom</div>
+          <div class="ppx-panel-desc" data-i18n="ppx.desc2">Hands-on labs, project-based learning, and AP courses preparing students for top universities worldwide.</div>
         </div>
       </div>
       <div class="ppx-panel" onclick="window.location='gallery.html'">
@@ -1960,9 +1967,9 @@
         <span class="ppx-panel-num">03</span>
         <div class="ppx-panel-arrow"><i class="fas fa-arrow-right"></i></div>
         <div class="ppx-panel-content">
-          <span class="ppx-panel-tag">Community</span>
-          <div class="ppx-panel-title">45+ Nationalities,<br/>One NAIS Family</div>
-          <div class="ppx-panel-desc">A vibrant, diverse community united by shared values of respect, ambition, and global citizenship.</div>
+          <span class="ppx-panel-tag" data-i18n="ppx.tag3">Community</span>
+          <div class="ppx-panel-title" data-i18n-html="ppx.title3">45+ Nationalities,<br/>One NAIS Family</div>
+          <div class="ppx-panel-desc" data-i18n="ppx.desc3">A vibrant, diverse community united by shared values of respect, ambition, and global citizenship.</div>
         </div>
       </div>
     </div>
@@ -1985,47 +1992,47 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <div class="section-label">Stay Informed</div>
-          <h2 class="section-title">Latest News <em>&amp; Events</em></h2>
+          <div class="section-label" data-i18n="news.label">Stay Informed</div>
+          <h2 class="section-title" data-i18n-html="news.h2">Latest News <em>&amp; Events</em></h2>
           <div class="title-ornament"></div>
         </div>
-        <a href="gallery.html" class="btn btn-outline-navy">All News <i class="fas fa-arrow-right"></i></a>
+        <a href="gallery.html" class="btn btn-outline-navy" data-i18n="news.all">All News</a>
       </div>
       <div class="news-grid">
         <article class="news-card featured">
           <div class="news-image">
             <img src="images/school-21.jpg" alt="Open House 2026" />
-            <span class="news-tag">Event</span>
+            <span class="news-tag" data-i18n="news.tag.event">Event</span>
           </div>
           <div class="news-body">
             <div class="news-meta"><i class="fas fa-calendar-alt"></i> March 2026 &nbsp;|&nbsp; <i class="fas fa-clock"></i> 9:00 AM – 12:00 PM</div>
-            <h3>Open House 2026 – Experience NAIS First-Hand</h3>
-            <p>Join us for our Spring Open House and tour our campus. Meet our faculty, explore our programs, and discover what makes NAIS Dubai's premier American school.</p>
-            <a href="admissions.html" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+            <h3 data-i18n="news.1.h3">Open House 2026 – Experience NAIS First-Hand</h3>
+            <p data-i18n="news.1.p">Join us for our Spring Open House and tour our campus. Meet our faculty, explore our programs, and discover what makes NAIS Dubai's premier American school.</p>
+            <a href="admissions.html" class="news-link" data-i18n="news.readmore">Read More</a>
           </div>
         </article>
         <article class="news-card">
           <div class="news-image">
             <img src="images/school-22.jpg" alt="Science achievements at NAIS" loading="lazy" />
-            <span class="news-tag news-tag-navy">Achievement</span>
+            <span class="news-tag news-tag-navy" data-i18n="news.tag.achievement">Achievement</span>
           </div>
           <div class="news-body">
             <div class="news-meta"><i class="fas fa-calendar-alt"></i> February 28, 2025</div>
-            <h3>NAIS Students Triumph at Regional Science Fair</h3>
-            <p>Our talented students brought home first and second place honors at the Dubai Regional Science Fair, showcasing innovation in sustainability.</p>
-            <a href="about.html" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+            <h3 data-i18n="news.2.h3">NAIS Students Triumph at Regional Science Fair</h3>
+            <p data-i18n="news.2.p">Our talented students brought home first and second place honors at the Dubai Regional Science Fair, showcasing innovation in sustainability.</p>
+            <a href="about.html" class="news-link" data-i18n="news.readmore">Read More</a>
           </div>
         </article>
         <article class="news-card">
           <div class="news-image">
             <img src="images/school-15.jpg" alt="Graduation Class of 2025 – Record University Acceptances" loading="lazy" />
-            <span class="news-tag news-tag-green">Academics</span>
+            <span class="news-tag news-tag-green" data-i18n="news.tag.academics">Academics</span>
           </div>
           <div class="news-body">
             <div class="news-meta"><i class="fas fa-calendar-alt"></i> February 10, 2025</div>
-            <h3>Class of 2025 – Record University Acceptances</h3>
-            <p>We are proud to celebrate our graduating class as they receive offers from top universities across North America, the UK, and Australia.</p>
-            <a href="academics.html" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+            <h3 data-i18n="news.3.h3">Class of 2025 – Record University Acceptances</h3>
+            <p data-i18n="news.3.p">We are proud to celebrate our graduating class as they receive offers from top universities across North America, the UK, and Australia.</p>
+            <a href="academics.html" class="news-link" data-i18n="news.readmore">Read More</a>
           </div>
         </article>
       </div>
@@ -2037,36 +2044,36 @@
     <div class="container">
       <div class="section-header">
         <div>
-          <div class="section-label">Academic Year 2026–2027</div>
-          <h2 class="section-title">School <em>Calendar</em></h2>
+          <div class="section-label" data-i18n="cal.label">Academic Year 2026–2027</div>
+          <h2 class="section-title" data-i18n-html="cal.h2">School <em>Calendar</em></h2>
           <div class="title-ornament"></div>
         </div>
-        <a href="admissions.html" class="btn btn-outline-navy">Full Calendar <i class="fas fa-arrow-right"></i></a>
+        <a href="admissions.html" class="btn btn-outline-navy" data-i18n="cal.full">Full Calendar</a>
       </div>
       <div class="calendar-grid">
         <div class="calendar-card">
           <div class="calendar-date"><span class="cal-month">Sep</span><span class="cal-day">01</span><span class="cal-year">2025</span></div>
-          <div class="calendar-info"><span class="event-tag">Start of Year</span><h4>First Day of School – AY 2026–2027</h4><p>Welcome back! All students report to school</p></div>
+          <div class="calendar-info"><span class="event-tag" data-i18n="cal.tag1">Start of Year</span><h4 data-i18n="cal.e1.h4">First Day of School – AY 2026–2027</h4><p data-i18n="cal.e1.p">Welcome back! All students report to school</p></div>
         </div>
         <div class="calendar-card">
           <div class="calendar-date"><span class="cal-month">Oct</span><span class="cal-day">18</span><span class="cal-year">2025</span></div>
-          <div class="calendar-info"><span class="event-tag">Event</span><h4>Open House Day 2025</h4><p>Prospective families welcome – campus tours available</p></div>
+          <div class="calendar-info"><span class="event-tag" data-i18n="cal.tag2">Event</span><h4 data-i18n="cal.e2.h4">Open House Day 2025</h4><p data-i18n="cal.e2.p">Prospective families welcome – campus tours available</p></div>
         </div>
         <div class="calendar-card">
           <div class="calendar-date"><span class="cal-month">Nov</span><span class="cal-day">03</span><span class="cal-year">2025</span></div>
-          <div class="calendar-info"><span class="event-tag">Holiday</span><h4>UAE National Day Break</h4><p>School closed – National Day celebrations</p></div>
+          <div class="calendar-info"><span class="event-tag" data-i18n="cal.tag3">Holiday</span><h4 data-i18n="cal.e3.h4">UAE National Day Break</h4><p data-i18n="cal.e3.p">School closed – National Day celebrations</p></div>
         </div>
         <div class="calendar-card">
           <div class="calendar-date"><span class="cal-month">Dec</span><span class="cal-day">19</span><span class="cal-year">2025</span></div>
-          <div class="calendar-info"><span class="event-tag">Break</span><h4>Winter Break Begins</h4><p>Students return January 5, 2026</p></div>
+          <div class="calendar-info"><span class="event-tag" data-i18n="cal.tag4">Break</span><h4 data-i18n="cal.e4.h4">Winter Break Begins</h4><p data-i18n="cal.e4.p">Students return January 5, 2026</p></div>
         </div>
         <div class="calendar-card">
           <div class="calendar-date"><span class="cal-month">Mar</span><span class="cal-day">20</span><span class="cal-year">2026</span></div>
-          <div class="calendar-info"><span class="event-tag">Exams</span><h4>AP Exam Preparation Week</h4><p>College Board AP exam prep for Grades 11–12</p></div>
+          <div class="calendar-info"><span class="event-tag" data-i18n="cal.tag5">Exams</span><h4 data-i18n="cal.e5.h4">AP Exam Preparation Week</h4><p data-i18n="cal.e5.p">College Board AP exam prep for Grades 11–12</p></div>
         </div>
         <div class="calendar-card">
           <div class="calendar-date"><span class="cal-month">Jun</span><span class="cal-day">12</span><span class="cal-year">2026</span></div>
-          <div class="calendar-info"><span class="event-tag">Graduation</span><h4>Class of 2026 Graduation Ceremony</h4><p>Celebrating our graduating seniors</p></div>
+          <div class="calendar-info"><span class="event-tag" data-i18n="cal.tag6">Graduation</span><h4 data-i18n="cal.e6.h4">Class of 2026 Graduation Ceremony</h4><p data-i18n="cal.e6.p">Celebrating our graduating seniors</p></div>
         </div>
       </div>
     </div>
@@ -2076,8 +2083,8 @@
   <section class="uni-strip-section">
     <div class="container">
       <div class="uni-strip-label">
-        <div class="section-label" style="justify-content:center;">Graduate Destinations</div>
-        <p style="font-size:0.88rem;color:var(--gray-500);margin-top:6px;">Our Class of 2024 graduates are studying at leading universities worldwide</p>
+        <div class="section-label" style="justify-content:center;" data-i18n="uni.label">Graduate Destinations</div>
+        <p style="font-size:0.88rem;color:var(--gray-500);margin-top:6px;" data-i18n="uni.sub">Our Class of 2024 graduates are studying at leading universities worldwide</p>
       </div>
       <div class="uni-logos">
         <div class="uni-logo-item">
@@ -2120,13 +2127,13 @@
   <div class="section-cta-strip">
     <div class="container">
       <div>
-        <h3>Ready to Start Your NAIS Journey?</h3>
-        <p>Join our community of 900+ students from 45+ nationalities</p>
+        <h3 data-i18n="cta.h3">Ready to Start Your NAIS Journey?</h3>
+        <p data-i18n="cta.p">Join our community of 900+ students from 45+ nationalities</p>
       </div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="admissions.html#apply" class="btn btn-red"><i class="fas fa-user-plus"></i> Apply Now</a>
-        <a href="#contact" class="btn btn-outline-white"><i class="fas fa-phone-alt"></i> Contact Us</a>
-        <a href="https://wa.me/97142884844" class="btn" style="background:#25D366;color:#fff;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="admissions.html#apply" class="btn btn-red" data-i18n="cta.apply"><i class="fas fa-user-plus"></i> Apply Now</a>
+        <a href="#contact" class="btn btn-outline-white" data-i18n="cta.contact"><i class="fas fa-phone-alt"></i> Contact Us</a>
+        <a href="https://wa.me/97142884844" class="btn" style="background:#25D366;color:#fff;" data-i18n="cta.whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
       </div>
     </div>
   </div>
@@ -2136,21 +2143,21 @@
     <div class="admissions-cta-bg"></div>
     <div class="container">
       <div class="admissions-cta-content">
-        <div class="section-label light">Admissions 2026–2027</div>
-        <h2>Ready to Join the NAIS Family?</h2>
-        <p>Enrollment is now open for the 2026–2027 academic year. Take the first step toward giving your child an exceptional American education in Dubai.</p>
+        <div class="section-label light" data-i18n="adm.cta.label">Admissions 2026–2027</div>
+        <h2 data-i18n="adm.cta.h2">Ready to Join the NAIS Family?</h2>
+        <p data-i18n="adm.cta.p">Enrollment is now open for the 2026–2027 academic year. Take the first step toward giving your child an exceptional American education in Dubai.</p>
         <div class="admissions-steps">
-          <div class="adm-step"><div class="adm-step-num">01</div><h4>Book a Tour</h4><p>Visit our beautiful campus and experience NAIS first-hand</p></div>
+          <div class="adm-step"><div class="adm-step-num">01</div><h4 data-i18n="adm.step1.h4">Book a Tour</h4><p data-i18n="adm.step1.p">Visit our beautiful campus and experience NAIS first-hand</p></div>
           <div class="adm-step-arrow"><i class="fas fa-chevron-right"></i></div>
-          <div class="adm-step"><div class="adm-step-num">02</div><h4>Submit Application</h4><p>Complete our simple online admissions application</p></div>
+          <div class="adm-step"><div class="adm-step-num">02</div><h4 data-i18n="adm.step2.h4">Submit Application</h4><p data-i18n="adm.step2.p">Complete our simple online admissions application</p></div>
           <div class="adm-step-arrow"><i class="fas fa-chevron-right"></i></div>
-          <div class="adm-step"><div class="adm-step-num">03</div><h4>Assessment Day</h4><p>Join us for a friendly assessment and meet our team</p></div>
+          <div class="adm-step"><div class="adm-step-num">03</div><h4 data-i18n="adm.step3.h4">Assessment Day</h4><p data-i18n="adm.step3.p">Join us for a friendly assessment and meet our team</p></div>
           <div class="adm-step-arrow"><i class="fas fa-chevron-right"></i></div>
-          <div class="adm-step"><div class="adm-step-num">04</div><h4>Welcome to NAIS!</h4><p>Receive your offer and start your NAIS journey</p></div>
+          <div class="adm-step"><div class="adm-step-num">04</div><h4 data-i18n="adm.step4.h4">Welcome to NAIS!</h4><p data-i18n="adm.step4.p">Receive your offer and start your NAIS journey</p></div>
         </div>
         <div class="admissions-cta-buttons">
-          <a href="admissions.html" class="btn btn-red">Apply Now <i class="fas fa-arrow-right"></i></a>
-          <a href="mailto:admissions@naischool.ae" class="btn btn-outline-white">Email Admissions</a>
+          <a href="admissions.html" class="btn btn-red" data-i18n="btn.apply">Apply Now</a>
+          <a href="mailto:admissions@naischool.ae" class="btn btn-outline-white" data-i18n="adm.cta.email">Email Admissions</a>
         </div>
       </div>
     </div>
@@ -2160,16 +2167,16 @@
   <section class="accreditations-section section-pad">
     <div class="container">
       <div class="section-header centered">
-        <div class="section-label">Recognition &amp; Trust</div>
-        <h2 class="section-title">Accreditations &amp; <em>Affiliations</em></h2>
+        <div class="section-label" data-i18n="accred.sec.label">Recognition &amp; Trust</div>
+        <h2 class="section-title" data-i18n-html="accred.sec.h2">Accreditations &amp; <em>Affiliations</em></h2>
         <div class="title-ornament centered-ornament"></div>
       </div>
       <div class="accreditation-logos">
-        <div class="accred-item"><div class="accred-badge"><i class="fas fa-shield"></i><span>KHDA</span></div><p>Knowledge &amp; Human Development Authority</p></div>
-        <div class="accred-item"><div class="accred-badge"><i class="fas fa-star"></i><span>AdvancED</span></div><p>Accreditation Commission</p></div>
-        <div class="accred-item"><div class="accred-badge"><i class="fas fa-globe-americas"></i><span>NEASC</span></div><p>New England Association of Schools &amp; Colleges</p></div>
-        <div class="accred-item"><div class="accred-badge"><i class="fas fa-university"></i><span>College Board</span></div><p>Advanced Placement Program Member</p></div>
-        <div class="accred-item"><div class="accred-badge"><i class="fas fa-flag"></i><span>MoE UAE</span></div><p>UAE Ministry of Education Licensed</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-shield"></i><span>KHDA</span></div><p data-i18n="accred.khda">Knowledge &amp; Human Development Authority</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-star"></i><span>AdvancED</span></div><p data-i18n="accred.advanced">Accreditation Commission</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-globe-americas"></i><span>NEASC</span></div><p data-i18n="accred.neasc">New England Association of Schools &amp; Colleges</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-university"></i><span>College Board</span></div><p data-i18n="accred.cb">Advanced Placement Program Member</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-flag"></i><span>MoE UAE</span></div><p data-i18n="accred.moe">UAE Ministry of Education Licensed</p></div>
       </div>
     </div>
   </section>
@@ -2179,31 +2186,31 @@
     <div class="container">
       <div class="contact-grid">
         <div class="contact-info-col">
-          <div class="section-label">Get in Touch</div>
-          <h2 class="section-title">We'd Love to <em>Hear From You</em></h2>
+          <div class="section-label" data-i18n="contact.sec.label">Get in Touch</div>
+          <h2 class="section-title" data-i18n-html="contact.sec.h2">We'd Love to <em>Hear From You</em></h2>
           <div class="title-ornament"></div>
-          <p>Whether you have questions about admissions, want to schedule a tour, or simply want to learn more about NAIS, our team is here to help.</p>
+          <p data-i18n="contact.sec.p">Whether you have questions about admissions, want to schedule a tour, or simply want to learn more about NAIS, our team is here to help.</p>
           <div class="contact-details">
             <div class="contact-detail-item">
               <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
-              <div class="detail-text"><strong>Address</strong><span>Al Mizhar 1, Mirdif, Dubai<br/>United Arab Emirates</span></div>
+              <div class="detail-text"><strong data-i18n="contact.addr.strong">Address</strong><span data-i18n-html="contact.addr.span">Al Mizhar 1, Mirdif, Dubai<br/>United Arab Emirates</span></div>
             </div>
             <div class="contact-detail-item">
               <div class="detail-icon"><i class="fas fa-phone-alt"></i></div>
-              <div class="detail-text"><strong>Phone</strong><span><a href="tel:+97142884844">+971 4 288 4844</a></span></div>
+              <div class="detail-text"><strong data-i18n="contact.phone.strong">Phone</strong><span><a href="tel:+97142884844">+971 4 288 4844</a></span></div>
             </div>
             <div class="contact-detail-item">
               <div class="detail-icon"><i class="fas fa-envelope"></i></div>
-              <div class="detail-text"><strong>Admissions Email</strong><span><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></span></div>
+              <div class="detail-text"><strong data-i18n="contact.email.strong">Admissions Email</strong><span><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></span></div>
             </div>
             <div class="contact-detail-item">
               <div class="detail-icon"><i class="fas fa-clock"></i></div>
-              <div class="detail-text"><strong>Office Hours</strong><span>Sunday – Thursday: 8:00 AM – 3:30 PM</span></div>
+              <div class="detail-text"><strong data-i18n="contact.hours.strong">Office Hours</strong><span data-i18n="contact.hours.span">Sunday – Thursday: 8:00 AM – 3:30 PM</span></div>
             </div>
           </div>
             <a href="https://wa.me/97142884844" class="contact-whatsapp-btn" target="_blank" rel="noopener">
             <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i>
-            Chat on WhatsApp – Quick Response!
+            <span data-i18n="contact.whatsapp.btn">Chat on WhatsApp – Quick Response!</span>
           </a>
           <div class="contact-social" style="margin-top:16px;">
             <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -2215,33 +2222,33 @@
         </div>
         <div class="contact-form-col">
           <form class="contact-form" id="contact-form" novalidate>
-            <h3>Send Us a Message</h3>
+            <h3 data-i18n="contact.form.h3">Send Us a Message</h3>
             <div class="form-row">
-              <div class="form-group"><label for="parent-name">Parent / Guardian Name *</label><input type="text" id="parent-name" name="parent_name" placeholder="Your full name" required /></div>
-              <div class="form-group"><label for="student-name">Student Name *</label><input type="text" id="student-name" name="student_name" placeholder="Student's name" required /></div>
+              <div class="form-group"><label for="parent-name" data-i18n="contact.form.pname">Parent / Guardian Name *</label><input type="text" id="parent-name" name="parent_name" data-i18n-placeholder="contact.form.pname.ph" placeholder="Your full name" required /></div>
+              <div class="form-group"><label for="student-name" data-i18n="contact.form.sname">Student Name *</label><input type="text" id="student-name" name="student_name" data-i18n-placeholder="contact.form.sname.ph" placeholder="Student's name" required /></div>
             </div>
             <div class="form-row">
-              <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" name="email" placeholder="your@email.com" required /></div>
-              <div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" placeholder="+971 XX XXX XXXX" /></div>
+              <div class="form-group"><label for="email" data-i18n="contact.form.email">Email Address *</label><input type="email" id="email" name="email" data-i18n-placeholder="contact.form.email.ph" placeholder="your@email.com" required /></div>
+              <div class="form-group"><label for="phone" data-i18n="contact.form.phone">Phone Number</label><input type="tel" id="phone" name="phone" data-i18n-placeholder="contact.form.phone.ph" placeholder="+971 XX XXX XXXX" /></div>
             </div>
             <div class="form-group">
-              <label for="grade">Grade Applying For *</label>
+              <label for="grade" data-i18n="contact.form.grade">Grade Applying For *</label>
               <select id="grade" name="grade" required>
-                <option value="">Select Grade Level</option>
-                <option>Kindergarten 1</option><option>Kindergarten 2</option>
-                <option>Grade 1 – Grade 5 (Elementary)</option>
-                <option>Grade 6 – Grade 8 (Middle School)</option>
-                <option>Grade 9 – Grade 12 (High School)</option>
+                <option value="" data-i18n="contact.form.grade.sel">Select Grade Level</option>
+                <option data-i18n="contact.form.grade.kg1">Kindergarten 1</option><option data-i18n="contact.form.grade.kg2">Kindergarten 2</option>
+                <option data-i18n="contact.form.grade.elem">Grade 1 – Grade 5 (Elementary)</option>
+                <option data-i18n="contact.form.grade.mid">Grade 6 – Grade 8 (Middle School)</option>
+                <option data-i18n="contact.form.grade.high">Grade 9 – Grade 12 (High School)</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="message">Your Message</label>
-              <textarea id="message" name="message" rows="4" placeholder="Tell us how we can help you..."></textarea>
+              <label for="message" data-i18n="contact.form.msg">Your Message</label>
+              <textarea id="message" name="message" rows="4" data-i18n-placeholder="contact.form.msg.ph" placeholder="Tell us how we can help you..."></textarea>
             </div>
-            <button type="submit" class="btn btn-primary btn-full"><span>Send Message</span><i class="fas fa-paper-plane"></i></button>
+            <button type="submit" class="btn btn-primary btn-full"><span data-i18n="contact.form.send">Send Message</span><i class="fas fa-paper-plane"></i></button>
             <div class="form-success" id="form-success" style="display:none;">
               <i class="fas fa-check-circle"></i>
-              <span>Thank you! We'll be in touch within 24 hours.</span>
+              <span data-i18n="contact.form.thanks">Thank you! We'll be in touch within 24 hours.</span>
             </div>
           </form>
         </div>
@@ -2254,11 +2261,11 @@
     <div class="container">
       <div class="tour-banner-inner">
         <div class="tour-banner-text">
-          <h3>📍 Visit Our Campus in Al Mizhar 1, Dubai</h3>
-          <p>Book a personalized campus tour and experience NAIS first-hand — meet our teachers, see our facilities, and discover what makes us Dubai's premier American school.</p>
+          <h3 data-i18n="tourbanner.h3">📍 Visit Our Campus in Al Mizhar 1, Dubai</h3>
+          <p data-i18n="tourbanner.p">Book a personalized campus tour and experience NAIS first-hand — meet our teachers, see our facilities, and discover what makes us Dubai's premier American school.</p>
         </div>
         <a href="admissions.html#apply" class="btn btn-outline-white" style="white-space:nowrap;flex-shrink:0;">
-          <i class="fas fa-calendar-check"></i> Book a Tour
+          <span data-i18n="tourbanner.btn">Book a Tour</span>
         </a>
       </div>
     </div>
@@ -2269,7 +2276,7 @@
     <div class="container">
       <div class="enrollment-notice">
         <i class="fas fa-bell"></i>
-        <p><strong>📅 Enrollment Now Open for 2026–2027!</strong> Limited seats available — don't miss the opportunity to join NAIS Dubai. <a href="admissions.html#apply" style="color:var(--red);font-weight:700;">Apply Today &rarr;</a></p>
+        <p><strong data-i18n="enroll.strong">📅 Enrollment Now Open for 2026–2027!</strong> <span data-i18n="enroll.p">Limited seats available — don't miss the opportunity to join NAIS Dubai.</span> <a href="admissions.html#apply" style="color:var(--red);font-weight:700;" data-i18n="enroll.link">Apply Today →</a></p>
       </div>
     </div>
   </div>
@@ -2297,7 +2304,7 @@
             <div class="footer-logo">
               <img src="images/nais-logo.png" alt="NAIS Dubai Logo" class="footer-logo-img" />
             </div>
-            <p class="footer-desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
+            <p class="footer-desc" data-i18n="footer.desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
             <div class="footer-social">
               <a href="https://www.facebook.com/NAISDubai" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
               <a href="https://www.instagram.com/naisdubai" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -2307,50 +2314,50 @@
             </div>
           </div>
           <div class="footer-col">
-            <h4 class="footer-heading">Quick Links</h4>
+            <h4 class="footer-heading" data-i18n="footer.links">Quick Links</h4>
             <ul class="footer-links">
-              <li><a href="about.html">About NAIS</a></li>
-              <li><a href="academics.html">Academic Programs</a></li>
-              <li><a href="admissions.html">Admissions</a></li>
-              <li><a href="#student-life">Student Life</a></li>
-              <li><a href="#news">News &amp; Events</a></li>
-              <li><a href="#contact">Contact Us</a></li>
-              <li><a href="gallery.html" style="color:#E11B22;font-weight:600;"><i class="fas fa-images" style="margin-right:5px;"></i>Photo Gallery</a></li>
+              <li><a href="about.html" data-i18n="footer.ql.about">About NAIS</a></li>
+              <li><a href="academics.html" data-i18n="footer.ql.academics">Academic Programs</a></li>
+              <li><a href="admissions.html" data-i18n="footer.ql.admissions">Admissions</a></li>
+              <li><a href="#student-life" data-i18n="footer.ql.life">Student Life</a></li>
+              <li><a href="#news" data-i18n="footer.ql.news">News &amp; Events</a></li>
+              <li><a href="#contact" data-i18n="footer.ql.contact">Contact Us</a></li>
+              <li><a href="gallery.html" style="color:#E11B22;font-weight:600;"><i class="fas fa-images" style="margin-right:5px;"></i><span data-i18n="footer.ql.gallery">Photo Gallery</span></a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4 class="footer-heading">Academic Programs</h4>
+            <h4 class="footer-heading" data-i18n="footer.ac.programs">Academic Programs</h4>
             <ul class="footer-links">
-              <li><a href="academics.html#kindergarten">Kindergarten (KG1–KG2)</a></li>
-              <li><a href="academics.html#elementary">Elementary (Grades 1–5)</a></li>
-              <li><a href="academics.html#middle">Middle School (Grades 6–8)</a></li>
-              <li><a href="academics.html#high">High School (Grades 9–12)</a></li>
-              <li><a href="academics.html#inclusion">Inclusion Program</a></li>
-              <li><a href="academics.html#ap">AP Courses</a></li>
+              <li><a href="academics.html#kindergarten" data-i18n="footer.al.kg">Kindergarten (KG1–KG2)</a></li>
+              <li><a href="academics.html#elementary" data-i18n="footer.al.elem">Elementary (Grades 1–5)</a></li>
+              <li><a href="academics.html#middle" data-i18n="footer.al.mid">Middle School (Grades 6–8)</a></li>
+              <li><a href="academics.html#high" data-i18n="footer.al.high">High School (Grades 9–12)</a></li>
+              <li><a href="academics.html#inclusion" data-i18n="footer.al.incl">Inclusion Program</a></li>
+              <li><a href="academics.html#ap" data-i18n="footer.al.ap">AP Courses</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4 class="footer-heading">Contact &amp; Location</h4>
+            <h4 class="footer-heading" data-i18n="footer.contact.head">Contact &amp; Location</h4>
             <ul class="footer-contact-list">
-              <li><i class="fas fa-map-marker-alt"></i><span>Al Mizhar 1, Mirdif, Dubai, UAE</span></li>
+              <li><i class="fas fa-map-marker-alt"></i><span data-i18n="footer.addr">Al Mizhar 1, Mirdif, Dubai, UAE</span></li>
               <li><i class="fas fa-phone-alt"></i><a href="tel:+97142884844">+971 4 288 4844</a></li>
               <li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li>
-              <li><i class="fas fa-clock"></i><span>Sun – Thu: 8:00 AM – 3:30 PM</span></li>
+              <li><i class="fas fa-clock"></i><span data-i18n="footer.hours">Sun – Thu: 8:00 AM – 3:30 PM</span></li>
             </ul>
-            <a href="admissions.html" class="btn btn-red-sm">Apply Now <i class="fas fa-arrow-right"></i></a>
-            <a href="https://wa.me/97142884844" class="btn btn-red-sm" target="_blank" rel="noopener" style="background:#25D366;margin-top:8px;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="admissions.html" class="btn btn-red-sm"><span data-i18n="footer.apply.btn">Apply Now</span> <i class="fas fa-arrow-right"></i></a>
+            <a href="https://wa.me/97142884844" class="btn btn-red-sm" target="_blank" rel="noopener" style="background:#25D366;margin-top:8px;"><i class="fab fa-whatsapp"></i> <span data-i18n="footer.whatsapp.btn">WhatsApp</span></a>
           </div>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="container">
-        <p>© 2025 North American International School, Dubai. All Rights Reserved.</p>
+        <p data-i18n="footer.copy">© 2025 North American International School, Dubai. All Rights Reserved.</p>
         <div class="footer-bottom-links">
-          <a href="privacy-policy.html">Privacy Policy</a>
-          <a href="terms-of-use.html">Terms of Use</a>
-          <a href="safeguarding.html">Safeguarding Policy</a>
-          <a href="sitemap.html">Sitemap</a>
+          <a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a>
+          <a href="terms-of-use.html" data-i18n="footer.terms">Terms of Use</a>
+          <a href="safeguarding.html" data-i18n="footer.safeguarding">Safeguarding Policy</a>
+          <a href="sitemap.html" data-i18n="footer.sitemap">Sitemap</a>
         </div>
       </div>
     </div>
@@ -2360,52 +2367,59 @@
   <div class="mobile-sticky-cta" id="mobile-sticky-cta">
     <a href="tel:+97142884844" class="mob-cta-btn mob-cta-call">
       <i class="fas fa-phone-alt"></i>
-      <span>Call</span>
+      <span data-i18n="mob.call">Call</span>
     </a>
     <a href="https://wa.me/97142884844" class="mob-cta-btn mob-cta-whatsapp" target="_blank" rel="noopener">
       <i class="fab fa-whatsapp"></i>
-      <span>WhatsApp</span>
+      <span data-i18n="mob.whatsapp">WhatsApp</span>
     </a>
     <a href="admissions.html#apply" class="mob-cta-btn mob-cta-apply">
       <i class="fas fa-user-plus"></i>
-      <span>Apply Now</span>
+      <span data-i18n="mob.apply">Apply Now</span>
     </a>
     <a href="#contact" class="mob-cta-btn mob-cta-tour">
       <i class="fas fa-calendar-check"></i>
-      <span>Book Tour</span>
+      <span data-i18n="mob.tour">Book Tour</span>
     </a>
   </div>
 
   <!-- ── VIDEO LIGHTBOX ── -->
   <div id="video-lightbox" role="dialog" aria-modal="true" aria-label="School Film" aria-hidden="true"
        style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99998;align-items:center;justify-content:center;backdrop-filter:blur(6px);">
-    <button class="vl-close" id="vl-close-btn" aria-label="Close video lightbox"
+    <button class="vl-close" id="vl-close-btn" data-i18n-aria="vl.close" aria-label="Close video lightbox"
             style="position:absolute;top:20px;right:28px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;z-index:2;line-height:1;transition:transform 0.2s ease;">&times;</button>
     <div style="width:90vw;max-width:860px;background:#0a0e1f;border-radius:16px;overflow:hidden;padding:48px 40px;text-align:center;">
       <i class="fas fa-film" style="font-size:3.5rem;color:#E11B22;margin-bottom:24px;display:block;"></i>
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;margin-bottom:12px;">School Film Coming Soon</h3>
-      <p style="color:rgba(255,255,255,0.65);margin-bottom:32px;font-size:1rem;">Experience NAIS first-hand — book a personal campus tour and meet our team.</p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;margin-bottom:12px;" data-i18n="video.film.h3">School Film Coming Soon</h3>
+      <p style="color:rgba(255,255,255,0.65);margin-bottom:32px;font-size:1rem;" data-i18n="video.film.p">Experience NAIS first-hand — book a personal campus tour and meet our team.</p>
       <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-        <a href="admissions.html#apply" class="btn btn-red vl-close-link">Book a Campus Tour <i class="fas fa-arrow-right"></i></a>
-        <a href="https://wa.me/97142884844" class="btn" style="background:#25D366;color:#fff;" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+        <a href="admissions.html#apply" class="btn btn-red vl-close-link" data-i18n="hero.btn.tour">Book a Campus Tour <i class="fas fa-arrow-right"></i></a>
+        <a href="https://wa.me/97142884844" class="btn" style="background:#25D366;color:#fff;" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> <span data-i18n="hero.btn.whatsapp">WhatsApp Us</span></a>
       </div>
     </div>
   </div>
 
+  <!-- Language Switcher Floating Pill (Mobile) -->
+  <div class="lang-float-pill" id="lang-float-pill" aria-label="Language switcher">
+    <button class="lang-switcher" data-lang="en" aria-pressed="true" title="English" data-i18n-aria="lang.en">EN</button>
+    <button class="lang-switcher" data-lang="ar" aria-pressed="false" title="العربية" data-i18n-aria="lang.ar">عر</button>
+  </div>
+
   <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/97142884844" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <a href="https://wa.me/97142884844" class="whatsapp-float" target="_blank" rel="noopener" data-i18n-aria="contact.whatsapp.btn" aria-label="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
   <!-- Apply Now Floating Button -->
-  <a href="admissions.html#apply" class="apply-float" aria-label="Apply Now">
+  <a href="admissions.html#apply" class="apply-float" data-i18n-aria="nav.apply-now" aria-label="Apply Now">
     <i class="fas fa-pen-to-square"></i>
-    <span class="apply-float-label">Apply Now</span>
+    <span class="apply-float-label" data-i18n="nav.apply-now">Apply Now</span>
   </a>
 
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+  <button class="back-to-top" id="back-to-top" data-i18n-aria="btn.back-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
   <script src="js/nav.js"></script>
   <script src="js/img-fallback.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
 </html>
