@@ -399,6 +399,142 @@
       .lb-body h2 { font-size: 1.3rem; }
       .lb-nav { bottom: 14px; right: 22px; }
     }
+
+    /* ── Chairman / Owner featured card ── */
+    .chairman-card-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    .chairman-card-wrap .chairman-card {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      background: linear-gradient(135deg, #0d1535 0%, #1a2a5e 100%);
+      border: 3px solid var(--red, #E11B22);
+      box-shadow: 0 32px 90px rgba(13,21,53,0.45);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .chairman-card-wrap .chairman-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: rgba(225,27,34,0.08);
+      pointer-events: none;
+    }
+    .chairman-card-wrap .chairman-card::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    /* Photo column */
+    .chairman-card-wrap .chairman-card .leader-card-photo {
+      flex: 0 0 420px;
+      min-height: 460px;
+      position: relative;
+      overflow: hidden;
+    }
+    .chairman-card-wrap .chairman-card .leader-portrait {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+    }
+    .chairman-card-wrap .chairman-card .leader-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 5%;
+      filter: none;
+      display: block;
+    }
+    .chairman-card-wrap .chairman-card .leader-card-role-tag {
+      background: var(--red, #E11B22);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      font-weight: 800;
+      padding: 9px 22px;
+      bottom: 20px;
+      left: 20px;
+    }
+    /* Body column */
+    .chairman-card-wrap .chairman-card .leader-card-body {
+      flex: 1;
+      padding: 44px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+    .chairman-card-wrap .chairman-card .leader-card-body h3 {
+      font-size: 2.1rem;
+      color: #fff;
+      margin: 0 0 2px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .chairman-card-wrap .chairman-card .leader-card-title {
+      color: rgba(255,255,255,0.60);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .chairman-card-wrap .chairman-card .leader-quote {
+      border-left: 5px solid var(--red, #E11B22);
+      background: rgba(255,255,255,0.08);
+      border-radius: 0 14px 14px 0;
+      padding: 22px 24px;
+      margin: 0;
+    }
+    .chairman-card-wrap .chairman-card .leader-quote p {
+      color: rgba(255,255,255,0.90);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      font-style: italic;
+    }
+    .chairman-card-wrap .chairman-card .leader-quote i {
+      color: var(--red, #E11B22);
+      font-size: 1.3rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .chairman-card-wrap .chairman-card .leader-bio-toggle {
+      color: rgba(255,255,255,0.70);
+      border-color: rgba(255,255,255,0.20);
+    }
+    .chairman-card-wrap .chairman-card .leader-card-bio {
+      color: rgba(255,255,255,0.78);
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    @media (max-width: 1024px) {
+      .chairman-card-wrap .chairman-card .leader-card-photo { flex: 0 0 360px; min-height: 420px; }
+      .chairman-card-wrap .chairman-card .leader-card-body { padding: 36px 40px; }
+      .chairman-card-wrap .chairman-card .leader-card-body h3 { font-size: 1.8rem; }
+    }
+    @media (max-width: 768px) {
+      .chairman-card-wrap .chairman-card .leader-card-photo { flex: 0 0 300px; min-height: 360px; }
+      .chairman-card-wrap .chairman-card .leader-card-body { padding: 28px 30px; gap: 10px; }
+      .chairman-card-wrap .chairman-card .leader-card-body h3 { font-size: 1.55rem; }
+      .chairman-card-wrap .chairman-card .leader-quote p { font-size: 0.95rem; }
+    }
+    @media (max-width: 640px) {
+      .chairman-card-wrap .chairman-card { flex-direction: column; }
+      .chairman-card-wrap .chairman-card .leader-card-photo { flex: 0 0 320px; min-height: 320px; }
+      .chairman-card-wrap .chairman-card .leader-portrait { position: relative; height: 320px; }
+      .chairman-card-wrap .chairman-card .leader-card-body { padding: 28px 24px; }
+      .chairman-card-wrap .chairman-card .leader-card-body h3 { font-size: 1.45rem; }
+    }
   </style>
 </head>
 <body data-page-title="page.title.about">
@@ -678,6 +814,32 @@
         <p class="section-intro" data-i18n="about.leadership.intro">Our experienced, passionate leadership team sets the tone for excellence, care, and innovation across every aspect of school life at NAIS.</p>
       </div>
 
+      <!-- ── Chairman / Owner featured card ── -->
+      <div class="chairman-card-wrap">
+        <div class="chairman-card leader-card-equal">
+          <div class="leader-card-photo">
+            <div class="leader-portrait">
+              <img src="images/executive-director.jpg" alt="Ms. Arwa A. Taher – Chairman / Owner" />
+            </div>
+            <div class="leader-card-role-tag" data-i18n="leader.ed.tag">Chairman / Owner</div>
+          </div>
+          <div class="leader-card-body">
+            <h3>Ms. Arwa A. Taher</h3>
+            <div class="leader-card-title" data-i18n="leader.ed.title">Chairman / Owner, NAIS Dubai</div>
+            <blockquote class="leader-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"At NAIS, we nurture every child's unique potential within a safe, inclusive, and values-driven environment — because great education begins with belonging."</p>
+            </blockquote>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-arwa">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-arwa" aria-hidden="true">
+              <p class="leader-card-bio">Ms. Taher's visionary leadership has shaped NAIS into one of Dubai's most trusted American curriculum schools. Her commitment to Emirati values and community excellence defines the school's culture and strategic direction.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="leadership-grid-equal stagger-children">
 
         <!-- Group CEO -->
@@ -704,29 +866,7 @@
           </div>
         </div>
 
-        <!-- Executive Director -->
-        <div class="leader-card-equal">
-          <div class="leader-card-photo">
-            <div class="leader-portrait">
-              <img src="images/executive-director.jpg" alt="Ms. Arwa A. Taher – Executive Director" />
-            </div>
-            <div class="leader-card-role-tag" data-i18n="leader.ed.tag">Executive Director</div>
-          </div>
-          <div class="leader-card-body">
-            <h3>Ms. Arwa A. Taher</h3>
-            <div class="leader-card-title" data-i18n="leader.ed.title">Executive Director, NAIS Dubai</div>
-            <blockquote class="leader-quote">
-              <i class="fas fa-quote-left"></i>
-              <p>"At NAIS, we nurture every child's unique potential within a safe, inclusive, and values-driven environment — because great education begins with belonging."</p>
-            </blockquote>
-            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-1">
-              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
-            </button>
-            <div class="leader-bio-wrap" id="bio-1" aria-hidden="true">
-              <p class="leader-card-bio">Ms. Taher's visionary leadership has shaped NAIS into one of Dubai's most trusted American curriculum schools. Her commitment to Emirati values and community excellence defines the school's culture and strategic direction.</p>
-            </div>
-          </div>
-        </div>
+
 
         <!-- Principal -->
         <div class="leader-card-equal">

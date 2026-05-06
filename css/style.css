@@ -2904,9 +2904,9 @@ a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
 /* ── Recruit Leaders Grid (3 equal cards: CEO, Director, Principal) ── */
 .recruit-leaders-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 28px;
-  margin-top: 48px;
+  margin-top: 32px;
   margin-bottom: 48px;
 }
 
@@ -3060,6 +3060,128 @@ a:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
   .recruit-leaders-grid { grid-template-columns: 1fr; gap: 18px; margin-bottom: 28px; }
   .recruit-leader-card:last-child { grid-column: auto; max-width: none; }
   .recruit-leader-photo { height: 220px; }
+}
+
+/* ── Chairman / Owner featured card (index.html) ── */
+.recruit-chairman-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+  margin-top: 48px;
+}
+.recruit-chairman-card {
+  max-width: 1100px;
+  width: 100%;
+  flex-direction: row !important;
+  background: linear-gradient(135deg, #0d1535 0%, #1a2a5e 100%) !important;
+  border-top: none !important;
+  border: 3px solid var(--red) !important;
+  box-shadow: 0 32px 90px rgba(13,21,53,0.45) !important;
+  border-radius: 24px !important;
+  position: relative;
+  overflow: hidden;
+}
+.recruit-chairman-card::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: rgba(225,27,34,0.08);
+  pointer-events: none;
+}
+.recruit-chairman-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+.recruit-chairman-card .recruit-leader-photo {
+  flex: 0 0 420px;
+  height: auto;
+  min-height: 440px;
+}
+.recruit-chairman-card .recruit-leader-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 5%;
+  filter: none !important;
+  transform-origin: center top;
+}
+.recruit-chairman-card .recruit-leader-role-tag {
+  background: var(--red);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  padding: 9px 22px;
+  bottom: 20px;
+  left: 20px;
+}
+.recruit-chairman-card .recruit-leader-body {
+  justify-content: center;
+  padding: 44px 52px;
+  gap: 14px;
+}
+.recruit-chairman-card .recruit-leader-body h3 {
+  font-size: 2.1rem;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.recruit-chairman-card .recruit-leader-title {
+  color: rgba(255,255,255,0.60);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 8px;
+}
+.recruit-chairman-card .recruit-leader-quote {
+  background: rgba(255,255,255,0.08);
+  border-left: 5px solid var(--red);
+  border-radius: 0 14px 14px 0;
+  padding: 22px 24px;
+  margin: 4px 0 18px;
+}
+.recruit-chairman-card .recruit-leader-quote p {
+  color: rgba(255,255,255,0.90);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  font-style: italic;
+}
+.recruit-chairman-card .recruit-leader-quote i {
+  color: var(--red);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  display: block;
+}
+.recruit-chairman-card .recruit-leader-link {
+  color: rgba(255,255,255,0.82);
+  font-size: 0.88rem;
+  margin-top: 6px;
+}
+.recruit-chairman-card .recruit-leader-link:hover {
+  color: #fff;
+}
+@media (max-width: 1024px) {
+  .recruit-chairman-card { max-width: 100%; }
+  .recruit-chairman-card .recruit-leader-photo { flex: 0 0 360px; min-height: 400px; }
+  .recruit-chairman-card .recruit-leader-body { padding: 36px 40px; }
+  .recruit-chairman-card .recruit-leader-body h3 { font-size: 1.8rem; }
+}
+@media (max-width: 768px) {
+  .recruit-chairman-card .recruit-leader-photo { flex: 0 0 300px; min-height: 340px; }
+  .recruit-chairman-card .recruit-leader-body { padding: 28px 30px; gap: 10px; }
+  .recruit-chairman-card .recruit-leader-body h3 { font-size: 1.55rem; }
+  .recruit-chairman-card .recruit-leader-quote p { font-size: 0.95rem; }
+}
+@media (max-width: 640px) {
+  .recruit-chairman-card { flex-direction: column !important; }
+  .recruit-chairman-card .recruit-leader-photo { flex: 0 0 320px; height: 320px; min-height: unset; }
+  .recruit-chairman-card .recruit-leader-body { padding: 28px 24px; }
+  .recruit-chairman-card .recruit-leader-body h3 { font-size: 1.45rem; }
 }
 
 .recruit-grid {
