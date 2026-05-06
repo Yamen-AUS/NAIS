@@ -436,20 +436,21 @@
       background: rgba(255,255,255,0.04);
       pointer-events: none;
     }
-    /* Photo column */
-    .chairman-card-wrap .chairman-card .leader-card-photo {
+    /* Photo column — fully independent classes, no pages.css conflict */
+    .chairman-photo-col {
       flex: 0 0 420px;
       min-height: 460px;
       position: relative;
       overflow: hidden;
+      background: #0d1535;
     }
-    .chairman-card-wrap .chairman-card .leader-portrait {
-      width: 100%;
-      height: 100%;
+    .chairman-portrait {
       position: absolute;
       inset: 0;
+      width: 100%;
+      height: 100%;
     }
-    .chairman-card-wrap .chairman-card .leader-portrait img {
+    .chairman-portrait img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -457,16 +458,17 @@
       filter: none;
       display: block;
     }
-    .chairman-card-wrap .chairman-card .leader-card-role-tag {
+    .chairman-role-tag {
       position: absolute;
       bottom: 20px;
       left: 20px;
-      top: auto;
-      margin: 0;
       background: var(--red, #E11B22);
+      color: #fff;
+      font-family: var(--font-display, 'Montserrat', sans-serif);
       font-size: 0.75rem;
-      letter-spacing: 0.14em;
       font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
       padding: 9px 22px;
       border-radius: 50px;
       box-shadow: 0 4px 16px rgba(225,27,34,0.45);
@@ -474,7 +476,7 @@
       white-space: nowrap;
     }
     /* Body column */
-    .chairman-card-wrap .chairman-card .leader-card-body {
+    .chairman-card-body {
       flex: 1;
       padding: 44px 52px;
       display: flex;
@@ -482,65 +484,211 @@
       justify-content: center;
       gap: 14px;
     }
-    .chairman-card-wrap .chairman-card .leader-card-body h3 {
+    .chairman-card-body h3 {
+      font-family: var(--font-serif, 'Playfair Display', serif);
       font-size: 2.1rem;
       color: #fff;
       margin: 0 0 2px;
       letter-spacing: -0.02em;
       line-height: 1.1;
     }
-    .chairman-card-wrap .chairman-card .leader-card-title {
+    .chairman-card-body .chairman-card-title {
       color: rgba(255,255,255,0.60);
+      font-family: var(--font-display, 'Montserrat', sans-serif);
       font-size: 0.78rem;
+      font-weight: 800;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       margin-bottom: 8px;
     }
-    .chairman-card-wrap .chairman-card .leader-quote {
+    .chairman-card-body .chairman-quote {
       border-left: 5px solid var(--red, #E11B22);
       background: rgba(255,255,255,0.08);
       border-radius: 0 14px 14px 0;
       padding: 22px 24px;
       margin: 0;
     }
-    .chairman-card-wrap .chairman-card .leader-quote p {
+    .chairman-card-body .chairman-quote p {
       color: rgba(255,255,255,0.90);
       font-size: 1.05rem;
       line-height: 1.85;
       font-style: italic;
+      margin: 0;
     }
-    .chairman-card-wrap .chairman-card .leader-quote i {
+    .chairman-card-body .chairman-quote i {
       color: var(--red, #E11B22);
       font-size: 1.3rem;
       display: block;
       margin-bottom: 10px;
     }
-    .chairman-card-wrap .chairman-card .leader-bio-toggle {
+    .chairman-card-body .leader-bio-toggle {
       color: rgba(255,255,255,0.70);
       border-color: rgba(255,255,255,0.20);
+      align-self: flex-start;
+      margin-top: 4px;
     }
-    .chairman-card-wrap .chairman-card .leader-card-bio {
+    .chairman-card-body .leader-card-bio {
       color: rgba(255,255,255,0.78);
       font-size: 0.92rem;
       line-height: 1.75;
     }
     @media (max-width: 1024px) {
-      .chairman-card-wrap .chairman-card .leader-card-photo { flex: 0 0 360px; min-height: 420px; }
-      .chairman-card-wrap .chairman-card .leader-card-body { padding: 36px 40px; }
-      .chairman-card-wrap .chairman-card .leader-card-body h3 { font-size: 1.8rem; }
+      .chairman-photo-col { flex: 0 0 360px; min-height: 420px; }
+      .chairman-card-body { padding: 36px 40px; }
+      .chairman-card-body h3 { font-size: 1.8rem; }
     }
     @media (max-width: 768px) {
-      .chairman-card-wrap .chairman-card .leader-card-photo { flex: 0 0 300px; min-height: 360px; }
-      .chairman-card-wrap .chairman-card .leader-card-body { padding: 28px 30px; gap: 10px; }
-      .chairman-card-wrap .chairman-card .leader-card-body h3 { font-size: 1.55rem; }
-      .chairman-card-wrap .chairman-card .leader-quote p { font-size: 0.95rem; }
+      .chairman-photo-col { flex: 0 0 260px; min-height: 340px; }
+      .chairman-card-body { padding: 28px 30px; gap: 10px; }
+      .chairman-card-body h3 { font-size: 1.55rem; }
+      .chairman-card-body .chairman-quote p { font-size: 0.95rem; }
     }
     @media (max-width: 640px) {
       .chairman-card-wrap .chairman-card { flex-direction: column; }
-      .chairman-card-wrap .chairman-card .leader-card-photo { flex: 0 0 320px; min-height: 320px; }
-      .chairman-card-wrap .chairman-card .leader-portrait { position: relative; height: 320px; }
-      .chairman-card-wrap .chairman-card .leader-card-body { padding: 28px 24px; }
-      .chairman-card-wrap .chairman-card .leader-card-body h3 { font-size: 1.45rem; }
+      .chairman-photo-col { flex: 0 0 auto; height: 320px; min-height: 0; width: 100%; }
+      .chairman-portrait { position: absolute; height: 100%; }
+      .chairman-card-body { padding: 28px 24px; }
+      .chairman-card-body h3 { font-size: 1.45rem; }
+    }
+
+    /* ── CEO featured card (secondary — white/light, fully independent classes) ── */
+    .ceo-card-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    .ceo-card {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      background: #ffffff;
+      border: 2px solid rgba(15,29,82,0.10);
+      border-left: 6px solid var(--red, #E11B22);
+      box-shadow: 0 16px 56px rgba(15,29,82,0.10);
+      border-radius: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ceo-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(15,29,82,0.03);
+      pointer-events: none;
+    }
+    /* ─ Photo column — fully independent, no pages.css conflict ─ */
+    .ceo-photo-col {
+      flex: 0 0 320px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #0f1d45 0%, #1a2f6a 60%, #0a1128 100%);
+    }
+    .ceo-portrait {
+      position: absolute;
+      inset: 0;
+    }
+    .ceo-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+      display: block;
+    }
+    .ceo-role-tag {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--navy, #0f1d45);
+      color: #fff;
+      font-family: var(--font-display, 'Montserrat', sans-serif);
+      font-size: 0.70rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 7px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 16px rgba(15,29,82,0.40);
+      z-index: 5;
+      white-space: nowrap;
+    }
+    /* ─ Body column ─ */
+    .ceo-card-body {
+      flex: 1;
+      padding: 40px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+    }
+    .ceo-card-body h3 {
+      font-family: var(--font-serif, 'Playfair Display', serif);
+      font-size: 1.85rem;
+      color: var(--navy, #0f1d45);
+      margin: 0 0 2px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .ceo-card-title {
+      font-family: var(--font-display, 'Montserrat', sans-serif);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red, #E11B22);
+      margin-bottom: 6px;
+    }
+    .ceo-quote {
+      border-left: 4px solid var(--red, #E11B22);
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 22px;
+      margin: 0;
+    }
+    .ceo-quote i {
+      color: var(--red, #E11B22);
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .ceo-quote p {
+      color: #1a2a5e;
+      font-size: 1.0rem;
+      line-height: 1.8;
+      font-style: italic;
+      margin: 0;
+    }
+    .ceo-card-body .leader-bio-toggle {
+      color: var(--navy, #0f1d45);
+      border-color: rgba(15,29,82,0.20);
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+    .ceo-card-body .leader-card-bio {
+      color: #4a5568;
+      font-size: 0.90rem;
+      line-height: 1.75;
+    }
+    /* ─ Responsive ─ */
+    @media (max-width: 1024px) {
+      .ceo-photo-col { flex: 0 0 280px; }
+      .ceo-card-body { padding: 32px 36px; }
+      .ceo-card-body h3 { font-size: 1.6rem; }
+    }
+    @media (max-width: 768px) {
+      .ceo-photo-col { flex: 0 0 240px; }
+      .ceo-card-body { padding: 26px 28px; gap: 10px; }
+      .ceo-card-body h3 { font-size: 1.4rem; }
+      .ceo-quote p { font-size: 0.92rem; }
+    }
+    @media (max-width: 640px) {
+      .ceo-card { flex-direction: column; border-left: none; border-top: 6px solid var(--red, #E11B22); }
+      .ceo-photo-col { flex: 0 0 300px; height: 300px; }
+      .ceo-portrait { position: relative; height: 300px; }
+      .ceo-card-body { padding: 26px 22px; }
+      .ceo-card-body h3 { font-size: 1.3rem; }
     }
   </style>
 </head>
@@ -823,22 +971,22 @@
 
       <!-- ── Chairman / Owner featured card ── -->
       <div class="chairman-card-wrap">
-        <div class="chairman-card leader-card-equal">
-          <div class="leader-card-photo">
-            <div class="leader-portrait">
+        <div class="chairman-card">
+          <div class="chairman-photo-col">
+            <div class="chairman-portrait">
               <img src="images/executive-director.jpg" alt="Ms. Arwa A. Taher – Chairman / Owner" />
             </div>
-            <div class="leader-card-role-tag" data-i18n="leader.ed.tag" style="position:absolute;bottom:20px;left:20px;top:auto;margin:0;">Chairman / Owner</div>
+            <div class="chairman-role-tag" data-i18n="leader.ed.tag">Chairman / Owner</div>
           </div>
-          <div class="leader-card-body">
+          <div class="chairman-card-body">
             <h3>Ms. Arwa A. Taher</h3>
-            <div class="leader-card-title" data-i18n="leader.ed.title">Chairman / Owner, NAIS Dubai</div>
-            <blockquote class="leader-quote">
+            <div class="chairman-card-title" data-i18n="leader.ed.title">Chairman / Owner, NAIS Dubai</div>
+            <blockquote class="chairman-quote">
               <i class="fas fa-quote-left"></i>
               <p>"At NAIS, we nurture every child's unique potential within a safe, inclusive, and values-driven environment — because great education begins with belonging."</p>
             </blockquote>
             <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-arwa">
-              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+              <span class="lbt-icon">+</span><span class="lbt-label" data-i18n="leader.bio.read">Read Bio</span>
             </button>
             <div class="leader-bio-wrap" id="bio-arwa" aria-hidden="true">
               <p class="leader-card-bio">Ms. Taher's visionary leadership has shaped NAIS into one of Dubai's most trusted American curriculum schools. Her commitment to Emirati values and community excellence defines the school's culture and strategic direction.</p>
@@ -847,20 +995,19 @@
         </div>
       </div>
 
-      <div class="leadership-grid-equal stagger-children">
-
-        <!-- Group CEO -->
-        <div class="leader-card-equal">
-          <div class="leader-card-photo">
-            <div class="leader-portrait">
+      <!-- ── Group CEO featured card ── -->
+      <div class="ceo-card-wrap">
+        <div class="ceo-card">
+          <div class="ceo-photo-col">
+            <div class="ceo-portrait">
               <img src="images/group-ceo.jpg" alt="Kelvin Hornsby – Group CEO" />
             </div>
-            <div class="leader-card-role-tag" data-i18n="leader.ceo.tag">Group CEO</div>
+            <div class="ceo-role-tag" data-i18n="leader.ceo.tag">Group CEO</div>
           </div>
-          <div class="leader-card-body">
+          <div class="ceo-card-body">
             <h3>Kelvin Hornsby</h3>
-            <div class="leader-card-title" data-i18n="leader.ceo.title">Group Chief Executive Officer</div>
-            <blockquote class="leader-quote">
+            <div class="ceo-card-title" data-i18n="leader.ceo.title">Group Chief Executive Officer</div>
+            <blockquote class="ceo-quote">
               <i class="fas fa-quote-left"></i>
               <p>"Our mission is simple: create world-class schools where every child is inspired to achieve their greatest potential and every family feels at home."</p>
             </blockquote>
@@ -872,7 +1019,9 @@
             </div>
           </div>
         </div>
+      </div>
 
+      <div class="leadership-grid-equal stagger-children">
 
 
         <!-- Principal -->
