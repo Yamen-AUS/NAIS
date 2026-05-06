@@ -458,13 +458,20 @@
       display: block;
     }
     .chairman-card-wrap .chairman-card .leader-card-role-tag {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      top: auto;
+      margin: 0;
       background: var(--red, #E11B22);
       font-size: 0.75rem;
       letter-spacing: 0.14em;
       font-weight: 800;
       padding: 9px 22px;
-      bottom: 20px;
-      left: 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 16px rgba(225,27,34,0.45);
+      z-index: 5;
+      white-space: nowrap;
     }
     /* Body column */
     .chairman-card-wrap .chairman-card .leader-card-body {
@@ -821,7 +828,7 @@
             <div class="leader-portrait">
               <img src="images/executive-director.jpg" alt="Ms. Arwa A. Taher – Chairman / Owner" />
             </div>
-            <div class="leader-card-role-tag" data-i18n="leader.ed.tag">Chairman / Owner</div>
+            <div class="leader-card-role-tag" data-i18n="leader.ed.tag" style="position:absolute;bottom:20px;left:20px;top:auto;margin:0;">Chairman / Owner</div>
           </div>
           <div class="leader-card-body">
             <h3>Ms. Arwa A. Taher</h3>
