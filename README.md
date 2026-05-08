@@ -15,18 +15,17 @@ Full multi-page static website for NAIS Dubai featuring an animated intro, hero 
 
 ## ✅ Completed Features
 
-### Core Pages (13 pages)
+### Core Pages (12 pages — `gallery.html` removed)
 
 | Page | File | Description |
 |------|------|-------------|
 | Homepage | `index.html` | Full hero, all sections, mobile CTA, intro overlay |
-| About | `about.html` | Leadership, mission, CARE values, accreditation |
+| About | `about.html` | Leadership (Chairman→CEO→Principal→grid), mission, CARE values, accreditation |
 | Academics | `academics.html` | KG–Grade 12 programs, AP courses, filmstrip |
-| Admissions | `admissions.html` | Application form, fees, FAQs, process steps |
+| Admissions | `admissions.html` | Application form, fees, **Transport & Bus Routes**, FAQs, process steps |
 | American Curriculum | `curriculum.html` | Grading, assessments, learning pathways |
 | Project-Based Learning | `pbl.html` | PBL philosophy, projects, outcomes |
 | Parent FAQ | `parent-faq.html` | Searchable FAQ with category tabs |
-| Photo Gallery | `gallery.html` | Hero carousel, category filter, lightbox |
 | Phase 4 Results | `phase4-results.html` | MAP, PSAT, AP, SAT, IELTS data with Chart.js |
 | Privacy Policy | `privacy-policy.html` | Full privacy policy (KHDA / UAE compliant) |
 | Terms of Use | `terms-of-use.html` | Website terms and conditions |
@@ -96,18 +95,18 @@ All footer legal links now point to real pages:
 
 ```
 index.html                   — Homepage
-about.html                   — About NAIS
+about.html                   — About NAIS (Chairman→CEO→Principal→grid leadership)
 academics.html               — Academic Programs
-admissions.html              — Admissions
+admissions.html              — Admissions + Transport & Bus Routes section
 curriculum.html              — American Curriculum
 pbl.html                     — Project-Based Learning
 parent-faq.html              — Parent FAQ
-gallery.html                 — Photo Gallery
+[gallery.html DELETED]       — Photo Gallery removed; all 12-file references scrubbed
 phase4-results.html          — Phase 4 Academic Results (Chart.js)
 privacy-policy.html          — Privacy Policy
 terms-of-use.html            — Terms of Use
 safeguarding.html            — Safeguarding Policy
-sitemap.html                 — Visual Sitemap
+sitemap.html                 — Visual Sitemap (gallery entry removed)
 intro.html                   — Standalone intro preview
 
 css/

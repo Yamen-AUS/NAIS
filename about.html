@@ -830,7 +830,7 @@
                 <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link" data-i18n="nav.sub.news">News &amp; Events</a></li>
                 <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.contact">Contact Us</a></li>
                 <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.visit">Visit Campus</a></li>
-                <li class="nav-subnav-item"><a href="gallery.html" class="nav-subnav-link" style="color:#E11B22;font-weight:700;"><i class="fas fa-images" style="margin-right:5px;"></i><span data-i18n="nav.sub.gallery">Photo Gallery ✦</span></a></li>
+
               </ul>
             </li>
 
@@ -1021,26 +1021,24 @@
         </div>
       </div>
 
-      <div class="leadership-grid-equal stagger-children">
-
-
-        <!-- Principal -->
-        <div class="leader-card-equal">
-          <div class="leader-card-photo">
-            <div class="leader-portrait">
+      <!-- ── Principal featured card (same size as CEO card) ── -->
+      <div class="ceo-card-wrap">
+        <div class="ceo-card">
+          <div class="ceo-photo-col">
+            <div class="ceo-portrait">
               <img src="images/school-01.jpg" alt="Justin McCauley – Principal" />
             </div>
-            <div class="leader-card-role-tag" data-i18n="leader.principal.tag">Principal</div>
+            <div class="ceo-role-tag" data-i18n="leader.principal.tag">Principal</div>
           </div>
-          <div class="leader-card-body">
+          <div class="ceo-card-body">
             <h3>Justin McCauley</h3>
-            <div class="leader-card-title" data-i18n="leader.principal.title">Principal, NAIS Dubai</div>
-            <blockquote class="leader-quote">
+            <div class="ceo-card-title" data-i18n="leader.principal.title">Principal, NAIS Dubai</div>
+            <blockquote class="ceo-quote">
               <i class="fas fa-quote-left"></i>
               <p>"Every student at NAIS is known, valued, and challenged. We create an environment where every child feels a strong sense of belonging while being inspired to achieve their full potential."</p>
             </blockquote>
             <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-2">
-              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+              <span class="lbt-icon">+</span><span class="lbt-label" data-i18n="leader.bio.read">Read Bio</span>
             </button>
             <div class="leader-bio-wrap" id="bio-2" aria-hidden="true">
               <p class="leader-card-bio">Justin McCauley brings over 25 years of international and U.S. educational leadership to NAIS Dubai, where he has served as Principal since 2019. Born and raised in Portland, Oregon, he holds a Bachelor of Arts from Portland State University, a post-baccalaureate teaching licence from Warner Pacific College, and a Master of Education from Lewis and Clark College, with further administrative studies at Concordia University.</p>
@@ -1048,6 +1046,9 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="leadership-grid-equal stagger-children">
 
         <!-- Vice Principal High School -->
         <div class="leader-card-equal">
@@ -1338,79 +1339,7 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════════
-       PHOTO SHOWCASE STRIP — innovative gallery
-  ══════════════════════════════════════════ -->
-  <section style="background:#08091a;padding:0;overflow:hidden;">
-    <style>
-      .abt-photo-hero{display:grid;grid-template-columns:1.6fr 1fr;grid-template-rows:340px;gap:5px;}
-      @media(max-width:800px){.abt-photo-hero{grid-template-columns:1fr;grid-template-rows:260px 220px;}}
-      .abt-photo-hero-side{display:grid;gap:5px;grid-template-rows:1fr 1fr;}
-      .abt-ph-item{position:relative;overflow:hidden;cursor:pointer;}
-      .abt-ph-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.4,0,.2,1),filter .5s ease;filter:brightness(.75) saturate(.85);}
-      .abt-ph-item:hover img{transform:scale(1.08);filter:brightness(1.0) saturate(1.25);}
-      .abt-ph-ov{position:absolute;inset:0;background:linear-gradient(160deg,transparent 30%,rgba(8,9,26,.75) 100%);opacity:0;transition:opacity .4s;display:flex;align-items:flex-end;padding:18px;z-index:2;}
-      .abt-ph-item:hover .abt-ph-ov{opacity:1;}
-      .abt-ph-tag{font-family:'Montserrat',sans-serif;font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E11B22;background:rgba(0,0,0,.55);padding:3px 8px;border-radius:2px;border-left:2px solid #E11B22;display:inline-block;margin-bottom:4px;backdrop-filter:blur(4px);}
-      .abt-ph-cap{font-family:'Inter',sans-serif;font-size:.74rem;font-weight:600;color:rgba(255,255,255,.9);}
-      /* Accordion strip */
-      .abt-accordion-strip{display:flex;height:180px;gap:4px;background:#040610;}
-      .abt-acc-item{flex:1;position:relative;overflow:hidden;cursor:pointer;transition:flex .65s cubic-bezier(.4,0,.2,1);}
-      .abt-acc-item:hover{flex:4;}
-      .abt-acc-item img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .5s ease;}
-      .abt-acc-item:nth-child(1) img{filter:sepia(.5) hue-rotate(200deg) saturate(1.6) brightness(.65);}
-      .abt-acc-item:nth-child(2) img{filter:grayscale(55%) brightness(.65) contrast(1.18);}
-      .abt-acc-item:nth-child(3) img{filter:sepia(.6) saturate(1.8) brightness(.62);}
-      .abt-acc-item:nth-child(4) img{filter:brightness(.68) saturate(.5) contrast(1.3);}
-      .abt-acc-item:nth-child(5) img{filter:sepia(.4) hue-rotate(320deg) saturate(1.5) brightness(.65);}
-      .abt-acc-item:nth-child(6) img{filter:brightness(.68) saturate(1.5) hue-rotate(30deg);}
-      .abt-acc-item:hover img{filter:brightness(1.0) saturate(1.3) contrast(1.05)!important;}
-      .abt-acc-lbl{position:absolute;bottom:0;left:0;right:0;padding:10px;background:linear-gradient(0deg,rgba(8,9,26,.85),transparent);font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0);text-align:center;transition:color .4s ease .2s;z-index:2;}
-      .abt-acc-item:hover .abt-acc-lbl{color:rgba(255,255,255,.82);}
-      /* Info bar */
-      .abt-gallery-bar{background:#0d1124;border-bottom:2px solid rgba(225,27,34,.2);padding:22px clamp(20px,4vw,60px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
-      .abt-gb-text h3{font-family:'Playfair Display',serif;font-size:1.15rem;color:#fff;margin-bottom:3px;}
-      .abt-gb-text p{font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.45);}
-      @media(max-width:500px){.abt-accordion-strip .abt-acc-item:nth-child(n+5){display:none;}}
-    </style>
 
-    <!-- Big mosaic top -->
-    <div class="abt-photo-hero">
-      <div class="abt-ph-item">
-        <img src="images/school-18.jpg" alt="Sports Day at NAIS Dubai" loading="lazy" />
-        <div class="abt-ph-ov"><div><div class="abt-ph-tag">Sports</div><div class="abt-ph-cap">Champions on Every Field</div></div></div>
-      </div>
-      <div class="abt-photo-hero-side">
-        <div class="abt-ph-item">
-          <img src="images/school-19.jpg" alt="Teacher helping student at NAIS" loading="lazy" />
-          <div class="abt-ph-ov"><div><div class="abt-ph-tag">Learning</div><div class="abt-ph-cap">Every Student Matters</div></div></div>
-        </div>
-        <div class="abt-ph-item">
-          <img src="images/school-22.jpg" alt="Science lab at NAIS" loading="lazy" />
-          <div class="abt-ph-ov"><div><div class="abt-ph-tag">Science</div><div class="abt-ph-cap">Curious Minds at Work</div></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Accordion expanding strip -->
-    <div class="abt-accordion-strip">
-      <div class="abt-acc-item"><img src="images/school-23.jpg" alt="" loading="lazy" /><span class="abt-acc-lbl">Early Years</span></div>
-      <div class="abt-acc-item"><img src="images/school-16.jpg" alt="" loading="lazy" /><span class="abt-acc-lbl">Sports</span></div>
-      <div class="abt-acc-item"><img src="images/school-21.jpg" alt="" loading="lazy" /><span class="abt-acc-lbl">Events</span></div>
-      <div class="abt-acc-item"><img src="images/school-24.jpg" alt="" loading="lazy" /><span class="abt-acc-lbl">Community</span></div>
-      <div class="abt-acc-item"><img src="images/school-25.jpg" alt="" loading="lazy" /><span class="abt-acc-lbl">UAE Spirit</span></div>
-      <div class="abt-acc-item"><img src="images/school-15.jpg" alt="" loading="lazy" /><span class="abt-acc-lbl">Achievements</span></div>
-    </div>
-
-    <!-- Info bar with CTA -->
-    <div class="abt-gallery-bar">
-      <div class="abt-gb-text">
-        <h3 data-i18n="about.gallery.h3">Explore Life at NAIS — Through Our Lens</h3>
-        <p data-i18n="about.gallery.sub">14 photos · 6 categories · Academic Year 2024–2025</p>
-      </div>
-      <a href="gallery.html" class="btn btn-red" style="flex-shrink:0;"><i class="fas fa-images"></i> <span data-i18n="about.gallery.btn">View Full Gallery</span></a>
-    </div>
-  </section>
 
   <!-- CAMPUS SECTION -->
   <section class="section-pad bg-light" id="campus">
@@ -1644,7 +1573,6 @@
       </div>
       <div class="accreditation-logos">
         <div class="accred-item"><div class="accred-badge"><i class="fas fa-shield"></i><span>KHDA</span></div><p data-i18n="accred.khda">Knowledge &amp; Human Development Authority</p></div>
-        <div class="accred-item"><div class="accred-badge"><i class="fas fa-star"></i><span>AdvancED</span></div><p data-i18n="accred.advanced">Accreditation Commission</p></div>
         <div class="accred-item"><div class="accred-badge"><i class="fas fa-globe-americas"></i><span>NEASC</span></div><p data-i18n="accred.neasc">New England Association of Schools &amp; Colleges</p></div>
         <div class="accred-item"><div class="accred-badge"><i class="fas fa-university"></i><span>College Board</span></div><p data-i18n="accred.cb">Advanced Placement Program Member</p></div>
         <div class="accred-item"><div class="accred-badge"><i class="fas fa-flag"></i><span>MoE UAE</span></div><p data-i18n="accred.moe">UAE Ministry of Education Licensed</p></div>
@@ -1667,7 +1595,7 @@
           
         </div>
       </div>
-      <div class="footer-col"><h4 class="footer-heading" data-i18n="footer.links">Quick Links</h4><ul class="footer-links"><li><a href="about.html" data-i18n="nav.about">About NAIS</a></li><li><a href="academics.html" data-i18n="nav.academics">Academic Programs</a></li><li><a href="admissions.html" data-i18n="nav.admissions">Admissions</a></li><li><a href="index.html#student-life" data-i18n="nav.student-life">Student Life</a></li><li><a href="index.html#contact" data-i18n="nav.sub.contact">Contact Us</a></li><li><a href="gallery.html" style="color:#E11B22;font-weight:600;"><i class="fas fa-images" style="margin-right:5px;"></i><span data-i18n="nav.sub.gallery">Photo Gallery</span></a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-heading" data-i18n="footer.links">Quick Links</h4><ul class="footer-links"><li><a href="about.html" data-i18n="nav.about">About NAIS</a></li><li><a href="academics.html" data-i18n="nav.academics">Academic Programs</a></li><li><a href="admissions.html" data-i18n="nav.admissions">Admissions</a></li><li><a href="index.html#student-life" data-i18n="nav.student-life">Student Life</a></li><li><a href="index.html#contact" data-i18n="nav.sub.contact">Contact Us</a></li></ul></div>
       <div class="footer-col"><h4 class="footer-heading" data-i18n="footer.programs">Academic Programs</h4><ul class="footer-links"><li><a href="academics.html#kindergarten" data-i18n="nav.sub.kg">Kindergarten</a></li><li><a href="academics.html#elementary" data-i18n="nav.sub.elementary">Elementary</a></li><li><a href="academics.html#middle" data-i18n="nav.sub.middle">Middle School</a></li><li><a href="academics.html#high" data-i18n="nav.sub.high">High School</a></li><li><a href="academics.html#inclusion" data-i18n="footer.inclusion">Inclusion</a></li></ul></div>
       <div class="footer-col"><h4 class="footer-heading" data-i18n="footer.contact">Contact</h4><ul class="footer-contact-list"><li><i class="fas fa-map-marker-alt"></i><span data-i18n="footer.addr">Al Mizhar 1, Mirdif, Dubai, UAE</span></li><li><i class="fas fa-phone-alt"></i><a href="tel:+97142884844">+971 4 288 4844</a></li><li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li></ul><a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" target="_blank" rel="noopener" class="btn btn-red-sm" data-i18n="nav.apply-now">Apply Now <i class="fas fa-arrow-right"></i></a></div>
     </div></div></div>
