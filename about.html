@@ -400,6 +400,142 @@
       .lb-nav { bottom: 14px; right: 22px; }
     }
 
+    /* ── NEASC Accreditation Inspection Block ── */
+    .neasc-block {
+      background: linear-gradient(135deg, #0f1d45 0%, #1a2f6a 100%);
+      border-radius: 20px;
+      padding: 44px 52px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .neasc-block::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(225,27,34,0.07);
+      pointer-events: none;
+    }
+    .neasc-block::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      pointer-events: none;
+    }
+    .neasc-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .neasc-logo-badge {
+      flex-shrink: 0;
+      background: #fff;
+      border-radius: 14px;
+      width: 64px; height: 64px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+    }
+    .neasc-logo-badge i {
+      font-size: 1.6rem;
+      color: #0f1d45;
+    }
+    .neasc-header-text {}
+    .neasc-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red, #E11B22);
+      margin-bottom: 4px;
+    }
+    .neasc-header-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      color: #fff;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .neasc-header-text h3 em {
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+    }
+    /* Quotes masonry grid */
+    .neasc-quotes-grid {
+      columns: 2;
+      column-gap: 20px;
+    }
+    .neasc-quote {
+      break-inside: avoid;
+      background: rgba(255,255,255,0.07);
+      border-left: 3px solid var(--red, #E11B22);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .neasc-quote p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.88);
+      margin: 0;
+      font-style: italic;
+    }
+    .neasc-quote p strong {
+      color: #fff;
+      font-style: normal;
+    }
+    .neasc-footer-bar {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .neasc-footer-note {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.40);
+      text-transform: uppercase;
+    }
+    .neasc-accred-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.80);
+    }
+    .neasc-accred-pill i { color: var(--red, #E11B22); font-size: 0.7rem; }
+    @media (max-width: 768px) {
+      .neasc-block { padding: 32px 28px; }
+      .neasc-quotes-grid { columns: 1; }
+    }
+    @media (max-width: 480px) {
+      .neasc-block { padding: 26px 20px; }
+      .neasc-header-text h3 { font-size: 1.25rem; }
+    }
+
     /* ── Chairman / Owner featured card ── */
     .chairman-card-wrap {
       display: flex;
@@ -1212,10 +1348,10 @@
 
       <!-- Header -->
       <div class="section-header centered">
-        <div class="section-label"><i class="fas fa-award"></i> &nbsp;<span data-i18n="about.dsib.label">Official Inspection Results</span></div>
-        <h2 class="section-title" data-i18n-html="about.dsib.h2">DSIB Inspection Report<br/><em>2023–2024</em></h2>
+        <div class="section-label"><i class="fas fa-award"></i> &nbsp;Official Inspection Results</div>
+        <h2 class="section-title">Independent Inspection <em>&amp; Accreditation</em></h2>
         <div class="title-ornament centered-ornament"></div>
-        <p class="section-intro" data-i18n="about.dsib.intro">The Dubai Schools Inspection Bureau (DSIB) independently evaluated NAIS Dubai and recognised significant strengths across teaching, curriculum, and student development.</p>
+        <p class="section-intro">NAIS Dubai has been independently evaluated by two of the world's leading educational inspection and accreditation bodies — NEASC (2025) and the Dubai Schools Inspection Bureau (DSIB, 2023–2024) — both confirming our commitment to excellence.</p>
       </div>
 
       <!-- Rating Badges Row -->
@@ -1256,6 +1392,80 @@
           </div>
         </div>
       </div>
+
+      <!-- ── NEASC 2025 Accreditation Inspection Quotes ── -->
+      <div class="neasc-block animate-fade-up">
+        <div class="neasc-header">
+          <div class="neasc-logo-badge">
+            <i class="fas fa-globe-americas"></i>
+          </div>
+          <div class="neasc-header-text">
+            <div class="neasc-eyebrow">NEASC Accreditation Inspection · 2025</div>
+            <h3>What Inspectors Said About <em>NAIS Dubai</em></h3>
+          </div>
+        </div>
+
+        <div class="neasc-quotes-grid">
+
+          <blockquote class="neasc-quote">
+            <p>"The school maintains an inclusive admissions policy welcoming students from a variety of backgrounds — <strong>indeed no student is turned away.</strong>"</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"School leadership takes a <strong>proactive and personalized approach</strong> to engaging with new families."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"They personally meet and onboard all new parents and students, ensuring that contact details are provided for additional support, thereby facilitating a <strong>smooth transition</strong> into the school environment."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"Parents and visitors reflected a <strong>high degree of satisfaction</strong> with the school."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"Parents reported a personal welcome by the school administration, a <strong>high level of care</strong> by the teacher, and the feeling of a <strong>sense of belonging</strong> among their children at all levels."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"The offering of many programs that build a <strong>sense of belonging and confidence</strong> in their children."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"<strong>Teachers are easily accessible.</strong>"</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"The school offers a <strong>balanced focus on academic and extracurricular activities.</strong>"</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"Middle school and high school students have seen growth (on average) of <strong>10 percentile points in MAP performance</strong>, across all subject areas — with some isolated dramatic results such as an <strong>18 percentile point gain</strong> in Middle School MAP Math scores in two years."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"<strong>The increase in student performance is remarkable.</strong>"</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"<strong>A clear trend of improvement can be seen.</strong>"</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"NAIS has embedded its values of <strong>inclusivity, rigor, and innovation</strong> into the culture of learning."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"The efforts at NAIS reflect the belief that <strong>every student can achieve growth</strong> when provided with structured support and challenge."</p>
+          </blockquote>
+
+        </div><!-- /.neasc-quotes-grid -->
+
+        <div class="neasc-footer-bar">
+          <span class="neasc-footer-note">Source: NEASC Accreditation Inspection Report · 2025</span>
+          <span class="neasc-accred-pill"><i class="fas fa-check-circle"></i> NEASC Accredited School</span>
+        </div>
+      </div><!-- /.neasc-block -->
 
       <!-- Two-column: ratings + quotes -->
       <div class="dsib-grid">
