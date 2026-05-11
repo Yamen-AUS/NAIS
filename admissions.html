@@ -1,969 +1,1151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Announcements & Events — NAIS Dubai CMS</title>
+  <title>Admissions | North American International School Dubai</title>
+  <meta name="description" content="Apply to North American International School (NAIS) in Dubai. Learn about our admissions process, tuition fees, and how to book a campus tour." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" href="images/nais-logo.png?v=3" type="image/png" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/admin.css?v=2.2" />
-</head>
-<body>
-
-  <!-- ── Sidebar ── -->
-  <aside class="admin-sidebar" id="adminSidebar">
-    <div class="sidebar-header">
-      <div class="sidebar-logo">
-        <div class="sidebar-logo-mark">🏫</div>
-        <div class="sidebar-logo-text">
-          <span class="sidebar-school">NAIS Dubai</span>
-          <span class="sidebar-cms">CMS Admin</span>
-        </div>
-      </div>
-      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="sidebar-user">
-      <div class="sidebar-user-avatar" data-user-avatar>SA</div>
-      <div class="sidebar-user-info">
-        <span class="sidebar-user-name" data-user-name>Loading…</span>
-        <span class="sidebar-user-badge" data-user-role>Admin</span>
-      </div>
-    </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section-label">Main</div>
-      <a href="index.html" class="nav-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
-      <a href="content.html" class="nav-item"><i class="fas fa-file-alt"></i><span>Pages</span><i class="fas fa-chevron-right nav-arrow"></i></a>
-      <a href="media.html" class="nav-item"><i class="fas fa-images"></i><span>Media Library</span></a>
-      <a href="announcements.html" class="nav-item active"><i class="fas fa-bullhorn"></i><span>Announcements</span><span class="nav-badge">3</span></a>
-      <a href="events.html" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Events</span></a>
-      <div class="nav-section-label">School</div>
-      <a href="staff.html" class="nav-item"><i class="fas fa-users"></i><span>Staff Profiles</span></a>
-      <a href="admissions.html" class="nav-item"><i class="fas fa-user-graduate"></i><span>Admissions</span></a>
-      <a href="results.html" class="nav-item"><i class="fas fa-award"></i><span>Results</span></a>
-      <a href="gallery.html" class="nav-item"><i class="fas fa-photo-video"></i><span>Gallery</span></a>
-      <a href="documents.html" class="nav-item"><i class="fas fa-folder-open"></i><span>Documents</span><span class="nav-badge">2</span></a>
-      <div class="nav-section-label">System</div>
-      <a href="users.html" class="nav-item"><i class="fas fa-user-shield"></i><span>Users &amp; Roles</span></a>
-      <a href="seo.html" class="nav-item"><i class="fas fa-search"></i><span>SEO Manager</span></a>
-      <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
-      <a href="../index.html" target="_blank" class="nav-item"><i class="fas fa-external-link-alt"></i><span>View Website</span></a>
-    </nav>
-    <div class="sidebar-footer">
-      <button class="sidebar-signout-btn" id="sidebarSignOut"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
-    </div>
-  </aside>
-
-  <!-- ── Topbar ── -->
-  <header class="admin-topbar">
-    <div class="topbar-left">
-      <button class="topbar-menu-btn" id="sidebarToggle"><i class="fas fa-bars"></i></button>
-      <div class="topbar-breadcrumb">
-        <span class="bc-home"><i class="fas fa-home"></i></span>
-        <i class="fas fa-chevron-right bc-sep"></i>
-        <span class="bc-current">Announcements &amp; Events</span>
-      </div>
-    </div>
-    <div class="topbar-right">
-      <button class="topbar-icon-btn" onclick="window.open('../index.html','_blank')"><i class="fas fa-globe"></i></button>
-      <div class="topbar-user" id="topbarUser">
-        <div class="topbar-avatar" data-user-avatar>SA</div>
-        <div class="topbar-user-info">
-          <span class="topbar-user-name" data-user-name>Loading…</span>
-          <span class="topbar-user-role" data-user-role>—</span>
-        </div>
-        <div class="user-dropdown" id="userDropdown">
-          <div class="user-dropdown-header">
-            <div class="udh-avatar" data-user-avatar>SA</div>
-            <div><div class="udh-name" data-user-name>—</div><div class="udh-email" data-user-email>—</div></div>
-          </div>
-          <div class="user-dropdown-divider"></div>
-          <a href="settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i> Settings</a>
-          <button class="user-dropdown-item danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ── Main ── -->
-  <main class="admin-main">
-    <div class="admin-content">
-
-      <div class="page-header">
-        <div>
-          <h1 class="page-title">Announcements &amp; Events</h1>
-          <p class="page-subtitle">Manage school announcements, news posts, and upcoming events.</p>
-        </div>
-        <div class="page-header-actions" id="pageHeaderActions">
-          <!-- Populated by tab switch -->
-        </div>
-      </div>
-
-      <!-- ── Tabs ── -->
-      <div class="tabs-bar">
-        <button class="tab-btn active" id="tab-announcements" onclick="switchTab('announcements')">
-          <i class="fas fa-bullhorn"></i> Announcements
-          <span class="tab-count" id="annCount">—</span>
-        </button>
-        <button class="tab-btn" id="tab-events" onclick="switchTab('events')">
-          <i class="fas fa-calendar-alt"></i> Events
-          <span class="tab-count" id="evtCount">—</span>
-        </button>
-      </div>
-
-      <!-- ── Announcements panel ── -->
-      <div id="panel-announcements">
-
-        <!-- Toolbar -->
-        <div class="ann-toolbar">
-          <div class="search-wrap">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" id="annSearch" placeholder="Search announcements…" oninput="filterAnn()" />
-          </div>
-          <select class="form-select sm" id="annCatFilter" onchange="filterAnn()">
-            <option value="">All categories</option>
-            <option value="General">General</option>
-            <option value="Academic">Academic</option>
-            <option value="Admissions">Admissions</option>
-            <option value="Events">Events</option>
-            <option value="Sports">Sports</option>
-            <option value="Community">Community</option>
-            <option value="Holiday">Holiday</option>
-            <option value="Emergency">Emergency</option>
-          </select>
-          <select class="form-select sm" id="annStatusFilter" onchange="filterAnn()">
-            <option value="">All statuses</option>
-            <option value="published">Published</option>
-            <option value="draft">Draft</option>
-            <option value="scheduled">Scheduled</option>
-            <option value="archived">Archived</option>
-          </select>
-          <button class="btn btn-outline btn-sm" onclick="clearAnnFilters()"><i class="fas fa-times"></i></button>
-          <span class="result-count" id="annResultCount"></span>
-        </div>
-
-        <!-- Table -->
-        <div class="panel">
-          <div class="panel-body p0">
-            <div class="table-wrap">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th style="width:36px;"><input type="checkbox" id="annSelectAll" onchange="toggleAnnSelectAll(this)" /></th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Status</th>
-                    <th>Publish Date</th>
-                    <th>Priority</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="annTableBody">
-                  <tr><td colspan="7" class="table-loading">Loading…</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="panel-footer" id="annBulkBar" style="display:none;">
-            <span id="annSelCount">0 selected</span>
-            <div style="display:flex;gap:8px;">
-              <button class="btn btn-outline btn-sm" onclick="bulkPublish()"><i class="fas fa-globe"></i> Publish Selected</button>
-              <button class="btn btn-red btn-sm" onclick="bulkDeleteAnn()"><i class="fas fa-trash"></i> Delete Selected</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── Events panel ── -->
-      <div id="panel-events" style="display:none;">
-
-        <!-- Toolbar -->
-        <div class="ann-toolbar">
-          <div class="search-wrap">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" id="evtSearch" placeholder="Search events…" oninput="filterEvt()" />
-          </div>
-          <select class="form-select sm" id="evtStatusFilter" onchange="filterEvt()">
-            <option value="">All statuses</option>
-            <option value="upcoming">Upcoming</option>
-            <option value="ongoing">Ongoing</option>
-            <option value="completed">Completed</option>
-            <option value="cancelled">Cancelled</option>
-            <option value="draft">Draft</option>
-          </select>
-          <button class="btn btn-outline btn-sm" onclick="clearEvtFilters()"><i class="fas fa-times"></i></button>
-          <span class="result-count" id="evtResultCount"></span>
-        </div>
-
-        <!-- Calendar strip + table -->
-        <div class="evt-layout">
-          <div class="panel">
-            <div class="panel-header">
-              <h2 class="panel-title"><i class="fas fa-calendar-alt"></i> Upcoming Events</h2>
-            </div>
-            <div class="panel-body p0">
-              <div class="table-wrap">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th>Event</th>
-                      <th>Date</th>
-                      <th>Location</th>
-                      <th>Status</th>
-                      <th>Audience</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="evtTableBody">
-                    <tr><td colspan="6" class="table-loading">Loading…</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- ── Announcement Modal ── -->
-  <div class="modal-backdrop" id="annModal">
-    <div class="modal modal-lg">
-      <div class="modal-header">
-        <h3 class="modal-title" id="annModalTitle">New Announcement</h3>
-        <button class="modal-close" data-modal-close="annModal"><i class="fas fa-times"></i></button>
-      </div>
-      <div class="modal-body">
-        <form id="annForm">
-          <input type="hidden" id="annId" />
-
-          <div class="form-group">
-            <label class="form-label">Title (EN) <span class="form-required">*</span></label>
-            <input type="text" class="form-input" id="annTitleEn" placeholder="Announcement title in English" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Title (AR)</label>
-            <input type="text" class="form-input rtl-input" id="annTitleAr" placeholder="عنوان الإعلان بالعربية" dir="rtl" />
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Category</label>
-              <select class="form-select" id="annCategory">
-                <option value="General">General</option>
-                <option value="Academic">Academic</option>
-                <option value="Admissions">Admissions</option>
-                <option value="Events">Events</option>
-                <option value="Sports">Sports</option>
-                <option value="Community">Community</option>
-                <option value="Holiday">Holiday</option>
-                <option value="Emergency">Emergency</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Priority</label>
-              <select class="form-select" id="annPriority">
-                <option value="normal">Normal</option>
-                <option value="high">High</option>
-                <option value="urgent">Urgent</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Body Content (EN) <span class="form-required">*</span></label>
-            <textarea class="form-textarea" id="annBodyEn" rows="6" placeholder="Full announcement body text in English…" required></textarea>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Body Content (AR)</label>
-            <textarea class="form-textarea rtl-input" id="annBodyAr" rows="6" placeholder="نص الإعلان الكامل بالعربية…" dir="rtl"></textarea>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Publish Date</label>
-              <input type="date" class="form-input" id="annPublishDate" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Expiry Date</label>
-              <input type="date" class="form-input" id="annExpiryDate" />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Status</label>
-              <select class="form-select" id="annStatus">
-                <option value="published">Published</option>
-                <option value="draft">Draft</option>
-                <option value="scheduled">Scheduled</option>
-                <option value="archived">Archived</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Target Audience</label>
-              <select class="form-select" id="annAudience">
-                <option value="all">All</option>
-                <option value="parents">Parents</option>
-                <option value="students">Students</option>
-                <option value="staff">Staff</option>
-                <option value="prospective">Prospective Families</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Link / CTA URL</label>
-            <input type="url" class="form-input" id="annLink" placeholder="https://… (optional call-to-action link)" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Banner Image URL</label>
-            <input type="url" class="form-input" id="annImage" placeholder="https://… (optional header image)" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Tags <span style="font-size:11px;color:var(--gray400);">(comma-separated)</span></label>
-            <input type="text" class="form-input" id="annTags" placeholder="open-day, admissions, 2025" />
-          </div>
-
-          <div class="form-group">
-            <div class="toggle-row">
-              <label class="toggle-switch">
-                <input type="checkbox" id="annPinned" />
-                <span class="toggle-slider"></span>
-              </label>
-              <span class="toggle-label">Pin to top of announcements list</span>
-            </div>
-          </div>
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline" data-modal-close="annModal">Cancel</button>
-        <button class="btn btn-outline" onclick="saveAnn('draft')"><i class="fas fa-save"></i> Save Draft</button>
-        <button class="btn btn-primary" onclick="saveAnn('published')"><i class="fas fa-globe"></i> Publish</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── Event Modal ── -->
-  <div class="modal-backdrop" id="evtModal">
-    <div class="modal modal-lg">
-      <div class="modal-header">
-        <h3 class="modal-title" id="evtModalTitle">New Event</h3>
-        <button class="modal-close" data-modal-close="evtModal"><i class="fas fa-times"></i></button>
-      </div>
-      <div class="modal-body">
-        <form id="evtForm">
-          <input type="hidden" id="evtId" />
-
-          <div class="form-group">
-            <label class="form-label">Event Title (EN) <span class="form-required">*</span></label>
-            <input type="text" class="form-input" id="evtTitleEn" placeholder="Open Day 2025" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Event Title (AR)</label>
-            <input type="text" class="form-input rtl-input" id="evtTitleAr" placeholder="يوم الأبواب المفتوحة 2025" dir="rtl" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Description (EN)</label>
-            <textarea class="form-textarea" id="evtDescEn" rows="4" placeholder="Event description…"></textarea>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Description (AR)</label>
-            <textarea class="form-textarea rtl-input" id="evtDescAr" rows="4" placeholder="وصف الفعالية…" dir="rtl"></textarea>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Event Date <span class="form-required">*</span></label>
-              <input type="date" class="form-input" id="evtDate" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label">End Date</label>
-              <input type="date" class="form-input" id="evtEndDate" />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Start Time</label>
-              <input type="time" class="form-input" id="evtStartTime" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">End Time</label>
-              <input type="time" class="form-input" id="evtEndTime" />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Location</label>
-              <input type="text" class="form-input" id="evtLocation" placeholder="NAIS Dubai Campus, Main Hall…" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Location (AR)</label>
-              <input type="text" class="form-input rtl-input" id="evtLocationAr" placeholder="حرم مدرسة نايس دبي…" dir="rtl" />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Status</label>
-              <select class="form-select" id="evtStatus">
-                <option value="upcoming">Upcoming</option>
-                <option value="ongoing">Ongoing</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
-                <option value="draft">Draft</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Target Audience</label>
-              <select class="form-select" id="evtAudience">
-                <option value="all">All</option>
-                <option value="parents">Parents</option>
-                <option value="students">Students</option>
-                <option value="prospective">Prospective Families</option>
-                <option value="staff">Staff</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Capacity</label>
-              <input type="number" class="form-input" id="evtCapacity" placeholder="200" min="0" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">RSVP Link</label>
-              <input type="url" class="form-input" id="evtRsvp" placeholder="https://… (registration link)" />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Event Banner Image URL</label>
-            <input type="url" class="form-input" id="evtImage" placeholder="https://…" />
-          </div>
-
-          <div class="form-group">
-            <div class="toggle-row">
-              <label class="toggle-switch">
-                <input type="checkbox" id="evtFeatured" />
-                <span class="toggle-slider"></span>
-              </label>
-              <span class="toggle-label">Feature this event prominently on the homepage</span>
-            </div>
-          </div>
-
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline" data-modal-close="evtModal">Cancel</button>
-        <button class="btn btn-outline" onclick="saveEvt('draft')"><i class="fas fa-save"></i> Save Draft</button>
-        <button class="btn btn-primary" onclick="saveEvt('upcoming')"><i class="fas fa-check"></i> Save Event</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="toast-container" id="toastContainer"></div>
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-  <script src="js/core.js?v=2.2"></script>
-  <script>
-    let allAnn = [], filteredAnn = [], selectedAnnIds = new Set();
-    let allEvt = [], filteredEvt = [];
-    let activeTab = 'announcements';
-
-    // ── Tab switch ──
-    function switchTab(tab) {
-      activeTab = tab;
-      document.getElementById('panel-announcements').style.display = tab === 'announcements' ? '' : 'none';
-      document.getElementById('panel-events').style.display         = tab === 'events'        ? '' : 'none';
-      document.getElementById('tab-announcements').classList.toggle('active', tab === 'announcements');
-      document.getElementById('tab-events').classList.toggle('active', tab === 'events');
-
-      const actionsDiv = document.getElementById('pageHeaderActions');
-      if (tab === 'announcements') {
-        actionsDiv.innerHTML = `<button class="btn btn-primary btn-sm" onclick="openNewAnn()"><i class="fas fa-plus"></i> New Announcement</button>`;
-      } else {
-        actionsDiv.innerHTML = `<button class="btn btn-primary btn-sm" onclick="openNewEvt()"><i class="fas fa-plus"></i> New Event</button>`;
-      }
-    }
-
-    // ════════════════════════════════════
-    //  ANNOUNCEMENTS
-    // ════════════════════════════════════
-
-    async function loadAnn() {
-      try {
-        const res = await API.get('cms_announcements', { limit: 200 });
-        allAnn = res.data || [];
-        document.getElementById('annCount').textContent = allAnn.length;
-        filterAnn();
-      } catch(e) {
-        document.getElementById('annTableBody').innerHTML =
-          '<tr><td colspan="7" class="table-empty">Could not load announcements.</td></tr>';
-      }
-    }
-
-    function filterAnn() {
-      const q      = (document.getElementById('annSearch').value || '').toLowerCase();
-      const cat    = document.getElementById('annCatFilter').value;
-      const status = document.getElementById('annStatusFilter').value;
-      filteredAnn = allAnn.filter(a => {
-        const mq = !q || (a.title||'').toLowerCase().includes(q) || (a.body_en||'').toLowerCase().includes(q);
-        const mc = !cat    || a.category === cat;
-        const ms = !status || a.status   === status;
-        return mq && mc && ms;
-      });
-      document.getElementById('annResultCount').textContent = `${filteredAnn.length} result${filteredAnn.length!==1?'s':''}`;
-      renderAnnTable();
-    }
-
-    function clearAnnFilters() {
-      document.getElementById('annSearch').value = '';
-      document.getElementById('annCatFilter').value = '';
-      document.getElementById('annStatusFilter').value = '';
-      filterAnn();
-    }
-
-    function renderAnnTable() {
-      const tbody = document.getElementById('annTableBody');
-      if (!filteredAnn.length) {
-        tbody.innerHTML = '<tr><td colspan="7" class="table-empty">No announcements found. <a href="#" onclick="openNewAnn();return false;">Create one</a>.</td></tr>';
-        return;
-      }
-      // Sort: pinned first, then by publish date desc
-      const sorted = [...filteredAnn].sort((a,b) => {
-        if (a.pinned && !b.pinned) return -1;
-        if (!a.pinned && b.pinned) return 1;
-        return (b.publish_date||b.created_at||'') > (a.publish_date||a.created_at||'') ? 1 : -1;
-      });
-      tbody.innerHTML = sorted.map(a => {
-        const isSelected = selectedAnnIds.has(a.id);
-        const pinHtml = a.pinned ? '<i class="fas fa-thumbtack" title="Pinned" style="color:var(--navy);font-size:11px;margin-right:4px;"></i>' : '';
-        const priorityBadge = a.priority === 'urgent' ? '<span class="priority-badge urgent">Urgent</span>' : a.priority === 'high' ? '<span class="priority-badge high">High</span>' : '<span class="priority-badge normal">Normal</span>';
-        return `<tr class="${isSelected?'row-selected':''}">
-          <td><input type="checkbox" class="ann-check" value="${a.id}" ${isSelected?'checked':''} onchange="toggleAnnSelect('${a.id}',this.checked)" /></td>
-          <td>
-            <div class="ann-title-cell">${pinHtml}<span class="table-title-cell">${escHtml(a.title||'—')}</span></div>
-            ${a.tags ? `<div class="ann-tags">${a.tags.split(',').map(t=>`<span class="tag-pill">${escHtml(t.trim())}</span>`).join('')}</div>` : ''}
-          </td>
-          <td><span class="badge badge-navy">${escHtml(a.category||'General')}</span></td>
-          <td>${badgeHtml(a.status||'draft')}</td>
-          <td class="table-date">${a.publish_date ? formatDate(a.publish_date) : '<span style="color:var(--gray400)">—</span>'}</td>
-          <td>${priorityBadge}</td>
-          <td>
-            <div class="table-actions">
-              <button class="btn btn-ghost btn-icon" onclick="editAnn('${a.id}')" title="Edit"><i class="fas fa-edit"></i></button>
-              <button class="btn btn-ghost btn-icon" onclick="togglePin('${a.id}')" title="${a.pinned?'Unpin':'Pin'}"><i class="fas fa-thumbtack"></i></button>
-              <button class="btn btn-ghost btn-icon danger" onclick="deleteAnn('${a.id}','${escHtml(a.title||'')}')" title="Delete"><i class="fas fa-trash"></i></button>
-            </div>
-          </td>
-        </tr>`;
-      }).join('');
-    }
-
-    // ── Open new announcement ──
-    function openNewAnn() {
-      document.getElementById('annModalTitle').textContent = 'New Announcement';
-      document.getElementById('annForm').reset();
-      document.getElementById('annId').value = '';
-      document.getElementById('annPublishDate').value = new Date().toISOString().slice(0,10);
-      Modal.open('annModal');
-    }
-
-    // ── Edit announcement ──
-    function editAnn(id) {
-      const a = allAnn.find(x=>x.id===id);
-      if (!a) return;
-      document.getElementById('annModalTitle').textContent = 'Edit Announcement';
-      document.getElementById('annId').value          = a.id;
-      document.getElementById('annTitleEn').value     = a.title || '';
-      document.getElementById('annTitleAr').value     = a.title_ar || '';
-      document.getElementById('annCategory').value    = a.category || 'General';
-      document.getElementById('annPriority').value    = a.priority || 'normal';
-      document.getElementById('annBodyEn').value      = a.body_en || '';
-      document.getElementById('annBodyAr').value      = a.body_ar || '';
-      document.getElementById('annPublishDate').value = (a.publish_date||'').slice(0,10);
-      document.getElementById('annExpiryDate').value  = (a.expiry_date||'').slice(0,10);
-      document.getElementById('annStatus').value      = a.status || 'published';
-      document.getElementById('annAudience').value    = a.audience || 'all';
-      document.getElementById('annLink').value        = a.link_url || '';
-      document.getElementById('annImage').value       = a.image_url || '';
-      document.getElementById('annTags').value        = a.tags || '';
-      document.getElementById('annPinned').checked    = !!a.pinned;
-      Modal.open('annModal');
-    }
-
-    // ── Save announcement ──
-    async function saveAnn(forcedStatus) {
-      const id = document.getElementById('annId').value;
-      const title = document.getElementById('annTitleEn').value.trim();
-      const body  = document.getElementById('annBodyEn').value.trim();
-      if (!title || !body) { Toast.warning('Title and body content are required.'); return; }
-
-      const payload = {
-        title:        title,
-        title_ar:     document.getElementById('annTitleAr').value.trim(),
-        category:     document.getElementById('annCategory').value,
-        priority:     document.getElementById('annPriority').value,
-        body_en:      body,
-        body_ar:      document.getElementById('annBodyAr').value.trim(),
-        publish_date: document.getElementById('annPublishDate').value,
-        expiry_date:  document.getElementById('annExpiryDate').value,
-        status:       forcedStatus || document.getElementById('annStatus').value,
-        audience:     document.getElementById('annAudience').value,
-        link_url:     document.getElementById('annLink').value.trim(),
-        image_url:    document.getElementById('annImage').value.trim(),
-        tags:         document.getElementById('annTags').value.trim(),
-        pinned:       document.getElementById('annPinned').checked,
-      };
-
-      try {
-        if (id) {
-          await API.put('cms_announcements', id, payload);
-          logActivity('updated', 'announcement', title);
-          Toast.success('Announcement updated.');
-        } else {
-          await API.post('cms_announcements', payload);
-          logActivity('published', 'announcement', title);
-          Toast.success('Announcement ' + (forcedStatus === 'draft' ? 'saved as draft.' : 'published.'));
-        }
-        Modal.close('annModal');
-        loadAnn();
-      } catch(e) { Toast.error('Save failed.'); }
-    }
-
-    // ── Pin/Unpin ──
-    async function togglePin(id) {
-      const a = allAnn.find(x=>x.id===id);
-      if (!a) return;
-      await API.patch('cms_announcements', id, { pinned: !a.pinned });
-      Toast.success(a.pinned ? 'Unpinned.' : 'Pinned to top.');
-      loadAnn();
-    }
-
-    // ── Delete ──
-    async function deleteAnn(id, label) {
-      confirmDelete(label, async () => {
-        await API.delete('cms_announcements', id);
-        logActivity('deleted', 'announcement', label);
-        Toast.success('Announcement deleted.');
-        loadAnn();
-      });
-    }
-
-    // ── Selection ──
-    function toggleAnnSelect(id, checked) {
-      if (checked) selectedAnnIds.add(id); else selectedAnnIds.delete(id);
-      updateAnnBulkBar();
-    }
-    function toggleAnnSelectAll(cb) {
-      filteredAnn.forEach(a => { if(cb.checked) selectedAnnIds.add(a.id); else selectedAnnIds.delete(a.id); });
-      renderAnnTable();
-      updateAnnBulkBar();
-    }
-    function updateAnnBulkBar() {
-      const bar = document.getElementById('annBulkBar');
-      bar.style.display = selectedAnnIds.size > 0 ? 'flex' : 'none';
-      document.getElementById('annSelCount').textContent = `${selectedAnnIds.size} selected`;
-    }
-    async function bulkPublish() {
-      for (const id of selectedAnnIds) await API.patch('cms_announcements', id, { status: 'published' });
-      Toast.success(`${selectedAnnIds.size} announcement(s) published.`);
-      selectedAnnIds.clear();
-      loadAnn();
-    }
-    async function bulkDeleteAnn() {
-      confirmDelete(`${selectedAnnIds.size} announcement(s)`, async () => {
-        for (const id of selectedAnnIds) await API.delete('cms_announcements', id);
-        Toast.success('Selected announcements deleted.');
-        selectedAnnIds.clear();
-        loadAnn();
-      });
-    }
-
-    // ════════════════════════════════════
-    //  EVENTS
-    // ════════════════════════════════════
-
-    async function loadEvt() {
-      try {
-        const res = await API.get('cms_events', { limit: 200 });
-        allEvt = res.data || [];
-        document.getElementById('evtCount').textContent = allEvt.length;
-        filterEvt();
-      } catch(e) {
-        document.getElementById('evtTableBody').innerHTML =
-          '<tr><td colspan="6" class="table-empty">Could not load events.</td></tr>';
-      }
-    }
-
-    function filterEvt() {
-      const q      = (document.getElementById('evtSearch').value || '').toLowerCase();
-      const status = document.getElementById('evtStatusFilter').value;
-      filteredEvt = allEvt.filter(e => {
-        const mq = !q || (e.title||'').toLowerCase().includes(q) || (e.location||'').toLowerCase().includes(q);
-        const ms = !status || e.status === status;
-        return mq && ms;
-      });
-      document.getElementById('evtResultCount').textContent = `${filteredEvt.length} result${filteredEvt.length!==1?'s':''}`;
-      renderEvtTable();
-    }
-
-    function clearEvtFilters() {
-      document.getElementById('evtSearch').value = '';
-      document.getElementById('evtStatusFilter').value = '';
-      filterEvt();
-    }
-
-    function renderEvtTable() {
-      const tbody = document.getElementById('evtTableBody');
-      if (!filteredEvt.length) {
-        tbody.innerHTML = '<tr><td colspan="6" class="table-empty">No events found. <a href="#" onclick="openNewEvt();return false;">Create one</a>.</td></tr>';
-        return;
-      }
-      const sorted = [...filteredEvt].sort((a,b) => (a.event_date||'') > (b.event_date||'') ? 1 : -1);
-      tbody.innerHTML = sorted.map(e => {
-        const isPast = e.event_date && new Date(e.event_date) < new Date();
-        return `<tr class="${isPast&&e.status==='upcoming'?'row-past':''}">
-          <td>
-            <div style="display:flex;align-items:center;gap:8px;">
-              ${e.featured?'<i class="fas fa-star" style="color:var(--gold);font-size:11px;"></i>':''}
-              <span class="table-title-cell">${escHtml(e.title||'—')}</span>
-            </div>
-            ${e.description_en ? `<div style="font-size:11px;color:var(--gray400);margin-top:2px;">${escHtml((e.description_en||'').slice(0,60))}…</div>` : ''}
-          </td>
-          <td>
-            <div class="evt-date-cell">
-              <i class="fas fa-calendar" style="color:var(--navy);font-size:11px;"></i>
-              ${e.event_date ? formatDate(e.event_date) : '—'}
-            </div>
-            ${e.start_time ? `<div style="font-size:11px;color:var(--gray400);">${e.start_time}${e.end_time?'–'+e.end_time:''}</div>` : ''}
-          </td>
-          <td style="font-size:13px;">${escHtml(e.location||'—')}</td>
-          <td>${badgeHtml(e.status||'upcoming')}</td>
-          <td><span class="badge badge-gray">${escHtml(e.audience||'All')}</span></td>
-          <td>
-            <div class="table-actions">
-              <button class="btn btn-ghost btn-icon" onclick="editEvt('${e.id}')" title="Edit"><i class="fas fa-edit"></i></button>
-              <button class="btn btn-ghost btn-icon danger" onclick="deleteEvt('${e.id}','${escHtml(e.title||'')}')" title="Delete"><i class="fas fa-trash"></i></button>
-            </div>
-          </td>
-        </tr>`;
-      }).join('');
-    }
-
-    function openNewEvt() {
-      document.getElementById('evtModalTitle').textContent = 'New Event';
-      document.getElementById('evtForm').reset();
-      document.getElementById('evtId').value = '';
-      document.getElementById('evtDate').value = new Date().toISOString().slice(0,10);
-      Modal.open('evtModal');
-    }
-
-    function editEvt(id) {
-      const e = allEvt.find(x=>x.id===id);
-      if (!e) return;
-      document.getElementById('evtModalTitle').textContent = 'Edit Event';
-      document.getElementById('evtId').value          = e.id;
-      document.getElementById('evtTitleEn').value     = e.title || '';
-      document.getElementById('evtTitleAr').value     = e.title_ar || '';
-      document.getElementById('evtDescEn').value      = e.description_en || '';
-      document.getElementById('evtDescAr').value      = e.description_ar || '';
-      document.getElementById('evtDate').value        = (e.event_date||'').slice(0,10);
-      document.getElementById('evtEndDate').value     = (e.end_date||'').slice(0,10);
-      document.getElementById('evtStartTime').value   = e.start_time || '';
-      document.getElementById('evtEndTime').value     = e.end_time || '';
-      document.getElementById('evtLocation').value    = e.location || '';
-      document.getElementById('evtLocationAr').value  = e.location_ar || '';
-      document.getElementById('evtStatus').value      = e.status || 'upcoming';
-      document.getElementById('evtAudience').value    = e.audience || 'all';
-      document.getElementById('evtCapacity').value    = e.capacity || '';
-      document.getElementById('evtRsvp').value        = e.rsvp_url || '';
-      document.getElementById('evtImage').value       = e.image_url || '';
-      document.getElementById('evtFeatured').checked  = !!e.featured;
-      Modal.open('evtModal');
-    }
-
-    async function saveEvt(forcedStatus) {
-      const id    = document.getElementById('evtId').value;
-      const title = document.getElementById('evtTitleEn').value.trim();
-      const date  = document.getElementById('evtDate').value;
-      if (!title || !date) { Toast.warning('Event title and date are required.'); return; }
-
-      const payload = {
-        title:          title,
-        title_ar:       document.getElementById('evtTitleAr').value.trim(),
-        description_en: document.getElementById('evtDescEn').value.trim(),
-        description_ar: document.getElementById('evtDescAr').value.trim(),
-        event_date:     date,
-        end_date:       document.getElementById('evtEndDate').value,
-        start_time:     document.getElementById('evtStartTime').value,
-        end_time:       document.getElementById('evtEndTime').value,
-        location:       document.getElementById('evtLocation').value.trim(),
-        location_ar:    document.getElementById('evtLocationAr').value.trim(),
-        status:         forcedStatus || document.getElementById('evtStatus').value,
-        audience:       document.getElementById('evtAudience').value,
-        capacity:       parseInt(document.getElementById('evtCapacity').value)||null,
-        rsvp_url:       document.getElementById('evtRsvp').value.trim(),
-        image_url:      document.getElementById('evtImage').value.trim(),
-        featured:       document.getElementById('evtFeatured').checked,
-      };
-
-      try {
-        if (id) {
-          await API.put('cms_events', id, payload);
-          logActivity('updated', 'event', title);
-          Toast.success('Event updated.');
-        } else {
-          await API.post('cms_events', payload);
-          logActivity('created', 'event', title);
-          Toast.success('Event saved.');
-        }
-        Modal.close('evtModal');
-        loadEvt();
-      } catch(e) { Toast.error('Save failed.'); }
-    }
-
-    async function deleteEvt(id, label) {
-      confirmDelete(label, async () => {
-        await API.delete('cms_events', id);
-        logActivity('deleted', 'event', label);
-        Toast.success('Event deleted.');
-        loadEvt();
-      });
-    }
-
-    function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-    // ── Init ──
-    document.addEventListener('DOMContentLoaded', () => {
-      // Set default add button
-      switchTab('announcements');
-
-      const params = new URLSearchParams(window.location.search);
-      const tabParam = params.get('tab');
-      if (tabParam === 'events') {
-        switchTab('events');
-        if (params.get('new') === '1') setTimeout(openNewEvt, 400);
-      } else {
-        if (params.get('new') === '1') setTimeout(openNewAnn, 400);
-        // Check edit param
-        const editId = params.get('edit');
-        if (editId) { loadAnn().then(() => editAnn(editId)); return; }
-      }
-
-      loadAnn();
-      loadEvt();
-    });
-  </script>
-
+  <link rel="stylesheet" href="css/style.css?v=9" />
+  <link rel="stylesheet" href="css/pages.css?v=9" />
+  <link rel="stylesheet" href="css/nav.css?v=9" />
+  <link rel="stylesheet" href="css/mobile.css?v=9" />
+  <link rel="stylesheet" href="css/enhancements.css?v=5" />
+  <link rel="stylesheet" href="css/rtl.css?v=1" />
   <style>
-    /* Tabs bar */
-    .tabs-bar {
-      display: flex;
-      gap: 4px;
-      border-bottom: 2px solid var(--gray200);
-      margin-bottom: 24px;
-    }
-    .tab-btn {
-      background: none;
-      border: none;
-      padding: 10px 20px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--gray500);
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-      margin-bottom: -2px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all .15s;
-      font-family: 'Inter', sans-serif;
-    }
-    .tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
-    .tab-btn:hover:not(.active) { color: var(--gray700); }
-    .tab-count {
-      background: var(--gray100);
-      color: var(--gray500);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 1px 6px;
-      border-radius: 10px;
-    }
-    .tab-btn.active .tab-count { background: rgba(10,25,49,.1); color: var(--navy); }
-
-    /* Toolbar */
-    .ann-toolbar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-    .result-count { font-size: 13px; color: var(--gray400); margin-left: auto; }
-    .search-wrap { position: relative; }
-    .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--gray400); font-size: 12px; pointer-events: none; }
-    .search-input { height: 34px; border: 1.5px solid var(--gray200); border-radius: 8px; padding: 0 10px 0 30px; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--gray700); outline: none; width: 220px; }
-    .search-input:focus { border-color: var(--navy); }
-    .form-select.sm { height: 34px; font-size: 13px; padding: 0 10px; min-width: 140px; border: 1.5px solid var(--gray200); border-radius: 8px; font-family: 'Inter', sans-serif; color: var(--gray700); outline: none; }
-
-    /* Announcement table extras */
-    .ann-title-cell { display: flex; align-items: center; }
-    .ann-tags { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px; }
-    .tag-pill { font-size: 10px; background: var(--gray100); color: var(--gray600); padding: 1px 6px; border-radius: 10px; }
-
-    .priority-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 10px; }
-    .priority-badge.normal  { background: var(--gray100); color: var(--gray500); }
-    .priority-badge.high    { background: #fef3c7; color: #92400e; }
-    .priority-badge.urgent  { background: #fee2e2; color: #991b1b; }
-
-    /* Event table extras */
-    .evt-date-cell { display: flex; align-items: center; gap: 5px; font-size: 13px; }
-    .row-past td { opacity: 0.6; }
-
-    /* Panel footer for bulk actions */
-    .panel-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 20px;
-      border-top: 1px solid var(--gray200);
-      background: var(--gray50);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--gray600);
-    }
-
-    /* Toggle (reused from staff.html) */
-    .toggle-row { display:flex;align-items:center;gap:12px; }
-    .toggle-switch { position:relative;width:44px;height:24px;flex-shrink:0; }
-    .toggle-switch input { opacity:0;width:0;height:0; }
-    .toggle-slider { position:absolute;inset:0;background:var(--gray200);border-radius:24px;cursor:pointer;transition:background .2s; }
-    .toggle-slider::before { content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2); }
-    .toggle-switch input:checked + .toggle-slider { background:var(--navy); }
-    .toggle-switch input:checked + .toggle-slider::before { transform:translateX(20px); }
-    .toggle-label { font-size:13px;color:var(--gray600); }
-
-    /* Misc */
-    .table-empty { text-align:center;padding:32px;color:var(--gray400);font-size:13px; }
-    .table-empty a { color:var(--navy);font-weight:600; }
-    .table-loading { text-align:center;padding:24px;color:var(--gray400);font-size:13px; }
-    .rtl-input { text-align:right; }
-    .badge-gray { background:var(--gray100);color:var(--gray600); }
-    .badge-navy { background:rgba(10,25,49,.1);color:var(--navy); }
-    .row-selected td { background:rgba(10,25,49,.04); }
-
-    @media (max-width:700px) {
-      .ann-toolbar { flex-direction:column;align-items:stretch; }
-      .result-count { margin-left:0; }
+    /* TOPBAR LOGO FIX — desktop only */
+    @media (min-width: 1200px) {
+      .topbar{overflow:visible!important;height:62px!important;display:flex!important;align-items:center!important;}
+      .topbar-inner{height:62px!important;display:flex!important;align-items:center!important;padding:0 60px 0 0!important;}
+      .topbar-logo{width:auto!important;height:68px!important;max-height:68px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:6px 16px 6px 12px!important;background:#fff!important;flex-shrink:0!important;}
+      .topbar-logo-img{width:auto!important;height:56px!important;max-width:220px!important;max-height:56px!important;object-fit:contain!important;object-position:left center!important;display:block!important;}
     }
   </style>
+</head>
+<body data-page-title="page.title.admissions">
+
+  <!-- TOP BAR -->
+  <div class="topbar" id="main-topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="topbar-logo" aria-label="NAIS Dubai – Home" style="width:auto;height:68px;overflow:visible;display:flex;align-items:center;justify-content:flex-start;padding:6px 16px 6px 12px;background:#fff;flex-shrink:0;">
+        <img src="images/nais-logo.png" alt="North American International School Dubai" class="topbar-logo-img" style="width:auto;height:56px;max-width:220px;max-height:56px;object-fit:contain;object-position:left center;display:block;" />
+      </a>
+      <div class="topbar-left">
+        <a href="tel:+97142884844" data-config-href="phone" data-config="phone"><i class="fas fa-phone-alt"></i> +971 4 288 4844</a>
+        <a href="mailto:admissions@naischool.ae" data-config-href="email_adm"><i class="fas fa-envelope"></i> <span data-config="email_adm">admissions@naischool.ae</span></a>
+        <span><i class="fas fa-map-marker-alt"></i> <span data-i18n="topbar.address">Al Mizhar 1, Dubai, UAE</span></span>
+      </div>
+      <div class="topbar-right">
+        <a href="https://nais.schoology.com/login" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.portal">Parent Portal</a>
+        <span class="topbar-divider">|</span>
+        <a href="https://nais.schoology.com/login" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.elearning">E-Learning</a>
+        <span class="topbar-divider">|</span>
+        <a href="mailto:careers@naischool.ae" class="topbar-link" data-i18n="topbar.careers">Careers</a>
+        <span class="topbar-divider">|</span>
+        <div class="lang-switcher-wrap">
+          <button class="lang-switcher active" data-lang="en" aria-pressed="true" title="English">EN</button>
+          <span class="lang-switcher-divider">|</span>
+          <button class="lang-switcher" data-lang="ar" aria-pressed="false" title="العربية">ع</button>
+        </div>
+        <div class="topbar-social">
+          <a href="https://www.facebook.com/naischooldxb/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/northamericandxb/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          
+          
+          <a href="https://www.youtube.com/@northamericaninternational6627" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT-SIDE NAV RAIL -->
+  <div class="nav-rail" id="nav-rail" role="button" aria-label="Open Navigation Menu" aria-expanded="false">
+    <div class="nav-rail-inner" id="nav-rail-trigger">
+      <a href="index.html" class="logo-wrap" aria-label="NAIS Home">
+        <img src="images/nais-logo.png" alt="NAIS" style="height:42px;max-height:42px;max-width:190px;width:auto;object-fit:contain;background:#fff;padding:5px 10px;border-radius:5px;" />
+      </a>
+      <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
+        <div class="nav-rail-lines"><span></span><span></span><span></span></div>
+        <span class="nav-rail-label" data-i18n="nav.menu">MENU</span>
+      </button>
+    </div>
+    <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
+    <span id="nav-desktop-label" data-i18n="nav.menu">MENU</span>
+  </div>
+
+  <!-- FULL-SCREEN NAV OVERLAY -->
+  <div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Main Navigation" aria-hidden="true" style="background-color:#0b1230;">
+
+    <!-- LEFT VISUAL PANEL -->
+    <div class="nav-left-panel" aria-hidden="true" style="background-color:#0a1128;position:relative;flex-shrink:0;">
+      <div class="nav-left-bg" style="position:absolute;inset:0;background:linear-gradient(155deg,#0f1d45 0%,#1e3175 40%,#0a1128 100%);z-index:0;"></div>
+      <div class="nav-left-content">
+        <a href="index.html" class="nav-left-logo">
+          <img src="images/nais-logo.png" alt="North American International School" style="height:72px;max-width:300px;width:auto;object-fit:contain;display:block;" />
+        </a>
+        <div class="nav-left-tagline">
+          <div class="nav-left-tagline-top" data-i18n="nav.tagline.est">Est. 2005 · Dubai, UAE</div>
+          <div class="nav-left-tagline-title" data-i18n-html="nav.tagline.title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
+          <p class="nav-left-tagline-sub" data-i18n="nav.tagline.sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
+        </div>
+        <div class="nav-left-spacer"></div>
+        <div class="nav-promo-card">
+          <div class="nav-promo-card-label" data-i18n="nav.promo.label">Open Enrollment</div>
+          <div class="nav-promo-card-title" data-i18n="nav.promo.title">Apply for 2026–2027</div>
+          <p class="nav-promo-card-desc" data-i18n="nav.promo.desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
+          <a href="admissions.html" class="nav-promo-card-link" data-i18n="nav.promo.link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT NAV PANEL -->
+    <div class="nav-right-panel" style="background-color:#0d1535;">
+      <div class="nav-close" id="nav-close" aria-label="Close Navigation">
+        <button class="nav-close-inner" data-i18n-aria="nav.close" aria-label="Close Menu">&#x2715;</button>
+      </div>
+      <div class="nav-panel">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-primary-list">
+          <li class="nav-primary-item" data-item="about">
+            <a href="about.html" class="nav-primary-link" data-i18n="nav.about">About</a>
+            <ul class="nav-subnav">
+              <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link" data-i18n="nav.sub.mission">Mission &amp; Vision</a></li>
+              <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.leadership">School Leadership</a></li>
+              <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link" data-i18n="nav.sub.values">Core Values — CARE</a></li>
+              <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link" data-i18n="nav.sub.campus">Our Campus</a></li>
+              <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link" data-i18n="nav.sub.accreditation">Accreditation</a></li>
+            </ul>
+          </li>
+          <li class="nav-primary-item" data-item="academics">
+            <a href="academics.html" class="nav-primary-link" data-i18n="nav.academics">Academics</a>
+            <ul class="nav-subnav">
+              <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link" data-i18n="nav.sub.kg">Kindergarten</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link" data-i18n="nav.sub.elementary">Elementary School</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link" data-i18n="nav.sub.high">High School</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link" data-i18n="nav.sub.ap">AP Courses</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=curriculum" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.curriculum">American Curriculum ★</a></li>
+              <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;" data-i18n="nav.sub.results">Academic Results ★</a></li>
+              <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.pbl">Project-Based Learning ★</a></li>
+            </ul>
+          </li>
+          <li class="nav-primary-item" data-item="student-life">
+            <a href="index.html#student-life" class="nav-primary-link" data-i18n="nav.student-life">Student Life</a>
+            <ul class="nav-subnav">
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.arts">Arts &amp; Culture</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.athletics">Athletics &amp; Sports</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.clubs">Clubs &amp; Activities</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.service">Community Service</a></li>
+              <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.council">Student Council</a></li>
+            </ul>
+          </li>
+          <li class="nav-primary-item" data-item="admissions">
+            <a href="admissions.html" class="nav-primary-link" data-i18n="nav.admissions">Admissions</a>
+            <ul class="nav-subnav">
+              <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link" data-i18n="nav.sub.how-apply">How to Apply</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link" data-i18n="nav.sub.fees">Tuition &amp; Fees</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link" data-i18n="nav.sub.documents">Required Documents</a></li>
+              <li class="nav-subnav-item"><a href="admissions.html#faq" class="nav-subnav-link" data-i18n="nav.sub.faq">Admissions FAQ</a></li>
+              <li class="nav-subnav-item"><a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" class="nav-subnav-link" data-i18n="nav.apply-now">Apply Now</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-primary-item" data-item="news">
+            <a href="index.html#news" class="nav-primary-link" data-i18n="nav.sub.news">News &amp; Events</a>
+            <ul class="nav-subnav">
+              <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link" data-i18n="ann.latest">Latest News</a></li>
+              <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link" data-i18n="cal.h2">Events Calendar</a></li>
+              <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link" data-i18n="nav.sub.news">Announcements</a></li>
+              <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.contact">Contact Us</a></li>
+              <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.visit">Visit Campus</a></li>
+            </ul>
+          </li>
+
+
+        </ul>
+        </nav>
+        <div class="nav-panel-bottom">
+          <div class="nav-bottom-careers">
+            <span class="nav-careers-label" data-i18n="nav.careers">Career Opportunities</span>
+            <div class="nav-bottom-social">
+              <a href="https://www.facebook.com/naischooldxb/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              
+              <a href="https://www.instagram.com/northamericandxb/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              
+              <a href="https://www.youtube.com/@northamericaninternational6627" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="nav-bottom-search">
+            <span class="nav-search-label" data-i18n="nav.search">Search</span>
+            <div class="nav-search-form">
+              <input type="text" class="nav-search-input" data-i18n-placeholder="nav.search-placeholder" placeholder="Keyword" aria-label="Search" />
+              <button class="nav-search-btn" aria-label="Submit Search"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" target="_blank" rel="noopener" class="nav-apply-btn" data-i18n="nav.apply-now">Apply Now</a>
+        </div>
+      </div><!-- /.nav-panel -->
+    </div><!-- /.nav-right-panel -->
+  </div><!-- /.nav-overlay -->
+
+  <!-- QUICK LINKS BAR -->
+  <nav class="quick-links-bar" aria-label="Quick Access Links">
+    <div class="quick-links-inner">
+      <a href="#apply" class="quick-link-item highlight"><i class="fas fa-user-plus"></i> <span data-i18n="nav.apply-now">Apply Now</span></a>
+      <a href="#fees" class="quick-link-item"><i class="fas fa-dollar-sign"></i> <span data-i18n="nav.sub.fees">Tuition Fees</span></a>
+      <a href="#transport" class="quick-link-item"><i class="fas fa-bus"></i> <span>Bus Transport</span></a>
+      <a href="#process" class="quick-link-item"><i class="fas fa-route"></i> <span data-i18n="nav.sub.how-apply">Admissions Process</span></a>
+      <a href="#documents" class="quick-link-item"><i class="fas fa-folder-open"></i> <span data-i18n="nav.sub.documents">Required Docs</span></a>
+      <a href="#faq" class="quick-link-item"><i class="fas fa-question-circle"></i> <span data-i18n="nav.sub.faq">FAQ</span></a>
+      <a href="index.html#contact" class="quick-link-item"><i class="fas fa-phone-alt"></i> <span data-i18n="nav.sub.contact">Contact Us</span></a>
+      <a href="https://wa.me/971563522454" target="_blank" rel="noopener" class="quick-link-item" style="color:#4CD964;"><i class="fab fa-whatsapp"></i> <span data-i18n="btn.whatsapp">WhatsApp</span></a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('images/school-19.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <nav class="breadcrumb"><a href="index.html" data-i18n="legal.home">Home</a><span>/</span><span data-i18n="nav.admissions">Admissions</span></nav>
+      <h1 class="page-hero-title" data-i18n-html="adm.hero.title">Join the NAIS<br/><em>Family</em></h1>
+      <p class="page-hero-subtitle" data-i18n="adm.hero.sub">Enrollment is open for the 2026–2027 academic year. We'd love to welcome your child into our exceptional learning community.</p>
+    </div>
+    <div class="page-hero-accent">2026</div>
+  </section>
+
+  <!-- ADMISSIONS INTRO -->
+  <section class="admissions-intro section-pad" id="intro">
+    <div class="container">
+      <div class="adm-intro-grid">
+        <div class="adm-intro-text">
+          <div class="section-label" data-i18n="adm.intro.label">Welcome</div>
+          <h2 class="section-title" data-i18n-html="adm.intro.h2">Begin Your Child's<br/><em>NAIS Journey</em></h2>
+          <div class="title-ornament"></div>
+          <p data-i18n="adm.intro.p1">We believe the admissions process should be as welcoming as our school. Our Admissions team is dedicated to guiding families through every step — from your first inquiry to your child's first day at NAIS.</p>
+          <p data-i18n="adm.intro.p2">Whether you are relocating to Dubai, looking for a school change, or starting your educational search in the UAE, NAIS offers a smooth, transparent admissions experience and a warm welcome to every prospective family.</p>
+
+          <div class="adm-contact-list">
+            <a href="tel:+97142884844" class="adm-contact-item" data-config-href="phone">
+              <div class="adm-contact-icon"><i class="fas fa-phone-alt"></i></div>
+              <div><span class="adm-contact-label" data-i18n="adm.contact.call">Call Admissions</span><strong data-config="phone">+971 4 288 4844</strong></div>
+            </a>
+            <a href="mailto:admissions@naischool.ae" class="adm-contact-item" data-config-href="email_adm">
+              <div class="adm-contact-icon"><i class="fas fa-envelope"></i></div>
+              <div><span class="adm-contact-label" data-i18n="adm.contact.email">Email Us</span><strong data-config="email_adm">admissions@naischool.ae</strong></div>
+            </a>
+            <div class="adm-contact-item">
+              <div class="adm-contact-icon"><i class="fas fa-clock"></i></div>
+              <div><span class="adm-contact-label" data-i18n="contact.hours.label">Office Hours</span><strong data-i18n="contact.hours.span" data-config="hours">Sun – Thu: 8:00 AM – 3:30 PM</strong></div>
+            </div>
+            <div class="adm-contact-item">
+              <div class="adm-contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div><span class="adm-contact-label" data-i18n="contact.address.label">Location</span><strong data-i18n="footer.addr" data-config="address_en">Al Mizhar 1, Mirdif, Dubai</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="adm-intro-visual">
+          <div class="adm-hero-img-wrap">
+            <img src="images/school-19.jpg" alt="NAIS campus welcome" />
+            <div class="adm-img-badge">
+              <span class="adm-badge-num">900<sup>+</sup></span>
+              <span class="adm-badge-text" data-i18n="adm.badge.text">Happy Students<br/>Enrolled</span>
+            </div>
+          </div>
+          <div class="adm-quick-stats">
+            <div class="adm-qstat">
+              <i class="fas fa-flag-checkered"></i>
+              <strong>45+</strong>
+              <span data-i18n="stats.nations">Nationalities</span>
+            </div>
+            <div class="adm-qstat">
+              <i class="fas fa-graduation-cap"></i>
+              <strong>100%</strong>
+              <span data-i18n="stats.uni">Uni Placement</span>
+            </div>
+            <div class="adm-qstat">
+              <i class="fas fa-users"></i>
+              <strong>18</strong>
+              <span data-i18n="adm.avg.class">Avg Class Size</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMISSIONS PROCESS -->
+  <section class="admissions-process-section section-pad bg-light" id="process">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label" data-i18n="adm.process.label">Simple &amp; Transparent</div>
+        <h2 class="section-title" data-i18n-html="adm.process.h2">The Admissions<br/><em>Process</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro" data-i18n="adm.process.intro">We've made the admissions process simple and straightforward. Here's what to expect when you apply to NAIS Dubai.</p>
+      </div>
+
+      <!-- Row 1: Steps 01–04 -->
+      <div class="adm-process-steps">
+        <div class="adm-step">
+          <div class="adm-step-num">01</div>
+          <div class="adm-step-icon"><i class="fas fa-search"></i></div>
+          <h4 data-i18n="adm.step.01.title">Inquire &amp; Explore</h4>
+          <p data-i18n="adm.step.01.p">Submit an inquiry form or call our Admissions team. We'll answer your questions and send our prospectus and fee schedule.</p>
+        </div>
+        <div class="adm-step-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="adm-step">
+          <div class="adm-step-num">02</div>
+          <div class="adm-step-icon"><i class="fas fa-building"></i></div>
+          <h4 data-i18n="adm.step.02.title">Campus Tour</h4>
+          <p data-i18n="adm.step.02.p">Visit our beautiful Al Mizhar campus. Meet our team, see our facilities, and experience the NAIS community firsthand.</p>
+        </div>
+        <div class="adm-step-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="adm-step">
+          <div class="adm-step-num">03</div>
+          <div class="adm-step-icon"><i class="fas fa-file-alt"></i></div>
+          <h4 data-i18n="adm.step.03.title">Submit Application</h4>
+          <p data-i18n="adm.step.03.p">Complete our online application form and submit required documents — school reports, passport copies, and more.</p>
+        </div>
+        <div class="adm-step-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="adm-step">
+          <div class="adm-step-num">04</div>
+          <div class="adm-step-icon"><i class="fas fa-clipboard-check"></i></div>
+          <h4 data-i18n="adm.step.04.title">Assessment Day</h4>
+          <p data-i18n="adm.step.04.p">Students joining Grade 2 and above attend a friendly assessment to ensure the best academic placement for your child.</p>
+        </div>
+      </div>
+
+      <!-- Row 2: Steps 05–06 centred -->
+      <div class="adm-process-steps adm-process-steps--row2">
+        <div class="adm-step">
+          <div class="adm-step-num">05</div>
+          <div class="adm-step-icon"><i class="fas fa-handshake"></i></div>
+          <h4 data-i18n="adm.step.05.title">Receive Offer</h4>
+          <p data-i18n="adm.step.05.p">We'll review and send an official admission offer, typically within 3–5 working days of the assessment.</p>
+        </div>
+        <div class="adm-step-arrow"><i class="fas fa-chevron-right"></i></div>
+        <div class="adm-step">
+          <div class="adm-step-num">06</div>
+          <div class="adm-step-icon adm-step-icon--gold"><i class="fas fa-star"></i></div>
+          <h4 data-i18n="adm.step.06.title">Welcome to NAIS!</h4>
+          <p data-i18n="adm.step.06.p">Accept your offer, complete enrollment formalities, and prepare for your child's exciting first day at NAIS!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY NAIS BANNER -->
+  <section class="adm-why-section">
+    <div class="container">
+      <div class="adm-why-grid">
+        <div class="adm-why-text">
+          <div class="section-label light" data-i18n="why.title">Why Choose NAIS?</div>
+          <h2 class="section-title light" data-i18n-html="adm.why.h2">A School That <em>Truly Cares</em></h2>
+          <div class="title-ornament light-ornament"></div>
+          <p style="color:rgba(255,255,255,0.78);line-height:1.8;margin-bottom:28px;" data-i18n="adm.why.p">At NAIS, every child is known by name. Our small class sizes, dedicated faculty, and vibrant multicultural community create an environment where students thrive academically and personally.</p>
+          <div class="adm-why-points">
+            <div class="adm-why-point"><i class="fas fa-check"></i><span data-i18n="adm.why.pt1">American curriculum — globally recognized</span></div>
+            <div class="adm-why-point"><i class="fas fa-check"></i><span data-i18n="adm.why.pt2">KHDA-licensed &amp; fully accredited</span></div>
+            <div class="adm-why-point"><i class="fas fa-check"></i><span data-i18n="adm.why.pt3">15+ Advanced Placement (AP) subjects</span></div>
+            <div class="adm-why-point"><i class="fas fa-check"></i><span data-i18n="adm.why.pt4">State-of-the-art facilities &amp; STEM labs</span></div>
+            <div class="adm-why-point"><i class="fas fa-check"></i><span data-i18n="adm.why.pt5">Dedicated Inclusion &amp; IEP support</span></div>
+            <div class="adm-why-point"><i class="fas fa-check"></i><span data-i18n="adm.why.pt6">Rich sports, arts &amp; extracurricular life</span></div>
+          </div>
+          <a href="#apply" class="btn btn-red" style="margin-top:32px;display:inline-flex;align-items:center;gap:10px;" data-i18n="nav.apply-now">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="adm-why-images">
+          <img class="adm-why-img adm-why-img--main" src="images/school-22.jpg" alt="NAIS students learning" />
+          <img class="adm-why-img adm-why-img--small" src="images/school-23.jpg" alt="NAIS campus" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEES SECTION -->
+  <section class="fees-section section-pad" id="fees">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label" data-i18n="fees.label">Transparent Pricing</div>
+        <h2 class="section-title" data-i18n-html="fees.h2">Tuition &amp; <em>Fees</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro" data-i18n="fees.intro">NAIS offers exceptional value for a premium American education. All fees are KHDA-regulated and published transparently below in UAE Dirhams (AED).</p>
+      </div>
+
+      <div class="fees-table-wrap">
+        <table class="fees-table">
+          <thead>
+            <tr>
+              <th data-i18n="fees.th.grade">Grade Level</th>
+              <th data-i18n="fees.th.program">Program</th>
+              <th data-i18n="fees.th.annual">Annual Tuition (AED)</th>
+              <th data-i18n="fees.th.term">Per Term (AED)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Kindergarten 1 (KG1)</strong></td><td><span class="fee-badge fee-badge--early">Early Years</span></td><td>28,500</td><td>9,500</td></tr>
+            <tr><td><strong>Kindergarten 2 (KG2)</strong></td><td><span class="fee-badge fee-badge--early">Early Years</span></td><td>29,800</td><td>9,933</td></tr>
+            <tr><td><strong>Grade 1 – Grade 2</strong></td><td><span class="fee-badge fee-badge--elem">Elementary</span></td><td>31,500</td><td>10,500</td></tr>
+            <tr><td><strong>Grade 3 – Grade 5</strong></td><td><span class="fee-badge fee-badge--elem">Elementary</span></td><td>33,200</td><td>11,067</td></tr>
+            <tr><td><strong>Grade 6 – Grade 8</strong></td><td><span class="fee-badge fee-badge--mid">Middle School</span></td><td>36,800</td><td>12,267</td></tr>
+            <tr><td><strong>Grade 9 – Grade 10</strong></td><td><span class="fee-badge fee-badge--high">High School</span></td><td>39,500</td><td>13,167</td></tr>
+            <tr class="fees-table-highlight"><td><strong>Grade 11 – Grade 12</strong></td><td><span class="fee-badge fee-badge--ap">High School (AP)</span></td><td>42,000</td><td>14,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="fees-extras-grid">
+        <div class="fees-extra-card">
+          <i class="fas fa-percent"></i>
+          <div><strong data-i18n="fees.sibling.title">Sibling Discount</strong><p data-i18n="fees.sibling.p">10% discount on tuition fees for each additional sibling enrolled at NAIS.</p></div>
+        </div>
+        <div class="fees-extra-card">
+          <i class="fas fa-calendar-check"></i>
+          <div><strong data-i18n="fees.payment.title">Payment Plans</strong><p data-i18n="fees.payment.p">Flexible payment options — annual, semester, or term-by-term installments available.</p></div>
+        </div>
+        <div class="fees-extra-card">
+          <i class="fas fa-shield"></i>
+          <div><strong data-i18n="fees.khda.title">KHDA Regulated</strong><p data-i18n="fees.khda.p">All fees are fully regulated and approved by the Knowledge &amp; Human Development Authority.</p></div>
+        </div>
+      </div>
+
+      <div class="fees-note">
+        <i class="fas fa-info-circle"></i>
+        <div>
+          <strong data-i18n="fees.note.strong">Please Note:</strong>
+          <p data-i18n="fees.note.p">Fees listed are annual tuition fees subject to KHDA annual increase approvals. Additional fees may apply for registration (AED 1,500), books, uniforms, and activities. Contact Admissions for a complete fee breakdown.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TRANSPORT & BUS ROUTES ══ -->
+  <section class="section-pad" id="transport" style="background:#f8f9fc;">
+    <div class="container">
+
+      <!-- Section Header -->
+      <div class="section-header centered">
+        <div class="section-label" style="color:var(--red);">School Transport</div>
+        <h2 class="section-title">Transport &amp; <em>Bus Routes</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro">Our safe, air-conditioned school buses cover a wide range of neighbourhoods across Dubai, Sharjah and Ajman. Routes are reviewed annually to match the locations of our students.</p>
+      </div>
+
+      <!-- Stats Cards -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px;">
+        <div style="background:linear-gradient(135deg,#1a7a4a 0%,#0f5c35 100%);border-radius:16px;padding:28px 20px;text-align:center;color:#fff;">
+          <div style="font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;line-height:1;">56</div>
+          <div style="font-family:Montserrat,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-top:8px;opacity:0.9;">Bus Routes</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#0f1d45 0%,#1a2f6a 100%);border-radius:16px;padding:28px 20px;text-align:center;color:#fff;">
+          <div style="font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:700;line-height:1;">16</div>
+          <div style="font-family:Montserrat,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-top:8px;opacity:0.9;">Service Areas</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#1a7a4a 0%,#0f5c35 100%);border-radius:16px;padding:28px 20px;text-align:center;color:#fff;">
+          <div style="font-family:Montserrat,sans-serif;font-size:1.8rem;font-weight:800;line-height:1;letter-spacing:0.04em;">GPS</div>
+          <div style="font-family:Montserrat,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-top:8px;opacity:0.9;">Tracked Buses</div>
+        </div>
+        <div style="background:linear-gradient(135deg,#0f1d45 0%,#1a2f6a 100%);border-radius:16px;padding:28px 20px;text-align:center;color:#fff;">
+          <div style="font-family:Montserrat,sans-serif;font-size:1.8rem;font-weight:800;line-height:1;letter-spacing:0.04em;">RTA</div>
+          <div style="font-family:Montserrat,sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-top:8px;opacity:0.9;">Certified Fleet</div>
+        </div>
+      </div>
+
+      <!-- Coverage Bullet Points -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;margin-bottom:40px;">
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <i class="fas fa-check-circle" style="color:#1a7a4a;margin-top:3px;flex-shrink:0;font-size:1rem;"></i>
+          <span style="font-size:0.95rem;color:#2d3748;line-height:1.6;"><strong>Dubai areas:</strong> Al Mizhar, Mirdif, Rashidiya, Deira, Bur Dubai, Karama, Al Qusais, Muhaisnah, International City, Silicon Oasis, Al Barsha &amp; more</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <i class="fas fa-check-circle" style="color:#1a7a4a;margin-top:3px;flex-shrink:0;font-size:1rem;"></i>
+          <span style="font-size:0.95rem;color:#2d3748;line-height:1.6;"><strong>Sharjah &amp; Ajman</strong> routes available for select areas</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <i class="fas fa-check-circle" style="color:#1a7a4a;margin-top:3px;flex-shrink:0;font-size:1rem;"></i>
+          <span style="font-size:0.95rem;color:#2d3748;line-height:1.6;">GPS-tracked buses · RTA-certified · trained supervisors on every route</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;">
+          <i class="fas fa-check-circle" style="color:#1a7a4a;margin-top:3px;flex-shrink:0;font-size:1rem;"></i>
+          <span style="font-size:0.95rem;color:#2d3748;line-height:1.6;">Fees payable in <strong>3 term instalments</strong> · Cash, Cheque or Skiply app</span>
+        </div>
+      </div>
+
+      <!-- Fee Structure Table -->
+      <div style="background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 40px rgba(15,29,82,0.10);margin-bottom:40px;">
+        <!-- Table Header Bar -->
+        <div style="background:linear-gradient(135deg,#0f1d45 0%,#1a2f6a 100%);padding:16px 28px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <i class="fas fa-bus" style="color:var(--red,#E11B22);font-size:1rem;"></i>
+            <span style="font-family:Montserrat,sans-serif;font-size:0.75rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#fff;">Bus Fee Structure — AY 2025–26 (RBT)</span>
+          </div>
+          <span style="background:rgba(255,255,255,0.12);color:#fff;font-family:Montserrat,sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:5px 14px;border-radius:50px;">16 Areas · 56 Routes</span>
+        </div>
+        <!-- Table -->
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-family:Inter,sans-serif;">
+            <thead>
+              <tr style="background:#f0f4ff;">
+                <th style="text-align:left;padding:14px 28px;font-family:Montserrat,sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#0f1d45;border-bottom:2px solid #e2e8f0;">Area / Zone</th>
+                <th style="text-align:right;padding:14px 20px;font-family:Montserrat,sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#0f1d45;border-bottom:2px solid #e2e8f0;">Term 1</th>
+                <th style="text-align:right;padding:14px 20px;font-family:Montserrat,sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#0f1d45;border-bottom:2px solid #e2e8f0;">Term 2</th>
+                <th style="text-align:right;padding:14px 20px;font-family:Montserrat,sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#0f1d45;border-bottom:2px solid #e2e8f0;">Term 3</th>
+                <th style="text-align:right;padding:14px 28px;font-family:Montserrat,sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#E11B22;border-bottom:2px solid #e2e8f0;">Total (AED)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #f0f0f0;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Mirdif / Mizhar / Muhaisna-1</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,200</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">900</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">900</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">3,000</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;background:#fafbff;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Rashidiya / Al Warqa / Oud Muteena</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,320</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">990</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">990</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">3,300</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Al Qusais / Al Twar</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,520</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,140</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,140</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">3,800</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;background:#fafbff;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Muhaisnah-4 / Alwasl Village</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,560</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,170</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,170</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">3,900</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Al Nahda (Dubai)</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,680</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,260</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,260</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">4,200</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;background:#fafbff;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">International City / Ras Al Khor / Garhoud</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,680</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,260</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,260</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">4,200</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Silicon Oasis / Academic City / Liwan</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,800</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,350</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,350</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">4,500</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;background:#fafbff;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Deira / Al Mamzar</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,880</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,410</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,410</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">4,700</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Bur Dubai / Karama / Jaddaf</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,880</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,410</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,410</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">4,700</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;background:#fafbff;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Al Satwa</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,920</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,440</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,440</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">4,800</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Al Sharjah</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">2,000</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,500</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,500</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">5,000</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;background:#fafbff;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Al Quoz</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">2,160</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,620</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,620</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">5,400</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Al Barsha 1</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">2,320</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,740</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,740</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">5,800</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;background:#fafbff;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Ajman</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">2,320</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,740</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,740</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">5,800</td>
+              </tr>
+              <tr style="border-bottom:1px solid #f0f0f0;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;">Majan / Al Barari</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">2,600</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,950</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">1,950</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#0f1d45;">6,500</td>
+              </tr>
+              <tr style="background:#fff8f8;">
+                <td style="padding:13px 28px;font-size:0.9rem;color:#2d3748;font-weight:600;">JVC / Dubai Sports City</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">2,800</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">2,100</td>
+                <td style="padding:13px 20px;text-align:right;font-size:0.9rem;color:#4a5568;">2,100</td>
+                <td style="padding:13px 28px;text-align:right;font-size:0.92rem;font-weight:700;color:#E11B22;">7,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Important Notes Card -->
+      <div style="background:#fff;border-radius:18px;border:1.5px solid #e8edf5;box-shadow:0 4px 24px rgba(15,29,82,0.08);padding:32px 36px;margin-bottom:0;">
+
+        <!-- Title -->
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;padding-bottom:18px;border-bottom:1.5px solid #f0f4ff;">
+          <span style="font-size:1.4rem;">🚌</span>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.25rem;color:#0f1d45;margin:0;">Important Notes — Bus Transport</h3>
+        </div>
+
+        <!-- Bullet Notes -->
+        <ul style="list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:12px;">
+          <li style="display:flex;align-items:flex-start;gap:12px;">
+            <i class="fas fa-diamond" style="color:#1a7a4a;font-size:0.55rem;margin-top:6px;flex-shrink:0;"></i>
+            <span style="font-size:0.93rem;color:#374151;line-height:1.65;">You will have to fill in the <strong>bus registration form</strong> and get the confirmation from the <strong>RBT office</strong>.</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:12px;">
+            <i class="fas fa-diamond" style="color:#1a7a4a;font-size:0.55rem;margin-top:6px;flex-shrink:0;"></i>
+            <span style="font-size:0.93rem;color:#374151;line-height:1.65;">If the student <strong>did not use the bus service in 2025–26 AY</strong>, a one-time joining fee of <strong>AED 50</strong> will be applicable.</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:12px;">
+            <i class="fas fa-diamond" style="color:#1a7a4a;font-size:0.55rem;margin-top:6px;flex-shrink:0;"></i>
+            <span style="font-size:0.93rem;color:#374151;line-height:1.65;">(FS2 to Year 13) Transport fee is calculated for <strong>ten months</strong> in an academic year, payable in <strong>3 instalments (term-wise)</strong>:</span>
+          </li>
+        </ul>
+
+        <!-- Instalment Boxes -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;">
+          <div style="background:linear-gradient(135deg,#0f1d45 0%,#1a2f6a 100%);border-radius:14px;padding:22px 18px;text-align:center;color:#fff;">
+            <div style="font-family:Montserrat,sans-serif;font-size:0.60rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;opacity:0.75;margin-bottom:10px;">1st Instalment</div>
+            <div style="font-size:0.85rem;opacity:0.85;margin-bottom:6px;">On or before</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:#60a5fa;">30 August 2026</div>
+          </div>
+          <div style="background:linear-gradient(135deg,#1a7a4a 0%,#0f5c35 100%);border-radius:14px;padding:22px 18px;text-align:center;color:#fff;">
+            <div style="font-family:Montserrat,sans-serif;font-size:0.60rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;opacity:0.75;margin-bottom:10px;">2nd Instalment</div>
+            <div style="font-size:0.85rem;opacity:0.85;margin-bottom:6px;">On or before</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:#86efac;">1 January 2027</div>
+          </div>
+          <div style="background:linear-gradient(135deg,#0f1d45 0%,#1a2f6a 100%);border-radius:14px;padding:22px 18px;text-align:center;color:#fff;">
+            <div style="font-family:Montserrat,sans-serif;font-size:0.60rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;opacity:0.75;margin-bottom:10px;">3rd Instalment</div>
+            <div style="font-size:0.85rem;opacity:0.85;margin-bottom:6px;">On or before</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:#60a5fa;">1 April 2027</div>
+          </div>
+        </div>
+
+        <!-- Warning Notes -->
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:28px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;background:#fffbeb;border-radius:10px;padding:12px 16px;">
+            <i class="fas fa-exclamation-triangle" style="color:#d97706;margin-top:2px;flex-shrink:0;"></i>
+            <span style="font-size:0.88rem;color:#374151;line-height:1.6;">There will be <strong>no refund</strong> for the unused portion of the term.</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;background:#fffbeb;border-radius:10px;padding:12px 16px;">
+            <i class="fas fa-exclamation-triangle" style="color:#d97706;margin-top:2px;flex-shrink:0;"></i>
+            <span style="font-size:0.88rem;color:#374151;line-height:1.6;">Buses have <strong>specific routes</strong> and may cover only some portions of the listed areas. You are advised to <strong>confirm the availability</strong> of the transport service with the Regal Bus Transport department before admission.</span>
+          </div>
+        </div>
+
+        <!-- Payment Methods -->
+        <div style="margin-bottom:28px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+            <i class="fas fa-credit-card" style="color:var(--red,#E11B22);"></i>
+            <span style="font-family:Montserrat,sans-serif;font-size:0.68rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#0f1d45;">Payment Methods</span>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;">
+            <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1.5px solid #86efac;color:#166534;font-family:Montserrat,sans-serif;font-size:0.75rem;font-weight:700;padding:7px 16px;border-radius:50px;">
+              <i class="fas fa-money-bill-wave" style="font-size:0.7rem;"></i> Cash
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1.5px solid #86efac;color:#166534;font-family:Montserrat,sans-serif;font-size:0.75rem;font-weight:700;padding:7px 16px;border-radius:50px;">
+              <i class="fas fa-file-invoice" style="font-size:0.7rem;"></i> Current-Dated Cheque (payable to Regal Bus Transport LLC)
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:6px;background:#f0fdf4;border:1.5px solid #86efac;color:#166534;font-family:Montserrat,sans-serif;font-size:0.75rem;font-weight:700;padding:7px 16px;border-radius:50px;">
+              <i class="fas fa-mobile-alt" style="font-size:0.7rem;"></i> Skiply Mobile App
+            </span>
+          </div>
+        </div>
+
+        <!-- Contact Panels -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="background:#f8faff;border:1.5px solid #e2e8f0;border-radius:12px;padding:18px 22px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+              <i class="fas fa-credit-card" style="color:var(--red,#E11B22);font-size:0.8rem;"></i>
+              <span style="font-family:Montserrat,sans-serif;font-size:0.60rem;font-weight:800;letter-spacing:0.13em;text-transform:uppercase;color:#0f1d45;">Bus Transport Fees &amp; Payments</span>
+            </div>
+            <a href="mailto:rbtaccounts@arabunityschool.ae" style="display:block;font-size:0.85rem;color:#1a7a4a;text-decoration:none;margin-bottom:4px;">rbtaccounts@arabunityschool.ae</a>
+            <a href="mailto:creditcontrol@arabunityschool.ae" style="display:block;font-size:0.85rem;color:#1a7a4a;text-decoration:none;">creditcontrol@arabunityschool.ae</a>
+          </div>
+          <div style="background:#f8faff;border:1.5px solid #e2e8f0;border-radius:12px;padding:18px 22px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+              <i class="fas fa-bus" style="color:var(--red,#E11B22);font-size:0.8rem;"></i>
+              <span style="font-family:Montserrat,sans-serif;font-size:0.60rem;font-weight:800;letter-spacing:0.13em;text-transform:uppercase;color:#0f1d45;">Bus Transport Service</span>
+            </div>
+            <a href="mailto:atef@regalbustransport.ae" style="display:block;font-size:0.85rem;color:#1a7a4a;text-decoration:none;margin-bottom:4px;">atef@regalbustransport.ae</a>
+            <a href="tel:042809343" style="display:flex;align-items:center;gap:6px;font-size:0.85rem;color:#1a7a4a;text-decoration:none;">
+              <i class="fas fa-phone-alt" style="font-size:0.75rem;"></i> 04-280 9343
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /important notes card -->
+
+    </div>
+  </section>
+  <!-- ══ END TRANSPORT ══ -->
+
+  <!-- REQUIRED DOCUMENTS -->
+  <section class="section-pad bg-light" id="documents">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label" data-i18n="docs.label">Application Requirements</div>
+        <h2 class="section-title" data-i18n-html="docs.h2">Required<br/><em>Documents</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro" data-i18n="docs.intro">Please prepare the following documents before submitting your application to ensure a smooth enrollment process.</p>
+      </div>
+
+      <div class="docs-grid">
+        <div class="docs-card docs-card--navy">
+          <div class="docs-card-icon"><i class="fas fa-id-card"></i></div>
+          <h4 data-i18n="docs.student.title">Student Documents</h4>
+          <ul class="docs-list">
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.student.1">Passport copy (student)</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.student.2">UAE Residence Visa (if applicable)</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.student.3">Original birth certificate</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.student.4">Emirates ID (if available)</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.student.5">Updated immunization records</span></li>
+          </ul>
+        </div>
+
+        <div class="docs-card docs-card--navy">
+          <div class="docs-card-icon"><i class="fas fa-file-alt"></i></div>
+          <h4 data-i18n="docs.academic.title">Academic Records</h4>
+          <ul class="docs-list">
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.academic.1">Last 2 years' school reports</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.academic.2">Current school transcripts</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.academic.3">Teacher recommendation letter</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.academic.4">Standardized test results (if any)</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.academic.5">Transfer certificate (if applicable)</span></li>
+          </ul>
+        </div>
+
+        <div class="docs-card docs-card--red">
+          <div class="docs-card-icon"><i class="fas fa-users"></i></div>
+          <h4 data-i18n="docs.parent.title">Parent Documents</h4>
+          <ul class="docs-list">
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.parent.1">Parent passport copies</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.parent.2">UAE Residence Visa (parent)</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.parent.3">Emirates ID copies</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.parent.4">Completed application form</span></li>
+            <li><i class="fas fa-chevron-right"></i> <span data-i18n="docs.parent.5">Registration fee payment (AED 1,500)</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="docs-note">
+        <i class="fas fa-lightbulb"></i>
+        <p data-i18n="docs.note.p2">All documents should be clear, legible scans or photos. Original documents will be verified on Assessment Day. For students transferring mid-year, please contact Admissions for expedited processing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="adm-testimonials section-pad" id="testimonials">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label" data-i18n="test.label">Parent Stories</div>
+        <h2 class="section-title" data-i18n-html="adm.test.h2">What Our Families<br/><em>Say About NAIS</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+      </div>
+      <div class="adm-testi-grid">
+        <div class="adm-testi-card">
+          <div class="adm-testi-stars">★★★★★</div>
+          <p data-i18n="adm.testi.1.quote">"The admissions process at NAIS was incredibly smooth. From the first phone call to our daughter's first day — the team was warm, professional, and genuinely caring. She absolutely loves her class!"</p>
+          <div class="adm-testi-author">
+            <img src="images/school-21.jpg" alt="Sarah M." style="width:100%;height:100%;object-fit:cover;" />
+            <div><strong>Sarah M.</strong><span data-i18n="adm.testi.1.role">Parent of Grade 4 student</span></div>
+          </div>
+        </div>
+        <div class="adm-testi-card">
+          <div class="adm-testi-stars">★★★★★</div>
+          <p data-i18n="adm.testi.2.quote">"We relocated from London and were worried about finding the right school. NAIS welcomed us with open arms. The AP program is excellent and my son's university acceptance to UCL was a proud moment for all of us."</p>
+          <div class="adm-testi-author">
+            <img src="images/school-24.jpg" alt="James K." style="width:100%;height:100%;object-fit:cover;" />
+            <div><strong>James K.</strong><span data-i18n="adm.testi.2.role">Parent of Grade 12 student</span></div>
+          </div>
+        </div>
+        <div class="adm-testi-card">
+          <div class="adm-testi-stars">★★★★★</div>
+          <p data-i18n="adm.testi.3.quote">"The diversity at NAIS is truly remarkable. My children have made friends from over 20 different countries. The school balances academics and social development beautifully — we couldn't be happier."</p>
+          <div class="adm-testi-author">
+            <img src="images/school-25.jpg" alt="Fatima Al R." style="width:100%;height:100%;object-fit:cover;" />
+            <div><strong>Fatima Al R.</strong><span data-i18n="adm.testi.3.role">Parent of KG &amp; Grade 6 students</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="apply-form-section section-pad" id="apply">
+    <div class="container">
+      <div class="apply-form-layout">
+        <!-- Left: form info -->
+        <div class="apply-form-sidebar">
+          <div class="section-label light" data-i18n="adm.form.sidebar.label">Ready to Join?</div>
+          <h2 class="section-title light" style="font-size:clamp(1.8rem,3vw,2.6rem);" data-i18n-html="adm.form.sidebar.h2">Start Your<br/><em>Application</em></h2>
+          <div class="title-ornament light-ornament"></div>
+          <p style="color:rgba(255,255,255,0.72);line-height:1.8;margin-bottom:28px;" data-i18n="adm.form.sidebar.p">Complete the enquiry form and our Admissions team will contact you within one working day to guide you through next steps.</p>
+          <div class="apply-sidebar-steps">
+            <div class="apply-sidebar-step"><span>1</span><p data-i18n="adm.form.step1">Fill in the form</p></div>
+            <div class="apply-sidebar-step"><span>2</span><p data-i18n="adm.form.step2">We call you within 24 hrs</p></div>
+            <div class="apply-sidebar-step"><span>3</span><p data-i18n="adm.form.step3">Book your campus tour</p></div>
+            <div class="apply-sidebar-step"><span>4</span><p data-i18n="adm.form.step4">Submit &amp; get your offer</p></div>
+          </div>
+          <div class="apply-sidebar-contact">
+            <p style="color:rgba(255,255,255,0.5);font-size:0.8rem;margin-bottom:10px;">Or reach us directly:</p>
+            <a href="tel:+97142884844" style="color:#fff;display:flex;align-items:center;gap:8px;font-size:0.88rem;margin-bottom:8px;" data-config-href="phone" data-config="phone"><i class="fas fa-phone-alt" style="color:var(--red);"></i> +971 4 288 4844</a>
+            <a href="mailto:admissions@naischool.ae" style="color:#fff;display:flex;align-items:center;gap:8px;font-size:0.88rem;" data-config-href="email_adm" data-config="email_adm"><i class="fas fa-envelope" style="color:var(--red);"></i> admissions@naischool.ae</a>
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <div class="apply-form-wrap">
+          <h3 data-i18n="adm.form.title">Online Admissions Enquiry</h3>
+          <p class="form-intro" data-i18n="adm.form.intro">Fields marked with * are required. We'll respond within one working day.</p>
+
+          <form id="admissions-form" novalidate>
+            <div class="form-section-title" data-i18n="adm.form.parent.section">Parent / Guardian Information</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="parent-first" data-i18n="adm.form.fname">First Name *</label>
+                <input type="text" id="parent-first" required data-i18n-placeholder="adm.form.fname.ph" placeholder="First name" />
+              </div>
+              <div class="form-group">
+                <label for="parent-last" data-i18n="adm.form.lname">Last Name *</label>
+                <input type="text" id="parent-last" required data-i18n-placeholder="adm.form.lname.ph" placeholder="Last name" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="adm-email" data-i18n="contact.form.email">Email Address *</label>
+                <input type="email" id="adm-email" required data-i18n-placeholder="contact.form.email.ph" placeholder="your@email.com" />
+              </div>
+              <div class="form-group">
+                <label for="adm-phone" data-i18n="form.phone">Phone / WhatsApp *</label>
+                <input type="tel" id="adm-phone" required data-i18n-placeholder="contact.form.phone.ph" placeholder="+971 XX XXX XXXX" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="adm-nationality" data-i18n="adm.form.nationality">Nationality</label>
+              <input type="text" id="adm-nationality" data-i18n-placeholder="adm.form.nationality.ph" placeholder="e.g. American, British, Emirati..." />
+            </div>
+
+            <div class="form-section-title" data-i18n="adm.form.student.section">Student Information</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="student-first" data-i18n="adm.form.sfname">Student First Name *</label>
+                <input type="text" id="student-first" required data-i18n-placeholder="adm.form.sfname.ph" placeholder="Student's first name" />
+              </div>
+              <div class="form-group">
+                <label for="student-last" data-i18n="adm.form.slname">Student Last Name *</label>
+                <input type="text" id="student-last" required data-i18n-placeholder="adm.form.slname.ph" placeholder="Student's last name" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="dob" data-i18n="adm.form.dob">Date of Birth *</label>
+                <input type="date" id="dob" required />
+              </div>
+              <div class="form-group">
+                <label for="current-grade" data-i18n="adm.form.currentgrade">Current Grade Level *</label>
+                <select id="current-grade" required>
+                  <option value="">Select current grade</option>
+                  <option>Pre-Kindergarten</option>
+                  <option>Kindergarten 1</option><option>Kindergarten 2</option>
+                  <option>Grade 1</option><option>Grade 2</option><option>Grade 3</option>
+                  <option>Grade 4</option><option>Grade 5</option><option>Grade 6</option>
+                  <option>Grade 7</option><option>Grade 8</option><option>Grade 9</option>
+                  <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="applying-for" data-i18n="adm.form.applygrade">Applying for Grade *</label>
+                <select id="applying-for" required>
+                  <option value="">Select applying grade</option>
+                  <option>Kindergarten 1</option><option>Kindergarten 2</option>
+                  <option>Grade 1</option><option>Grade 2</option><option>Grade 3</option>
+                  <option>Grade 4</option><option>Grade 5</option><option>Grade 6</option>
+                  <option>Grade 7</option><option>Grade 8</option><option>Grade 9</option>
+                  <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="start-date" data-i18n="adm.form.startdate">Preferred Start Date</label>
+                <select id="start-date">
+                  <option value="">Select start date</option>
+                  <option>September 2025 (Academic Year Start)</option>
+                  <option>January 2026 (Mid-Year Intake)</option>
+                  <option>April 2026 (Term 3 Start)</option>
+                  <option>Flexible / ASAP</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-section-title" data-i18n="adm.form.additional.section">Additional Information</div>
+            <div class="form-group">
+              <label for="current-school" data-i18n="adm.form.school">Current School Name</label>
+              <input type="text" id="current-school" data-i18n-placeholder="adm.form.school.ph" placeholder="Name of current / previous school" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="special-needs" data-i18n="adm.form.special">Learning Support Needs?</label>
+                <select id="special-needs">
+                  <option value="">Please select</option>
+                  <option>No learning support needs</option>
+                  <option>Mild learning support required</option>
+                  <option>Special Education / IEP student</option>
+                  <option>Prefer to discuss with Admissions</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="how-heard" data-i18n="adm.form.howheard">How did you hear about NAIS?</label>
+                <select id="how-heard">
+                  <option value="">Please select</option>
+                  <option>Google Search</option>
+                  <option>WhichSchoolAdvisor / Bayut</option>
+                  <option>Word of mouth / Referral</option>
+                  <option>Social Media</option>
+                  <option>KHDA Website</option>
+                  <option>School Brochure / Event</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="adm-message" data-i18n="contact.form.msg">Questions or Comments</label>
+              <textarea id="adm-message" rows="4" data-i18n-placeholder="adm.form.msg.ph" placeholder="Any questions, special circumstances, or additional information..."></textarea>
+            </div>
+
+            <div class="form-check-row">
+              <input type="checkbox" id="agree-terms" />
+              <label for="agree-terms" data-i18n-html="adm.form.terms">I agree to the <a href="privacy-policy.html">Privacy Policy</a> and consent to NAIS contacting me regarding my enquiry. *</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              <span data-i18n="adm.form.submit">Submit Enquiry</span>
+              <i class="fas fa-paper-plane"></i>
+            </button>
+
+            <div class="form-success" id="adm-form-success" style="display:none;">
+              <i class="fas fa-check-circle"></i>
+              <span data-i18n="contact.form.thanks">Thank you! Your enquiry has been received. Our Admissions team will contact you within one working day.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section-pad bg-light" id="faq">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label" data-i18n="faq.label">Common Questions</div>
+        <h2 class="section-title" data-i18n-html="faq.h2">Frequently Asked<br/><em>Questions</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+      </div>
+
+      <div class="adm-faq-grid" id="faq-list">
+        <div class="adm-faq-item">
+          <button class="adm-faq-q" onclick="this.parentElement.classList.toggle('open')">
+            <span data-i18n="adm.faq.1.q">What curriculum does NAIS follow?</span><i class="fas fa-plus"></i>
+          </button>
+          <div class="adm-faq-a" data-i18n="adm.faq.1.a">NAIS follows the American curriculum aligned with US Common Core State Standards and NGSS Science Standards. High School students have access to Advanced Placement (AP) courses recognized by universities worldwide.</div>
+        </div>
+        <div class="adm-faq-item">
+          <button class="adm-faq-q" onclick="this.parentElement.classList.toggle('open')">
+            <span data-i18n="adm.faq.2.q">What are the school hours?</span><i class="fas fa-plus"></i>
+          </button>
+          <div class="adm-faq-a" data-i18n="adm.faq.2.a">School hours at NAIS are Sunday to Thursday, 8:00 AM to 3:30 PM for all grades. After-school activities and clubs may run beyond 3:30 PM.</div>
+        </div>
+        <div class="adm-faq-item">
+          <button class="adm-faq-q" onclick="this.parentElement.classList.toggle('open')">
+            <span data-i18n="adm.faq.3.q">Is NAIS a KHDA-licensed school?</span><i class="fas fa-plus"></i>
+          </button>
+          <div class="adm-faq-a" data-i18n="adm.faq.3.a">Yes, NAIS is fully licensed by the Knowledge and Human Development Authority (KHDA), the regulatory body for private schools in Dubai. Our fees are KHDA-regulated and published transparently.</div>
+        </div>
+        <div class="adm-faq-item">
+          <button class="adm-faq-q" onclick="this.parentElement.classList.toggle('open')">
+            <span data-i18n="adm.faq.4.q">What languages are used at NAIS?</span><i class="fas fa-plus"></i>
+          </button>
+          <div class="adm-faq-a" data-i18n="adm.faq.4.a">The primary language of instruction is English. Arabic Language and Islamic Studies are taught in Arabic as mandated by the UAE Ministry of Education. Optional French is also offered as a second foreign language.</div>
+        </div>
+        <div class="adm-faq-item">
+          <button class="adm-faq-q" onclick="this.parentElement.classList.toggle('open')">
+            <span data-i18n="adm.faq.5.q">Does NAIS offer Inclusion / Special Needs support?</span><i class="fas fa-plus"></i>
+          </button>
+          <div class="adm-faq-a" data-i18n="adm.faq.5.a">Yes. NAIS has a dedicated Inclusion Program with trained Special Education professionals who support students with diverse learning needs through Individualized Education Plans (IEPs), differentiated instruction, and specialist therapies.</div>
+        </div>
+        <div class="adm-faq-item">
+          <button class="adm-faq-q" onclick="this.parentElement.classList.toggle('open')">
+            <span data-i18n="adm.faq.6.q">What university counseling is available?</span><i class="fas fa-plus"></i>
+          </button>
+          <div class="adm-faq-a" data-i18n="adm.faq.6.a">Our university counseling program begins in Grade 9. Students receive guidance on course selection, SAT/ACT preparation, university selection, and full application support for institutions in the US, Canada, UK, Australia, and beyond.</div>
+        </div>
+        <div class="adm-faq-item">
+          <button class="adm-faq-q" onclick="this.parentElement.classList.toggle('open')">
+            <span data-i18n="adm.faq.7.q">Are bus transportation services available?</span><i class="fas fa-plus"></i>
+          </button>
+          <div class="adm-faq-a">Yes, NAIS partners with Regal Bus Transport (RBT) operating <strong>56 routes across 16 areas</strong> covering Dubai, Sharjah and Ajman. All buses are GPS-tracked, RTA-certified, and supervised. Fees range from <strong>AED 3,000 to AED 7,000</strong> per year depending on your area, payable in 3 term instalments. See the full fee table and important notes in the <a href="#transport" style="color:var(--red);">Transport &amp; Bus Routes</a> section above, or contact the RBT office at <a href="tel:042809343" style="color:var(--red);">04-280 9343</a>.</div>
+        </div>
+        <div class="adm-faq-item">
+          <button class="adm-faq-q" onclick="this.parentElement.classList.toggle('open')">
+            <span data-i18n="adm.faq.8.q">What is the average class size at NAIS?</span><i class="fas fa-plus"></i>
+          </button>
+          <div class="adm-faq-a" data-i18n="adm.faq.8.a">NAIS maintains an average class size of 18 students, enabling our teachers to provide genuinely personalized attention and support to every learner.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PHOTO STRIP ══ -->
+  <section style="background:#06080f;overflow:hidden;padding:0;">
+    <div style="display:flex;height:200px;gap:3px;">
+      <div style="flex:1.5;overflow:hidden;position:relative;">
+        <img src="images/school-17.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:brightness(.65) saturate(.8);transition:transform .7s ease,filter .5s ease;" onmouseover="this.style.transform='scale(1.08)';this.style.filter='brightness(.95) saturate(1.3)'" onmouseout="this.style.transform='';this.style.filter='brightness(.65) saturate(.8)'" />
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(6,8,15,.85) 100%);pointer-events:none;"></div>
+        <div style="position:absolute;bottom:14px;left:14px;font-family:Montserrat,sans-serif;font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);">Campus</div>
+      </div>
+      <div style="flex:1;overflow:hidden;position:relative;">
+        <img src="images/school-19.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:brightness(.62) sepia(.3) hue-rotate(200deg) saturate(1.5);transition:transform .7s ease,filter .5s ease;" onmouseover="this.style.transform='scale(1.08)';this.style.filter='brightness(.95) saturate(1.3)'" onmouseout="this.style.transform='';this.style.filter='brightness(.62) sepia(.3) hue-rotate(200deg) saturate(1.5)'" />
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(6,8,15,.85) 100%);pointer-events:none;"></div>
+        <div style="position:absolute;bottom:14px;left:14px;font-family:Montserrat,sans-serif;font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);">Learning</div>
+      </div>
+      <div style="flex:1;overflow:hidden;position:relative;">
+        <img src="images/school-22.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:grayscale(55%) brightness(.62) contrast(1.2);transition:transform .7s ease,filter .5s ease;" onmouseover="this.style.transform='scale(1.08)';this.style.filter='brightness(.95) saturate(1.3)'" onmouseout="this.style.transform='';this.style.filter='grayscale(55%) brightness(.62) contrast(1.2)'" />
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(6,8,15,.85) 100%);pointer-events:none;"></div>
+        <div style="position:absolute;bottom:14px;left:14px;font-family:Montserrat,sans-serif;font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);">Arts</div>
+      </div>
+      <div style="flex:1;overflow:hidden;position:relative;">
+        <img src="images/school-25.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:brightness(.65) saturate(1.3) hue-rotate(340deg) sepia(.2);transition:transform .7s ease,filter .5s ease;" onmouseover="this.style.transform='scale(1.08)';this.style.filter='brightness(.95) saturate(1.3)'" onmouseout="this.style.transform='';this.style.filter='brightness(.65) saturate(1.3) hue-rotate(340deg) sepia(.2)'" />
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(6,8,15,.85) 100%);pointer-events:none;"></div>
+        <div style="position:absolute;bottom:14px;left:14px;font-family:Montserrat,sans-serif;font-size:.55rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);">Sports</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top"><div class="container"><div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="images/nais-logo.png" alt="NAIS Dubai Logo" class="footer-logo-img" /></div>
+        <p class="footer-desc" data-i18n="footer.desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow.</p>
+        <div class="footer-social"><a href="https://www.facebook.com/naischooldxb/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/northamericandxb/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a></div>
+      </div>
+      <div class="footer-col"><h4 class="footer-heading" data-i18n="footer.links">Quick Links</h4><ul class="footer-links"><li><a href="about.html" data-i18n="footer.ql.about">About NAIS</a></li><li><a href="academics.html" data-i18n="footer.ql.academics">Academics</a></li><li><a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" target="_blank" rel="noopener" data-i18n="footer.apply.now">Apply Now</a></li><li><a href="#fees" data-i18n="nav.sub.fees">Fees</a></li><li><a href="index.html#contact" data-i18n="footer.ql.contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-heading" data-i18n="footer.ac.programs">Programs</h4><ul class="footer-links"><li><a href="academics.html#kindergarten" data-i18n="nav.sub.kg">Kindergarten</a></li><li><a href="academics.html#elementary" data-i18n="nav.sub.elementary">Elementary</a></li><li><a href="academics.html#middle" data-i18n="nav.sub.middle">Middle School</a></li><li><a href="academics.html#high" data-i18n="nav.sub.high">High School</a></li><li><a href="academics.html#inclusion" data-i18n="footer.al.incl">Inclusion</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-heading" data-i18n="footer.contact">Contact</h4><ul class="footer-contact-list"><li><i class="fas fa-map-marker-alt"></i><span data-i18n="footer.addr" data-config="address_en">Al Mizhar 1, Mirdif, Dubai, UAE</span></li><li><i class="fas fa-phone-alt"></i><a href="tel:+97142884844" data-config-href="phone" data-config="phone">+971 4 288 4844</a></li><li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae" data-config-href="email_adm" data-config="email_adm">admissions@naischool.ae</a></li></ul><a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" target="_blank" rel="noopener" class="btn btn-red-sm" data-i18n="footer.apply.btn">Apply Now <i class="fas fa-arrow-right"></i></a></div>
+    </div></div></div>
+    <div class="footer-bottom"><div class="container"><p data-i18n="footer.copy">© 2025 North American International School, Dubai. All Rights Reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a><a href="terms-of-use.html" data-i18n="footer.terms">Terms of Use</a><a href="safeguarding.html" data-i18n="footer.safeguarding">Safeguarding</a></div></div></div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+
+  <script>
+    // FAQ Data
+    const faqs = [
+      { q: "What curriculum does NAIS follow?", a: "NAIS follows the American curriculum aligned with US Common Core State Standards and NGSS Science Standards. High School students have access to Advanced Placement (AP) courses recognized by universities worldwide." },
+      { q: "What are the school hours?", a: "School hours at NAIS are Sunday to Thursday, 8:00 AM to 3:30 PM for all grades. After-school activities and clubs may run beyond 3:30 PM." },
+      { q: "Is NAIS a KHDA-licensed school?", a: "Yes, NAIS is fully licensed by the Knowledge and Human Development Authority (KHDA), the regulatory body for private schools in Dubai. Our fees are KHDA-regulated and published transparently." },
+      { q: "What languages of instruction does NAIS use?", a: "The primary language of instruction at NAIS is English. Arabic language and Islamic Studies are taught in Arabic as mandated by the UAE Ministry of Education. We also offer optional French as a second foreign language." },
+      { q: "Does NAIS offer an Inclusion / Special Needs program?", a: "Yes. NAIS has a dedicated Inclusion Program with trained Special Education professionals who support students with diverse learning needs through Individualized Education Plans (IEPs), differentiated instruction, and specialist therapies." },
+      { q: "What university counseling support is available?", a: "Our university counseling program begins in Grade 9. Students receive guidance on course selection, extracurricular activities, SAT/ACT preparation, university selection, and the complete application process for institutions in the US, Canada, UK, Australia, and beyond." },
+      { q: "Are there bus transportation services?", a: "Yes, NAIS partners with approved school transport providers servicing most areas of Dubai. Please contact the Admissions team for routes and pricing specific to your area." },
+      { q: "What is the average class size at NAIS?", a: "NAIS maintains an average class size of 18 students, enabling our teachers to provide genuinely personalized attention and support to every learner." },
+    ];
+
+    const faqList = document.getElementById('faq-list');
+    if (faqList) {
+      faqs.forEach((faq, i) => {
+        const item = document.createElement('div');
+        item.style.cssText = 'background:white;border-radius:12px;border:1.5px solid #EDF0F5;overflow:hidden;transition:0.3s ease;';
+        item.innerHTML = `
+          <button onclick="toggleFaq(this)" style="width:100%;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;text-align:left;gap:16px;">
+            <span style="font-family:'Montserrat',sans-serif;font-size:0.92rem;font-weight:700;color:#0A1F4B;line-height:1.4;">${faq.q}</span>
+            <i class="fas fa-plus" style="color:#E11B22;font-size:0.85rem;flex-shrink:0;transition:transform 0.3s ease;"></i>
+          </button>
+          <div class="faq-answer" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease;">
+            <p style="padding:0 24px 20px;font-size:0.9rem;color:#4A5568;line-height:1.75;">${faq.a}</p>
+          </div>
+        `;
+        faqList.appendChild(item);
+      });
+    }
+
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const icon = btn.querySelector('i');
+      const item = btn.parentElement;
+      const isOpen = answer.style.maxHeight !== '0px' && answer.style.maxHeight !== '';
+
+      // Close all
+      document.querySelectorAll('.faq-answer').forEach(a => { a.style.maxHeight = '0px'; });
+      document.querySelectorAll('#faq-list button i').forEach(i => {
+        i.style.transform = '';
+        i.classList.replace('fa-minus', 'fa-plus');
+      });
+      document.querySelectorAll('#faq-list > div').forEach(d => {
+        d.style.borderColor = '#EDF0F5';
+      });
+
+      if (!isOpen) {
+        answer.style.maxHeight = answer.scrollHeight + 40 + 'px';
+        icon.style.transform = 'rotate(45deg)';
+        icon.classList.replace('fa-plus', 'fa-minus');
+        item.style.borderColor = '#1F2F6E';
+      }
+    }
+  </script>
+  <!-- Language Float Pill (Mobile) -->
+  <div class="lang-float-pill" aria-label="Language switcher">
+    <button class="lang-switcher" data-lang="en" title="English">EN</button>
+    <button class="lang-switcher" data-lang="ar" title="العربية">ع</button>
+  </div>
+  <!-- Floating Buttons -->
+  <a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" target="_blank" rel="noopener" class="apply-float" aria-label="Apply Now"><i class="fas fa-pen-to-square"></i><span class="apply-float-label" data-i18n="float.apply">Apply Now</span></a>
+  <a href="https://wa.me/971563522454" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+  <script src="js/nav.js"></script>
+  <script src="js/img-fallback.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js"></script>
+<script src="js/site-config.js"></script>
 </body>
 </html>

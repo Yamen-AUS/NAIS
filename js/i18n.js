@@ -1842,4 +1842,51 @@
     applyAll: applyAll
   };
 
+  /* ═══════════════════════════════════════════════════
+     CMS LIVE SYNC — override contact keys from NAIS_CONFIG
+     Listens for site-config.js to finish loading settings,
+     then patches the translation table and re-applies.
+  ═══════════════════════════════════════════════════ */
+  document.addEventListener('nais:config-loaded', function (e) {
+    var cfg = e.detail || {};
+    var lang = currentLang;
+
+    /* Helper: update both EN and AR for a key */
+    function patch(key, enVal, arVal) {
+      if (!T[key]) return;
+      if (enVal) T[key].en = enVal;
+      if (arVal) T[key].ar = arVal;
+    }
+
+    /* topbar address */
+    patch('topbar.address',
+      cfg.contact_address_en || null,
+      cfg.contact_address_ar || null);
+
+    /* contact section — address span */
+    if (cfg.contact_address_en) {
+      patch('contact.addr.span',
+        cfg.contact_address_en,
+        cfg.contact_address_ar || cfg.contact_address_en);
+    }
+
+    /* contact section — hours span */
+    if (cfg.contact_hours) {
+      patch('contact.hours.val',  cfg.contact_hours, cfg.contact_hours_ar || null);
+      patch('contact.hours.span', cfg.contact_hours, cfg.contact_hours_ar || null);
+    }
+
+    /* footer address + hours */
+    patch('footer.addr',
+      cfg.contact_address_en || null,
+      cfg.contact_address_ar || null);
+
+    if (cfg.contact_hours) {
+      patch('footer.hours', cfg.contact_hours, cfg.contact_hours_ar || null);
+    }
+
+    /* Re-apply so updated keys render immediately */
+    applyTranslations();
+  });
+
 }());

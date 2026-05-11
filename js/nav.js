@@ -500,7 +500,7 @@
       .catch(function () {
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
-        alert('Sorry, there was an error. Please try calling us directly: +971 4 263 5456');
+        alert('Sorry, there was an error. Please try calling us directly: ' + ((window.NAIS_CONFIG && window.NAIS_CONFIG.contact_phone) || '+971 4 263 5456'));
       });
     });
   })();
