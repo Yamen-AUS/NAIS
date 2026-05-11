@@ -1,0 +1,2116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About NAIS | North American International School Dubai</title>
+  <meta name="description" content="Discover the story, mission, values and leadership of North American International School (NAIS) in Dubai. A premier American curriculum school committed to excellence." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" href="images/nais-logo.png?v=3" type="image/png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
+  <link rel="stylesheet" href="css/pages.css?v=9" />
+  <link rel="stylesheet" href="css/nav.css?v=9" />
+  <link rel="stylesheet" href="css/mobile.css?v=9" />
+  <link rel="stylesheet" href="css/enhancements.css?v=5" />
+  <link rel="stylesheet" href="css/rtl.css?v=1" />
+  <style>
+    /* TOPBAR LOGO FIX — desktop only */
+    @media (min-width: 1200px) {
+      .topbar{overflow:visible!important;height:62px!important;display:flex!important;align-items:center!important;}
+      .topbar-inner{height:62px!important;display:flex!important;align-items:center!important;padding:0 60px 0 0!important;}
+      .topbar-logo{width:auto!important;height:68px!important;max-height:68px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:6px 16px 6px 12px!important;background:#fff!important;flex-shrink:0!important;}
+      .topbar-logo-img{width:auto!important;height:56px!important;max-width:220px!important;max-height:56px!important;object-fit:contain!important;object-position:left center!important;display:block!important;}
+    }
+
+    /* ── BIO EXPAND / COLLAPSE TOGGLE ── */
+    .leader-bio-wrap {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1),
+                  opacity   0.35s ease,
+                  margin    0.35s ease;
+      margin-top: 0;
+    }
+    .leader-bio-wrap.open {
+      max-height: 600px;   /* tall enough for any bio */
+      opacity: 1;
+      margin-top: 12px;
+    }
+    .leader-bio-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 14px;
+      background: none;
+      border: 1.5px solid rgba(225,27,34,0.35);
+      color: #E11B22;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px 6px 10px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.22s, color 0.22s, border-color 0.22s, transform 0.18s;
+      line-height: 1;
+      user-select: none;
+    }
+    .leader-bio-toggle:hover {
+      background: #E11B22;
+      color: #fff;
+      border-color: #E11B22;
+      transform: translateY(-1px);
+    }
+    .leader-bio-toggle.open {
+      background: rgba(225,27,34,0.08);
+      border-color: #E11B22;
+    }
+    .lbt-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #E11B22;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 900;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+                  background 0.22s;
+    }
+    .leader-bio-toggle.open .lbt-icon {
+      transform: rotate(45deg);   /* + → × look */
+      background: #b01318;
+    }
+    .lbt-label { transition: opacity 0.2s; }
+
+    /* ── LEADER PORTRAIT ZOOM CURSOR & OVERLAY HINT ── */
+    /* Zoom cursor on the portrait frame itself */
+    .leader-card-photo .leader-portrait {
+      cursor: zoom-in;
+    }
+    /* Zoom icon overlaid on the portrait (not on .leader-card-photo
+       which now uses ::after for the wave separator) */
+    .leader-card-photo .leader-portrait::after {
+      content: '\f00e'; /* fa-search-plus */
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.40);
+      color: #fff;
+      font-size: 1rem;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: 4;
+      pointer-events: none;
+      border-radius: 16px;
+    }
+    .leader-card-equal:hover .leader-card-photo .leader-portrait::after {
+      opacity: 1;
+    }
+
+    /* ── LEADER LIGHTBOX ── */
+    #leader-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 99997;
+      background: rgba(6,10,28,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      cursor: zoom-out;
+    }
+    /* ── ZOOM TOOLBAR ── */
+    .lb-zoom-bar {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 50px;
+      padding: 5px 10px;
+      z-index: 11;
+      backdrop-filter: blur(8px);
+    }
+    .lb-zoom-btn {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s, color 0.18s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .lb-zoom-btn:hover { background: #E11B22; color: #fff; border-color: #E11B22; transform: scale(1.1); }
+    .lb-zoom-btn:disabled { opacity: 0.3; cursor: default; transform: none; }
+    .lb-zoom-level {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.5);
+      min-width: 36px;
+      text-align: center;
+      user-select: none;
+    }
+    .lb-zoom-reset {
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0 8px;
+      width: auto;
+      border-radius: 50px;
+    }
+    /* Zoomed photo container */
+    .lb-photo {
+      position: relative;
+      overflow: hidden;
+    }
+    #lb-img {
+      transform-origin: center center;
+      transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94) !important;
+      will-change: transform;
+      cursor: zoom-in;
+    }
+    #lb-img.zoomed {
+      cursor: zoom-out;
+    }
+    /* Keyboard hint strip */
+    .lb-kbd-hint {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 8px 18px;
+      background: linear-gradient(to top, rgba(6,10,28,0.9) 0%, transparent 100%);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 5;
+      transition: opacity 0.3s ease;
+    }
+    .lb-kbd-hint.hidden { opacity: 0; }
+    .lb-kbd-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.38);
+      letter-spacing: 0.06em;
+    }
+    .lb-kbd-tag kbd {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: monospace;
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.5);
+    }
+    #leader-lightbox.open {
+      display: flex;
+      animation: lbFadeIn 0.3s ease;
+    }
+    @keyframes lbFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .lb-card {
+      background: #0d1535;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      max-width: 880px;
+      width: 100%;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.7);
+      cursor: default;
+      animation: lbSlideUp 0.35s cubic-bezier(0.22,1,0.36,1);
+      position: relative;
+    }
+    @keyframes lbSlideUp {
+      from { transform: translateY(28px) scale(0.96); opacity: 0; }
+      to   { transform: translateY(0)    scale(1);    opacity: 1; }
+    }
+    .lb-photo {
+      flex: 0 0 320px;
+      position: relative;
+      overflow: hidden;
+      background: #060a1c;
+    }
+    .lb-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .lb-photo-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 60%, #0d1535 100%),
+                  linear-gradient(to top, #0d1535 0%, transparent 35%);
+      pointer-events: none;
+    }
+    .lb-role-tag {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      background: var(--red, #E11B22);
+      color: #fff;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      z-index: 2;
+    }
+    .lb-body {
+      flex: 1;
+      padding: 40px 40px 40px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+      max-height: 88vh;
+    }
+    .lb-body h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 4px;
+      line-height: 1.2;
+    }
+    .lb-body .lb-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #E11B22;
+      margin-bottom: 20px;
+    }
+    .lb-quote {
+      background: rgba(255,255,255,0.06);
+      border-left: 3px solid #E11B22;
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+    }
+    .lb-quote i { color: #E11B22; font-size: 0.85rem; opacity: 0.7; display:block; margin-bottom: 5px; }
+    .lb-quote p { font-style: italic; font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.75); margin: 0; }
+    .lb-bio {
+      font-size: 0.85rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.60);
+      margin-bottom: 10px;
+    }
+    .lb-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      z-index: 10;
+    }
+    .lb-close:hover {
+      background: rgba(225,27,34,0.8);
+      color: #fff;
+      transform: rotate(90deg);
+    }
+    /* ── nav prev/next ── */
+    .lb-card { position: relative; }
+    .lb-nav {
+      position: absolute;
+      bottom: 20px;
+      right: 40px;
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+    .lb-nav-btn {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .lb-nav-btn:hover { background: #E11B22; color: #fff; border-color: #E11B22; }
+    /* ── counter badge ── */
+    .lb-counter {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+      z-index: 10;
+    }
+    @media (max-width: 680px) {
+      .lb-card { flex-direction: column; }
+      .lb-photo { flex: 0 0 220px; }
+      .lb-body  { padding: 24px 22px 28px; max-height: 60vh; }
+      .lb-body h2 { font-size: 1.3rem; }
+      .lb-nav { bottom: 14px; right: 22px; }
+    }
+
+    /* ── NEASC Accreditation Inspection Block ── */
+    .neasc-block {
+      background: linear-gradient(135deg, #0f1d45 0%, #1a2f6a 100%);
+      border-radius: 20px;
+      padding: 44px 52px;
+      margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .neasc-block::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: rgba(225,27,34,0.07);
+      pointer-events: none;
+    }
+    .neasc-block::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      pointer-events: none;
+    }
+    .neasc-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .neasc-logo-badge {
+      flex-shrink: 0;
+      background: #fff;
+      border-radius: 14px;
+      width: 64px; height: 64px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+    }
+    .neasc-logo-badge i {
+      font-size: 1.6rem;
+      color: #0f1d45;
+    }
+    .neasc-header-text {}
+    .neasc-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red, #E11B22);
+      margin-bottom: 4px;
+    }
+    .neasc-header-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      color: #fff;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .neasc-header-text h3 em {
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+    }
+    /* Quotes masonry grid */
+    .neasc-quotes-grid {
+      columns: 2;
+      column-gap: 20px;
+    }
+    .neasc-quote {
+      break-inside: avoid;
+      background: rgba(255,255,255,0.07);
+      border-left: 3px solid var(--red, #E11B22);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .neasc-quote p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.88);
+      margin: 0;
+      font-style: italic;
+    }
+    .neasc-quote p strong {
+      color: #fff;
+      font-style: normal;
+    }
+    .neasc-footer-bar {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .neasc-footer-note {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.40);
+      text-transform: uppercase;
+    }
+    .neasc-accred-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.80);
+    }
+    .neasc-accred-pill i { color: var(--red, #E11B22); font-size: 0.7rem; }
+    @media (max-width: 768px) {
+      .neasc-block { padding: 32px 28px; }
+      .neasc-quotes-grid { columns: 1; }
+    }
+    @media (max-width: 480px) {
+      .neasc-block { padding: 26px 20px; }
+      .neasc-header-text h3 { font-size: 1.25rem; }
+    }
+
+    /* ── Chairman / Owner featured card ── */
+    .chairman-card-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    .chairman-card-wrap .chairman-card {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      background: linear-gradient(135deg, #0d1535 0%, #1a2a5e 100%);
+      border: 3px solid var(--red, #E11B22);
+      box-shadow: 0 32px 90px rgba(13,21,53,0.45);
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .chairman-card-wrap .chairman-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: rgba(225,27,34,0.08);
+      pointer-events: none;
+    }
+    .chairman-card-wrap .chairman-card::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    /* Photo column — fully independent classes, no pages.css conflict */
+    .chairman-photo-col {
+      flex: 0 0 420px;
+      min-height: 460px;
+      position: relative;
+      overflow: hidden;
+      background: #0d1535;
+    }
+    .chairman-portrait {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .chairman-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 5%;
+      filter: none;
+      display: block;
+    }
+    .chairman-role-tag {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--red, #E11B22);
+      color: #fff;
+      font-family: var(--font-display, 'Montserrat', sans-serif);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 9px 22px;
+      border-radius: 50px;
+      box-shadow: 0 4px 16px rgba(225,27,34,0.45);
+      z-index: 5;
+      white-space: nowrap;
+    }
+    /* Body column */
+    .chairman-card-body {
+      flex: 1;
+      padding: 44px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+    .chairman-card-body h3 {
+      font-family: var(--font-serif, 'Playfair Display', serif);
+      font-size: 2.1rem;
+      color: #fff;
+      margin: 0 0 2px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .chairman-card-body .chairman-card-title {
+      color: rgba(255,255,255,0.60);
+      font-family: var(--font-display, 'Montserrat', sans-serif);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .chairman-card-body .chairman-quote {
+      border-left: 5px solid var(--red, #E11B22);
+      background: rgba(255,255,255,0.08);
+      border-radius: 0 14px 14px 0;
+      padding: 22px 24px;
+      margin: 0;
+    }
+    .chairman-card-body .chairman-quote p {
+      color: rgba(255,255,255,0.90);
+      font-size: 1.05rem;
+      line-height: 1.85;
+      font-style: italic;
+      margin: 0;
+    }
+    .chairman-card-body .chairman-quote i {
+      color: var(--red, #E11B22);
+      font-size: 1.3rem;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .chairman-card-body .leader-bio-toggle {
+      color: rgba(255,255,255,0.70);
+      border-color: rgba(255,255,255,0.20);
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+    .chairman-card-body .leader-card-bio {
+      color: rgba(255,255,255,0.78);
+      font-size: 0.92rem;
+      line-height: 1.75;
+    }
+    @media (max-width: 1024px) {
+      .chairman-photo-col { flex: 0 0 360px; min-height: 420px; }
+      .chairman-card-body { padding: 36px 40px; }
+      .chairman-card-body h3 { font-size: 1.8rem; }
+    }
+    @media (max-width: 768px) {
+      .chairman-photo-col { flex: 0 0 260px; min-height: 340px; }
+      .chairman-card-body { padding: 28px 30px; gap: 10px; }
+      .chairman-card-body h3 { font-size: 1.55rem; }
+      .chairman-card-body .chairman-quote p { font-size: 0.95rem; }
+    }
+    @media (max-width: 640px) {
+      .chairman-card-wrap .chairman-card { flex-direction: column; }
+      .chairman-photo-col { flex: 0 0 auto; height: 320px; min-height: 0; width: 100%; }
+      .chairman-portrait { position: absolute; height: 100%; }
+      .chairman-card-body { padding: 28px 24px; }
+      .chairman-card-body h3 { font-size: 1.45rem; }
+    }
+
+    /* ── CEO featured card (secondary — white/light, fully independent classes) ── */
+    .ceo-card-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+    .ceo-card {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      background: #ffffff;
+      border: 2px solid rgba(15,29,82,0.10);
+      border-left: 6px solid var(--red, #E11B22);
+      box-shadow: 0 16px 56px rgba(15,29,82,0.10);
+      border-radius: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ceo-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(15,29,82,0.03);
+      pointer-events: none;
+    }
+    /* ─ Photo column — fully independent, no pages.css conflict ─ */
+    .ceo-photo-col {
+      flex: 0 0 320px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #0f1d45 0%, #1a2f6a 60%, #0a1128 100%);
+    }
+    .ceo-portrait {
+      position: absolute;
+      inset: 0;
+    }
+    .ceo-portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+      display: block;
+    }
+    .ceo-role-tag {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--navy, #0f1d45);
+      color: #fff;
+      font-family: var(--font-display, 'Montserrat', sans-serif);
+      font-size: 0.70rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 7px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 16px rgba(15,29,82,0.40);
+      z-index: 5;
+      white-space: nowrap;
+    }
+    /* ─ Body column ─ */
+    .ceo-card-body {
+      flex: 1;
+      padding: 40px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+    }
+    .ceo-card-body h3 {
+      font-family: var(--font-serif, 'Playfair Display', serif);
+      font-size: 1.85rem;
+      color: var(--navy, #0f1d45);
+      margin: 0 0 2px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .ceo-card-title {
+      font-family: var(--font-display, 'Montserrat', sans-serif);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red, #E11B22);
+      margin-bottom: 6px;
+    }
+    .ceo-quote {
+      border-left: 4px solid var(--red, #E11B22);
+      background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 100%);
+      border-radius: 0 12px 12px 0;
+      padding: 20px 22px;
+      margin: 0;
+    }
+    .ceo-quote i {
+      color: var(--red, #E11B22);
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .ceo-quote p {
+      color: #1a2a5e;
+      font-size: 1.0rem;
+      line-height: 1.8;
+      font-style: italic;
+      margin: 0;
+    }
+    .ceo-card-body .leader-bio-toggle {
+      color: var(--navy, #0f1d45);
+      border-color: rgba(15,29,82,0.20);
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+    .ceo-card-body .leader-card-bio {
+      color: #4a5568;
+      font-size: 0.90rem;
+      line-height: 1.75;
+    }
+    /* ─ Responsive ─ */
+    @media (max-width: 1024px) {
+      .ceo-photo-col { flex: 0 0 280px; }
+      .ceo-card-body { padding: 32px 36px; }
+      .ceo-card-body h3 { font-size: 1.6rem; }
+    }
+    @media (max-width: 768px) {
+      .ceo-photo-col { flex: 0 0 240px; }
+      .ceo-card-body { padding: 26px 28px; gap: 10px; }
+      .ceo-card-body h3 { font-size: 1.4rem; }
+      .ceo-quote p { font-size: 0.92rem; }
+    }
+    @media (max-width: 640px) {
+      .ceo-card { flex-direction: column; border-left: none; border-top: 6px solid var(--red, #E11B22); }
+      .ceo-photo-col { flex: 0 0 300px; height: 300px; }
+      .ceo-portrait { position: relative; height: 300px; }
+      .ceo-card-body { padding: 26px 22px; }
+      .ceo-card-body h3 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body data-page-title="page.title.about">
+
+  <!-- TOP BAR -->
+  <div class="topbar" id="main-topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="topbar-logo" aria-label="NAIS Dubai – Home" style="width:auto;height:68px;overflow:visible;display:flex;align-items:center;justify-content:flex-start;padding:6px 16px 6px 12px;background:#fff;flex-shrink:0;">
+        <img src="images/nais-logo.png" alt="North American International School Dubai" class="topbar-logo-img" style="width:auto;height:56px;max-width:220px;max-height:56px;object-fit:contain;object-position:left center;display:block;" />
+      </a>
+      <div class="topbar-left">
+        <a href="tel:+97142884844"><i class="fas fa-phone-alt"></i> +971 4 288 4844</a>
+        <a href="mailto:admissions@naischool.ae"><i class="fas fa-envelope"></i> admissions@naischool.ae</a>
+        <span><i class="fas fa-map-marker-alt"></i> <span data-i18n="topbar.address">Al Mizhar 1, Dubai, UAE</span></span>
+      </div>
+      <div class="topbar-right">
+        <a href="https://nais.schoology.com/login" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.portal">Parent Portal</a>
+        <span class="topbar-divider">|</span>
+        <a href="https://nais.schoology.com/login" target="_blank" rel="noopener" class="topbar-link" data-i18n="topbar.elearning">E-Learning</a>
+        <span class="topbar-divider">|</span>
+        <a href="mailto:careers@naischool.ae" class="topbar-link" data-i18n="topbar.careers">Careers</a>
+        <span class="topbar-divider">|</span>
+        <div class="lang-switcher-wrap">
+          <button class="lang-switcher active" data-lang="en" aria-pressed="true" title="English">EN</button>
+          <span class="lang-switcher-divider">|</span>
+          <button class="lang-switcher" data-lang="ar" aria-pressed="false" title="العربية">ع</button>
+        </div>
+        <div class="topbar-social">
+          <a href="https://www.facebook.com/naischooldxb/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/northamericandxb/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          
+          
+          <a href="https://www.youtube.com/@northamericaninternational6627" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT-SIDE NAV RAIL -->
+  <div class="nav-rail" id="nav-rail" role="button" aria-label="Open Navigation Menu" aria-expanded="false">
+    <div class="nav-rail-inner" id="nav-rail-trigger">
+      <a href="index.html" class="logo-wrap" aria-label="NAIS Home">
+        <img src="images/nais-logo.png" alt="NAIS" style="height:42px;max-height:42px;max-width:190px;width:auto;object-fit:contain;background:#fff;padding:5px 10px;border-radius:5px;" />
+      </a>
+      <button id="nav-mobile-toggle" aria-label="Open Menu" style="background:none;border:none;display:flex;align-items:center;gap:8px;cursor:pointer;padding:0;">
+        <div class="nav-rail-lines"><span></span><span></span><span></span></div>
+        <span class="nav-rail-label" data-i18n="nav.menu">MENU</span>
+      </button>
+    </div>
+    <div id="nav-desktop-lines"><span></span><span></span><span></span></div>
+    <span id="nav-desktop-label" data-i18n="nav.menu">MENU</span>
+  </div>
+
+  <!-- FULL-SCREEN NAV OVERLAY -->
+  <div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Main Navigation" aria-hidden="true" style="background-color:#0b1230;">
+    <!-- LEFT VISUAL PANEL -->
+    <div class="nav-left-panel" aria-hidden="true" style="background-color:#0a1128;position:relative;flex-shrink:0;">
+      <div class="nav-left-bg" style="position:absolute;inset:0;background:linear-gradient(155deg,#0f1d45 0%,#1e3175 40%,#0a1128 100%);z-index:0;"></div>
+      <div class="nav-left-content">
+        <a href="index.html" class="nav-left-logo">
+          <img src="images/nais-logo.png" alt="North American International School" style="height:72px;max-width:300px;width:auto;object-fit:contain;display:block;" />
+        </a>
+        <div class="nav-left-tagline">
+          <div class="nav-left-tagline-top" data-i18n="nav.tagline.est">Est. 2005 · Dubai, UAE</div>
+          <div class="nav-left-tagline-title" data-i18n-html="nav.tagline.title">Inspiring Excellence,<br>Building Tomorrow's Leaders</div>
+          <p class="nav-left-tagline-sub" data-i18n="nav.tagline.sub">A premier American curriculum school serving KG–Grade 12 students in the heart of Dubai.</p>
+        </div>
+        <div class="nav-left-spacer"></div>
+        <div class="nav-promo-card">
+          <div class="nav-promo-card-label" data-i18n="nav.promo.label">Open Enrollment</div>
+          <div class="nav-promo-card-title" data-i18n="nav.promo.title">Apply for 2026–2027</div>
+          <p class="nav-promo-card-desc" data-i18n="nav.promo.desc">Secure your child's place at NAIS Dubai. Limited seats available for all grades KG–12.</p>
+          <a href="admissions.html" class="nav-promo-card-link" data-i18n="nav.promo.link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <!-- RIGHT NAV PANEL -->
+    <div class="nav-right-panel" style="background-color:#0d1535;">
+      <div class="nav-close" id="nav-close" aria-label="Close Navigation">
+        <button class="nav-close-inner" aria-label="Close Menu">&#x2715;</button>
+      </div>
+      <div class="nav-panel">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-primary-list">
+            <li class="nav-primary-item" data-item="about">
+              <a href="about.html" class="nav-primary-link" data-i18n="nav.about">About</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="about.html#mission" class="nav-subnav-link" data-i18n="nav.sub.mission">Mission &amp; Vision</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.leadership">School Leadership</a></li>
+                <li class="nav-subnav-item"><a href="about.html#values" class="nav-subnav-link" data-i18n="nav.sub.values">Core Values — CARE</a></li>
+                <li class="nav-subnav-item"><a href="about.html#campus" class="nav-subnav-link" data-i18n="nav.sub.campus">Our Campus</a></li>
+                <li class="nav-subnav-item"><a href="about.html#accreditation" class="nav-subnav-link" data-i18n="nav.sub.accreditation">Accreditation</a></li>
+              </ul>
+            </li>
+            <li class="nav-primary-item" data-item="academics">
+              <a href="academics.html" class="nav-primary-link" data-i18n="nav.academics">Academics</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#kindergarten" class="nav-subnav-link" data-i18n="nav.sub.kg">Kindergarten</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#elementary" class="nav-subnav-link" data-i18n="nav.sub.elementary">Elementary School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#high" class="nav-subnav-link" data-i18n="nav.sub.high">High School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=programs#ap" class="nav-subnav-link" data-i18n="nav.sub.ap">AP Courses</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=curriculum" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.curriculum">American Curriculum ★</a></li>
+                <li class="nav-subnav-item"><a href="academics.html?tab=results" class="nav-subnav-link" style="color:#4ade80;font-weight:700;" data-i18n="nav.sub.results">Academic Results ★</a></li>
+                <li class="nav-subnav-item"><a href="pbl.html" class="nav-subnav-link" style="color:#F5A623;font-weight:700;" data-i18n="nav.sub.pbl">Project-Based Learning ★</a></li>
+              </ul>
+            </li>
+            <li class="nav-primary-item" data-item="student-life">
+              <a href="index.html#student-life" class="nav-primary-link" data-i18n="nav.student-life">Student Life</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.arts">Arts &amp; Culture</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.athletics">Athletics &amp; Sports</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.clubs">Clubs &amp; Activities</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.service">Community Service</a></li>
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.council">Student Council</a></li>
+              </ul>
+            </li>
+            <li class="nav-primary-item" data-item="admissions">
+              <a href="admissions.html" class="nav-primary-link" data-i18n="nav.admissions">Admissions</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="admissions.html#process" class="nav-subnav-link" data-i18n="nav.sub.how-apply">How to Apply</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#fees" class="nav-subnav-link" data-i18n="nav.sub.fees">Tuition &amp; Fees</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link" data-i18n="nav.sub.tours">Campus Tours</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html" class="nav-subnav-link" data-i18n="nav.sub.request-info">Request Information</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#documents" class="nav-subnav-link" data-i18n="nav.sub.documents">Required Documents</a></li>
+                <li class="nav-subnav-item"><a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" class="nav-subnav-link" data-i18n="nav.apply-now">Apply Now</a></li>
+                <li class="nav-subnav-item"><a href="admissions.html#faq" class="nav-subnav-link" data-i18n="nav.sub.faq">Admissions FAQ</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-primary-item" data-item="our-school">
+              <a href="about.html" class="nav-primary-link" data-i18n="nav.our-school">Our School</a>
+              <ul class="nav-subnav">
+                <li class="nav-subnav-item"><a href="index.html#student-life" class="nav-subnav-link" data-i18n="nav.sub.life">Life at NAIS</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#middle" class="nav-subnav-link" data-i18n="nav.sub.middle">Middle School</a></li>
+                <li class="nav-subnav-item"><a href="academics.html#high" class="nav-subnav-link" data-i18n="nav.sub.upper">Upper School</a></li>
+                <li class="nav-subnav-item"><a href="about.html#leadership" class="nav-subnav-link" data-i18n="nav.sub.parents">Parent Community</a></li>
+                <li class="nav-subnav-item"><a href="index.html#news" class="nav-subnav-link" data-i18n="nav.sub.news">News &amp; Events</a></li>
+                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.contact">Contact Us</a></li>
+                <li class="nav-subnav-item"><a href="index.html#contact" class="nav-subnav-link" data-i18n="nav.sub.visit">Visit Campus</a></li>
+
+              </ul>
+            </li>
+
+          </ul>
+        </nav>
+        <div class="nav-panel-bottom">
+          <div class="nav-bottom-careers">
+            <span class="nav-careers-label" data-i18n="nav.careers">Career Opportunities</span>
+            <div class="nav-bottom-social">
+              <a href="https://www.facebook.com/naischooldxb/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              
+              <a href="https://www.instagram.com/northamericandxb/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              
+              <a href="https://www.youtube.com/@northamericaninternational6627" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="nav-bottom-search">
+            <span class="nav-search-label" data-i18n="nav.search">Search</span>
+            <div class="nav-search-form">
+              <input type="text" class="nav-search-input" data-i18n-placeholder="nav.search-placeholder" placeholder="Keyword" aria-label="Search" />
+              <button class="nav-search-btn" aria-label="Submit Search"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" target="_blank" rel="noopener" class="nav-apply-btn" data-i18n="nav.apply-now">Apply Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK LINKS BAR -->
+  <nav class="quick-links-bar" aria-label="Quick Access Links">
+    <div class="quick-links-inner">
+      <a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" class="quick-link-item highlight"><i class="fas fa-user-plus"></i> <span data-i18n="nav.apply-now">Apply Now</span></a>
+      <a href="admissions.html#fees" class="quick-link-item"><i class="fas fa-dollar-sign"></i> <span data-i18n="nav.sub.fees">Tuition Fees</span></a>
+      <a href="academics.html" class="quick-link-item"><i class="fas fa-graduation-cap"></i> <span data-i18n="nav.academics">Academics</span></a>
+      <a href="index.html#calendar" class="quick-link-item"><i class="fas fa-calendar-alt"></i> <span data-i18n="nav.sub.calendar">School Calendar</span></a>
+      <a href="index.html#contact" class="quick-link-item"><i class="fas fa-phone-alt"></i> <span data-i18n="nav.sub.contact">Contact Us</span></a>
+      <a href="https://nais.schoology.com/login" target="_blank" rel="noopener" class="quick-link-item"><i class="fas fa-external-link-alt"></i> <span data-i18n="topbar.elearning">LMS Login</span></a>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image:url('images/school-18.jpg')"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html" data-i18n="breadcrumb.home">Home</a>
+        <span>/</span>
+        <span data-i18n="about.breadcrumb">About NAIS</span>
+      </nav>
+      <div class="page-hero-badge"><i class="fas fa-award"></i> <span data-i18n="about.hero.badge">Est. 2005 · KHDA Licensed · Cognia Accredited</span></div>
+      <h1 class="page-hero-title" data-i18n-html="about.hero.title">About North American<br/><em>International School</em></h1>
+      <p class="page-hero-subtitle" data-i18n="about.hero.sub">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
+    </div>
+    <div class="page-hero-accent">NAIS</div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section class="about-mission-section section-pad" id="mission">
+    <div class="container">
+      <div class="mission-grid">
+        <div class="mission-content animate-fade-up">
+          <div class="section-label" data-i18n="about.mission.label">Our Purpose</div>
+          <h2 class="section-title" data-i18n-html="about.mission.h2">Mission, Vision<br/><em>&amp; Philosophy</em></h2>
+          <div class="title-ornament"></div>
+          <p data-i18n="about.mission.p1">North American International School was founded on the belief that every child deserves an exceptional education that prepares them not just for university, but for life. Rooted in the American curriculum tradition, we have built a community of learners who are curious, compassionate, and ready for a changing world.</p>
+          <p data-i18n="about.mission.p2">Our approach combines academic rigor with genuine care for each student's social-emotional wellbeing. At NAIS, students are not numbers — they are individuals with unique gifts, passions, and potential. Our small class sizes, dedicated faculty, and supportive community create the ideal conditions for every student to thrive.</p>
+
+          <div class="mission-highlight">
+            <h4 data-i18n="about.mission.h4a">Our Mission</h4>
+            <p data-i18n="about.mission.stmt">"To provide an exceptional American education that empowers students to achieve academic excellence, develop strong character, and become engaged global citizens."</p>
+          </div>
+          <div class="mission-highlight" style="margin-top:16px;">
+            <h4 data-i18n="about.vision.h4">Our Vision</h4>
+            <p data-i18n="about.vision.stmt">"A community of learners who are intellectually curious, morally grounded, and equipped to make a positive difference in the world."</p>
+          </div>
+        </div>
+        <div class="mission-image animate-fade-up" style="transition-delay:0.2s">
+          <img src="images/school-19.jpg" alt="NAIS students learning" />
+          <div class="mission-image-badge">
+            <span class="big-num">20+</span>
+            <span data-i18n="about.badge.years">Years of Educational Excellence in Dubai</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARE VALUES -->
+  <section class="values-section" id="values">
+    <div class="values-bg-overlay"></div>
+    <div class="container">
+      <div class="values-header">
+        <div class="section-label light" data-i18n="about.values.label">Our Core Framework</div>
+        <h2 class="section-title light" data-i18n-html="care.h2">The NAIS <em>CARE</em> Values</h2>
+        <div class="title-ornament centered-ornament light-ornament"></div>
+        <p class="section-intro light" data-i18n="care.intro">Everything we do at NAIS is guided by our four core values — Community, Awareness, Resilience, and Engagement. These aren't just words on a wall; they are the living culture of our school.</p>
+      </div>
+      <div class="care-grid stagger-children">
+        <div class="care-card">
+          <div class="care-letter">C</div>
+          <h3 data-i18n="care.c.h3">Community</h3>
+          <p data-i18n="care.c.p">We cultivate a warm, inclusive community where every student feels known, respected, and connected — across classrooms, hallways, and beyond.</p>
+          <div class="care-line"></div>
+        </div>
+        <div class="care-card">
+          <div class="care-letter">A</div>
+          <h3 data-i18n="care.a.h3">Awareness</h3>
+          <p data-i18n="care.a.p">We develop mindful, empathetic learners who are aware of themselves, their environment, and their responsibility to the broader global community.</p>
+          <div class="care-line"></div>
+        </div>
+        <div class="care-card">
+          <div class="care-letter">R</div>
+          <h3 data-i18n="care.r.h3">Resilience</h3>
+          <p data-i18n="care.r.p">We nurture the strength and grit to overcome challenges, learn from setbacks, and emerge more confident and capable with every experience.</p>
+          <div class="care-line"></div>
+        </div>
+        <div class="care-card">
+          <div class="care-letter">E</div>
+          <h3 data-i18n="care.e.h3">Engagement</h3>
+          <p data-i18n="care.e.p">We inspire deep, active engagement in learning, school life, and community — building students who are passionate and purposeful in all they do.</p>
+          <div class="care-line"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="leadership-section section-pad" id="leadership">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label" data-i18n="about.leadership.label">Our People</div>
+        <h2 class="section-title" data-i18n-html="about.leadership.h2">School <em>Leadership</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro" data-i18n="about.leadership.intro">Our experienced, passionate leadership team sets the tone for excellence, care, and innovation across every aspect of school life at NAIS.</p>
+      </div>
+
+      <!-- ── Chairman / Owner featured card ── -->
+      <div class="chairman-card-wrap">
+        <div class="chairman-card">
+          <div class="chairman-photo-col">
+            <div class="chairman-portrait">
+              <img src="images/executive-director.jpg" alt="Ms. Arwa A. Taher – Chairman / Owner" />
+            </div>
+            <div class="chairman-role-tag" data-i18n="leader.ed.tag">Chairman / Owner</div>
+          </div>
+          <div class="chairman-card-body">
+            <h3>Ms. Arwa A. Taher</h3>
+            <div class="chairman-card-title" data-i18n="leader.ed.title">Chairman / Owner, NAIS Dubai</div>
+            <blockquote class="chairman-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"At NAIS, we nurture every child's unique potential within a safe, inclusive, and values-driven environment — because great education begins with belonging."</p>
+            </blockquote>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-arwa">
+              <span class="lbt-icon">+</span><span class="lbt-label" data-i18n="leader.bio.read">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-arwa" aria-hidden="true">
+              <p class="leader-card-bio">Ms. Taher's visionary leadership has shaped NAIS into one of Dubai's most trusted American curriculum schools. Her commitment to Emirati values and community excellence defines the school's culture and strategic direction.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Group CEO featured card ── -->
+      <div class="ceo-card-wrap">
+        <div class="ceo-card">
+          <div class="ceo-photo-col">
+            <div class="ceo-portrait">
+              <img src="images/group-ceo.jpg" alt="Kelvin Hornsby – Group CEO" />
+            </div>
+            <div class="ceo-role-tag" data-i18n="leader.ceo.tag">Group CEO</div>
+          </div>
+          <div class="ceo-card-body">
+            <h3>Kelvin Hornsby</h3>
+            <div class="ceo-card-title" data-i18n="leader.ceo.title">Group Chief Executive Officer</div>
+            <blockquote class="ceo-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"Our mission is simple: create world-class schools where every child is inspired to achieve their greatest potential and every family feels at home."</p>
+            </blockquote>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-0">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-0" aria-hidden="true">
+              <p class="leader-card-bio">Kelvin Hornsby brings decades of international education leadership across the Middle East and beyond. His strategic vision drives the group's commitment to academic excellence, inclusive values, and sustainable school growth.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Principal featured card (same size as CEO card) ── -->
+      <div class="ceo-card-wrap">
+        <div class="ceo-card">
+          <div class="ceo-photo-col">
+            <div class="ceo-portrait">
+              <img src="images/school-01.jpg" alt="Justin McCauley – Principal" />
+            </div>
+            <div class="ceo-role-tag" data-i18n="leader.principal.tag">Principal</div>
+          </div>
+          <div class="ceo-card-body">
+            <h3>Justin McCauley</h3>
+            <div class="ceo-card-title" data-i18n="leader.principal.title">Principal, NAIS Dubai</div>
+            <blockquote class="ceo-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"Every student at NAIS is known, valued, and challenged. We create an environment where every child feels a strong sense of belonging while being inspired to achieve their full potential."</p>
+            </blockquote>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-2">
+              <span class="lbt-icon">+</span><span class="lbt-label" data-i18n="leader.bio.read">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-2" aria-hidden="true">
+              <p class="leader-card-bio">Justin McCauley brings over 25 years of international and U.S. educational leadership to NAIS Dubai, where he has served as Principal since 2019. Born and raised in Portland, Oregon, he holds a Bachelor of Arts from Portland State University, a post-baccalaureate teaching licence from Warner Pacific College, and a Master of Education from Lewis and Clark College, with further administrative studies at Concordia University.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Justin began his career teaching Language Arts, Leadership, and Film Studies at Centennial High School in Oregon for 10 years, before moving into school administration as Dean of Students, then Vice Principal and Principal in the United States. He subsequently joined the Abu Dhabi Department of Education and Knowledge as an Academic Vice Principal, serving four years before taking the helm at NAIS Dubai. He is passionate about data-informed decision-making, high-quality teaching, and strong family partnerships as the foundation for student growth.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="leadership-grid-equal stagger-children">
+
+        <!-- Vice Principal High School -->
+        <div class="leader-card-equal">
+          <div class="leader-card-photo">
+            <div class="leader-portrait">
+              <img src="images/school-02.jpg" alt="Crystal Goodwin – Vice Principal High School" />
+            </div>
+            <div class="leader-card-role-tag" data-i18n="leader.vp.hs.tag">Vice Principal</div>
+          </div>
+          <div class="leader-card-body">
+            <h3>Crystal C. Goodwin</h3>
+            <div class="leader-card-title" data-i18n="leader.vp.hs.title">Vice Principal – High School, NAIS Dubai</div>
+            <blockquote class="leader-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"Education has the power to transform society. I champion teaching that blends foundational knowledge with critical thinking — inspiring students to become the next generation of global innovators."</p>
+            </blockquote>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-3">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-3" aria-hidden="true">
+              <p class="leader-card-bio">Crystal C. Goodwin brings 22 years of dedicated service to education, combining deep subject-matter expertise with exceptional leadership skills. She holds a B.S. in Chemistry from Columbia College, a teaching certification from the University of North Carolina at Charlotte, and a Master of Education in Educational Leadership from Cambridge College.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Crystal began her career teaching Chemistry and Physics and developing innovative high school science curricula in the United States. After moving to the UAE — where she has lived for 11 years — she served as Curriculum Coordinator at an American high school in Dubai before joining NAIS as Vice Principal for Secondary and High School. She is a recognised expert in building professional learning communities and designing impactful professional development for teachers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vice Principal Middle School -->
+        <div class="leader-card-equal">
+          <div class="leader-card-photo">
+            <div class="leader-portrait">
+              <img src="images/school-03.jpg" alt="Jonathan D'Avignon – Vice Principal Middle School" />
+            </div>
+            <div class="leader-card-role-tag" data-i18n="leader.vp.hs.tag">Vice Principal</div>
+          </div>
+          <div class="leader-card-body">
+            <h3>Jonathan D'Avignon</h3>
+            <div class="leader-card-title" data-i18n="leader.vp.ms.title">Vice Principal – Middle School, NAIS Dubai</div>
+            <blockquote class="leader-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"I combine evidence-based practices with a collaborative leadership philosophy — empowering educators and students alike to reach their highest potential."</p>
+            </blockquote>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-4">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-4" aria-hidden="true">
+              <p class="leader-card-bio">Jonathan D'Avignon brings over two decades of distinguished international educational leadership experience to NAIS Dubai. His career spans roles as Principal, Assistant Principal, Magnet Programs Coordinator, and Instructional Coach. He holds an Education Specialist degree in Educational Leadership from the University of West Florida and is currently pursuing his Doctorate in Curriculum and Instruction.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Jonathan's international experience includes serving as Principal and IB Program Administrator at The Dewey Schools in Hà Nội, Vietnam. In the United States, he was instrumental in founding multiple innovative programmes in Florida — including STEAM Magnet programmes, Walton In"10"sity School of Education, and Seacoast Collegiate High School. He is also an educational consultant, keynote speaker, and lead facilitator for professional development programmes across the region.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vice Principal Elementary School -->
+        <div class="leader-card-equal">
+          <div class="leader-card-photo">
+            <div class="leader-portrait">
+              <img src="images/school-04.jpg" alt="Jennifer Rose McCauley – Vice Principal Elementary School" />
+            </div>
+            <div class="leader-card-role-tag" data-i18n="leader.vp.hs.tag">Vice Principal</div>
+          </div>
+          <div class="leader-card-body">
+            <h3>Jennifer Rose McCauley</h3>
+            <div class="leader-card-title" data-i18n="leader.vp.es.title">Vice Principal – Elementary School, NAIS Dubai</div>
+            <blockquote class="leader-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"Strong relationships are at the heart of a successful school. I work to build a culture where students feel confident to take risks, grow academically, and develop as individuals."</p>
+            </blockquote>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-5">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-5" aria-hidden="true">
+              <p class="leader-card-bio">Jennifer Rose McCauley is Vice Principal at NAIS Dubai, providing leadership in teaching and learning, student wellbeing, and schoolwide systems across the elementary division. With more than twenty years of experience in education — both in the United States and internationally — she brings a student-centred leadership approach grounded in strong relationships, instructional excellence, and an inclusive school culture.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Jennifer has a deep passion for literacy, mathematics, and science, and is committed to helping students build strong foundational skills while nurturing curiosity, problem-solving, and a love of discovery. She is especially passionate about responsible digital citizenship and supporting educators with the systems and professional resources they need to succeed in the classroom.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Head of Lower Elementary -->
+        <div class="leader-card-equal">
+          <div class="leader-card-photo">
+            <div class="leader-portrait">
+              <img src="images/school-05.jpg" alt="Natasha Sorak – Head of Lower Elementary" />
+            </div>
+            <div class="leader-card-role-tag" data-i18n="leader.hod.tag">Head of Department</div>
+          </div>
+          <div class="leader-card-body">
+            <h3>Natasha Sorak</h3>
+            <div class="leader-card-title" data-i18n="leader.hod.le.title">Head of Lower Elementary (KG–Grade 2), NAIS Dubai</div>
+            <blockquote class="leader-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"Strong foundations in academics and social-emotional development are the key to long-term success. Every child deserves an environment where they feel supported to thrive."</p>
+            </blockquote>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-6">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-6" aria-hidden="true">
+              <p class="leader-card-bio">Natasha Sorak is the Head of Department for Kindergarten through Grade 2 at NAIS Dubai. With a background in Psychology and ongoing Master's studies in both Early Childhood Education and Educational Leadership, she brings a strong balance of academic knowledge and practical leadership to her role.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Natasha is passionate about early childhood education and works closely with her team to create engaging, supportive classroom environments — with a particular focus on English Language Learners. Her areas of expertise include curriculum design, data-informed teaching, and building strong relationships within the school community.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Head of Inclusive Education -->
+        <div class="leader-card-equal">
+          <div class="leader-card-photo">
+            <div class="leader-portrait">
+              <img src="images/school-06.jpg" alt="Noha Shaaban – Head of Inclusive Education" />
+            </div>
+            <div class="leader-card-role-tag" data-i18n="leader.hod.tag">Head of Department</div>
+          </div>
+          <div class="leader-card-body">
+            <h3>Noha Shaaban</h3>
+            <div class="leader-card-title" data-i18n="leader.hod.ie.title">Head of Inclusive Education, NAIS Dubai</div>
+            <blockquote class="leader-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"Inclusive schools are stronger schools. Every student of determination deserves the support, belief, and opportunity to reach their fullest potential."</p>
+            </blockquote>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-7">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-7" aria-hidden="true">
+              <p class="leader-card-bio">Noha Shaaban brings nearly 30 years of experience in education to NAIS Dubai, having begun her teaching career in 1997. She has dedicated much of her career to inclusive education — taking on leadership of Elementary Stage inclusion programmes since 2004 — and has spent the past 8 years leading inclusive programmes at American curriculum schools across Dubai and Sharjah in the UAE.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">Noha holds a Master's degree in Special and Inclusive Education from University College London (UCL) and is currently pursuing her doctorate. She is also a certified school inspector, evaluating schools across the MENA region for accreditation purposes. Her work reflects a deep and unwavering commitment to supporting students of determination and building school communities where every learner belongs.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dean of Students -->
+        <div class="leader-card-equal">
+          <div class="leader-card-photo">
+            <div class="leader-portrait">
+              <img src="images/school-07.jpg" alt="Maha El-Tantawy – Dean of Students" />
+            </div>
+            <div class="leader-card-role-tag" data-i18n="leader.dean.tag">Dean of Students</div>
+          </div>
+          <div class="leader-card-body">
+            <h3>Maha El-Tantawy</h3>
+            <div class="leader-card-title" data-i18n="leader.dean.title">Dean of Students, NAIS Dubai</div>
+            <blockquote class="leader-quote">
+              <i class="fas fa-quote-left"></i>
+              <p>"Empowering students to take initiative and lead within their school community helps them develop confidence, resilience, and a strong sense of responsibility."</p>
+            </blockquote>
+            <button class="leader-bio-toggle" aria-expanded="false" aria-controls="bio-8">
+              <span class="lbt-icon">+</span><span class="lbt-label">Read Bio</span>
+            </button>
+            <div class="leader-bio-wrap" id="bio-8" aria-hidden="true">
+              <p class="leader-card-bio">Maha Gala El-Tantawy holds a BA in Computer Science from Cairo University and a PMP certification in Project Management, along with post-graduate studies in Engineering Project Management from the American University in Cairo. She brings over 24 years of professional experience, including 15 years working in schools across the United Arab Emirates, where she has developed extensive expertise in student affairs, wellbeing, and school leadership.</p>
+              <p class="leader-card-bio" style="margin-top:10px;">In her role, Maha oversees student wellbeing, attendance systems, and behavioural support, working closely with teachers, parents, and school leadership to foster a positive, respectful, and safe learning environment. A key part of her work involves implementing and ensuring compliance with student conduct policies aligned with KHDA and UAE Ministry of Education standards. She is deeply committed to student safety and safeguarding, while mentoring students and nurturing leadership skills through guidance, responsibility, and positive role modelling.</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.leadership-grid-equal -->
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       DSIB INSPECTION RESULTS 2023–24
+  ══════════════════════════════════════════════════════ -->
+  <section class="section-pad dsib-section" id="inspection">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="section-header centered">
+        <div class="section-label"><i class="fas fa-award"></i> &nbsp;Official Inspection Results</div>
+        <h2 class="section-title">Independent Inspection <em>&amp; Accreditation</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro">NAIS Dubai has been independently evaluated by two of the world's leading educational inspection and accreditation bodies — NEASC (2025) and the Dubai Schools Inspection Bureau (DSIB, 2023–2024) — both confirming our commitment to excellence.</p>
+      </div>
+
+      <!-- Rating Badges Row -->
+      <div class="dsib-badges-row">
+        <div class="dsib-badge dsib-badge--good">
+          <div class="dsib-badge-icon"><i class="fas fa-star"></i></div>
+          <div class="dsib-badge-text">
+            <strong>Good</strong>
+            <span>All Elementary Subjects</span>
+          </div>
+        </div>
+        <div class="dsib-badge dsib-badge--good">
+          <div class="dsib-badge-icon"><i class="fas fa-calculator"></i></div>
+          <div class="dsib-badge-text">
+            <strong>Good</strong>
+            <span>Math — Elementary &amp; High School</span>
+          </div>
+        </div>
+        <div class="dsib-badge dsib-badge--good">
+          <div class="dsib-badge-icon"><i class="fas fa-book"></i></div>
+          <div class="dsib-badge-text">
+            <strong>Good</strong>
+            <span>Arabic &amp; Islamic Studies — Elementary</span>
+          </div>
+        </div>
+        <div class="dsib-badge dsib-badge--vgood">
+          <div class="dsib-badge-icon"><i class="fas fa-child"></i></div>
+          <div class="dsib-badge-text">
+            <strong>Very Good</strong>
+            <span>Personal Development — KG</span>
+          </div>
+        </div>
+        <div class="dsib-badge dsib-badge--vgood">
+          <div class="dsib-badge-icon"><i class="fas fa-users"></i></div>
+          <div class="dsib-badge-text">
+            <strong>Very Good</strong>
+            <span>Personal Development — Elementary</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── NEASC 2025 Accreditation Inspection Quotes ── -->
+      <div class="neasc-block animate-fade-up">
+        <div class="neasc-header">
+          <div class="neasc-logo-badge">
+            <i class="fas fa-globe-americas"></i>
+          </div>
+          <div class="neasc-header-text">
+            <div class="neasc-eyebrow">NEASC Accreditation Inspection · 2025</div>
+            <h3>What Inspectors Said About <em>NAIS Dubai</em></h3>
+          </div>
+        </div>
+
+        <div class="neasc-quotes-grid">
+
+          <blockquote class="neasc-quote">
+            <p>"The school maintains an inclusive admissions policy welcoming students from a variety of backgrounds — <strong>indeed no student is turned away.</strong>"</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"School leadership takes a <strong>proactive and personalized approach</strong> to engaging with new families."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"They personally meet and onboard all new parents and students, ensuring that contact details are provided for additional support, thereby facilitating a <strong>smooth transition</strong> into the school environment."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"Parents and visitors reflected a <strong>high degree of satisfaction</strong> with the school."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"Parents reported a personal welcome by the school administration, a <strong>high level of care</strong> by the teacher, and the feeling of a <strong>sense of belonging</strong> among their children at all levels."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"The offering of many programs that build a <strong>sense of belonging and confidence</strong> in their children."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"<strong>Teachers are easily accessible.</strong>"</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"The school offers a <strong>balanced focus on academic and extracurricular activities.</strong>"</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"Middle school and high school students have seen growth (on average) of <strong>10 percentile points in MAP performance</strong>, across all subject areas — with some isolated dramatic results such as an <strong>18 percentile point gain</strong> in Middle School MAP Math scores in two years."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"<strong>The increase in student performance is remarkable.</strong>"</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"<strong>A clear trend of improvement can be seen.</strong>"</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"NAIS has embedded its values of <strong>inclusivity, rigor, and innovation</strong> into the culture of learning."</p>
+          </blockquote>
+
+          <blockquote class="neasc-quote">
+            <p>"The efforts at NAIS reflect the belief that <strong>every student can achieve growth</strong> when provided with structured support and challenge."</p>
+          </blockquote>
+
+        </div><!-- /.neasc-quotes-grid -->
+
+        <div class="neasc-footer-bar">
+          <span class="neasc-footer-note">Source: NEASC Accreditation Inspection Report · 2025</span>
+          <span class="neasc-accred-pill"><i class="fas fa-check-circle"></i> NEASC Accredited School</span>
+        </div>
+      </div><!-- /.neasc-block -->
+
+      <!-- Two-column: ratings + quotes -->
+      <div class="dsib-grid">
+
+        <!-- Ratings List -->
+        <div class="dsib-ratings animate-fade-up">
+          <div class="dsib-col-label"><i class="fas fa-clipboard-check"></i> <span data-i18n="about.dsib.ratings">Rating Highlights</span></div>
+          <ul class="dsib-list">
+            <li class="dsib-list-item dsib-good">
+              <span class="dsib-pill dsib-pill--good">Good</span>
+              <p>Progress for <strong>all subject categories</strong> in Elementary</p>
+            </li>
+            <li class="dsib-list-item dsib-good">
+              <span class="dsib-pill dsib-pill--good">Good</span>
+              <p>Attainment in <strong>Arabic &amp; Islamic Studies</strong> — Elementary</p>
+            </li>
+            <li class="dsib-list-item dsib-good">
+              <span class="dsib-pill dsib-pill--good">Good</span>
+              <p>Attainment in <strong>Elementary Mathematics</strong></p>
+            </li>
+            <li class="dsib-list-item dsib-good">
+              <span class="dsib-pill dsib-pill--good">Good</span>
+              <p>Attainment in <strong>High School Mathematics</strong></p>
+            </li>
+            <li class="dsib-list-item dsib-vgood">
+              <span class="dsib-pill dsib-pill--vgood">Very Good</span>
+              <p><strong>Personal Development</strong> in Kindergarten</p>
+            </li>
+            <li class="dsib-list-item dsib-vgood">
+              <span class="dsib-pill dsib-pill--vgood">Very Good</span>
+              <p><strong>Personal Development</strong> in Elementary</p>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Inspector Quotes -->
+        <div class="dsib-quotes animate-fade-up">
+          <div class="dsib-col-label"><i class="fas fa-quote-right"></i> <span data-i18n="about.dsib.quotes">Inspector Quotes</span></div>
+          <div class="dsib-quotes-grid">
+            <blockquote class="dsib-quote">
+              <p>"Students' learning skills are <strong>good across the school.</strong>"</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"Teachers possess <strong>secure knowledge of their subjects.</strong>"</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"Teaching in KG and Elementary is characterised by <strong>purposeful planning</strong> and instructional approaches that suit student needs."</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"The curriculum is <strong>systematically adapted</strong> to support students' academic progress."</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"Students clearly show appreciation and understanding of <strong>Islamic values</strong> and how these values shape their daily lives in the UAE."</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"<strong>Safeguarding, child protection and anti-bullying</strong> are high priorities."</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"Students possess a clear knowledge and appreciation of <strong>Emirati culture.</strong>"</p>
+            </blockquote>
+            <blockquote class="dsib-quote">
+              <p>"The <strong>leadership team manages the school effectively.</strong>"</p>
+            </blockquote>
+          </div>
+        </div>
+
+      </div><!-- /.dsib-grid -->
+
+      <!-- Bottom CTA strip -->
+      <div class="dsib-cta-strip">
+        <div class="dsib-cta-left">
+          <i class="fas fa-shield dsib-cta-icon"></i>
+          <div>
+            <strong data-i18n="about.dsib.cta.title">KHDA Licensed &amp; DSIB Evaluated</strong>
+            <span data-i18n="about.dsib.cta.sub">North American International School Dubai — 2023–2024 Academic Year</span>
+          </div>
+        </div>
+        <a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" class="btn btn-primary" data-i18n="about.dsib.apply.btn">Apply for 2026–2027 <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+
+
+  <!-- CAMPUS SECTION -->
+  <section class="section-pad bg-light" id="campus">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label" data-i18n="about.campus.label">Our Environment</div>
+        <h2 class="section-title" data-i18n-html="about.campus.h2">A Campus Designed for<br/><em>Learning &amp; Growth</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro" data-i18n="about.campus.intro">Our thoughtfully designed campus in Al Mizhar 1, Dubai provides students with inspiring spaces to learn, create, collaborate, and thrive.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" class="stagger-children">
+        <div style="background:white;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:200px;overflow:hidden;">
+            <img src="images/school-22.jpg" alt="Modern Classrooms at NAIS" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''" />
+          </div>
+          <div style="padding:24px;">
+            <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+              <i class="fas fa-chalkboard-teacher" style="color:white;font-size:1.1rem;"></i>
+            </div>
+            <h3 style="font-family:var(--font-serif);font-size:1.15rem;color:var(--navy);margin-bottom:8px;" data-i18n="about.campus.class.h3">Modern Classrooms</h3>
+            <p style="font-size:0.88rem;color:var(--gray-500);line-height:1.7;" data-i18n="about.campus.class.p">Bright, technology-equipped classrooms with interactive whiteboards and collaborative learning spaces designed to inspire.</p>
+          </div>
+        </div>
+
+        <div style="background:white;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:200px;overflow:hidden;">
+            <img src="images/school-17.jpg" alt="Sports Facilities at NAIS" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" />
+          </div>
+          <div style="padding:24px;">
+            <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+              <i class="fas fa-running" style="color:white;font-size:1.1rem;"></i>
+            </div>
+            <h3 style="font-family:var(--font-serif);font-size:1.15rem;color:var(--navy);margin-bottom:8px;" data-i18n="about.campus.sports.h3">Sports Facilities</h3>
+            <p style="font-size:0.88rem;color:var(--gray-500);line-height:1.7;" data-i18n="about.campus.sports.p">Full gymnasium, outdoor courts, and a sports field supporting a wide range of athletic programs and physical education.</p>
+          </div>
+        </div>
+
+        <div style="background:white;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:200px;overflow:hidden;">
+            <img src="images/school-23.jpg" alt="Library and Resources at NAIS Dubai" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;" />
+          </div>
+          <div style="padding:24px;">
+            <div style="width:44px;height:44px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
+              <i class="fas fa-book-open" style="color:white;font-size:1.1rem;"></i>
+            </div>
+            <h3 style="font-family:var(--font-serif);font-size:1.15rem;color:var(--navy);margin-bottom:8px;" data-i18n="about.campus.lib.h3">Library &amp; Resource Centre</h3>
+            <p style="font-size:0.88rem;color:var(--gray-500);line-height:1.7;" data-i18n="about.campus.lib.p">A well-stocked library and digital resource centre providing students access to knowledge, research tools, and quiet study spaces.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDENT LIFE & PHOTO GALLERY -->
+  <section class="section-pad" id="student-life">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label" data-i18n="about.life.label">Life at NAIS</div>
+        <h2 class="section-title" data-i18n-html="about.life.h2">Beyond the <em>Classroom</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro" data-i18n="about.life.intro">At NAIS, education extends far beyond textbooks. Our rich co-curricular programs, vibrant arts scene, competitive sports, and community service initiatives develop the whole child.</p>
+      </div>
+
+      <!-- Activities Grid -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:48px;" class="stagger-children">
+        <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:180px;overflow:hidden;"><img src="images/school-16.jpg" alt="Athletics at NAIS" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''" /></div>
+          <div style="padding:20px;">
+            <div style="width:38px;height:38px;background:var(--red);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><i class="fas fa-running" style="color:white;font-size:1rem;"></i></div>
+            <h4 style="font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);margin-bottom:6px;" data-i18n="about.life.athletics.h4">Athletics &amp; Sports</h4>
+            <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.65;" data-i18n="about.life.athletics.p">Football, basketball, swimming, athletics and more — competitive teams with expert coaching.</p>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:180px;overflow:hidden;"><img src="images/school-22.jpg" alt="Arts at NAIS" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''" /></div>
+          <div style="padding:20px;">
+            <div style="width:38px;height:38px;background:var(--red);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><i class="fas fa-palette" style="color:white;font-size:1rem;"></i></div>
+            <h4 style="font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);margin-bottom:6px;" data-i18n="about.life.arts.h4">Visual &amp; Performing Arts</h4>
+            <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.65;" data-i18n="about.life.arts.p">Drama, music, visual arts and dance — building creativity and self-expression in every student.</p>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:180px;overflow:hidden;"><img src="images/school-18.jpg" alt="Clubs at NAIS" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''" /></div>
+          <div style="padding:20px;">
+            <div style="width:38px;height:38px;background:var(--red);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><i class="fas fa-users" style="color:white;font-size:1rem;"></i></div>
+            <h4 style="font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);margin-bottom:6px;" data-i18n="about.life.clubs.h4">Clubs &amp; Societies</h4>
+            <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.65;" data-i18n="about.life.clubs.p">30+ student-led clubs spanning robotics, debate, journalism, MUN, coding, and more.</p>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);transition:var(--transition);" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='var(--shadow-xl)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-sm)'">
+          <div style="height:180px;overflow:hidden;"><img src="images/school-25.jpg" alt="Community Service at NAIS" style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform=''" /></div>
+          <div style="padding:20px;">
+            <div style="width:38px;height:38px;background:var(--red);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;margin-bottom:12px;"><i class="fas fa-heart" style="color:white;font-size:1rem;"></i></div>
+            <h4 style="font-family:var(--font-serif);font-size:1.05rem;color:var(--navy);margin-bottom:6px;" data-i18n="about.life.service.h4">Community Service</h4>
+            <p style="font-size:0.82rem;color:var(--gray-500);line-height:1.65;" data-i18n="about.life.service.p">Inspiring global citizenship through meaningful service projects locally and internationally.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Photo Gallery -->
+      <div class="photo-gallery animate-fade-up">
+        <div class="photo-gallery-item">
+          <img src="images/school-20.jpg" alt="NAIS campus life" />
+        </div>
+        <div class="photo-gallery-item">
+          <img src="images/school-19.jpg" alt="Students learning" />
+        </div>
+        <div class="photo-gallery-item">
+          <img src="images/school-17.jpg" alt="Sports at NAIS" />
+        </div>
+        <div class="photo-gallery-item">
+          <img src="images/school-15.jpg" alt="Arts program" />
+        </div>
+        <div class="photo-gallery-item">
+          <img src="images/school-21.jpg" alt="Student clubs at NAIS" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       INNOVATIVE SPLIT-PHOTO SECTION
+  ══════════════════════════════════════════ -->
+  <section style="background:#06080f;overflow:hidden;padding:0;">
+    <style>
+      /* ── SPLIT REVEAL ── */
+      .split-photos{display:grid;grid-template-columns:1.4fr 1fr 1fr;height:380px;gap:3px;}
+      @media(max-width:900px){.split-photos{grid-template-columns:1fr 1fr;height:280px;}}
+      @media(max-width:560px){.split-photos{grid-template-columns:1fr;height:auto;}}
+      .sp{position:relative;overflow:hidden;cursor:pointer;}
+      .sp img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.4,0,.2,1),filter .55s ease;}
+      .sp:nth-child(1) img{filter:brightness(.68) saturate(.8);}
+      .sp:nth-child(2) img{filter:brightness(.65) saturate(.6) sepia(.28) hue-rotate(195deg);}
+      .sp:nth-child(3) img{filter:brightness(.65) saturate(1.4) hue-rotate(340deg) sepia(.2);}
+      .sp:hover img{transform:scale(1.09);filter:brightness(.96) saturate(1.3) contrast(1.06)!important;}
+      .sp-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(6,8,15,.85) 100%);z-index:1;}
+      .sp-label{position:absolute;bottom:18px;left:18px;z-index:2;}
+      .sp-tag{font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#E11B22;display:block;margin-bottom:4px;}
+      .sp-title{font-family:'Playfair Display',serif;font-size:clamp(.9rem,1.5vw,1.2rem);color:#fff;font-weight:700;line-height:1.25;text-shadow:0 2px 12px rgba(0,0,0,.6);}
+      .sp-num{position:absolute;top:16px;right:16px;font-family:'Montserrat',sans-serif;font-size:2.4rem;font-weight:900;color:rgba(255,255,255,.06);z-index:2;line-height:1;}
+      /* ── DUOTONE ROW ── */
+      .duo-row{display:flex;height:160px;gap:3px;}
+      @media(max-width:600px){.duo-row{height:100px;}}
+      .dr{flex:1;overflow:hidden;position:relative;}
+      .dr img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease,filter .5s ease;}
+      .dr:nth-child(1) img{filter:sepia(.6) hue-rotate(200deg) saturate(1.5) brightness(.65);}
+      .dr:nth-child(2) img{filter:grayscale(70%) brightness(.62) contrast(1.2);}
+      .dr:nth-child(3) img{filter:sepia(.5) saturate(1.8) brightness(.62);}
+      .dr:nth-child(4) img{filter:brightness(.65) saturate(.5) contrast(1.25);}
+      .dr:nth-child(5) img{filter:sepia(.4) hue-rotate(320deg) saturate(1.4) brightness(.65);}
+      .dr:hover img{filter:brightness(.96) saturate(1.35)!important;transform:scale(1.1);}
+      @media(max-width:500px){.dr:nth-child(n+4){display:none;}}
+    </style>
+
+    <div class="split-photos">
+      <div class="sp">
+        <img src="images/school-17.jpg" alt="Sports Day tug of war NAIS" loading="lazy" />
+        <div class="sp-overlay"></div>
+        <span class="sp-num">01</span>
+        <div class="sp-label"><span class="sp-tag">Sports</span><div class="sp-title">Champions on<br/>Every Field</div></div>
+      </div>
+      <div class="sp">
+        <img src="images/school-19.jpg" alt="Teacher helping student NAIS" loading="lazy" />
+        <div class="sp-overlay"></div>
+        <span class="sp-num">02</span>
+        <div class="sp-label"><span class="sp-tag">Learning</span><div class="sp-title">Every Student<br/>Is Known Here</div></div>
+      </div>
+      <div class="sp">
+        <img src="images/school-22.jpg" alt="Science lab NAIS" loading="lazy" />
+        <div class="sp-overlay"></div>
+        <span class="sp-num">03</span>
+        <div class="sp-label"><span class="sp-tag">STEM</span><div class="sp-title">Science &amp;<br/>Discovery</div></div>
+      </div>
+    </div>
+
+    <div class="duo-row">
+      <div class="dr"><img src="images/school-16.jpg" alt="" loading="lazy" /></div>
+      <div class="dr"><img src="images/school-21.jpg" alt="" loading="lazy" /></div>
+      <div class="dr"><img src="images/school-23.jpg" alt="" loading="lazy" /></div>
+      <div class="dr"><img src="images/school-24.jpg" alt="" loading="lazy" /></div>
+      <div class="dr"><img src="images/school-25.jpg" alt="" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- STUDENT TESTIMONIALS -->
+  <section class="section-pad bg-light">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label" data-i18n="about.test.label">Voices of Our Community</div>
+        <h2 class="section-title" data-i18n-html="about.test.h2">What Our Students <em>Say</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" class="stagger-children">
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);position:relative;">
+          <div style="color:#f5a623;font-size:0.9rem;letter-spacing:2px;margin-bottom:14px;">★★★★★</div>
+          <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.75;font-style:italic;margin-bottom:20px;">"NAIS shaped me into the person I am today. The teachers really pushed me to reach my potential, and the CARE values weren't just words — they were the culture of our school every single day."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:46px;height:46px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;color:#fff;border:2px solid var(--red);flex-shrink:0;">AK</div>
+            <div><strong style="display:block;font-family:var(--font-display);font-size:0.85rem;color:var(--navy);">Adam K.</strong><span style="font-size:0.78rem;color:var(--gray-500);">Class of 2024 — University of Toronto</span></div>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);position:relative;">
+          <div style="color:#f5a623;font-size:0.9rem;letter-spacing:2px;margin-bottom:14px;">★★★★★</div>
+          <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.75;font-style:italic;margin-bottom:20px;">"The AP courses gave me a real advantage when I started university. My professors were impressed by how well-prepared I was. I owe that entirely to my incredible teachers at NAIS."</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:46px;height:46px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;color:#fff;border:2px solid var(--red);flex-shrink:0;">SR</div>
+            <div><strong style="display:block;font-family:var(--font-display);font-size:0.85rem;color:var(--navy);">Sara R.</strong><span style="font-size:0.78rem;color:var(--gray-500);">Class of 2023 — King's College London</span></div>
+          </div>
+        </div>
+        <div style="background:var(--white);border-radius:var(--radius-lg);padding:32px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-100);position:relative;">
+          <div style="color:#f5a623;font-size:0.9rem;letter-spacing:2px;margin-bottom:14px;">★★★★★</div>
+          <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.75;font-style:italic;margin-bottom:20px;">"Coming from a different country, I was worried about fitting in. At NAIS I found a community that welcomed me immediately. The diversity is beautiful — my best friends come from 12 different countries!"</p>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:46px;height:46px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.85rem;color:#fff;border:2px solid var(--red);flex-shrink:0;">YT</div>
+            <div><strong style="display:block;font-family:var(--font-display);font-size:0.85rem;color:var(--navy);">Yuki T.</strong><span style="font-size:0.78rem;color:var(--gray-500);">Grade 11 Student</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCREDITATIONS -->
+  <section class="accreditations-section section-pad" id="accreditation">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-label" data-i18n="about.accred.label">Recognition &amp; Trust</div>
+        <h2 class="section-title" data-i18n-html="about.accred.h2">Accreditations &amp; <em>Affiliations</em></h2>
+        <div class="title-ornament centered-ornament"></div>
+        <p class="section-intro" data-i18n="about.accred.intro">NAIS is recognized and accredited by leading educational bodies, ensuring our programs meet the highest international standards.</p>
+      </div>
+      <div class="accreditation-logos">
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-shield"></i><span>KHDA</span></div><p data-i18n="accred.khda">Knowledge &amp; Human Development Authority</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-globe-americas"></i><span>NEASC</span></div><p data-i18n="accred.neasc">New England Association of Schools &amp; Colleges</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-university"></i><span>College Board</span></div><p data-i18n="accred.cb">Advanced Placement Program Member</p></div>
+        <div class="accred-item"><div class="accred-badge"><i class="fas fa-flag"></i><span>MoE UAE</span></div><p data-i18n="accred.moe">UAE Ministry of Education Licensed</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" id="footer">
+    <div class="footer-top"><div class="container"><div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="images/nais-logo.png" alt="NAIS Dubai Logo" class="footer-logo-img" />
+        </div>
+        <p class="footer-desc" data-i18n="footer.desc">Inspiring excellence, building character, and shaping the global leaders of tomorrow — in the heart of Dubai.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/naischooldxb/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/northamericandxb/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          
+          
+        </div>
+      </div>
+      <div class="footer-col"><h4 class="footer-heading" data-i18n="footer.links">Quick Links</h4><ul class="footer-links"><li><a href="about.html" data-i18n="nav.about">About NAIS</a></li><li><a href="academics.html" data-i18n="nav.academics">Academic Programs</a></li><li><a href="admissions.html" data-i18n="nav.admissions">Admissions</a></li><li><a href="index.html#student-life" data-i18n="nav.student-life">Student Life</a></li><li><a href="index.html#contact" data-i18n="nav.sub.contact">Contact Us</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-heading" data-i18n="footer.programs">Academic Programs</h4><ul class="footer-links"><li><a href="academics.html#kindergarten" data-i18n="nav.sub.kg">Kindergarten</a></li><li><a href="academics.html#elementary" data-i18n="nav.sub.elementary">Elementary</a></li><li><a href="academics.html#middle" data-i18n="nav.sub.middle">Middle School</a></li><li><a href="academics.html#high" data-i18n="nav.sub.high">High School</a></li><li><a href="academics.html#inclusion" data-i18n="footer.inclusion">Inclusion</a></li></ul></div>
+      <div class="footer-col"><h4 class="footer-heading" data-i18n="footer.contact">Contact</h4><ul class="footer-contact-list"><li><i class="fas fa-map-marker-alt"></i><span data-i18n="footer.addr">Al Mizhar 1, Mirdif, Dubai, UAE</span></li><li><i class="fas fa-phone-alt"></i><a href="tel:+97142884844">+971 4 288 4844</a></li><li><i class="fas fa-envelope"></i><a href="mailto:admissions@naischool.ae">admissions@naischool.ae</a></li></ul><a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" target="_blank" rel="noopener" class="btn btn-red-sm" data-i18n="nav.apply-now">Apply Now <i class="fas fa-arrow-right"></i></a></div>
+    </div></div></div>
+    <div class="footer-bottom"><div class="container">
+      <p><span data-i18n="footer.copy">© 2025 North American International School, Dubai.</span> <span data-i18n="footer.rights">All rights reserved.</span></p>
+      <div class="footer-bottom-links"><a href="privacy-policy.html" data-i18n="footer.privacy">Privacy Policy</a><a href="terms-of-use.html" data-i18n="footer.terms">Terms of Use</a><a href="safeguarding.html" data-i18n="footer.safeguarding">Safeguarding</a></div>
+    </div></div>
+  </footer>
+
+  <!-- Language Float Pill (Mobile) -->
+  <div class="lang-float-pill" aria-label="Language switcher">
+    <button class="lang-switcher" data-lang="en" title="English">EN</button>
+    <button class="lang-switcher" data-lang="ar" title="العربية">عر</button>
+  </div>
+  <!-- WhatsApp Floating Button -->
+  <a href="https://nais.ethdigitalcampus.com//OAWeb?dbConnVar=NAIS&enquiryFlag=Y" class="apply-float" data-i18n-aria="nav.apply-now" aria-label="Apply Now"><i class="fas fa-pen-to-square"></i><span class="apply-float-label" data-i18n="nav.apply-now">Apply Now</span></a>
+<a href="https://wa.me/971563522454" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+  <!-- ── LEADER PHOTO LIGHTBOX ── -->
+  <div id="leader-lightbox" role="dialog" aria-modal="true" aria-label="Leader Profile">
+    <div class="lb-card" id="lb-card">
+      <button class="lb-close" id="lb-close" aria-label="Close"><i class="fas fa-times"></i></button>
+      <span class="lb-counter" id="lb-counter"></span>
+      <!-- Zoom toolbar -->
+      <div class="lb-zoom-bar" id="lb-zoom-bar">
+        <button class="lb-zoom-btn" id="lb-zoom-out" aria-label="Zoom out" title="Zoom out (−)"><i class="fas fa-search-minus"></i></button>
+        <span class="lb-zoom-level" id="lb-zoom-level">100%</span>
+        <button class="lb-zoom-btn" id="lb-zoom-in" aria-label="Zoom in" title="Zoom in (+)"><i class="fas fa-search-plus"></i></button>
+        <button class="lb-zoom-btn lb-zoom-reset" id="lb-zoom-reset" aria-label="Reset zoom" title="Reset zoom (0)">Reset</button>
+      </div>
+      <div class="lb-photo">
+        <img id="lb-img" src="" alt="" />
+        <div class="lb-photo-gradient"></div>
+        <div class="lb-role-tag" id="lb-role"></div>
+        <!-- Keyboard hint -->
+        <div class="lb-kbd-hint" id="lb-kbd-hint">
+          <span class="lb-kbd-tag"><kbd>+</kbd> Zoom In</span>
+          <span class="lb-kbd-tag"><kbd>-</kbd> Zoom Out</span>
+          <span class="lb-kbd-tag"><kbd>0</kbd> Reset</span>
+          <span class="lb-kbd-tag"><kbd>←</kbd><kbd>→</kbd> Navigate</span>
+          <span class="lb-kbd-tag"><kbd>Esc</kbd> Close</span>
+        </div>
+      </div>
+      <div class="lb-body">
+        <h2 id="lb-name"></h2>
+        <div class="lb-title" id="lb-job"></div>
+        <div class="lb-quote" id="lb-quote-wrap">
+          <i class="fas fa-quote-left"></i>
+          <p id="lb-quote"></p>
+        </div>
+        <p class="lb-bio" id="lb-bio1"></p>
+        <p class="lb-bio" id="lb-bio2"></p>
+      </div>
+      <div class="lb-nav">
+        <button class="lb-nav-btn" id="lb-prev" aria-label="Previous leader"><i class="fas fa-chevron-left"></i></button>
+        <button class="lb-nav-btn" id="lb-next" aria-label="Next leader"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+  <script src="js/nav.js"></script>
+  <script src="js/img-fallback.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/i18n.js?v=2"></script>
+
+  <script>
+  /* ── BIO EXPAND / COLLAPSE TOGGLE ── */
+  (function () {
+    'use strict';
+    var toggles = document.querySelectorAll('.leader-bio-toggle');
+    toggles.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var targetId = btn.getAttribute('aria-controls');
+        var wrap     = document.getElementById(targetId);
+        var icon     = btn.querySelector('.lbt-icon');
+        var label    = btn.querySelector('.lbt-label');
+        var isOpen   = btn.classList.contains('open');
+
+        if (isOpen) {
+          /* Collapse */
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          wrap.classList.remove('open');
+          wrap.setAttribute('aria-hidden', 'true');
+          icon.textContent = '+';
+          label.textContent = (typeof t === 'function' ? t('leader.bio.read') : null) || 'Read Bio';
+        } else {
+          /* Expand */
+          btn.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          wrap.classList.add('open');
+          wrap.setAttribute('aria-hidden', 'false');
+          icon.textContent = '−';
+          label.textContent = (typeof t === 'function' ? t('leader.bio.hide') : null) || 'Hide Bio';
+        }
+      });
+    });
+  }());
+
+  /* ── LEADER PHOTO LIGHTBOX ── */
+  (function () {
+    'use strict';
+
+    /* Collect all leader data from the cards */
+    var cards = Array.prototype.slice.call(
+      document.querySelectorAll('.leader-card-equal')
+    );
+
+    var leaders = cards.map(function (card) {
+      var img   = card.querySelector('.leader-card-photo img');
+      var role  = card.querySelector('.leader-card-role-tag');
+      var name  = card.querySelector('.leader-card-body h3');
+      var title = card.querySelector('.leader-card-title');
+      var quote = card.querySelector('.leader-quote p');
+      var bios  = card.querySelectorAll('.leader-card-bio');
+      return {
+        src:   img   ? img.src   : '',
+        alt:   img   ? img.alt   : '',
+        style: img   ? img.getAttribute('style') || '' : '',
+        role:  role  ? role.textContent.trim() : '',
+        name:  name  ? name.textContent.trim() : '',
+        title: title ? title.textContent.trim() : '',
+        quote: quote ? quote.textContent.trim() : '',
+        bio1:  bios[0] ? bios[0].textContent.trim() : '',
+        bio2:  bios[1] ? bios[1].textContent.trim() : ''
+      };
+    });
+
+    var lb       = document.getElementById('leader-lightbox');
+    var lbImg    = document.getElementById('lb-img');
+    var lbRole   = document.getElementById('lb-role');
+    var lbName   = document.getElementById('lb-name');
+    var lbJob    = document.getElementById('lb-job');
+    var lbQuote  = document.getElementById('lb-quote');
+    var lbQWrap  = document.getElementById('lb-quote-wrap');
+    var lbBio1   = document.getElementById('lb-bio1');
+    var lbBio2   = document.getElementById('lb-bio2');
+    var lbClose  = document.getElementById('lb-close');
+    var lbPrev   = document.getElementById('lb-prev');
+    var lbNext   = document.getElementById('lb-next');
+    var lbCounter= document.getElementById('lb-counter');
+    var current  = 0;
+
+    function populate(idx) {
+      var l = leaders[idx];
+      if (!l) return;
+      /* animate out then in */
+      var body = document.getElementById('lb-card');
+      body.style.transition = 'opacity 0.18s ease';
+      body.style.opacity = '0';
+      setTimeout(function () {
+        lbImg.src   = l.src;
+        lbImg.alt   = l.alt;
+        /* preserve per-person object-position */
+        lbImg.style.cssText = l.style || 'object-fit:cover;object-position:center top;';
+        lbImg.style.width   = '100%';
+        lbImg.style.height  = '100%';
+        lbImg.style.display = 'block';
+        lbRole.textContent  = l.role;
+        lbName.textContent  = l.name;
+        lbJob.textContent   = l.title;
+        lbQuote.textContent = l.quote;
+        lbQWrap.style.display = l.quote ? '' : 'none';
+        lbBio1.textContent  = l.bio1;
+        lbBio1.style.display = l.bio1 ? '' : 'none';
+        lbBio2.textContent  = l.bio2;
+        lbBio2.style.display = l.bio2 ? '' : 'none';
+        lbCounter.textContent = (idx + 1) + ' / ' + leaders.length;
+        body.style.opacity = '1';
+      }, 180);
+    }
+
+    function openLb(idx) {
+      current = ((idx % leaders.length) + leaders.length) % leaders.length;
+      populate(current);
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      lb.focus();
+    }
+
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* Click on photo area opens lightbox */
+    cards.forEach(function (card, i) {
+      var photoDiv = card.querySelector('.leader-card-photo');
+      if (photoDiv) {
+        photoDiv.addEventListener('click', function () { openLb(i); });
+      }
+    });
+
+    /* Close button */
+    if (lbClose) lbClose.addEventListener('click', closeLb);
+
+    /* Backdrop click closes */
+    lb.addEventListener('click', function (e) {
+      if (e.target === lb) closeLb();
+    });
+
+    /* Prev / Next */
+    if (lbPrev) lbPrev.addEventListener('click', function () {
+      current = (current - 1 + leaders.length) % leaders.length;
+      populate(current);
+    });
+    if (lbNext) lbNext.addEventListener('click', function () {
+      current = (current + 1) % leaders.length;
+      populate(current);
+    });
+
+    /* Keyboard: Escape, ArrowLeft, ArrowRight, +/-, 0 */
+    document.addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape')     { closeLb(); }
+      if (e.key === 'ArrowLeft')  { current = (current - 1 + leaders.length) % leaders.length; populate(current); }
+      if (e.key === 'ArrowRight') { current = (current + 1) % leaders.length; populate(current); }
+      if (e.key === '+' || e.key === '=') { e.preventDefault(); applyZoom(zoomIdx + 1); }
+      if (e.key === '-' || e.key === '_') { e.preventDefault(); applyZoom(zoomIdx - 1); }
+      if (e.key === '0')          { e.preventDefault(); resetZoom(); }
+    });
+
+    /* ── PHOTO ZOOM SYSTEM ── */
+    var ZOOM_STEPS  = [100, 125, 150, 175, 200, 250, 300];
+    var zoomIdx     = 0;
+    var zoomBtn     = document.getElementById('lb-zoom-bar');
+    var btnZoomIn   = document.getElementById('lb-zoom-in');
+    var btnZoomOut  = document.getElementById('lb-zoom-out');
+    var btnZoomReset= document.getElementById('lb-zoom-reset');
+    var zoomLabel   = document.getElementById('lb-zoom-level');
+    var kbdHint     = document.getElementById('lb-kbd-hint');
+    var kbdHintTimer;
+
+    function applyZoom(idx) {
+      zoomIdx = Math.max(0, Math.min(ZOOM_STEPS.length - 1, idx));
+      var pct = ZOOM_STEPS[zoomIdx];
+      lbImg.style.transform = (pct === 100) ? '' : 'scale(' + (pct / 100).toFixed(2) + ')';
+      lbImg.style.transformOrigin = 'center center';
+      lbImg.style.objectFit = (pct > 100) ? 'none' : 'cover';
+      lbImg.classList.toggle('zoomed', pct > 100);
+      zoomLabel.textContent = pct + '%';
+      btnZoomIn.disabled  = (zoomIdx >= ZOOM_STEPS.length - 1);
+      btnZoomOut.disabled = (zoomIdx <= 0);
+      /* cursor on photo div */
+      document.querySelector('.lb-photo').style.overflow = (pct > 100) ? 'auto' : 'hidden';
+    }
+
+    function resetZoom() { applyZoom(0); }
+
+    /* Reset zoom whenever a new leader is shown */
+    var _origPopulate = populate;
+    populate = function (idx) {
+      resetZoom();
+      _origPopulate(idx);
+    };
+
+    if (btnZoomIn)    btnZoomIn.addEventListener('click',   function(e){ e.stopPropagation(); applyZoom(zoomIdx + 1); });
+    if (btnZoomOut)   btnZoomOut.addEventListener('click',  function(e){ e.stopPropagation(); applyZoom(zoomIdx - 1); });
+    if (btnZoomReset) btnZoomReset.addEventListener('click',function(e){ e.stopPropagation(); resetZoom(); });
+
+    /* Click on photo toggles zoom in/out */
+    lbImg.addEventListener('click', function (e) {
+      e.stopPropagation();
+      if (zoomIdx === 0) applyZoom(2);   /* jump to 150% */
+      else               resetZoom();
+    });
+
+    /* Wheel zoom on photo */
+    lbImg.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      if (e.deltaY < 0) applyZoom(zoomIdx + 1);
+      else              applyZoom(zoomIdx - 1);
+    }, { passive: false });
+
+    /* Show/hide keyboard hint */
+    function showKbdHint() {
+      if (!kbdHint) return;
+      kbdHint.classList.remove('hidden');
+      clearTimeout(kbdHintTimer);
+      kbdHintTimer = setTimeout(function () {
+        kbdHint.classList.add('hidden');
+      }, 3000);
+    }
+    lb.addEventListener('mouseenter', showKbdHint);
+
+    /* Initialise zoom state */
+    applyZoom(0);
+
+    /* Touch swipe support */
+    var swipeStartX = 0;
+    lb.addEventListener('touchstart', function (e) {
+      swipeStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      var diff = swipeStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 40) {
+        current = diff > 0
+          ? (current + 1) % leaders.length
+          : (current - 1 + leaders.length) % leaders.length;
+        populate(current);
+      }
+    }, { passive: true });
+  })();
+  </script>
+</body>
+</html>

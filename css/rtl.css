@@ -1,0 +1,1499 @@
+/* ============================================================
+   NAIS Dubai – RTL (Arabic) Stylesheet
+   Applied when <body class="lang-ar"> + <html dir="rtl">
+   All rules scoped to .lang-ar to avoid any conflict with LTR
+   ============================================================ */
+
+/* ── Arabic Font Import ── */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap');
+
+/* ═══════════════════════════════════════════════════════
+   1. BASE — Typography & Direction
+═══════════════════════════════════════════════════════ */
+.lang-ar,
+.lang-ar *:not(i):not(svg):not(.fab):not(.fas):not(.far) {
+  font-family: 'Cairo', 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif !important;
+  letter-spacing: 0 !important;           /* Arabic doesn't use letter-spacing */
+}
+
+.lang-ar {
+  text-align: right;
+}
+
+/* Keep icons direction-neutral */
+.lang-ar i,
+.lang-ar .fas,
+.lang-ar .far,
+.lang-ar .fab,
+.lang-ar svg {
+  font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands' !important;
+}
+
+/* Flip arrow icons in RTL */
+.lang-ar .fa-arrow-right::before  { content: "\f060"; } /* fa-arrow-left  */
+.lang-ar .fa-arrow-left::before   { content: "\f061"; } /* fa-arrow-right */
+.lang-ar .fa-chevron-right::before { content: "\f053"; } /* fa-chevron-left */
+.lang-ar .fa-chevron-left::before  { content: "\f054"; } /* fa-chevron-right */
+
+/* Nav subnav arrow — flip in RTL */
+.lang-ar .nav-subnav-arrow {
+  transform: scaleX(-1);
+  display: inline-block;
+}
+
+/* ═══════════════════════════════════════════════════════
+   2. TOPBAR
+═══════════════════════════════════════════════════════ */
+.lang-ar .topbar-inner {
+  flex-direction: row-reverse;
+}
+.lang-ar .topbar-left {
+  flex-direction: row-reverse;
+  margin-right: auto;
+  margin-left: unset;
+}
+.lang-ar .topbar-right {
+  flex-direction: row-reverse;
+  margin-left: auto;
+  margin-right: unset;
+}
+.lang-ar .topbar-social {
+  flex-direction: row-reverse;
+}
+
+/* Language switcher in topbar */
+.lang-switcher-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 8px;
+}
+.lang-switcher {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.7);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 9px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  font-family: 'Montserrat', 'Cairo', sans-serif !important;
+  line-height: 1;
+}
+.lang-switcher:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-color: rgba(255,255,255,0.6);
+}
+.lang-switcher.active {
+  background: #E11B22;
+  border-color: #E11B22;
+  color: #fff;
+}
+.lang-switcher-divider {
+  color: rgba(255,255,255,0.3);
+  font-size: 11px;
+  line-height: 1;
+}
+
+/* Mobile lang switcher in nav overlay */
+.nav-lang-switcher-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 12px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.nav-lang-switcher-wrap .lang-switcher {
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   3. NAV RAIL & OVERLAY
+═══════════════════════════════════════════════════════ */
+
+/* Desktop nav rail: move to LEFT side in RTL */
+.lang-ar .nav-rail {
+  right: unset;
+  left: 0;
+}
+
+/* Nav overlay: flip panels */
+.lang-ar .nav-overlay {
+  flex-direction: row-reverse;
+}
+.lang-ar .nav-left-panel {
+  order: 2;
+}
+.lang-ar .nav-right-panel {
+  order: 1;
+}
+
+/* Close button flip */
+.lang-ar .nav-close {
+  left: unset;
+  right: 0;
+}
+
+/* Nav list alignment */
+.lang-ar .nav-primary-list {
+  text-align: right;
+}
+.lang-ar .nav-primary-link {
+  text-align: right;
+}
+.lang-ar .nav-subnav {
+  text-align: right;
+  padding-right: 16px;
+  padding-left: 0;
+  border-right: 2px solid rgba(225,27,34,0.4);
+  border-left: none;
+}
+.lang-ar .nav-subnav-link {
+  text-align: right;
+}
+
+/* Nav bottom bar */
+.lang-ar .nav-panel-bottom {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .nav-bottom-careers {
+  text-align: right;
+}
+.lang-ar .nav-bottom-social {
+  flex-direction: row-reverse;
+}
+.lang-ar .nav-search-form {
+  flex-direction: row-reverse;
+}
+.lang-ar .nav-search-input {
+  text-align: right;
+  border-radius: 0 4px 4px 0;
+}
+.lang-ar .nav-search-btn {
+  border-radius: 4px 0 0 4px;
+}
+
+/* Tagline in left panel */
+.lang-ar .nav-left-tagline {
+  text-align: right;
+}
+.lang-ar .nav-promo-card {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   4. HERO SECTION
+═══════════════════════════════════════════════════════ */
+.lang-ar .hero-content {
+  text-align: right;
+  align-items: flex-end;
+}
+.lang-ar .hero-badge {
+  flex-direction: row-reverse;
+}
+.lang-ar .hero-title {
+  text-align: right;
+}
+.lang-ar .hero-title-line {
+  text-align: right;
+}
+.lang-ar .hero-subtitle {
+  text-align: right;
+}
+.lang-ar .hero-actions {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.lang-ar .hero-stats {
+  flex-direction: row-reverse;
+}
+.lang-ar .stat-item {
+  text-align: right;
+}
+.lang-ar .hero-sub-tagline {
+  text-align: right;
+}
+.lang-ar .btn-360-hero {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .btn-360-text {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   5. SECTION HEADERS
+═══════════════════════════════════════════════════════ */
+.lang-ar .section-header,
+.lang-ar .section-header-centered {
+  text-align: right;
+}
+.lang-ar .section-header-centered {
+  text-align: center; /* keep centered headers centered */
+}
+.lang-ar .section-tag,
+.lang-ar .section-eyebrow {
+  text-align: right;
+}
+.lang-ar .title-ornament {
+  margin-right: 0;
+  margin-left: auto;
+}
+.lang-ar .centered-ornament {
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   6. WHY NAIS CARDS
+═══════════════════════════════════════════════════════ */
+.lang-ar .why-card {
+  text-align: right;
+}
+.lang-ar .why-icon {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   7. USP PILLARS
+═══════════════════════════════════════════════════════ */
+.lang-ar .usp-pillar {
+  text-align: right;
+}
+.lang-ar .usp-pillar-icon {
+  margin-right: 0;
+  margin-left: auto;
+}
+.lang-ar .usp-pillar-tag {
+  text-align: right;
+}
+.lang-ar .usp-pillar h3 {
+  text-align: right;
+}
+.lang-ar .usp-pillar p {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   8. ACADEMICS PREVIEW
+═══════════════════════════════════════════════════════ */
+.lang-ar .acad-grid,
+.lang-ar .academics-intro-grid {
+  direction: rtl;
+}
+.lang-ar .acad-card,
+.lang-ar .prog-detail {
+  text-align: right;
+}
+.lang-ar .acad-card-icon {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   9. LEADERSHIP CARDS
+═══════════════════════════════════════════════════════ */
+.lang-ar .leader-card {
+  text-align: right;
+}
+.lang-ar .leader-card-body {
+  text-align: right;
+}
+.lang-ar .leader-card-quote {
+  text-align: right;
+  border-right: 3px solid #E11B22;
+  border-left: none;
+  padding-right: 12px;
+  padding-left: 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   10. CONTACT & FORMS
+═══════════════════════════════════════════════════════ */
+.lang-ar .contact-grid {
+  flex-direction: row-reverse;
+}
+.lang-ar .contact-info-item {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar input,
+.lang-ar textarea,
+.lang-ar select {
+  text-align: right;
+  direction: rtl;
+}
+.lang-ar label {
+  text-align: right;
+  display: block;
+}
+.lang-ar .form-group {
+  text-align: right;
+}
+.lang-ar .mini-form input,
+.lang-ar .mini-form select,
+.lang-ar .mini-form textarea {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   11. FOOTER
+═══════════════════════════════════════════════════════ */
+.lang-ar .footer-grid {
+  direction: rtl;
+}
+.lang-ar .footer-col {
+  text-align: right;
+}
+.lang-ar .footer-links li {
+  text-align: right;
+}
+.lang-ar .footer-bottom {
+  flex-direction: row-reverse;
+}
+.lang-ar .footer-bottom-links {
+  flex-direction: row-reverse;
+}
+.lang-ar .footer-social {
+  flex-direction: row-reverse;
+}
+.lang-ar .footer-logo-wrap {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   12. MOBILE BOTTOM BAR
+═══════════════════════════════════════════════════════ */
+.lang-ar .mobile-cta-bar {
+  flex-direction: row-reverse;
+}
+
+/* ═══════════════════════════════════════════════════════
+   13. BREADCRUMBS & PAGE HEADERS
+═══════════════════════════════════════════════════════ */
+.lang-ar .breadcrumb {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .page-hero-content {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   14. ADMISSION STEPS
+═══════════════════════════════════════════════════════ */
+.lang-ar .adm-process-steps {
+  direction: rtl;
+}
+.lang-ar .adm-step {
+  text-align: right;
+}
+.lang-ar .adm-step-arrow {
+  transform: scaleX(-1);
+}
+
+/* ═══════════════════════════════════════════════════════
+   15. FEES TABLE
+═══════════════════════════════════════════════════════ */
+.lang-ar .fees-table th,
+.lang-ar .fees-table td {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   16. ACCREDITATION BADGES
+═══════════════════════════════════════════════════════ */
+.lang-ar .accreditation-logos {
+  flex-direction: row-reverse;
+}
+.lang-ar .accred-item {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   17. STATS / COUNTERS
+═══════════════════════════════════════════════════════ */
+.lang-ar .stats-grid,
+.lang-ar .kpi-grid {
+  direction: rtl;
+}
+.lang-ar .kpi-card,
+.lang-ar .stat-card {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   18. GALLERY
+═══════════════════════════════════════════════════════ */
+.lang-ar .gallery-header {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   19. NEWS / BLOG CARDS
+═══════════════════════════════════════════════════════ */
+.lang-ar .news-card,
+.lang-ar .blog-card {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   20. ABOUT PAGE — MISSION / VALUES
+═══════════════════════════════════════════════════════ */
+.lang-ar .mission-content,
+.lang-ar .values-grid {
+  direction: rtl;
+}
+.lang-ar .value-card,
+.lang-ar .care-card {
+  text-align: right;
+}
+.lang-ar .care-letter {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   21. FAQ PAGE
+═══════════════════════════════════════════════════════ */
+.lang-ar .faq-item {
+  text-align: right;
+}
+.lang-ar .faq-question {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .faq-answer {
+  text-align: right;
+}
+.lang-ar .faq-tabs {
+  flex-direction: row-reverse;
+}
+.lang-ar .faq-sidebar {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   22. RECRUITMENT / VISIT SECTION
+═══════════════════════════════════════════════════════ */
+.lang-ar .recruit-grid {
+  direction: rtl;
+}
+.lang-ar .recruit-content {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   23. RESPONSIVE OVERRIDES FOR ARABIC
+═══════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .lang-ar .hero-content {
+    text-align: center;
+    align-items: center;
+  }
+  .lang-ar .hero-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .lang-ar .hero-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .lang-ar .topbar-inner {
+    flex-direction: column;
+  }
+  .lang-ar .nav-right-panel {
+    text-align: right;
+  }
+  .lang-ar .nav-primary-list {
+    text-align: right;
+  }
+  .lang-ar .contact-grid {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .lang-ar .hero-content {
+    text-align: center;
+  }
+  .lang-ar .section-header {
+    text-align: center;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   24. LANGUAGE SWITCHER — FLOATING PILL (Mobile)
+═══════════════════════════════════════════════════════ */
+.lang-float-pill {
+  display: none;
+}
+@media (max-width: 900px) {
+  .lang-float-pill {
+    display: flex;
+    position: fixed;
+    bottom: 80px;
+    left: 16px;
+    z-index: 8888;
+    background: rgba(11,18,48,0.95);
+    border: 1.5px solid rgba(225,27,34,0.5);
+    border-radius: 30px;
+    padding: 5px 7px;
+    gap: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    backdrop-filter: blur(8px);
+  }
+  .lang-ar .lang-float-pill {
+    left: unset;
+    right: 16px;
+  }
+  .lang-float-pill .lang-switcher {
+    border-radius: 20px;
+    font-size: 10px;
+    padding: 4px 10px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.65);
+    font-family: 'Montserrat', 'Cairo', sans-serif !important;
+  }
+  .lang-float-pill .lang-switcher.active {
+    background: #E11B22;
+    color: #fff;
+  }
+  .lang-float-pill .lang-switcher:hover {
+    color: #fff;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   25. SMOOTH TRANSITION ON LANG SWITCH
+═══════════════════════════════════════════════════════ */
+body {
+  transition: opacity 0.18s ease;
+}
+body.lang-switching {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════
+   26. WELCOME SECTION
+═══════════════════════════════════════════════════════ */
+.lang-ar .welcome-grid {
+  direction: rtl;
+}
+.lang-ar .welcome-content-col {
+  text-align: right;
+}
+.lang-ar .welcome-pillars {
+  direction: rtl;
+}
+.lang-ar .pillar-card {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .pillar-icon {
+  margin-right: 0;
+  margin-left: 14px;
+}
+.lang-ar .welcome-actions {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+.lang-ar .welcome-quote-box {
+  text-align: right;
+}
+.lang-ar .quote-icon {
+  float: right;
+  margin-right: 0;
+  margin-left: 10px;
+}
+.lang-ar .quote-principal {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   27. ACADEMICS SECTION (Program Cards)
+═══════════════════════════════════════════════════════ */
+.lang-ar .programs-grid {
+  direction: rtl;
+}
+.lang-ar .program-card-body {
+  text-align: right;
+}
+.lang-ar .program-features li {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .program-features li i {
+  margin-right: 0;
+  margin-left: 8px;
+}
+.lang-ar .program-link {
+  display: inline-block;
+}
+.lang-ar .academics-highlights {
+  direction: rtl;
+}
+.lang-ar .acad-highlight-item {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .acad-highlight-item i {
+  margin-right: 0;
+  margin-left: 12px;
+}
+.lang-ar .acad-highlight-item div {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   28. CARE VALUES
+═══════════════════════════════════════════════════════ */
+.lang-ar .care-grid {
+  direction: rtl;
+}
+.lang-ar .values-header {
+  text-align: center;
+}
+.lang-ar .care-line {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   29. STUDENT LIFE
+═══════════════════════════════════════════════════════ */
+.lang-ar .section-header {
+  text-align: right;
+}
+.lang-ar .life-showcase {
+  direction: rtl;
+}
+.lang-ar .life-feature-overlay {
+  text-align: right;
+}
+.lang-ar .life-card-overlay {
+  text-align: right;
+}
+.lang-ar .life-tag {
+  display: inline-block;
+}
+
+/* ═══════════════════════════════════════════════════════
+   30. HOME GALLERY SECTION
+═══════════════════════════════════════════════════════ */
+.lang-ar .hg-main {
+  direction: rtl;
+}
+.lang-ar .hg-info {
+  text-align: right;
+}
+.lang-ar .hg-label {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.lang-ar .hg-stats-row {
+  flex-direction: row-reverse;
+}
+.lang-ar .hg-cta-row {
+  flex-direction: row-reverse;
+}
+.lang-ar .hg-mosaic-badge {
+  left: unset;
+  right: 12px;
+  border-left: none;
+  border-right: 3px solid #E11B22;
+}
+
+/* ═══════════════════════════════════════════════════════
+   31. USP PILLARS — Featured Pillar 02
+═══════════════════════════════════════════════════════ */
+.lang-ar .usp-pillars-grid {
+  direction: rtl;
+}
+.lang-ar .usp-pillar-accent {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   32. RECRUITMENT / OPEN HOUSE SECTION
+═══════════════════════════════════════════════════════ */
+.lang-ar .recruit-leaders-grid {
+  direction: rtl;
+}
+.lang-ar .recruit-leader-card {
+  text-align: right;
+}
+.lang-ar .recruit-leader-role-tag {
+  left: unset;
+  right: 12px;
+}
+.lang-ar .recruit-leader-body {
+  text-align: right;
+}
+.lang-ar .recruit-leader-quote {
+  border-left: none;
+  border-right: 3px solid rgba(225,27,34,0.4);
+  padding-left: 0;
+  padding-right: 14px;
+  text-align: right;
+}
+.lang-ar .recruit-card-header {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .recruit-card--principal .recruit-card-header {
+  flex-direction: row-reverse;
+}
+.lang-ar .recruit-day-block {
+  text-align: right;
+}
+.lang-ar .recruit-day-name {
+  flex-direction: row-reverse;
+}
+.lang-ar .recruit-day-name i {
+  margin-right: 0;
+  margin-left: 6px;
+}
+.lang-ar .recruit-schedule {
+  direction: rtl;
+}
+.lang-ar .openhouse-dates {
+  direction: rtl;
+}
+.lang-ar .oh-date-item {
+  flex-direction: row-reverse;
+}
+.lang-ar .oh-date-info {
+  text-align: right;
+}
+.lang-ar .oh-date-arrow {
+  margin-left: 0;
+  margin-right: auto;
+  transform: scaleX(-1);
+}
+.lang-ar .ambassador-reward {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .ambassador-reward i {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   33. 360° CAMPUS TOUR
+═══════════════════════════════════════════════════════ */
+.lang-ar .campus-360-header {
+  text-align: center;
+}
+.lang-ar .tour-tabs {
+  flex-direction: row-reverse;
+}
+.lang-ar .tour-tab {
+  flex-direction: row-reverse;
+  gap: 6px;
+}
+.lang-ar .tour-pane {
+  direction: rtl;
+}
+.lang-ar .tour-info-card {
+  text-align: right;
+}
+.lang-ar .tour-features {
+  padding-right: 0;
+  padding-left: 0;
+}
+.lang-ar .tour-features li {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .tour-features li i {
+  margin-right: 0;
+  margin-left: 8px;
+}
+.lang-ar .tour-bottom-cta {
+  flex-direction: row-reverse;
+}
+.lang-ar .tour-bottom-text {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .tour-bottom-text i {
+  margin-right: 0;
+  margin-left: 14px;
+}
+.lang-ar .tour-source-badge {
+  flex-direction: row-reverse;
+}
+
+/* ═══════════════════════════════════════════════════════
+   34. STATS SECTION
+═══════════════════════════════════════════════════════ */
+.lang-ar .stats-grid-full {
+  direction: rtl;
+}
+.lang-ar .stat-full-item {
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   35. TESTIMONIALS
+═══════════════════════════════════════════════════════ */
+.lang-ar .testimonial-card {
+  text-align: right;
+}
+.lang-ar .testimonial-author {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .author-info {
+  text-align: right;
+}
+.lang-ar .testimonial-controls {
+  flex-direction: row-reverse;
+}
+.lang-ar .testimonial-prev,
+.lang-ar .testimonial-next {
+  transform: scaleX(-1);
+}
+
+/* ═══════════════════════════════════════════════════════
+   36. VIDEO PROMO
+═══════════════════════════════════════════════════════ */
+.lang-ar .video-promo-content {
+  direction: rtl;
+}
+.lang-ar .video-promo-text {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   37. PHOTO PARALLAX PANELS
+═══════════════════════════════════════════════════════ */
+.lang-ar .ppx-panel-content {
+  text-align: right;
+}
+.lang-ar .ppx-panel-tag {
+  display: inline-block;
+}
+.lang-ar .ppx-panel-arrow {
+  right: unset;
+  left: 18px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   38. NEWS & EVENTS
+═══════════════════════════════════════════════════════ */
+.lang-ar .news-section .section-header {
+  flex-direction: row-reverse;
+  align-items: flex-start;
+}
+.lang-ar .news-grid {
+  direction: rtl;
+}
+.lang-ar .news-body {
+  text-align: right;
+}
+.lang-ar .news-meta {
+  text-align: right;
+}
+.lang-ar .news-tag {
+  left: unset;
+  right: 14px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   39. SCHOOL CALENDAR
+═══════════════════════════════════════════════════════ */
+.lang-ar .calendar-section .section-header {
+  flex-direction: row-reverse;
+  align-items: flex-start;
+}
+.lang-ar .calendar-grid {
+  direction: rtl;
+}
+.lang-ar .calendar-card {
+  flex-direction: row-reverse;
+}
+.lang-ar .calendar-info {
+  text-align: right;
+}
+.lang-ar .calendar-date {
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   40. UNIVERSITY DESTINATIONS
+═══════════════════════════════════════════════════════ */
+.lang-ar .uni-strip-label {
+  text-align: center;
+}
+.lang-ar .uni-logos {
+  direction: rtl;
+}
+.lang-ar .uni-logo-item {
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   41. CTA STRIP
+═══════════════════════════════════════════════════════ */
+.lang-ar .section-cta-strip .container {
+  flex-direction: row-reverse;
+}
+.lang-ar .section-cta-strip div {
+  text-align: right;
+}
+.lang-ar .section-cta-strip div[style] {
+  flex-direction: row-reverse;
+}
+
+/* ═══════════════════════════════════════════════════════
+   42. ADMISSIONS CTA STEPS
+═══════════════════════════════════════════════════════ */
+.lang-ar .admissions-cta-content {
+  text-align: right;
+}
+.lang-ar .admissions-steps {
+  flex-direction: row-reverse;
+}
+.lang-ar .adm-step-num {
+  margin-right: 0;
+  margin-left: auto;
+}
+.lang-ar .admissions-cta-buttons {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+/* ═══════════════════════════════════════════════════════
+   43. CONTACT SECTION DETAILS
+═══════════════════════════════════════════════════════ */
+.lang-ar .contact-detail-item {
+  flex-direction: row-reverse;
+}
+.lang-ar .detail-icon {
+  margin-right: 0;
+  margin-left: 16px;
+}
+.lang-ar .detail-text {
+  text-align: right;
+}
+.lang-ar .contact-social {
+  flex-direction: row-reverse;
+}
+.lang-ar .contact-whatsapp-btn {
+  flex-direction: row-reverse;
+}
+.lang-ar .contact-whatsapp-btn i {
+  margin-right: 0;
+  margin-left: 8px;
+}
+.lang-ar .contact-form-col {
+  text-align: right;
+}
+.lang-ar .form-row {
+  direction: rtl;
+}
+
+/* ═══════════════════════════════════════════════════════
+   44. TOUR BANNER & ENROLLMENT NOTICE
+═══════════════════════════════════════════════════════ */
+.lang-ar .tour-banner-inner {
+  flex-direction: row-reverse;
+}
+.lang-ar .tour-banner-text {
+  text-align: right;
+}
+.lang-ar .enrollment-notice {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .enrollment-notice i {
+  margin-right: 0;
+  margin-left: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   45. QUICK ACCESS DASHBOARD
+═══════════════════════════════════════════════════════ */
+.lang-ar .quick-access-grid {
+  direction: rtl;
+}
+.lang-ar .quick-access-card {
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   46. ACHIEVEMENT BADGES ROW
+═══════════════════════════════════════════════════════ */
+.lang-ar .achievement-badges {
+  flex-direction: row-reverse;
+}
+.lang-ar .achievement-badge {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .achievement-badge > div {
+  text-align: right;
+}
+.lang-ar .achievement-badge i {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   47. QUICK LINKS BAR (top of page)
+═══════════════════════════════════════════════════════ */
+.lang-ar .quick-links-inner {
+  flex-direction: row-reverse;
+}
+.lang-ar .quick-link-item {
+  flex-direction: row-reverse;
+}
+.lang-ar .quick-link-item i {
+  margin-right: 0;
+  margin-left: 5px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   48. FOOTER CONTACT LIST
+═══════════════════════════════════════════════════════ */
+.lang-ar .footer-contact-list li {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .footer-contact-list li i {
+  margin-right: 0;
+  margin-left: 10px;
+}
+.lang-ar .footer-brand {
+  text-align: right;
+}
+.lang-ar .footer-desc {
+  text-align: right;
+}
+.lang-ar .footer-heading {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   49. VIDEO LIGHTBOX (RTL layout)
+═══════════════════════════════════════════════════════ */
+.lang-ar #video-lightbox > div {
+  text-align: center;
+}
+.lang-ar .vl-close {
+  right: unset;
+  left: 28px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   50. ANNOUNCEMENT BAND
+═══════════════════════════════════════════════════════ */
+.lang-ar .announcement-inner {
+  flex-direction: row-reverse;
+}
+.lang-ar .ann-tag {
+  flex-direction: row-reverse;
+}
+
+/* ═══════════════════════════════════════════════════════
+   51. SECTION LABEL WITH ICON
+═══════════════════════════════════════════════════════ */
+.lang-ar .section-label {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .section-label i {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   52. WHY CARDS GRID
+═══════════════════════════════════════════════════════ */
+.lang-ar .why-grid {
+  direction: rtl;
+}
+
+/* ═══════════════════════════════════════════════════════
+   53. RECRUIT BANNER OVERLAY
+═══════════════════════════════════════════════════════ */
+.lang-ar .recruit-banner-overlay {
+  text-align: right;
+}
+.lang-ar .recruit-banner-badge {
+  flex-direction: row-reverse;
+  display: inline-flex;
+}
+.lang-ar .recruit-banner-badge i {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   54. TOUR SOURCE BADGES & CAPTIONS (360° Tour panes)
+═══════════════════════════════════════════════════════ */
+.lang-ar .tour-source-badge {
+  flex-direction: row-reverse;
+  left: unset;
+  right: 12px;
+}
+.lang-ar .tour-source-badge i {
+  margin-right: 0;
+  margin-left: 5px;
+}
+.lang-ar .tour-photo-caption {
+  text-align: right;
+  flex-direction: row-reverse;
+}
+.lang-ar .tour-photo-caption i {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   55. PROGRAM GRADE TAGS (Academic Cards)
+═══════════════════════════════════════════════════════ */
+.lang-ar .program-grade-tag {
+  right: unset;
+  left: 12px;
+}
+.lang-ar .program-card-body {
+  text-align: right;
+}
+.lang-ar .program-icon {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   56. WELCOME SECTION — KHDA BADGE
+═══════════════════════════════════════════════════════ */
+.lang-ar .welcome-image-badge {
+  flex-direction: row-reverse;
+  right: unset;
+  left: 20px;
+}
+.lang-ar .badge-icon {
+  margin-right: 0;
+  margin-left: 10px;
+}
+.lang-ar .badge-text {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   57. GALLERY SECTION — LABEL ::after LINE
+═══════════════════════════════════════════════════════ */
+.lang-ar .hg-label::before {
+  content: '';
+  display: block;
+  height: 1px;
+  flex: 1;
+  background: rgba(225,27,34,0.3);
+}
+.lang-ar .hg-label::after {
+  display: none;
+}
+.lang-ar .hg-mosaic-badge {
+  left: unset;
+  right: 12px;
+  border-left: none;
+  border-right: 3px solid #E11B22;
+}
+.lang-ar .hg-info {
+  text-align: right;
+}
+.lang-ar .hg-cta-row {
+  justify-content: flex-start;
+}
+
+/* ═══════════════════════════════════════════════════════
+   58. QUICK ACCESS SECTION
+═══════════════════════════════════════════════════════ */
+.lang-ar .quick-access-icon {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ═══════════════════════════════════════════════════════
+   59. HERO FLOATING FORM (mini form)
+═══════════════════════════════════════════════════════ */
+.lang-ar .hero-floating-cta {
+  left: unset;
+  right: 24px;
+  text-align: right;
+}
+.lang-ar .hero-floating-cta h4 {
+  flex-direction: row-reverse;
+  display: flex;
+  align-items: center;
+}
+.lang-ar .hero-floating-cta h4 i {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   60. SCROLL INDICATOR
+═══════════════════════════════════════════════════════ */
+.lang-ar .hero-scroll-indicator {
+  left: unset;
+  right: 50%;
+  transform: translateX(50%);
+}
+
+/* ═══════════════════════════════════════════════════════
+   61. CTA STRIP BUTTONS ROW
+═══════════════════════════════════════════════════════ */
+.lang-ar .section-cta-strip .btn i {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   62. APPLY FLOAT BUTTON
+═══════════════════════════════════════════════════════ */
+.lang-ar .apply-float {
+  left: 20px;
+  right: unset;
+}
+.lang-ar .apply-float i {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   63. BACK TO TOP BUTTON
+═══════════════════════════════════════════════════════ */
+.lang-ar .back-to-top {
+  right: unset;
+  left: 20px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   64. WHATSAPP FLOAT BUTTON
+═══════════════════════════════════════════════════════ */
+.lang-ar .whatsapp-float {
+  right: unset;
+  left: 20px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   65. 360° BTN HERO
+═══════════════════════════════════════════════════════ */
+.lang-ar .btn-360-arrow {
+  transform: scaleX(-1);
+  margin-right: 0;
+  margin-left: 0;
+}
+.lang-ar .btn-360-ring {
+  margin-right: 0;
+  margin-left: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   66. ENROLL NOTICE — BELL ICON
+═══════════════════════════════════════════════════════ */
+.lang-ar .enrollment-notice > i {
+  margin-right: 0;
+  margin-left: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   67. MAP SECTION (no RTL changes needed, centred)
+═══════════════════════════════════════════════════════ */
+.lang-ar .map-wrap {
+  direction: ltr; /* keep map iframe LTR */
+}
+
+/* ═══════════════════════════════════════════════════════
+   68. FOOTER BOTTOM — LEGAL LINKS
+═══════════════════════════════════════════════════════ */
+.lang-ar .footer-bottom {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.lang-ar .footer-bottom p {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   69. MOBILE STICKY CTA — ICON SPACING
+═══════════════════════════════════════════════════════ */
+.lang-ar .mob-cta-btn {
+  flex-direction: column;
+}
+.lang-ar .mob-cta-btn i {
+  margin-right: 0;
+  margin-bottom: 2px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   70. VIDEO LIGHTBOX — CENTERED (no RTL override needed)
+═══════════════════════════════════════════════════════ */
+.lang-ar #video-lightbox > div {
+  direction: rtl;
+  text-align: center;
+}
+.lang-ar #video-lightbox .btn i {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   71. ACCREDITATION SECTION — BADGES CENTRED
+═══════════════════════════════════════════════════════ */
+.lang-ar .accred-badge {
+  flex-direction: column;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   72. ACADEMICS SECTION – EXPLORE LINK
+═══════════════════════════════════════════════════════ */
+.lang-ar .program-link {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: 6px;
+}
+.lang-ar .program-link i {
+  transform: scaleX(-1);
+}
+
+/* ═══════════════════════════════════════════════════════
+   73. NEWS SECTION — HEADER FLEX
+═══════════════════════════════════════════════════════ */
+.lang-ar .news-section > .container > .section-header {
+  align-items: flex-start;
+}
+.lang-ar .news-link {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: 4px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   74. CALENDAR SECTION – CARD INFO
+═══════════════════════════════════════════════════════ */
+.lang-ar .calendar-card {
+  text-align: right;
+}
+.lang-ar .calendar-date {
+  text-align: center;
+  direction: ltr; /* Keep date digits LTR */
+}
+
+/* ═══════════════════════════════════════════════════════
+   75. UNIVERSITY STRIP — LOGOS ROW
+═══════════════════════════════════════════════════════ */
+.lang-ar .uni-strip-label {
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════
+   76. TOUR BANNER — ICON
+═══════════════════════════════════════════════════════ */
+.lang-ar .tour-banner-text h3 i {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   77. HERO FLOATING FORM — fix right-side positioning
+═══════════════════════════════════════════════════════ */
+@media (min-width: 901px) {
+  .lang-ar .hero-floating-cta {
+    right: 24px;
+    left: unset;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   78. WELCOME — QUOTE CITE
+═══════════════════════════════════════════════════════ */
+.lang-ar .quote-principal cite {
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   79. CONTACT WHATSAPP BTN
+═══════════════════════════════════════════════════════ */
+.lang-ar .contact-whatsapp-btn {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+/* ═══════════════════════════════════════════════════════
+   80. LIFE SECTION — showcase
+═══════════════════════════════════════════════════════ */
+.lang-ar .life-feature-overlay .btn {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: 6px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   81. PROGRAM GRADE TAG — flip for RTL
+═══════════════════════════════════════════════════════ */
+.lang-ar .program-card-image .program-grade-tag {
+  right: unset;
+  left: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   82. ACAD HIGHLIGHTS — explore all btn
+═══════════════════════════════════════════════════════ */
+.lang-ar .acad-explore-btn {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: 6px;
+}
+.lang-ar .acad-explore-btn i {
+  transform: scaleX(-1);
+}
+
+/* ═══════════════════════════════════════════════════════
+   83. ANNOUNCEMENT BAND — ticker direction
+═══════════════════════════════════════════════════════ */
+.lang-ar .ann-ticker {
+  direction: rtl;
+  text-align: right;
+}
+.lang-ar .ann-more {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   84. STATS SECTION — number direction
+═══════════════════════════════════════════════════════ */
+.lang-ar .stat-count,
+.lang-ar .stat-unit,
+.lang-ar .stat-number,
+.lang-ar .stat-suffix {
+  direction: ltr; /* keep numbers LTR */
+  display: inline-block;
+}
+
+/* ═══════════════════════════════════════════════════════
+   85. HERO BTN 360 — text block right-align
+═══════════════════════════════════════════════════════ */
+.lang-ar .btn-360-text strong,
+.lang-ar .btn-360-text small {
+  text-align: right;
+  display: block;
+}
