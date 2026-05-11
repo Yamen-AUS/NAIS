@@ -268,7 +268,10 @@ All 14 tables have schemas matching the HTML page JavaScript exactly, and are se
 - ✅ **Credentials synced** — `core.js` DEMO_USERS matches `login.html` exactly; no personal names; role-based display names only
 - ✅ **Cache-busting** — `?v=2.1` on all `admin.css` and `core.js` references across all 13 admin pages
 - ✅ **Missing CSS classes added** — `.card`, `.card-header`, `.card-title`, `.card-body`, `.table-responsive`, `.search-box`, `.search-icon`, `.search-input`, `.table-action-btn`, `.toggle-switch`, `.toggle-slider`, `.form-grid`, `.required`, `.btn-danger`, `.text-center` — all now defined globally in `admin.css` (see "Shared Utility Classes" section below)
-- ✅ **Activity log reseeded** — `cms_activity_log` cleared of old personal names; reseeded with 7 role-based entries
+- ✅ **Activity log reseeded** — `cms_activity_log` cleared of old personal names; reseeded with 12 realistic entries
+- ✅ **Static host compatibility (v2.2)** — `core.js` now detects GitHub Pages / any static host via `IS_STATIC_HOST` flag. On static hosts, all `API.*` calls are intercepted and served from a built-in `STATIC_DB` in-memory store containing all 11 tables of realistic NAIS Dubai demo data. Writes (POST/PUT/PATCH/DELETE) work in-session via an in-memory write layer. Full live Table API is used on Genspark preview as normal.
+- ✅ **Demo mode banner (v2.2)** — On static hosts, a fixed bottom banner appears: "Static Demo Mode — data is built-in and read-only; changes reset on refresh." with a dismiss button and a link to Genspark for full live data.
+- ✅ **Cache-bust bumped to v2.2** — All 13 admin pages updated: `admin.css?v=2.2` and `core.js?v=2.2`
 - ✅ **Role-based auth** — 6-level hierarchy enforced via `Auth.can()`, session in localStorage
 - ✅ **Bilingual content** — all forms have EN + AR fields with `dir="rtl"` Arabic inputs
 - ✅ **Permissions matrix** — 24 feature rows × 6 roles rendered in users.html

@@ -626,29 +626,29 @@
             <div class="demo-email">admin@naisdubai.ae</div>
             <button class="demo-fill-btn" type="button">Fill</button>
           </div>
-          <div class="demo-cred-row" onclick="fillCreds('principal@naisdubai.ae','Principal@2025!')">
-            <div class="demo-role">Principal</div>
-            <div class="demo-email">principal@naisdubai.ae</div>
+          <div class="demo-cred-row" onclick="fillCreds('s.mitchell@naisdubai.ae','Principal@2025!')">
+            <div class="demo-role">Admin — Principal</div>
+            <div class="demo-email">s.mitchell@naisdubai.ae</div>
             <button class="demo-fill-btn" type="button">Fill</button>
           </div>
-          <div class="demo-cred-row" onclick="fillCreds('marketing@naisdubai.ae','Marketing@2025!')">
-            <div class="demo-role">Marketing</div>
-            <div class="demo-email">marketing@naisdubai.ae</div>
+          <div class="demo-cred-row" onclick="fillCreds('j.thornton@naisdubai.ae','VPAcademic@2025!')">
+            <div class="demo-role">Editor — VP Academic</div>
+            <div class="demo-email">j.thornton@naisdubai.ae</div>
             <button class="demo-fill-btn" type="button">Fill</button>
           </div>
-          <div class="demo-cred-row" onclick="fillCreds('admissions@naisdubai.ae','Admissions@2025!')">
-            <div class="demo-role">Admissions</div>
-            <div class="demo-email">admissions@naisdubai.ae</div>
+          <div class="demo-cred-row" onclick="fillCreds('l.hassan@naisdubai.ae','Admissions@2025!')">
+            <div class="demo-role">Editor — Admissions</div>
+            <div class="demo-email">l.hassan@naisdubai.ae</div>
             <button class="demo-fill-btn" type="button">Fill</button>
           </div>
-          <div class="demo-cred-row" onclick="fillCreds('academic@naisdubai.ae','Academic@2025!')">
-            <div class="demo-role">Academic</div>
-            <div class="demo-email">academic@naisdubai.ae</div>
+          <div class="demo-cred-row" onclick="fillCreds('t.mansour@naisdubai.ae','ITManager@2025!')">
+            <div class="demo-role">Editor — IT Manager</div>
+            <div class="demo-email">t.mansour@naisdubai.ae</div>
             <button class="demo-fill-btn" type="button">Fill</button>
           </div>
-          <div class="demo-cred-row" onclick="fillCreds('viewer@naisdubai.ae','Viewer@2025!')">
-            <div class="demo-role">Read Only</div>
-            <div class="demo-email">viewer@naisdubai.ae</div>
+          <div class="demo-cred-row" onclick="fillCreds('o.alrashidi@naisdubai.ae','HODSports@2025!')">
+            <div class="demo-role">Viewer — HOD PE</div>
+            <div class="demo-email">o.alrashidi@naisdubai.ae</div>
             <button class="demo-fill-btn" type="button">Fill</button>
           </div>
         </div>
@@ -663,18 +663,18 @@
   </div><!-- .login-page -->
 
   <script>
-    // ── Demo users (mirrored from core.js for standalone login page) ──
+    // ── Demo users (mirrored from core.js DEMO_USERS — keep in sync) ──
     const DEMO_USERS = [
-      { email: 'admin@naisdubai.ae',      password: 'Admin@2025!',      role: 'super_admin', name: 'System Administrator', avatar: 'SA' },
-      { email: 'principal@naisdubai.ae',  password: 'Principal@2025!',  role: 'principal',   name: 'School Principal',     avatar: 'SP' },
-      { email: 'marketing@naisdubai.ae',  password: 'Marketing@2025!',  role: 'marketing',   name: 'Marketing Manager',    avatar: 'MM' },
-      { email: 'admissions@naisdubai.ae', password: 'Admissions@2025!', role: 'admissions',  name: 'Admissions Officer',   avatar: 'AO' },
-      { email: 'academic@naisdubai.ae',   password: 'Academic@2025!',   role: 'academic',    name: 'Academic Coordinator', avatar: 'AC' },
-      { email: 'viewer@naisdubai.ae',     password: 'Viewer@2025!',     role: 'readonly',    name: 'Read-Only Viewer',     avatar: 'RV' },
+      { email: 'admin@naisdubai.ae',        password: 'Admin@2025!',       role: 'super_admin', name: 'System Administrator', avatar: 'SA', department: 'Executive' },
+      { email: 's.mitchell@naisdubai.ae',   password: 'Principal@2025!',   role: 'principal',   name: 'Sarah Mitchell',       avatar: 'SM', department: 'Leadership' },
+      { email: 'j.thornton@naisdubai.ae',   password: 'VPAcademic@2025!',  role: 'editor',      name: 'James Thornton',       avatar: 'JT', department: 'Academics' },
+      { email: 'l.hassan@naisdubai.ae',     password: 'Admissions@2025!',  role: 'editor',      name: 'Layla Hassan',         avatar: 'LH', department: 'Admissions' },
+      { email: 't.mansour@naisdubai.ae',    password: 'ITManager@2025!',   role: 'editor',      name: 'Tariq Mansour',        avatar: 'TM', department: 'IT' },
+      { email: 'o.alrashidi@naisdubai.ae',  password: 'HODSports@2025!',   role: 'viewer',      name: 'Omar Al-Rashidi',      avatar: 'OA', department: 'PE' },
     ];
 
     // ── Session version — must match core.js SESSION_VERSION ──
-    const SESSION_VERSION = '2.1';
+    const SESSION_VERSION = '2.2';
 
     // ── Already logged in? Validate session email + version before auto-redirecting ──
     (function checkExistingSession() {
