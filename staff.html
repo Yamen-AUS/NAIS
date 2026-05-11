@@ -3,638 +3,797 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard — NAIS Dubai CMS</title>
+  <title>NAIS Dubai — CMS Login</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/admin.css?v=2.2" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0a1931;
+      --navy2:  #112244;
+      --navy3:  #1a2f55;
+      --red:    #c0272d;
+      --red2:   #a01e23;
+      --gold:   #c9982a;
+      --white:  #ffffff;
+      --gray50: #f8fafc;
+      --gray100:#f1f5f9;
+      --gray200:#e2e8f0;
+      --gray400:#94a3b8;
+      --gray600:#475569;
+      --gray800:#1e293b;
+      --radius: 12px;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── Background decoration ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(192,39,45,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 90%, rgba(17,34,68,0.8) 0%, transparent 60%),
+        linear-gradient(135deg, #0a1931 0%, #112244 50%, #0d1f3c 100%);
+      pointer-events: none;
+    }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .bg-circle {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.12;
+    }
+    .bg-circle-1 { width: 500px; height: 500px; background: var(--red); top: -150px; right: -100px; }
+    .bg-circle-2 { width: 400px; height: 400px; background: var(--gold); bottom: -150px; left: -100px; opacity: 0.07; }
+
+    /* ── Page layout ── */
+    .login-page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 24px 16px;
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 48px;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* ── Left branding panel ── */
+    .brand-panel {
+      color: var(--white);
+      padding: 40px 0;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .brand-logo-mark {
+      width: 52px;
+      height: 52px;
+      background: var(--red);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: -1px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(192,39,45,0.4);
+    }
+
+    .brand-logo-text { line-height: 1.1; }
+    .brand-logo-text .school-name { font-size: 18px; font-weight: 700; }
+    .brand-logo-text .cms-label { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px; }
+
+    .brand-headline {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-headline em {
+      font-style: normal;
+      color: var(--red);
+    }
+
+    .brand-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 40px;
+    }
+
+    .brand-features {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .brand-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .brand-feature i {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* ── Login card ── */
+    .login-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px 36px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .login-card-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .login-card-header .icon-wrap {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--navy), var(--navy3));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 22px;
+      color: #fff;
+    }
+
+    .login-card-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gray800);
+      margin-bottom: 6px;
+    }
+
+    .login-card-header p {
+      font-size: 14px;
+      color: var(--gray400);
+    }
+
+    /* ── Form ── */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray600);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray400);
+      font-size: 14px;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      height: 46px;
+      border: 1.5px solid var(--gray200);
+      border-radius: 10px;
+      padding: 0 14px 0 40px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--gray800);
+      background: var(--gray50);
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      outline: none;
+    }
+
+    .input-wrap input:focus {
+      border-color: var(--navy);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(10,25,49,0.08);
+    }
+
+    .input-wrap input:focus + i,
+    .input-wrap i.active {
+      color: var(--navy);
+    }
+
+    .input-wrap input:focus ~ i { color: var(--navy); }
+
+    /* password toggle */
+    .pass-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--gray400);
+      font-size: 13px;
+      padding: 4px;
+      transition: color 0.2s;
+      pointer-events: all;
+    }
+    .pass-toggle:hover { color: var(--navy); }
+
+    .input-wrap.has-toggle input { padding-right: 38px; }
+
+    /* ── Error alert ── */
+    .login-error {
+      background: #fef2f2;
+      border: 1.5px solid #fecaca;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #dc2626;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .login-error.visible { display: flex; }
+    .login-error i { font-size: 15px; flex-shrink: 0; }
+
+    /* ── Submit btn ── */
+    .btn-login {
+      width: 100%;
+      height: 48px;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-login:hover { background: var(--navy3); box-shadow: 0 8px 24px rgba(10,25,49,0.25); }
+    .btn-login:active { transform: scale(0.98); }
+    .btn-login.loading { pointer-events: none; opacity: 0.75; }
+    .btn-login .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      display: none;
+    }
+    .btn-login.loading .spinner { display: block; }
+    .btn-login.loading .btn-text { display: none; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Remember me row ── */
+    .login-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .remember-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--gray600);
+      user-select: none;
+    }
+
+    .remember-check input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--navy);
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      font-size: 13px;
+      color: var(--navy);
+      text-decoration: none;
+      font-weight: 500;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .forgot-link:hover { opacity: 1; }
+
+    /* ── Demo credentials panel ── */
+    .demo-panel {
+      margin-top: 28px;
+      border-top: 1.5px solid var(--gray100);
+      padding-top: 24px;
+    }
+
+    .demo-panel-toggle {
+      background: none;
+      border: 1.5px solid var(--gray200);
+      border-radius: 8px;
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      color: var(--gray600);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .demo-panel-toggle:hover { border-color: var(--navy); color: var(--navy); }
+
+    .demo-panel-toggle .arrow {
+      transition: transform 0.25s;
+    }
+    .demo-panel-toggle.open .arrow { transform: rotate(180deg); }
+
+    .demo-creds {
+      display: none;
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .demo-creds.open { max-height: 400px; }
+
+    .demo-cred-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      align-items: center;
+      gap: 8px;
+      background: var(--gray50);
+      border: 1px solid var(--gray200);
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .demo-cred-row:hover { background: #eef2ff; border-color: #c7d2fe; }
+
+    .demo-role {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .demo-email {
+      font-size: 11px;
+      color: var(--gray600);
+      font-family: monospace;
+    }
+
+    .demo-fill-btn {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--navy);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(10,25,49,0.08);
+      white-space: nowrap;
+    }
+    .demo-fill-btn:hover { background: rgba(10,25,49,0.15); }
+
+    /* ── Back to site ── */
+    .back-to-site {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-to-site a {
+      font-size: 13px;
+      color: var(--gray400);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .back-to-site a:hover { color: var(--gray600); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .login-page {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        min-height: auto;
+        padding: 40px 16px;
+        gap: 0;
+      }
+      .brand-panel { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .login-card { padding: 32px 24px; border-radius: 16px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ── Sidebar ── -->
-  <aside class="admin-sidebar" id="adminSidebar">
-    <div class="sidebar-header">
-      <div class="sidebar-logo">
-        <div class="sidebar-logo-mark">🏫</div>
-        <div class="sidebar-logo-text">
-          <span class="sidebar-school">NAIS Dubai</span>
-          <span class="sidebar-cms">CMS Admin</span>
+  <div class="bg-grid"></div>
+  <div class="bg-circle bg-circle-1"></div>
+  <div class="bg-circle bg-circle-2"></div>
+
+  <div class="login-page">
+
+    <!-- ── Left branding ── -->
+    <div class="brand-panel">
+      <div class="brand-logo">
+        <div class="brand-logo-mark">N</div>
+        <div class="brand-logo-text">
+          <div class="school-name">NAIS Dubai</div>
+          <div class="cms-label">Content Management System</div>
         </div>
       </div>
-      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
-    </div>
 
-    <div class="sidebar-user">
-      <div class="sidebar-user-avatar" data-user-avatar>SA</div>
-      <div class="sidebar-user-info">
-        <span class="sidebar-user-name" data-user-name>Loading…</span>
-        <span class="sidebar-user-badge" data-user-role>Admin</span>
-      </div>
-    </div>
+      <h1 class="brand-headline">
+        Manage your school's<br>
+        <em>digital presence</em><br>
+        with confidence.
+      </h1>
 
-    <nav class="sidebar-nav">
-      <div class="nav-section-label">Main</div>
-      <a href="index.html" class="nav-item active">
-        <i class="fas fa-th-large"></i><span>Dashboard</span>
-      </a>
-      <a href="content.html" class="nav-item">
-        <i class="fas fa-file-alt"></i><span>Pages</span>
-        <i class="fas fa-chevron-right nav-arrow"></i>
-      </a>
-      <a href="media.html" class="nav-item">
-        <i class="fas fa-images"></i><span>Media Library</span>
-      </a>
-      <a href="announcements.html" class="nav-item">
-        <i class="fas fa-bullhorn"></i><span>Announcements</span>
-        <span class="nav-badge" id="annBadge">3</span>
-      </a>
-      <a href="events.html" class="nav-item">
-        <i class="fas fa-calendar-alt"></i><span>Events</span>
-      </a>
+      <p class="brand-desc">
+        A secure, role-based admin panel for managing all content across the NAIS Dubai website — from admissions to announcements.
+      </p>
 
-      <div class="nav-section-label">School</div>
-      <a href="staff.html" class="nav-item">
-        <i class="fas fa-users"></i><span>Staff Profiles</span>
-      </a>
-      <a href="admissions.html" class="nav-item">
-        <i class="fas fa-user-graduate"></i><span>Admissions</span>
-      </a>
-      <a href="results.html" class="nav-item">
-        <i class="fas fa-award"></i><span>Results</span>
-      </a>
-      <a href="gallery.html" class="nav-item">
-        <i class="fas fa-photo-video"></i><span>Gallery</span>
-      </a>
-      <a href="documents.html" class="nav-item">
-        <i class="fas fa-folder-open"></i><span>Documents</span>
-        <span class="nav-badge" id="docsBadge">2</span>
-      </a>
-
-      <div class="nav-section-label">System</div>
-      <a href="users.html" class="nav-item">
-        <i class="fas fa-user-shield"></i><span>Users &amp; Roles</span>
-      </a>
-      <a href="seo.html" class="nav-item">
-        <i class="fas fa-search"></i><span>SEO Manager</span>
-      </a>
-      <a href="settings.html" class="nav-item">
-        <i class="fas fa-cog"></i><span>Settings</span>
-      </a>
-      <a href="../index.html" target="_blank" class="nav-item">
-        <i class="fas fa-external-link-alt"></i><span>View Website</span>
-      </a>
-    </nav>
-
-    <div class="sidebar-footer">
-      <button class="sidebar-signout-btn" id="sidebarSignOut">
-        <i class="fas fa-sign-out-alt"></i> Sign Out
-      </button>
-    </div>
-  </aside>
-
-  <!-- ── Topbar ── -->
-  <header class="admin-topbar">
-    <div class="topbar-left">
-      <button class="topbar-menu-btn" id="sidebarToggle"><i class="fas fa-bars"></i></button>
-      <div class="topbar-breadcrumb">
-        <span class="bc-home"><i class="fas fa-home"></i></span>
-        <i class="fas fa-chevron-right bc-sep"></i>
-        <span class="bc-current">Dashboard</span>
-      </div>
-    </div>
-    <div class="topbar-right">
-      <button class="topbar-icon-btn" title="View site" onclick="window.open('../index.html','_blank')">
-        <i class="fas fa-globe"></i>
-      </button>
-      <button class="topbar-icon-btn" title="Notifications" id="notifBtn">
-        <i class="fas fa-bell"></i>
-        <span class="topbar-notif-dot"></span>
-      </button>
-      <div class="topbar-user" id="topbarUser">
-        <div class="topbar-avatar" data-user-avatar>SA</div>
-        <div class="topbar-user-info">
-          <span class="topbar-user-name" data-user-name>Loading…</span>
-          <span class="topbar-user-role" data-user-role>—</span>
+      <div class="brand-features">
+        <div class="brand-feature">
+          <i class="fas fa-shield-alt"></i>
+          <span>Role-based access control with 6 permission levels</span>
         </div>
-        <i class="fas fa-chevron-down topbar-chevron"></i>
-        <div class="user-dropdown" id="userDropdown">
-          <div class="user-dropdown-header">
-            <div class="udh-avatar" data-user-avatar>SA</div>
-            <div>
-              <div class="udh-name" data-user-name>—</div>
-              <div class="udh-email" data-user-email>—</div>
-            </div>
-          </div>
-          <div class="user-dropdown-divider"></div>
-          <a href="settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i> Settings</a>
-          <button class="user-dropdown-item danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+        <div class="brand-feature">
+          <i class="fas fa-edit"></i>
+          <span>Full CRUD for all page sections and content types</span>
+        </div>
+        <div class="brand-feature">
+          <i class="fas fa-images"></i>
+          <span>Media manager with drag-and-drop upload</span>
+        </div>
+        <div class="brand-feature">
+          <i class="fas fa-bell"></i>
+          <span>Announcements & events with scheduling</span>
+        </div>
+        <div class="brand-feature">
+          <i class="fas fa-chart-line"></i>
+          <span>Activity log and content change history</span>
         </div>
       </div>
     </div>
-  </header>
 
-  <!-- ── Main content ── -->
-  <main class="admin-main">
-    <div class="admin-content">
-
-      <!-- Page header -->
-      <div class="page-header">
-        <div>
-          <h1 class="page-title">Dashboard</h1>
-          <p class="page-subtitle">Welcome back, <strong data-user-name>Admin</strong>. Here's what's happening today.</p>
+    <!-- ── Login card ── -->
+    <div class="login-card">
+      <div class="login-card-header">
+        <div class="icon-wrap">
+          <i class="fas fa-lock"></i>
         </div>
-        <div class="page-header-actions">
-          <button class="btn btn-outline btn-sm" onclick="refreshDashboard()">
-            <i class="fas fa-sync-alt"></i> Refresh
-          </button>
-          <a href="announcements.html" class="btn btn-primary btn-sm">
-            <i class="fas fa-plus"></i> New Announcement
-          </a>
-        </div>
+        <h2>Welcome back</h2>
+        <p>Sign in to access the admin panel</p>
       </div>
 
-      <!-- ── Stats grid ── -->
-      <div class="stats-grid" id="statsGrid">
-        <div class="stat-card stat-navy">
-          <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
-          <div class="stat-body">
-            <div class="stat-value" id="statPages">12</div>
-            <div class="stat-label">Active Pages</div>
-            <div class="stat-trend up"><i class="fas fa-arrow-up"></i> All live</div>
-          </div>
-        </div>
-        <div class="stat-card stat-green">
-          <div class="stat-icon"><i class="fas fa-bullhorn"></i></div>
-          <div class="stat-body">
-            <div class="stat-value" id="statAnnouncements">—</div>
-            <div class="stat-label">Announcements</div>
-            <div class="stat-trend" id="statAnnouncementsTrend">Loading…</div>
-          </div>
-        </div>
-        <div class="stat-card stat-gold">
-          <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
-          <div class="stat-body">
-            <div class="stat-value" id="statEvents">—</div>
-            <div class="stat-label">Upcoming Events</div>
-            <div class="stat-trend" id="statEventsTrend">Loading…</div>
-          </div>
-        </div>
-        <div class="stat-card stat-red">
-          <div class="stat-icon"><i class="fas fa-users"></i></div>
-          <div class="stat-body">
-            <div class="stat-value" id="statStaff">—</div>
-            <div class="stat-label">Staff Profiles</div>
-            <div class="stat-trend" id="statStaffTrend">Loading…</div>
-          </div>
-        </div>
-        <div class="stat-card stat-purple">
-          <div class="stat-icon"><i class="fas fa-images"></i></div>
-          <div class="stat-body">
-            <div class="stat-value" id="statMedia">—</div>
-            <div class="stat-label">Media Files</div>
-            <div class="stat-trend" id="statMediaTrend">Loading…</div>
-          </div>
-        </div>
-        <div class="stat-card stat-teal">
-          <div class="stat-icon"><i class="fas fa-user-shield"></i></div>
-          <div class="stat-body">
-            <div class="stat-value" id="statUsers">—</div>
-            <div class="stat-label">CMS Users</div>
-            <div class="stat-trend" id="statUsersTrend">Loading…</div>
-          </div>
-        </div>
+      <!-- Error alert -->
+      <div class="login-error" id="loginError">
+        <i class="fas fa-exclamation-circle"></i>
+        <span id="loginErrorMsg">Invalid email or password. Please try again.</span>
       </div>
 
-      <!-- ── Two-column: Activity + Quick actions ── -->
-      <div class="dash-two-col">
+      <!-- Login form -->
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="emailInput">Email address</label>
+          <div class="input-wrap">
+            <i class="fas fa-envelope"></i>
+            <input
+              type="email"
+              id="emailInput"
+              name="email"
+              placeholder="you@naisdubai.ae"
+              autocomplete="email"
+              required
+            />
+          </div>
+        </div>
 
-        <!-- Activity feed -->
-        <div class="panel">
-          <div class="panel-header">
-            <h2 class="panel-title"><i class="fas fa-history"></i> Recent Activity</h2>
-            <button class="btn btn-ghost btn-sm" onclick="loadActivity()">
-              <i class="fas fa-sync-alt"></i>
+        <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <div class="input-wrap has-toggle">
+            <i class="fas fa-key"></i>
+            <input
+              type="password"
+              id="passwordInput"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+            <button type="button" class="pass-toggle" id="passToggle" aria-label="Toggle password visibility">
+              <i class="fas fa-eye" id="passToggleIcon"></i>
             </button>
           </div>
-          <div class="panel-body p0">
-            <ul class="activity-list" id="activityList">
-              <li class="activity-item skeleton-row"></li>
-              <li class="activity-item skeleton-row"></li>
-              <li class="activity-item skeleton-row"></li>
-            </ul>
-          </div>
-          <div class="panel-footer">
-            <a href="#" class="panel-footer-link" onclick="return false;">View all activity &rarr;</a>
-          </div>
         </div>
 
-        <!-- Right column -->
-        <div class="dash-right-col">
-
-          <!-- Quick actions -->
-          <div class="panel">
-            <div class="panel-header">
-              <h2 class="panel-title"><i class="fas fa-bolt"></i> Quick Actions</h2>
-            </div>
-            <div class="panel-body">
-              <div class="quick-actions-grid">
-                <a href="announcements.html?new=1" class="quick-action-btn">
-                  <i class="fas fa-bullhorn"></i>
-                  <span>New Announcement</span>
-                </a>
-                <a href="announcements.html?tab=events&new=1" class="quick-action-btn">
-                  <i class="fas fa-calendar-plus"></i>
-                  <span>Add Event</span>
-                </a>
-                <a href="staff.html?new=1" class="quick-action-btn">
-                  <i class="fas fa-user-plus"></i>
-                  <span>Add Staff</span>
-                </a>
-                <a href="media.html" class="quick-action-btn">
-                  <i class="fas fa-cloud-upload-alt"></i>
-                  <span>Upload Media</span>
-                </a>
-                <a href="content.html" class="quick-action-btn">
-                  <i class="fas fa-edit"></i>
-                  <span>Edit Content</span>
-                </a>
-                <a href="settings.html" class="quick-action-btn">
-                  <i class="fas fa-cog"></i>
-                  <span>Site Settings</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Site pages status -->
-          <div class="panel">
-            <div class="panel-header">
-              <h2 class="panel-title"><i class="fas fa-sitemap"></i> Site Pages</h2>
-              <span class="badge badge-green">12 Live</span>
-            </div>
-            <div class="panel-body p0">
-              <ul class="pages-list" id="pagesList"></ul>
-            </div>
-          </div>
-
+        <div class="login-meta">
+          <label class="remember-check">
+            <input type="checkbox" id="rememberMe" />
+            Remember me
+          </label>
+          <a href="#" class="forgot-link" onclick="return false;">Forgot password?</a>
         </div>
-      </div>
 
-      <!-- ── Recent announcements table ── -->
-      <div class="panel">
-        <div class="panel-header">
-          <h2 class="panel-title"><i class="fas fa-bullhorn"></i> Recent Announcements</h2>
-          <a href="announcements.html" class="btn btn-outline btn-sm">Manage All</a>
-        </div>
-        <div class="panel-body p0">
-          <div class="table-wrap">
-            <table class="data-table" id="announcementsTable">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Category</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="announcementsBody">
-                <tr><td colspan="5" class="table-loading">Loading…</td></tr>
-              </tbody>
-            </table>
+        <button type="submit" class="btn-login" id="loginBtn">
+          <span class="btn-text"><i class="fas fa-sign-in-alt"></i> &nbsp;Sign In</span>
+          <div class="spinner"></div>
+        </button>
+      </form>
+
+      <!-- Demo credentials panel -->
+      <div class="demo-panel">
+        <button class="demo-panel-toggle" id="demoPanelToggle" type="button">
+          <span><i class="fas fa-key"></i> &nbsp; Demo Credentials</span>
+          <i class="fas fa-chevron-down arrow"></i>
+        </button>
+
+        <div class="demo-creds" id="demoCreds">
+          <div class="demo-cred-row" onclick="fillCreds('admin@naisdubai.ae','Admin@2025!')">
+            <div class="demo-role">Super Admin</div>
+            <div class="demo-email">admin@naisdubai.ae</div>
+            <button class="demo-fill-btn" type="button">Fill</button>
+          </div>
+          <div class="demo-cred-row" onclick="fillCreds('s.mitchell@naisdubai.ae','Principal@2025!')">
+            <div class="demo-role">Admin — Principal</div>
+            <div class="demo-email">s.mitchell@naisdubai.ae</div>
+            <button class="demo-fill-btn" type="button">Fill</button>
+          </div>
+          <div class="demo-cred-row" onclick="fillCreds('j.thornton@naisdubai.ae','VPAcademic@2025!')">
+            <div class="demo-role">Editor — VP Academic</div>
+            <div class="demo-email">j.thornton@naisdubai.ae</div>
+            <button class="demo-fill-btn" type="button">Fill</button>
+          </div>
+          <div class="demo-cred-row" onclick="fillCreds('l.hassan@naisdubai.ae','Admissions@2025!')">
+            <div class="demo-role">Editor — Admissions</div>
+            <div class="demo-email">l.hassan@naisdubai.ae</div>
+            <button class="demo-fill-btn" type="button">Fill</button>
+          </div>
+          <div class="demo-cred-row" onclick="fillCreds('t.mansour@naisdubai.ae','ITManager@2025!')">
+            <div class="demo-role">Editor — IT Manager</div>
+            <div class="demo-email">t.mansour@naisdubai.ae</div>
+            <button class="demo-fill-btn" type="button">Fill</button>
+          </div>
+          <div class="demo-cred-row" onclick="fillCreds('o.alrashidi@naisdubai.ae','HODSports@2025!')">
+            <div class="demo-role">Viewer — HOD PE</div>
+            <div class="demo-email">o.alrashidi@naisdubai.ae</div>
+            <button class="demo-fill-btn" type="button">Fill</button>
           </div>
         </div>
       </div>
 
-      <!-- ── Upcoming events ── -->
-      <div class="panel">
-        <div class="panel-header">
-          <h2 class="panel-title"><i class="fas fa-calendar-alt"></i> Upcoming Events</h2>
-          <a href="announcements.html?tab=events" class="btn btn-outline btn-sm">Manage All</a>
-        </div>
-        <div class="panel-body p0">
-          <div class="table-wrap">
-            <table class="data-table" id="eventsTable">
-              <thead>
-                <tr>
-                  <th>Event</th>
-                  <th>Date</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="eventsBody">
-                <tr><td colspan="5" class="table-loading">Loading…</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <!-- Back to site -->
+      <div class="back-to-site">
+        <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to NAIS Dubai website</a>
       </div>
+    </div>
 
-    </div><!-- .admin-content -->
-  </main>
+  </div><!-- .login-page -->
 
-  <!-- ── Toast container ── -->
-  <div class="toast-container" id="toastContainer"></div>
-
-  <!-- ── Overlay for mobile sidebar ── -->
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-  <script src="js/core.js?v=2.2"></script>
   <script>
-    // ── Site pages list ──
-    const SITE_PAGES = [
-      { label: 'Home',         href: '../index.html',       icon: 'fa-home' },
-      { label: 'About',        href: '../about.html',       icon: 'fa-info-circle' },
-      { label: 'Academics',    href: '../academics.html',   icon: 'fa-graduation-cap' },
-      { label: 'Admissions',   href: '../admissions.html',  icon: 'fa-door-open' },
-      { label: 'Student Life', href: '../studentlife.html', icon: 'fa-star' },
-      { label: 'Facilities',   href: '../facilities.html',  icon: 'fa-building' },
-      { label: 'Community',    href: '../community.html',   icon: 'fa-hands-helping' },
-      { label: 'Innovation',   href: '../innovation.html',  icon: 'fa-lightbulb' },
-      { label: 'Sports',       href: '../sports.html',      icon: 'fa-futbol' },
-      { label: 'News',         href: '../news.html',        icon: 'fa-newspaper' },
-      { label: 'Careers',      href: '../careers.html',     icon: 'fa-briefcase' },
-      { label: 'Contact',      href: '../contact.html',     icon: 'fa-envelope' },
+    // ── Demo users (mirrored from core.js DEMO_USERS — keep in sync) ──
+    const DEMO_USERS = [
+      { email: 'admin@naisdubai.ae',        password: 'Admin@2025!',       role: 'super_admin', name: 'System Administrator', avatar: 'SA', department: 'Executive' },
+      { email: 's.mitchell@naisdubai.ae',   password: 'Principal@2025!',   role: 'principal',   name: 'Sarah Mitchell',       avatar: 'SM', department: 'Leadership' },
+      { email: 'j.thornton@naisdubai.ae',   password: 'VPAcademic@2025!',  role: 'editor',      name: 'James Thornton',       avatar: 'JT', department: 'Academics' },
+      { email: 'l.hassan@naisdubai.ae',     password: 'Admissions@2025!',  role: 'editor',      name: 'Layla Hassan',         avatar: 'LH', department: 'Admissions' },
+      { email: 't.mansour@naisdubai.ae',    password: 'ITManager@2025!',   role: 'editor',      name: 'Tariq Mansour',        avatar: 'TM', department: 'IT' },
+      { email: 'o.alrashidi@naisdubai.ae',  password: 'HODSports@2025!',   role: 'viewer',      name: 'Omar Al-Rashidi',      avatar: 'OA', department: 'PE' },
     ];
 
-    function renderPagesList() {
-      const ul = document.getElementById('pagesList');
-      ul.innerHTML = SITE_PAGES.map(p => `
-        <li class="pages-list-item">
-          <span class="pages-list-icon"><i class="fas ${p.icon}"></i></span>
-          <span class="pages-list-label">${p.label}</span>
-          <span class="badge badge-green pages-list-badge">Live</span>
-          <div class="pages-list-actions">
-            <a href="${p.href}" target="_blank" class="btn btn-ghost btn-icon" title="View page"><i class="fas fa-external-link-alt"></i></a>
-            <a href="content.html?page=${p.label.toLowerCase().replace(/ /g,'-')}" class="btn btn-ghost btn-icon" title="Edit content"><i class="fas fa-edit"></i></a>
-          </div>
-        </li>
-      `).join('');
-    }
+    // ── Session version — must match core.js SESSION_VERSION ──
+    const SESSION_VERSION = '2.2';
 
-    // ── Load stats ──
-    async function loadStats() {
+    // ── Already logged in? Validate session email + version before auto-redirecting ──
+    (function checkExistingSession() {
       try {
-        const [ann, evt, staff, media, users] = await Promise.all([
-          API.get('cms_announcements', { limit: 1 }),
-          API.get('cms_events',        { limit: 1 }),
-          API.get('cms_staff',         { limit: 1 }),
-          API.get('cms_media',         { limit: 1 }),
-          API.get('cms_users',         { limit: 1 }),
-        ]);
-
-        setStatCard('statAnnouncements', ann.total ?? '—', 'statAnnouncementsTrend', `${ann.total ?? 0} total`, '');
-        setStatCard('statEvents',        evt.total ?? '—', 'statEventsTrend',        `${evt.total ?? 0} total`, '');
-        setStatCard('statStaff',         staff.total ?? '—', 'statStaffTrend',       `${staff.total ?? 0} profiles`, '');
-        setStatCard('statMedia',         media.total ?? '—', 'statMediaTrend',       `${media.total ?? 0} files`, '');
-        setStatCard('statUsers',         users.total ?? '—', 'statUsersTrend',       `${users.total ?? 0} accounts`, '');
-      } catch(e) {
-        console.warn('Stats load error', e);
-      }
-    }
-
-    function setStatCard(valId, value, trendId, trendText, trendClass) {
-      const v = document.getElementById(valId);
-      const t = document.getElementById(trendId);
-      if (v) v.textContent = value;
-      if (t) { t.textContent = trendText; if (trendClass) t.className = 'stat-trend ' + trendClass; }
-    }
-
-    // ── Load activity feed ──
-    async function loadActivity() {
-      const list = document.getElementById('activityList');
-      list.innerHTML = '<li class="activity-item"><span style="color:var(--gray400);font-size:13px;padding:8px 0;">Loading…</span></li>';
-      try {
-        const res = await API.get('cms_activity_log', { limit: 12, sort: 'created_at' });
-        const items = (res.data || []).reverse();
-        if (!items.length) {
-          list.innerHTML = '<li class="activity-item"><span style="color:var(--gray400);font-size:13px;">No activity yet.</span></li>';
-          return;
+        const stored = localStorage.getItem('nais_cms_user');
+        if (stored) {
+          const user = JSON.parse(stored);
+          const validEmails = DEMO_USERS.map(u => u.email);
+          const isValidEmail   = user && user.email && validEmails.includes(user.email);
+          const isValidVersion = user && user._v === SESSION_VERSION;
+          if (isValidEmail && isValidVersion) {
+            window.location.href = 'index.html';
+          } else {
+            // Stale / old-version / old-credential session — wipe it, show login
+            localStorage.removeItem('nais_cms_user');
+          }
         }
-        list.innerHTML = items.map(item => `
-          <li class="activity-item">
-            <div class="activity-dot"></div>
-            <div class="activity-body">
-              <div class="activity-text">
-                <strong>${escHtml(item.user_name || 'System')}</strong>
-                ${escHtml(item.action || '')}
-                <em>${escHtml(item.target_label || '')}</em>
-              </div>
-              <div class="activity-time">${timeAgo(item.created_at)}</div>
-            </div>
-          </li>
-        `).join('');
       } catch(e) {
-        list.innerHTML = '<li class="activity-item"><span style="color:var(--gray400);font-size:13px;">Could not load activity.</span></li>';
+        localStorage.removeItem('nais_cms_user');
       }
-    }
+    })();
 
-    // ── Load recent announcements table ──
-    async function loadAnnouncementsTable() {
-      const tbody = document.getElementById('announcementsBody');
-      try {
-        const res = await API.get('cms_announcements', { limit: 5 });
-        const rows = res.data || [];
-        if (!rows.length) {
-          tbody.innerHTML = '<tr><td colspan="5" class="table-empty">No announcements yet. <a href="announcements.html?new=1">Create one</a>.</td></tr>';
-          return;
-        }
-        tbody.innerHTML = rows.map(r => `
-          <tr>
-            <td><span class="table-title-cell">${escHtml(r.title || '—')}</span></td>
-            <td><span class="badge badge-navy">${escHtml(r.category || 'General')}</span></td>
-            <td>${badgeHtml(r.status || 'draft')}</td>
-            <td class="table-date">${formatDate(r.publish_date || r.created_at)}</td>
-            <td>
-              <div class="table-actions">
-                <a href="announcements.html?edit=${r.id}" class="btn btn-ghost btn-icon" title="Edit"><i class="fas fa-edit"></i></a>
-                <button class="btn btn-ghost btn-icon danger" title="Delete" onclick="deleteAnnouncement('${r.id}','${escHtml(r.title||'')}')"><i class="fas fa-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-        `).join('');
-      } catch(e) {
-        tbody.innerHTML = '<tr><td colspan="5" class="table-empty">Could not load announcements.</td></tr>';
-      }
-    }
+    // ── Password toggle ──
+    const passInput     = document.getElementById('passwordInput');
+    const passToggle    = document.getElementById('passToggle');
+    const passToggleIcon = document.getElementById('passToggleIcon');
 
-    // ── Load upcoming events table ──
-    async function loadEventsTable() {
-      const tbody = document.getElementById('eventsBody');
-      try {
-        const res = await API.get('cms_events', { limit: 5 });
-        const rows = res.data || [];
-        if (!rows.length) {
-          tbody.innerHTML = '<tr><td colspan="5" class="table-empty">No events yet. <a href="announcements.html?tab=events&new=1">Create one</a>.</td></tr>';
-          return;
-        }
-        tbody.innerHTML = rows.map(r => `
-          <tr>
-            <td><span class="table-title-cell">${escHtml(r.title || '—')}</span></td>
-            <td class="table-date">${formatDate(r.event_date)}</td>
-            <td>${escHtml(r.location || '—')}</td>
-            <td>${badgeHtml(r.status || 'upcoming')}</td>
-            <td>
-              <div class="table-actions">
-                <a href="announcements.html?tab=events&edit=${r.id}" class="btn btn-ghost btn-icon" title="Edit"><i class="fas fa-edit"></i></a>
-                <button class="btn btn-ghost btn-icon danger" title="Delete" onclick="deleteEvent('${r.id}','${escHtml(r.title||'')}')"><i class="fas fa-trash"></i></button>
-              </div>
-            </td>
-          </tr>
-        `).join('');
-      } catch(e) {
-        tbody.innerHTML = '<tr><td colspan="5" class="table-empty">Could not load events.</td></tr>';
-      }
-    }
-
-    async function deleteAnnouncement(id, label) {
-      confirmDelete(label, async () => {
-        await API.delete('cms_announcements', id);
-        Toast.success('Announcement deleted.');
-        loadAnnouncementsTable();
-        loadStats();
-      });
-    }
-
-    async function deleteEvent(id, label) {
-      confirmDelete(label, async () => {
-        await API.delete('cms_events', id);
-        Toast.success('Event deleted.');
-        loadEventsTable();
-        loadStats();
-      });
-    }
-
-    function escHtml(str) {
-      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
-
-    async function refreshDashboard() {
-      Toast.info('Refreshing dashboard…');
-      await Promise.all([loadStats(), loadActivity(), loadAnnouncementsTable(), loadEventsTable()]);
-      Toast.success('Dashboard refreshed.');
-    }
-
-    // ── Init ──
-    document.addEventListener('DOMContentLoaded', () => {
-      renderPagesList();
-      loadStats();
-      loadActivity();
-      loadAnnouncementsTable();
-      loadEventsTable();
+    passToggle.addEventListener('click', () => {
+      const isText = passInput.type === 'text';
+      passInput.type = isText ? 'password' : 'text';
+      passToggleIcon.className = isText ? 'fas fa-eye' : 'fas fa-eye-slash';
     });
+
+    // ── Demo panel toggle ──
+    const demoPanelToggle = document.getElementById('demoPanelToggle');
+    const demoCreds       = document.getElementById('demoCreds');
+
+    demoPanelToggle.addEventListener('click', () => {
+      const isOpen = demoCreds.classList.toggle('open');
+      demoPanelToggle.classList.toggle('open', isOpen);
+    });
+
+    // ── Fill credentials helper ──
+    function fillCreds(email, password) {
+      document.getElementById('emailInput').value    = email;
+      document.getElementById('passwordInput').value = password;
+      hideError();
+      document.getElementById('emailInput').focus();
+    }
+
+    // ── Error helpers ──
+    function showError(msg) {
+      const el = document.getElementById('loginError');
+      document.getElementById('loginErrorMsg').textContent = msg || 'Invalid email or password.';
+      el.classList.add('visible');
+    }
+
+    function hideError() {
+      document.getElementById('loginError').classList.remove('visible');
+    }
+
+    // ── Form submit ──
+    const loginForm = document.getElementById('loginForm');
+    const loginBtn  = document.getElementById('loginBtn');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError();
+
+      const email    = document.getElementById('emailInput').value.trim().toLowerCase();
+      const password = document.getElementById('passwordInput').value;
+      const remember = document.getElementById('rememberMe').checked;
+
+      if (!email || !password) {
+        showError('Please enter your email and password.');
+        return;
+      }
+
+      // Loading state
+      loginBtn.classList.add('loading');
+
+      // Simulate async auth check (slight delay for realism)
+      await new Promise(r => setTimeout(r, 650));
+
+      const user = DEMO_USERS.find(u =>
+        u.email === email && u.password === password
+      );
+
+      loginBtn.classList.remove('loading');
+
+      if (!user) {
+        showError('Invalid email or password. Please check your credentials.');
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+        return;
+      }
+
+      // Success — store session (include version stamp)
+      const sessionData = {
+        email:    user.email,
+        name:     user.name,
+        role:     user.role,
+        avatar:   user.avatar,
+        loginAt:  new Date().toISOString(),
+        remember: remember,
+        _v:       SESSION_VERSION,
+      };
+
+      try {
+        localStorage.setItem('nais_cms_user', JSON.stringify(sessionData));
+      } catch(e) {}
+
+      // Redirect to dashboard
+      window.location.href = 'index.html';
+    });
+
+    // ── Clear error on input ──
+    document.getElementById('emailInput').addEventListener('input', hideError);
+    document.getElementById('passwordInput').addEventListener('input', hideError);
   </script>
-
-  <style>
-    /* ── Dashboard-specific extras ── */
-    .dash-two-col {
-      display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-    .dash-right-col { display: flex; flex-direction: column; gap: 24px; }
-
-    /* Activity list */
-    .activity-list { list-style: none; padding: 0; margin: 0; }
-    .activity-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--gray100);
-      transition: background 0.15s;
-    }
-    .activity-item:last-child { border-bottom: none; }
-    .activity-item:hover { background: var(--gray50); }
-    .activity-dot {
-      width: 8px; height: 8px;
-      background: var(--navy);
-      border-radius: 50%;
-      margin-top: 5px;
-      flex-shrink: 0;
-    }
-    .activity-body { flex: 1; min-width: 0; }
-    .activity-text { font-size: 13px; color: var(--gray700); line-height: 1.5; }
-    .activity-text strong { color: var(--gray800); font-weight: 600; }
-    .activity-text em { font-style: normal; color: var(--navy); font-weight: 500; }
-    .activity-time { font-size: 11px; color: var(--gray400); margin-top: 2px; }
-    .skeleton-row { height: 52px; background: linear-gradient(90deg,var(--gray100) 25%,var(--gray50) 50%,var(--gray100) 75%); background-size:200% 100%; animation: shimmer 1.4s infinite; border-radius: 4px; margin: 8px 20px; }
-    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-
-    /* Quick actions */
-    .quick-actions-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .quick-action-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 16px 10px;
-      background: var(--gray50);
-      border: 1.5px solid var(--gray200);
-      border-radius: 10px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--gray700);
-      text-decoration: none;
-      transition: all 0.18s;
-      text-align: center;
-      cursor: pointer;
-    }
-    .quick-action-btn i { font-size: 18px; color: var(--navy); }
-    .quick-action-btn:hover {
-      background: var(--navy);
-      border-color: var(--navy);
-      color: #fff;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(10,25,49,0.18);
-    }
-    .quick-action-btn:hover i { color: #fff; }
-
-    /* Pages list */
-    .pages-list { list-style: none; padding: 0; margin: 0; }
-    .pages-list-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--gray100);
-      font-size: 13px;
-      transition: background 0.15s;
-    }
-    .pages-list-item:last-child { border-bottom: none; }
-    .pages-list-item:hover { background: var(--gray50); }
-    .pages-list-icon { width: 28px; height: 28px; background: var(--gray100); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 11px; flex-shrink: 0; }
-    .pages-list-label { flex: 1; font-weight: 500; color: var(--gray700); }
-    .pages-list-badge { flex-shrink: 0; }
-    .pages-list-actions { display: flex; gap: 2px; opacity: 0; transition: opacity 0.15s; }
-    .pages-list-item:hover .pages-list-actions { opacity: 1; }
-
-    /* Table extras */
-    .table-loading { text-align: center; padding: 24px; color: var(--gray400); font-size: 13px; }
-    .table-empty { text-align: center; padding: 24px; color: var(--gray400); font-size: 13px; }
-    .table-empty a { color: var(--navy); font-weight: 500; }
-    .table-title-cell { font-weight: 500; color: var(--gray800); }
-    .table-date { font-size: 12px; color: var(--gray500); white-space: nowrap; }
-
-    /* ── Responsive ── */
-    @media (max-width: 1100px) {
-      .dash-two-col { grid-template-columns: 1fr; }
-      .dash-right-col { display: grid; grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 700px) {
-      .dash-right-col { grid-template-columns: 1fr; }
-      .quick-actions-grid { grid-template-columns: 1fr 1fr 1fr; }
-    }
-    @media (max-width: 500px) {
-      .quick-actions-grid { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
 </body>
 </html>

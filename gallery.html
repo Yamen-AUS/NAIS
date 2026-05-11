@@ -3,534 +3,1934 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Events — NAIS Dubai CMS</title>
+  <title>Settings — NAIS Dubai CMS</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/admin.css?v=2.2" />
+  <style>
+    /* ── Settings layout ── */
+    .settings-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .settings-sidenav {
+      background: #fff;
+      border: 1px solid var(--gray200);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      position: sticky;
+      top: calc(var(--topbar-h) + 20px);
+    }
+    .settings-sidenav-title {
+      padding: 14px 16px 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gray400);
+      border-bottom: 1px solid var(--gray100);
+    }
+    .snav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray600);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+    .snav-item:hover { background: var(--gray50); color: var(--navy); }
+    .snav-item.active { background: rgba(10,25,49,.05); color: var(--navy); border-left-color: var(--navy); font-weight: 600; }
+    .snav-item i { width: 16px; text-align: center; font-size: 13px; flex-shrink: 0; }
+    .snav-item .snav-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+    .snav-danger { color: var(--red) !important; }
+    .snav-danger:hover { background: #fff5f5 !important; }
+    .snav-danger.active { border-left-color: var(--red) !important; background: #fff5f5 !important; }
+
+    /* ── Settings sections ── */
+    .settings-section { display: none; }
+    .settings-section.active { display: block; }
+
+    /* Section hero banner */
+    .sect-hero {
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .sect-hero-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .sect-hero h2 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 2px; }
+    .sect-hero p  { font-size: 13px; color: rgba(255,255,255,.7); }
+
+    .hero-general   { background: linear-gradient(135deg,#0a1931 0%,#1a3a6b 100%); }
+    .hero-lang      { background: linear-gradient(135deg,#5b21b6 0%,#7c3aed 100%); }
+    .hero-emergency { background: linear-gradient(135deg,#b91c1c 0%,#dc2626 100%); }
+    .hero-social    { background: linear-gradient(135deg,#0369a1 0%,#0ea5e9 100%); }
+    .hero-analytics { background: linear-gradient(135deg,#065f46 0%,#059669 100%); }
+    .hero-backup    { background: linear-gradient(135deg,#92400e 0%,#d97706 100%); }
+    .hero-danger    { background: linear-gradient(135deg,#7f1d1d 0%,#c0272d 100%); }
+
+    /* Card sub-headers */
+    .card-section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--gray400);
+      margin: 0 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--gray100);
+    }
+
+    /* Toggle switch */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray100);
+    }
+    .toggle-row:last-child { border-bottom: none; }
+    .toggle-info { flex: 1; min-width: 0; padding-right: 16px; }
+    .toggle-label { font-size: 13.5px; font-weight: 600; color: var(--gray800); }
+    .toggle-desc  { font-size: 12px; color: var(--gray400); margin-top: 2px; }
+    .toggle-switch {
+      position: relative; width: 44px; height: 24px; flex-shrink: 0;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider {
+      position: absolute; inset: 0; background: var(--gray200);
+      border-radius: 24px; cursor: pointer;
+      transition: background .25s;
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      left: 3px; top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform .25s;
+      box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    }
+    .toggle-switch input:checked + .toggle-slider { background: var(--green); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+    /* Cache version row */
+    .cache-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+    }
+    .cache-version-badge {
+      background: var(--gray100);
+      border: 1px solid var(--gray200);
+      border-radius: var(--radius-sm);
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      font-family: monospace;
+      letter-spacing: .05em;
+    }
+
+    /* ── Section 2: Language ── */
+    .lang-tabs { display: flex; gap: 6px; margin-bottom: 18px; }
+    .lang-tab {
+      padding: 7px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1.5px solid var(--gray200);
+      background: #fff;
+      color: var(--gray500);
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex; align-items: center; gap: 7px;
+    }
+    .lang-tab:hover { border-color: var(--navy); color: var(--navy); }
+    .lang-tab.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .lang-tab .lang-pct {
+      background: rgba(255,255,255,.22);
+      padding: 1px 7px;
+      border-radius: 10px;
+      font-size: 11px;
+    }
+    .lang-tab:not(.active) .lang-pct { background: var(--gray100); color: var(--gray500); }
+
+    .progress-bar-wrap {
+      background: var(--gray100);
+      border-radius: 20px;
+      height: 8px;
+      overflow: hidden;
+      margin: 8px 0 4px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 20px;
+      background: linear-gradient(90deg, var(--green), #22c55e);
+      transition: width .5s ease;
+    }
+
+    .filter-chips { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 16px; }
+    .chip {
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1.5px solid var(--gray200);
+      background: #fff;
+      color: var(--gray500);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .chip:hover { border-color: var(--purple); color: var(--purple); }
+    .chip.active { background: var(--purple); border-color: var(--purple); color: #fff; }
+
+    .translation-table { width: 100%; border-collapse: collapse; }
+    .translation-table th {
+      text-align: left; padding: 9px 12px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--gray500);
+      background: var(--gray50); border-bottom: 2px solid var(--gray200);
+    }
+    .translation-table td {
+      padding: 9px 12px; border-bottom: 1px solid var(--gray100);
+      font-size: 13px; vertical-align: middle;
+    }
+    .translation-table tbody tr:hover td { background: var(--gray50); }
+    .translation-table .key-cell {
+      font-family: monospace; font-size: 12px;
+      color: var(--gray600); background: var(--gray50);
+      padding: 2px 8px; border-radius: 4px;
+    }
+    .translation-table .ar-input {
+      width: 100%; border: 1.5px solid var(--gray200);
+      border-radius: var(--radius-sm); padding: 6px 10px;
+      font-size: 13px; direction: rtl; text-align: right;
+      font-family: 'Inter', sans-serif;
+    }
+    .translation-table .ar-input:focus { border-color: var(--purple); outline: none; box-shadow: 0 0 0 3px rgba(124,58,237,.08); }
+    .badge-done    { background: rgba(22,163,74,.1);   color: var(--green);  padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .badge-missing { background: rgba(192,39,45,.08);  color: var(--red);    padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+
+    .rtl-preview-box {
+      background: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      direction: rtl;
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.8;
+      margin-top: 16px;
+    }
+    .rtl-preview-box h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+
+    /* ── Section 3: Emergency ── */
+    .alert-preview {
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+      transition: all .3s;
+    }
+    .alert-preview.info     { background: rgba(37,99,235,.08);  border-left: 4px solid var(--blue); }
+    .alert-preview.warning  { background: rgba(217,119,6,.08);   border-left: 4px solid var(--amber); }
+    .alert-preview.urgent   { background: rgba(192,39,45,.08);   border-left: 4px solid var(--red); }
+    .alert-preview-icon { font-size: 18px; margin-top: 1px; flex-shrink: 0; }
+    .alert-preview.info    .alert-preview-icon { color: var(--blue); }
+    .alert-preview.warning .alert-preview-icon { color: var(--amber); }
+    .alert-preview.urgent  .alert-preview-icon { color: var(--red); }
+    .alert-preview-body strong { font-size: 13.5px; font-weight: 700; display: block; margin-bottom: 2px; }
+    .alert-preview-body span  { font-size: 12.5px; color: var(--gray500); }
+
+    .alert-history-table { width: 100%; border-collapse: collapse; }
+    .alert-history-table th { text-align: left; padding: 9px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--gray500); background: var(--gray50); border-bottom: 2px solid var(--gray200); }
+    .alert-history-table td { padding: 10px 12px; border-bottom: 1px solid var(--gray100); font-size: 13px; vertical-align: middle; }
+    .alert-history-table tbody tr:hover td { background: var(--gray50); }
+
+    /* ── Section 4: Social ── */
+    .social-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray100);
+    }
+    .social-row:last-child { border-bottom: none; }
+    .social-icon-wrap {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .si-fb   { background: #e7f0fd; color: #1877f2; }
+    .si-ig   { background: #fce9f7; color: #e1306c; }
+    .si-x    { background: #e8f5fe; color: #1da1f2; }
+    .si-yt   { background: #fde8e8; color: #ff0000; }
+    .si-li   { background: #e6f2fb; color: #0a66c2; }
+    .si-wa   { background: #e6f8ee; color: #25d366; }
+    .social-name { font-size: 13px; font-weight: 600; color: var(--gray700); min-width: 90px; flex-shrink: 0; }
+    .social-input-wrap { flex: 1; }
+    .social-status { flex-shrink: 0; }
+    .status-live    { background: rgba(22,163,74,.1);  color: var(--green); padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .status-not-set { background: var(--gray100); color: var(--gray400);   padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+
+    /* ── Section 5: Analytics ── */
+    .analytics-card {
+      background: #fff;
+      border: 1px solid var(--gray200);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .analytics-card:last-child { margin-bottom: 0; }
+    .analytics-logo {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .al-ga    { background: #fef3c7; color: #d97706; }
+    .al-gsc   { background: #e0f2fe; color: #0369a1; }
+    .al-meta  { background: #ede9fe; color: #7c3aed; }
+    .al-hot   { background: #fce7f3; color: #db2777; }
+    .analytics-info { flex: 1; min-width: 0; }
+    .analytics-name { font-size: 14px; font-weight: 700; color: var(--gray800); }
+    .analytics-id   { font-size: 12px; color: var(--gray400); font-family: monospace; margin-top: 2px; }
+    .analytics-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .status-connected    { background: rgba(22,163,74,.1);  color: var(--green); padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .status-disconnected { background: var(--gray100); color: var(--gray500); padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+
+    .code-editor {
+      width: 100%;
+      min-height: 110px;
+      background: #0f172a;
+      color: #94a3b8;
+      border: 1px solid #1e293b;
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 12.5px;
+      line-height: 1.7;
+      resize: vertical;
+    }
+    .code-editor:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 0 3px rgba(124,58,237,.12); }
+    .code-editor::placeholder { color: #475569; }
+
+    /* ── Section 6: Backup ── */
+    .backup-entry {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray100);
+    }
+    .backup-entry:last-child { border-bottom: none; }
+    .backup-icon-wrap {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: rgba(217,119,6,.1);
+      color: var(--amber);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .backup-meta { flex: 1; min-width: 0; }
+    .backup-name { font-size: 13.5px; font-weight: 600; color: var(--gray800); }
+    .backup-size { font-size: 12px; color: var(--gray400); margin-top: 1px; }
+    .backup-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+    /* ── Section 7: Danger ── */
+    .danger-card {
+      background: #fff;
+      border: 1.5px solid #fee2e2;
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .danger-card:last-child { margin-bottom: 0; }
+    .danger-card-icon {
+      width: 42px; height: 42px;
+      border-radius: 11px;
+      background: #fee2e2;
+      color: var(--red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .danger-card-info { flex: 1; min-width: 0; }
+    .danger-card-title { font-size: 14px; font-weight: 700; color: var(--gray800); }
+    .danger-card-desc  { font-size: 12px; color: var(--gray400); margin-top: 2px; }
+
+    /* Save bar */
+    .save-bar {
+      position: sticky;
+      bottom: 0;
+      background: #fff;
+      border-top: 1px solid var(--gray200);
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 50;
+      margin: 24px -28px -48px;
+      box-shadow: 0 -4px 20px rgba(10,25,49,.06);
+    }
+    .save-bar-msg { font-size: 13px; color: var(--gray500); }
+    .save-bar-msg strong { color: var(--navy); }
+
+    @media (max-width: 900px) {
+      .settings-layout { grid-template-columns: 1fr; }
+      .settings-sidenav { position: static; display: flex; flex-wrap: wrap; gap: 4px; padding: 10px; }
+      .settings-sidenav-title { display: none; }
+      .snav-item { border-left: none; border-radius: 20px; padding: 7px 14px; border-bottom: 3px solid transparent; }
+      .snav-item.active { background: var(--navy); color: #fff; border-bottom-color: transparent; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ── Sidebar ── -->
-  <aside class="admin-sidebar" id="adminSidebar">
-    <div class="sidebar-header">
-      <div class="sidebar-logo">
-        <div class="sidebar-logo-mark">🏫</div>
-        <div class="sidebar-logo-text">
-          <span class="sidebar-school">NAIS Dubai</span>
-          <span class="sidebar-cms">CMS Admin</span>
-        </div>
-      </div>
-      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="sidebar-user">
-      <div class="sidebar-user-avatar" data-user-avatar>SA</div>
-      <div class="sidebar-user-info">
-        <span class="sidebar-user-name" data-user-name>Loading…</span>
-        <span class="sidebar-user-badge" data-user-role>Admin</span>
+<!-- ── Sidebar ── -->
+<aside class="admin-sidebar" id="adminSidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-mark">🏫</div>
+      <div class="sidebar-logo-text">
+        <span class="sidebar-school">NAIS Dubai</span>
+        <span class="sidebar-cms">CMS Admin</span>
       </div>
     </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section-label">Main</div>
-      <a href="index.html" class="nav-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
-      <a href="content.html" class="nav-item"><i class="fas fa-file-alt"></i><span>Pages</span><i class="fas fa-chevron-right nav-arrow"></i></a>
-      <a href="media.html" class="nav-item"><i class="fas fa-images"></i><span>Media Library</span></a>
-      <a href="announcements.html" class="nav-item"><i class="fas fa-bullhorn"></i><span>Announcements</span><span class="nav-badge">3</span></a>
-      <a href="events.html" class="nav-item active"><i class="fas fa-calendar-alt"></i><span>Events</span></a>
-      <div class="nav-section-label">School</div>
-      <a href="staff.html" class="nav-item"><i class="fas fa-users"></i><span>Staff Profiles</span></a>
-      <a href="admissions.html" class="nav-item"><i class="fas fa-user-graduate"></i><span>Admissions</span></a>
-      <a href="results.html" class="nav-item"><i class="fas fa-award"></i><span>Results</span></a>
-      <a href="gallery.html" class="nav-item"><i class="fas fa-photo-video"></i><span>Gallery</span></a>
-      <a href="documents.html" class="nav-item"><i class="fas fa-folder-open"></i><span>Documents</span><span class="nav-badge">2</span></a>
-      <div class="nav-section-label">System</div>
-      <a href="users.html" class="nav-item"><i class="fas fa-user-shield"></i><span>Users &amp; Roles</span></a>
-      <a href="seo.html" class="nav-item"><i class="fas fa-search"></i><span>SEO Manager</span></a>
-      <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
-      <a href="../index.html" target="_blank" class="nav-item"><i class="fas fa-external-link-alt"></i><span>View Website</span></a>
-    </nav>
-    <div class="sidebar-footer">
-      <button class="sidebar-signout-btn" id="sidebarSignOut"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+    <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="sidebar-user">
+    <div class="sidebar-user-avatar" data-user-avatar>SA</div>
+    <div class="sidebar-user-info">
+      <span class="sidebar-user-name" data-user-name>Loading…</span>
+      <span class="sidebar-user-badge" data-user-role>Admin</span>
     </div>
-  </aside>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+    <a href="index.html" class="nav-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+    <a href="content.html" class="nav-item"><i class="fas fa-file-alt"></i><span>Pages</span><i class="fas fa-chevron-right nav-arrow"></i></a>
+    <a href="media.html" class="nav-item"><i class="fas fa-images"></i><span>Media Library</span></a>
+    <a href="announcements.html" class="nav-item"><i class="fas fa-bullhorn"></i><span>Announcements</span><span class="nav-badge">3</span></a>
+    <a href="events.html" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Events</span></a>
+    <div class="nav-section-label">School</div>
+    <a href="staff.html" class="nav-item"><i class="fas fa-users"></i><span>Staff Profiles</span></a>
+    <a href="admissions.html" class="nav-item"><i class="fas fa-user-graduate"></i><span>Admissions</span></a>
+    <a href="results.html" class="nav-item"><i class="fas fa-award"></i><span>Results</span></a>
+    <a href="gallery.html" class="nav-item"><i class="fas fa-photo-video"></i><span>Gallery</span></a>
+    <a href="documents.html" class="nav-item"><i class="fas fa-folder-open"></i><span>Documents</span><span class="nav-badge">2</span></a>
+    <div class="nav-section-label">System</div>
+    <a href="users.html" class="nav-item"><i class="fas fa-user-shield"></i><span>Users &amp; Roles</span></a>
+    <a href="seo.html" class="nav-item"><i class="fas fa-search"></i><span>SEO Manager</span></a>
+    <a href="settings.html" class="nav-item active"><i class="fas fa-cog"></i><span>Settings</span></a>
+    <a href="../index.html" target="_blank" class="nav-item"><i class="fas fa-external-link-alt"></i><span>View Website</span></a>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="sidebar-signout-btn" id="sidebarSignOut"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+  </div>
+</aside>
 
-  <!-- ── Overlay ── -->
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-  <!-- ── Topbar ── -->
-  <header class="admin-topbar">
-    <div class="topbar-left">
-      <button class="topbar-menu-btn" id="sidebarToggle"><i class="fas fa-bars"></i></button>
-      <div class="topbar-breadcrumb">
-        <span class="bc-home"><i class="fas fa-home"></i></span>
-        <i class="fas fa-chevron-right bc-sep"></i>
-        <span class="bc-current">Events</span>
-      </div>
+<!-- ── Topbar ── -->
+<header class="admin-topbar">
+  <div class="topbar-left">
+    <button class="topbar-menu-btn" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+    <div class="topbar-breadcrumb">
+      <span class="bc-home"><i class="fas fa-home"></i></span>
+      <i class="fas fa-chevron-right bc-sep"></i>
+      <span class="bc-current">Settings</span>
     </div>
-    <div class="topbar-right">
-      <button class="topbar-icon-btn" onclick="window.open('../index.html','_blank')" title="View site"><i class="fas fa-globe"></i></button>
-      <div class="topbar-user" id="topbarUser">
-        <div class="topbar-avatar" data-user-avatar>SA</div>
-        <div class="topbar-user-info">
-          <span class="topbar-user-name" data-user-name>Loading…</span>
-          <span class="topbar-user-role" data-user-role>—</span>
-        </div>
-        <i class="fas fa-chevron-down topbar-chevron"></i>
-        <div class="user-dropdown" id="userDropdown">
-          <div class="user-dropdown-header">
-            <div class="udh-avatar" data-user-avatar>SA</div>
-            <div><div class="udh-name" data-user-name>—</div><div class="udh-email" data-user-email>—</div></div>
-          </div>
-          <div class="user-dropdown-divider"></div>
-          <a href="settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i> Settings</a>
-          <button class="user-dropdown-item danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
-        </div>
+  </div>
+  <div class="topbar-right">
+    <button class="topbar-icon-btn" onclick="window.open('../index.html','_blank')" title="View site"><i class="fas fa-globe"></i></button>
+    <div class="topbar-user" id="topbarUser">
+      <div class="topbar-avatar" data-user-avatar>SA</div>
+      <div class="topbar-user-info">
+        <span class="topbar-user-name" data-user-name>Loading…</span>
+        <span class="topbar-user-role" data-user-role>—</span>
       </div>
-    </div>
-  </header>
-
-  <!-- ── Main ── -->
-  <main class="admin-main">
-    <div class="admin-content">
-
-      <!-- Page header -->
-      <div class="page-header">
-        <div>
-          <h1 class="page-title">Events</h1>
-          <p class="page-subtitle">Manage school events, trips, shows and ceremonies.</p>
-        </div>
-        <div class="page-header-actions">
-          <div class="search-box">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search events…" />
-          </div>
-          <select class="form-select" id="filterStatus" style="width:160px">
-            <option value="">All Statuses</option>
-            <option value="upcoming">Upcoming</option>
-            <option value="ongoing">Ongoing</option>
-            <option value="past">Past</option>
-            <option value="cancelled">Cancelled</option>
-          </select>
-          <select class="form-select" id="filterCategory" style="width:150px">
-            <option value="">All Categories</option>
-            <option value="Academic">Academic</option>
-            <option value="Sports">Sports</option>
-            <option value="Arts">Arts</option>
-            <option value="Community">Community</option>
-            <option value="Holiday">Holiday</option>
-            <option value="Workshop">Workshop</option>
-            <option value="Trip">Trip</option>
-            <option value="Other">Other</option>
-          </select>
-          <button class="btn btn-primary" onclick="openEventModal()">
-            <i class="fas fa-plus"></i> New Event
-          </button>
-        </div>
-      </div>
-
-      <!-- Stats strip -->
-      <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px">
-        <div class="stat-card stat-gold">
-          <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statTotal">—</div><div class="stat-label">Total Events</div></div>
-        </div>
-        <div class="stat-card stat-green">
-          <div class="stat-icon"><i class="fas fa-clock"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statUpcoming">—</div><div class="stat-label">Upcoming</div></div>
-        </div>
-        <div class="stat-card stat-teal">
-          <div class="stat-icon"><i class="fas fa-play-circle"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statOngoing">—</div><div class="stat-label">Ongoing</div></div>
-        </div>
-        <div class="stat-card stat-red">
-          <div class="stat-icon"><i class="fas fa-ban"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statCancelled">—</div><div class="stat-label">Cancelled</div></div>
-        </div>
-      </div>
-
-      <!-- Table card -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title"><i class="fas fa-calendar-alt"></i> All Events</h3>
-          <span class="badge badge-published" id="countBadge">0 events</span>
-        </div>
-        <div class="table-responsive">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th style="width:36px"><input type="checkbox" id="selectAll" /></th>
-                <th>Event</th>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Category</th>
-                <th>Audience</th>
-                <th>Status</th>
-                <th style="width:110px">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="eventsTableBody">
-              <tr><td colspan="8" class="text-center" style="padding:48px;color:var(--gray400)"><i class="fas fa-spinner fa-spin fa-2x"></i></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- ═══════════════════ ADD / EDIT MODAL ═══════════════════ -->
-  <div class="modal-backdrop" id="eventModal">
-    <div class="modal" style="max-width:640px">
-      <div class="modal-header">
-        <h3 class="modal-title" id="eventModalTitle">New Event</h3>
-        <button class="modal-close" data-modal-close="eventModal"><i class="fas fa-times"></i></button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="evtId" />
-        <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:14px 18px">
-          <div class="form-group" style="grid-column:1/-1">
-            <label class="form-label">Event Title <span class="required">*</span></label>
-            <input type="text" id="evtTitle" class="form-input" placeholder="e.g. NAIS Sports Day 2025" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Category</label>
-            <select id="evtCategory" class="form-select">
-              <option>Academic</option><option>Sports</option><option>Arts</option>
-              <option>Community</option><option>Holiday</option><option>Workshop</option>
-              <option>Trip</option><option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Status</label>
-            <select id="evtStatus" class="form-select">
-              <option value="upcoming">Upcoming</option>
-              <option value="ongoing">Ongoing</option>
-              <option value="past">Past</option>
-              <option value="cancelled">Cancelled</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Start Date <span class="required">*</span></label>
-            <input type="date" id="evtDateStart" class="form-input" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">End Date</label>
-            <input type="date" id="evtDateEnd" class="form-input" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Start Time</label>
-            <input type="time" id="evtTimeStart" class="form-input" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">End Time</label>
-            <input type="time" id="evtTimeEnd" class="form-input" />
-          </div>
-          <div class="form-group" style="grid-column:1/-1">
-            <label class="form-label">Location / Venue</label>
-            <input type="text" id="evtLocation" class="form-input" placeholder="e.g. School Auditorium" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Audience</label>
-            <select id="evtAudience" class="form-select">
-              <option value="All">All</option>
-              <option value="Students">Students</option>
-              <option value="Parents">Parents</option>
-              <option value="Staff">Staff</option>
-              <option value="Public">Public</option>
-            </select>
-          </div>
-          <div class="form-group" style="display:flex;align-items:center;gap:10px;padding-top:22px">
-            <label class="toggle-switch"><input type="checkbox" id="evtFeatured" /><span class="toggle-slider"></span></label>
-            <span class="form-label" style="margin:0">Feature on homepage</span>
-          </div>
-          <div class="form-group" style="grid-column:1/-1">
-            <label class="form-label">Description</label>
-            <textarea id="evtDescription" class="form-textarea" rows="4" placeholder="Event details, agenda, dress code…"></textarea>
-          </div>
-          <div class="form-group" style="grid-column:1/-1">
-            <label class="form-label">Cover Image URL</label>
-            <input type="url" id="evtImage" class="form-input" placeholder="https://…" />
+      <i class="fas fa-chevron-down topbar-chevron"></i>
+      <div class="user-dropdown" id="userDropdown">
+        <div class="user-dropdown-header">
+          <div class="udh-avatar" data-user-avatar>SA</div>
+          <div>
+            <div class="udh-name" data-user-name>—</div>
+            <div class="udh-email" data-user-email>—</div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-ghost" data-modal-close="eventModal">Cancel</button>
-        <button class="btn btn-primary" id="saveEventBtn" onclick="saveEvent()">
-          <i class="fas fa-save"></i> Save Event
-        </button>
+        <div class="user-dropdown-divider"></div>
+        <a href="settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+        <button class="user-dropdown-item danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
       </div>
     </div>
   </div>
+</header>
 
-  <!-- ═══════════════════ VIEW MODAL ═══════════════════ -->
-  <div class="modal-backdrop" id="viewEventModal">
-    <div class="modal" style="max-width:520px">
-      <div class="modal-header">
-        <h3 class="modal-title" id="viewEventTitle">Event Details</h3>
-        <button class="modal-close" data-modal-close="viewEventModal"><i class="fas fa-times"></i></button>
-      </div>
-      <div class="modal-body" id="viewEventBody" style="line-height:1.8"></div>
-      <div class="modal-footer">
-        <button class="btn btn-ghost" data-modal-close="viewEventModal">Close</button>
-        <button class="btn btn-primary" id="viewEditBtn">
-          <i class="fas fa-edit"></i> Edit
-        </button>
-      </div>
-    </div>
-  </div>
+<!-- ── Main ── -->
+<main class="admin-main">
+  <div class="admin-content">
 
-  <!-- ── Delete confirm modal ── -->
-  <div class="modal-backdrop" id="deleteModal">
-    <div class="modal" style="max-width:420px">
-      <div class="modal-header">
-        <h3 class="modal-title"><i class="fas fa-trash-alt" style="color:var(--red)"></i> Delete Event</h3>
-        <button class="modal-close" data-modal-close="deleteModal"><i class="fas fa-times"></i></button>
+    <!-- Page header -->
+    <div class="page-header" style="margin-bottom:22px;">
+      <div>
+        <h1 class="page-title">Settings</h1>
+        <p class="page-subtitle">Configure your school website, integrations, and CMS behaviour.</p>
       </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete <strong id="deleteEventName">this event</strong>? This cannot be undone.</p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-ghost" data-modal-close="deleteModal">Cancel</button>
-        <button class="btn btn-danger" id="confirmDeleteBtn">
-          <i class="fas fa-trash-alt"></i> Delete
-        </button>
+      <div class="page-header-actions">
+        <button class="btn btn-outline btn-sm" onclick="resetSection()"><i class="fas fa-undo"></i> Reset</button>
+        <button class="btn btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> Save Changes</button>
       </div>
     </div>
+
+    <!-- Settings layout -->
+    <div class="settings-layout">
+
+      <!-- ── Side nav ── -->
+      <nav class="settings-sidenav">
+        <div class="settings-sidenav-title">Settings</div>
+        <a class="snav-item active" onclick="switchSection('general',this)">
+          <div class="snav-icon" style="background:rgba(10,25,49,.08);color:var(--navy)"><i class="fas fa-school"></i></div> General
+        </a>
+        <a class="snav-item" onclick="switchSection('language',this)">
+          <div class="snav-icon" style="background:rgba(124,58,237,.1);color:var(--purple)"><i class="fas fa-language"></i></div> Language
+        </a>
+        <a class="snav-item" onclick="switchSection('emergency',this)">
+          <div class="snav-icon" style="background:rgba(192,39,45,.08);color:var(--red)"><i class="fas fa-exclamation-triangle"></i></div> Emergency Alerts
+        </a>
+        <a class="snav-item" onclick="switchSection('social',this)">
+          <div class="snav-icon" style="background:rgba(37,99,235,.08);color:var(--blue)"><i class="fas fa-share-alt"></i></div> Social Media
+        </a>
+        <a class="snav-item" onclick="switchSection('analytics',this)">
+          <div class="snav-icon" style="background:rgba(13,148,136,.08);color:var(--teal)"><i class="fas fa-chart-line"></i></div> Analytics
+        </a>
+        <a class="snav-item" onclick="switchSection('backup',this)">
+          <div class="snav-icon" style="background:rgba(217,119,6,.1);color:var(--amber)"><i class="fas fa-database"></i></div> Backup &amp; Restore
+        </a>
+        <a class="snav-item snav-danger" onclick="switchSection('danger',this)">
+          <div class="snav-icon" style="background:#fee2e2;color:var(--red)"><i class="fas fa-skull-crossbones"></i></div> Danger Zone
+        </a>
+      </nav>
+
+      <!-- ── Sections ── -->
+      <div id="settingsSections">
+
+        <!-- ════════════════════════════════
+             SECTION 1: GENERAL
+        ════════════════════════════════ -->
+        <section class="settings-section active" id="sec-general">
+
+          <div class="sect-hero hero-general">
+            <div class="sect-hero-icon" style="background:rgba(255,255,255,.15)"><i class="fas fa-school" style="color:#fff"></i></div>
+            <div>
+              <h2>General Settings</h2>
+              <p>School identity, contact details, and site behaviour</p>
+            </div>
+          </div>
+
+          <!-- School identity -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-id-badge"></i> School Identity</h3>
+            </div>
+            <div class="panel-body">
+              <p class="card-section-title">Names &amp; Branding</p>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">School Name (English) <span class="form-required">*</span></label>
+                  <input type="text" class="form-input" id="sSchoolNameEn" value="North American International School" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">School Name (Arabic)</label>
+                  <input type="text" class="form-input" id="sSchoolNameAr" value="المدرسة الدولية الأمريكية الشمالية" dir="rtl" style="text-align:right" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Tagline (English)</label>
+                  <input type="text" class="form-input" id="sTaglineEn" value="Where Every Student Thrives" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tagline (Arabic)</label>
+                  <input type="text" class="form-input" id="sTaglineAr" value="حيث ينجح كل طالب" dir="rtl" style="text-align:right" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">KHDA Code</label>
+                  <input type="text" class="form-input" id="sKhdaCode" value="NAIS-DXB-2005" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Founded Year</label>
+                  <input type="number" class="form-input" id="sFoundedYear" value="2005" min="1900" max="2099" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Short Description</label>
+                <textarea class="form-textarea" id="sDescription" rows="3">A premier American curriculum school in Mirdif, Dubai, serving KG1 – Grade 12 students from over 90 nationalities.</textarea>
+              </div>
+
+              <p class="card-section-title" style="margin-top:20px">Logos &amp; Favicon</p>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Logo URL</label>
+                  <div style="display:flex;gap:8px;align-items:center">
+                    <input type="url" class="form-input" id="sLogoUrl" value="../images/nais-logo.png" oninput="previewLogo(this.value)" />
+                    <img id="logoPreview" src="../images/nais-logo.png" alt="logo" style="height:36px;width:auto;border-radius:6px;border:1px solid var(--gray200);padding:3px;background:#fff;flex-shrink:0;" onerror="this.style.display='none'" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Favicon URL</label>
+                  <input type="url" class="form-input" id="sFaviconUrl" value="../favicon.ico" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact details -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-address-card"></i> Contact Details</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Address (English)</label>
+                  <textarea class="form-textarea" id="sAddressEn" rows="2">Al Mizhar 1, Mirdif, Dubai, UAE</textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Address (Arabic)</label>
+                  <textarea class="form-textarea" id="sAddressAr" rows="2" dir="rtl" style="text-align:right">الميزهر 1، مردف، دبي، الإمارات</textarea>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Primary Phone</label>
+                  <input type="tel" class="form-input" id="sPhone1" value="+971 4 263 5456" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Secondary Phone</label>
+                  <input type="tel" class="form-input" id="sPhone2" value="+971 4 263 5457" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">WhatsApp Number</label>
+                  <input type="tel" class="form-input" id="sWhatsapp" value="+971 4 263 5456" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Admissions Email</label>
+                  <input type="email" class="form-input" id="sEmailAdm" value="admissions@naischool.ae" autocomplete="off" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">General Email</label>
+                  <input type="email" class="form-input" id="sEmailGen" value="info@naischool.ae" autocomplete="off" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Office Hours</label>
+                  <input type="text" class="form-input" id="sOfficeHours" value="Sun–Thu: 7:30 AM – 4:00 PM" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Google Maps Embed URL</label>
+                <input type="url" class="form-input" id="sMapsUrl" value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.7" placeholder="https://www.google.com/maps/embed?pb=..." />
+              </div>
+            </div>
+          </div>
+
+          <!-- Site behaviour -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-sliders-h"></i> Site Behaviour</h3>
+            </div>
+            <div class="panel-body">
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <div class="toggle-label">Maintenance Mode</div>
+                  <div class="toggle-desc">Visitors see a "Coming Soon" page; admin access still works</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="tMaintenance" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <div class="toggle-label">Arabic RTL</div>
+                  <div class="toggle-desc">Enable bilingual EN/AR mode with RTL layout support</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="tRtl" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <div class="toggle-label">Cookie Consent Banner</div>
+                  <div class="toggle-desc">Show GDPR/UAE compliance cookie notice to first-time visitors</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="tCookies" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="toggle-row">
+                <div class="toggle-info">
+                  <div class="toggle-label">Asset Cache Busting</div>
+                  <div class="toggle-desc">Append <code style="background:var(--gray100);padding:1px 5px;border-radius:3px;font-size:11px">?v=</code> version string to CSS/JS URLs on every deploy</div>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="tCache" checked />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div style="padding:10px 0 4px;">
+                <div class="form-label" style="margin-bottom:10px">Default Language</div>
+                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                  <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600">
+                    <input type="radio" name="defaultLang" value="en" checked style="accent-color:var(--navy)"> English
+                  </label>
+                  <label style="display:flex;align-items:center;gap:7px;cursor:pointer;font-size:13px;font-weight:600">
+                    <input type="radio" name="defaultLang" value="ar" style="accent-color:var(--navy)"> العربية
+                  </label>
+                </div>
+              </div>
+              <div class="cache-row" style="margin-top:16px;padding-top:14px;border-top:1px solid var(--gray100)">
+                <div>
+                  <div class="form-label" style="margin-bottom:6px">Cache Version</div>
+                  <div style="font-size:12px;color:var(--gray400)">Auto-appended to all CSS and JS file URLs</div>
+                </div>
+                <span class="cache-version-badge" id="cacheVersionBadge">v=12</span>
+                <button class="btn btn-outline btn-sm" onclick="bumpCacheVersion()"><i class="fas fa-bolt"></i> Bump to v=<span id="nextVersion">13</span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="save-bar">
+            <span class="save-bar-msg">General settings — <strong>unsaved changes</strong> will be lost if you navigate away.</span>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-outline" onclick="resetSection()">Discard</button>
+              <button class="btn btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> Save Changes</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ════════════════════════════════
+             SECTION 2: LANGUAGE
+        ════════════════════════════════ -->
+        <section class="settings-section" id="sec-language">
+
+          <div class="sect-hero hero-lang">
+            <div class="sect-hero-icon" style="background:rgba(255,255,255,.15)"><i class="fas fa-language" style="color:#fff"></i></div>
+            <div>
+              <h2>Language &amp; Translation</h2>
+              <p>Manage bilingual content and export/import translation files</p>
+            </div>
+          </div>
+
+          <!-- Language tabs -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-globe-asia"></i> Translation Languages</h3>
+              <div style="display:flex;gap:8px;">
+                <button class="btn btn-outline btn-sm" onclick="autoFillMissing()"><i class="fas fa-magic"></i> Auto-fill Missing</button>
+                <button class="btn btn-outline btn-sm" onclick="exportLang()"><i class="fas fa-download"></i> Export lang.js</button>
+                <button class="btn btn-outline btn-sm" onclick="importLang()"><i class="fas fa-upload"></i> Import</button>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="lang-tabs" id="langTabs">
+                <button class="lang-tab active" data-lang="ar" onclick="switchLangTab(this,'ar')">
+                  <i class="fas fa-globe"></i> Arabic <span class="lang-pct">94%</span>
+                </button>
+                <button class="lang-tab" data-lang="ur" onclick="switchLangTab(this,'ur')">
+                  <i class="fas fa-globe"></i> Urdu <span class="lang-pct">61%</span>
+                </button>
+                <button class="lang-tab" data-lang="fr" onclick="switchLangTab(this,'fr')">
+                  <i class="fas fa-globe"></i> French <span class="lang-pct">38%</span>
+                </button>
+              </div>
+
+              <!-- Progress -->
+              <div style="background:var(--gray50);border-radius:var(--radius);padding:14px 16px;margin-bottom:18px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                  <span style="font-size:13px;font-weight:700;color:var(--gray800)" id="langProgressLabel">Arabic — 94% translated</span>
+                  <span style="font-size:12px;color:var(--red);font-weight:600" id="langMissingLabel"><i class="fas fa-exclamation-circle"></i> 14 missing</span>
+                </div>
+                <div class="progress-bar-wrap">
+                  <div class="progress-bar-fill" id="langProgressBar" style="width:94%"></div>
+                </div>
+                <div style="font-size:11px;color:var(--gray400);margin-top:5px" id="langProgressSub">226 of 240 keys translated · Last export: 3 days ago</div>
+              </div>
+
+              <!-- Filter chips -->
+              <div class="filter-chips" id="filterChips">
+                <button class="chip active" onclick="filterTranslations('all',this)">All</button>
+                <button class="chip" onclick="filterTranslations('missing',this)">Missing Only</button>
+                <button class="chip" onclick="filterTranslations('nav',this)">Navigation</button>
+                <button class="chip" onclick="filterTranslations('home',this)">Home</button>
+                <button class="chip" onclick="filterTranslations('admissions',this)">Admissions</button>
+                <button class="chip" onclick="filterTranslations('leadership',this)">Leadership</button>
+              </div>
+
+              <!-- Search -->
+              <div style="position:relative;margin-bottom:16px;">
+                <i class="fas fa-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gray400);font-size:13px;"></i>
+                <input type="text" class="form-input" id="translationSearch" placeholder="Search keys or text…" style="padding-left:36px;" oninput="searchTranslations(this.value)" />
+              </div>
+
+              <!-- Translation table -->
+              <div class="table-wrap">
+                <table class="translation-table" id="translationTable">
+                  <thead>
+                    <tr>
+                      <th style="width:32%">Key</th>
+                      <th style="width:28%">English (Source)</th>
+                      <th style="width:30%">Translation</th>
+                      <th style="width:10%">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="translationBody">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- RTL Preview -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-eye"></i> Arabic RTL Preview</h3>
+              <button class="btn btn-outline btn-sm" onclick="regenRtlCss()"><i class="fas fa-sync-alt"></i> Regen RTL CSS</button>
+            </div>
+            <div class="panel-body">
+              <p style="font-size:13px;color:var(--gray500);margin-bottom:12px;">Live preview of how Arabic text appears with RTL layout applied.</p>
+              <div class="rtl-preview-box">
+                <h4 id="rtlPreviewTitle">مدرسة دبي الدولية للأمريكيين الشماليين</h4>
+                <p id="rtlPreviewSubtitle">مدرسة المنهج الأمريكي المتميزة في مردف، دبي، تخدم طلاب من رياض الأطفال حتى الصف الثاني عشر.</p>
+                <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end">
+                  <button style="background:var(--red);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">سجّل الآن</button>
+                  <button style="background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">تواصل معنا</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ════════════════════════════════
+             SECTION 3: EMERGENCY ALERTS
+        ════════════════════════════════ -->
+        <section class="settings-section" id="sec-emergency">
+
+          <div class="sect-hero hero-emergency">
+            <div class="sect-hero-icon" style="background:rgba(255,255,255,.15)"><i class="fas fa-exclamation-triangle" style="color:#fff"></i></div>
+            <div>
+              <h2>Emergency Alerts</h2>
+              <p>Display a site-wide banner for urgent school announcements</p>
+            </div>
+          </div>
+
+          <!-- Live preview -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-eye"></i> Live Preview</h3>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:12px;font-weight:600;color:var(--gray500)">Alert Active</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="alertActive" onchange="updateAlertPreview()" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="alert-preview info" id="alertPreviewBox">
+                <i class="fas fa-info-circle alert-preview-icon"></i>
+                <div class="alert-preview-body">
+                  <strong id="alertPreviewTitle">Alert title will appear here</strong>
+                  <span id="alertPreviewMsg">Your alert message will be shown to all site visitors in real time.</span>
+                </div>
+                <div style="margin-left:auto;flex-shrink:0">
+                  <button style="background:rgba(0,0,0,.08);border:none;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;color:inherit">Dismiss</button>
+                </div>
+              </div>
+              <div style="background:var(--gray50);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:var(--gray400);margin-top:10px" id="alertInactiveMsg">
+                <i class="fas fa-eye-slash"></i> Alert is currently <strong>inactive</strong> — toggle above to activate.
+              </div>
+            </div>
+          </div>
+
+          <!-- Alert settings -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-pen"></i> Alert Configuration</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Alert Type</label>
+                  <select class="form-select" id="alertType" onchange="updateAlertPreview()">
+                    <option value="info">ℹ️ Info (Blue)</option>
+                    <option value="warning">⚠️ Warning (Amber)</option>
+                    <option value="urgent">🚨 Urgent (Red)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Show Until</label>
+                  <input type="datetime-local" class="form-input" id="alertUntil" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Title (English) <span class="form-required">*</span></label>
+                  <input type="text" class="form-input" id="alertTitleEn" placeholder="e.g. School Closed — National Day" oninput="updateAlertPreview()" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Title (Arabic)</label>
+                  <input type="text" class="form-input" id="alertTitleAr" placeholder="مثال: المدرسة مغلقة — اليوم الوطني" dir="rtl" style="text-align:right" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Message (English)</label>
+                  <textarea class="form-textarea" id="alertMsgEn" rows="2" placeholder="Full alert message shown to visitors…" oninput="updateAlertPreview()"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Message (Arabic)</label>
+                  <textarea class="form-textarea" id="alertMsgAr" rows="2" placeholder="الرسالة الكاملة للزوار…" dir="rtl" style="text-align:right"></textarea>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Link Label (optional)</label>
+                  <input type="text" class="form-input" id="alertLinkLabel" placeholder="e.g. Read More" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Link URL</label>
+                  <input type="url" class="form-input" id="alertLinkUrl" placeholder="https://…" />
+                </div>
+              </div>
+              <button class="btn btn-red" onclick="publishAlert()"><i class="fas fa-broadcast-tower"></i> Publish Alert</button>
+            </div>
+          </div>
+
+          <!-- Alert history -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-history"></i> Alert History</h3>
+            </div>
+            <div class="panel-body p0">
+              <div class="table-wrap">
+                <table class="alert-history-table" id="alertHistoryTable">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Duration</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="alertHistoryBody">
+                    <tr>
+                      <td><strong>School Closed — UAE National Day</strong></td>
+                      <td><span class="badge badge-red">Urgent</span></td>
+                      <td>2 Dec 2024</td>
+                      <td>3 days</td>
+                      <td><button class="btn btn-outline btn-sm" onclick="restoreAlert('UAE National Day Closure')"><i class="fas fa-redo"></i> Restore</button></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Early Dismissal — Parent-Teacher Conferences</strong></td>
+                      <td><span class="badge badge-gold">Warning</span></td>
+                      <td>14 Nov 2024</td>
+                      <td>1 day</td>
+                      <td><button class="btn btn-outline btn-sm" onclick="restoreAlert('Early Dismissal')"><i class="fas fa-redo"></i> Restore</button></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Open Day Registration Now Open</strong></td>
+                      <td><span class="badge badge-blue">Info</span></td>
+                      <td>28 Oct 2024</td>
+                      <td>7 days</td>
+                      <td><button class="btn btn-outline btn-sm" onclick="restoreAlert('Open Day Registration')"><i class="fas fa-redo"></i> Restore</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ════════════════════════════════
+             SECTION 4: SOCIAL MEDIA
+        ════════════════════════════════ -->
+        <section class="settings-section" id="sec-social">
+
+          <div class="sect-hero hero-social">
+            <div class="sect-hero-icon" style="background:rgba(255,255,255,.15)"><i class="fas fa-share-alt" style="color:#fff"></i></div>
+            <div>
+              <h2>Social Media</h2>
+              <p>Social platform links and Open Graph sharing settings</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-at"></i> Platform Links</h3>
+            </div>
+            <div class="panel-body">
+              <div class="social-row">
+                <div class="social-icon-wrap si-fb"><i class="fab fa-facebook-f"></i></div>
+                <span class="social-name">Facebook</span>
+                <div class="social-input-wrap">
+                  <input type="url" class="form-input" id="sFacebook" value="https://www.facebook.com/NAISDubai" oninput="updateSocialStatus('facebook',this.value)" />
+                </div>
+                <span class="social-status"><span class="status-live" id="ss-facebook">● Live</span></span>
+              </div>
+              <div class="social-row">
+                <div class="social-icon-wrap si-ig"><i class="fab fa-instagram"></i></div>
+                <span class="social-name">Instagram</span>
+                <div class="social-input-wrap">
+                  <input type="url" class="form-input" id="sInstagram" value="https://www.instagram.com/naisdubai" oninput="updateSocialStatus('instagram',this.value)" />
+                </div>
+                <span class="social-status"><span class="status-live" id="ss-instagram">● Live</span></span>
+              </div>
+              <div class="social-row">
+                <div class="social-icon-wrap si-x"><i class="fab fa-twitter"></i></div>
+                <span class="social-name">X / Twitter</span>
+                <div class="social-input-wrap">
+                  <input type="url" class="form-input" id="sTwitter" value="https://twitter.com/NAISDubai" oninput="updateSocialStatus('twitter',this.value)" />
+                </div>
+                <span class="social-status"><span class="status-live" id="ss-twitter">● Live</span></span>
+              </div>
+              <div class="social-row">
+                <div class="social-icon-wrap si-yt"><i class="fab fa-youtube"></i></div>
+                <span class="social-name">YouTube</span>
+                <div class="social-input-wrap">
+                  <input type="url" class="form-input" id="sYoutube" value="https://www.youtube.com/@NAISDubai" oninput="updateSocialStatus('youtube',this.value)" />
+                </div>
+                <span class="social-status"><span class="status-live" id="ss-youtube">● Live</span></span>
+              </div>
+              <div class="social-row">
+                <div class="social-icon-wrap si-li"><i class="fab fa-linkedin-in"></i></div>
+                <span class="social-name">LinkedIn</span>
+                <div class="social-input-wrap">
+                  <input type="url" class="form-input" id="sLinkedin" value="https://www.linkedin.com/company/naisdubai" oninput="updateSocialStatus('linkedin',this.value)" />
+                </div>
+                <span class="social-status"><span class="status-live" id="ss-linkedin">● Live</span></span>
+              </div>
+              <div class="social-row">
+                <div class="social-icon-wrap si-wa"><i class="fab fa-whatsapp"></i></div>
+                <span class="social-name">WhatsApp</span>
+                <div class="social-input-wrap">
+                  <input type="url" class="form-input" id="sWhatsappLink" value="https://wa.me/97142635456" oninput="updateSocialStatus('whatsapp',this.value)" />
+                </div>
+                <span class="social-status"><span class="status-live" id="ss-whatsapp">● Live</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Open Graph -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-share-square"></i> Open Graph &amp; SEO Sharing</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">OG Title</label>
+                  <input type="text" class="form-input" id="sOgTitle" value="NAIS Dubai — North American International School" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Twitter Card Type</label>
+                  <select class="form-select" id="sTwitterCard">
+                    <option value="summary_large_image" selected>Summary Large Image</option>
+                    <option value="summary">Summary</option>
+                    <option value="app">App</option>
+                    <option value="player">Player</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">OG Description</label>
+                <textarea class="form-textarea" id="sOgDesc" rows="2">A premier American curriculum school in Mirdif, Dubai, serving KG1 – Grade 12 from over 90 nationalities.</textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">OG Image URL</label>
+                <input type="url" class="form-input" id="sOgImage" value="images/school-10.jpg" placeholder="https://…/og-image.jpg (1200×630px recommended)" />
+              </div>
+
+              <!-- OG Preview -->
+              <div style="background:var(--gray50);border:1px solid var(--gray200);border-radius:var(--radius);padding:16px;margin-top:10px">
+                <p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray400);margin-bottom:10px">Preview — How it looks when shared on social media</p>
+                <div style="background:#fff;border:1px solid var(--gray200);border-radius:8px;overflow:hidden;max-width:480px">
+                  <div style="height:90px;background:linear-gradient(135deg,var(--navy),var(--navy3));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:12px"><i class="fas fa-image" style="font-size:24px;opacity:.4"></i></div>
+                  <div style="padding:10px 14px">
+                    <div style="font-size:11px;color:var(--gray400);margin-bottom:3px">naisdubai.ae</div>
+                    <div style="font-size:13px;font-weight:700;color:var(--gray800);margin-bottom:3px" id="ogPreviewTitle">NAIS Dubai — North American International School</div>
+                    <div style="font-size:12px;color:var(--gray500);line-height:1.4" id="ogPreviewDesc">A premier American curriculum school in Mirdif, Dubai…</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="save-bar">
+            <span class="save-bar-msg">Social settings — <strong>save to apply</strong> platform links across all pages.</span>
+            <button class="btn btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> Save Changes</button>
+          </div>
+        </section>
+
+        <!-- ════════════════════════════════
+             SECTION 5: ANALYTICS
+        ════════════════════════════════ -->
+        <section class="settings-section" id="sec-analytics">
+
+          <div class="sect-hero hero-analytics">
+            <div class="sect-hero-icon" style="background:rgba(255,255,255,.15)"><i class="fas fa-chart-line" style="color:#fff"></i></div>
+            <div>
+              <h2>Analytics &amp; Tracking</h2>
+              <p>Connect measurement tools and inject custom tracking scripts</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-plug"></i> Connected Tools</h3>
+            </div>
+            <div class="panel-body">
+
+              <div class="analytics-card">
+                <div class="analytics-logo al-ga"><i class="fas fa-chart-bar"></i></div>
+                <div class="analytics-info">
+                  <div class="analytics-name">Google Analytics 4</div>
+                  <div class="analytics-id">G-XXXXXXXXXX &nbsp;·&nbsp; 3,241 visitors this month</div>
+                </div>
+                <div class="analytics-right">
+                  <span class="status-connected">● Connected</span>
+                  <input type="text" class="form-input" id="sGa4Id" value="G-XXXXXXXXXX" style="width:160px;font-family:monospace;font-size:12px;" />
+                  <button class="btn btn-outline btn-sm" onclick="disconnectTool('GA4')"><i class="fas fa-unlink"></i></button>
+                </div>
+              </div>
+
+              <div class="analytics-card">
+                <div class="analytics-logo al-gsc"><i class="fab fa-google"></i></div>
+                <div class="analytics-info">
+                  <div class="analytics-name">Google Search Console</div>
+                  <div class="analytics-id">naisdubai.ae &nbsp;·&nbsp; 1,847 impressions last 28 days</div>
+                </div>
+                <div class="analytics-right">
+                  <span class="status-connected">● Connected</span>
+                  <button class="btn btn-outline btn-sm" onclick="disconnectTool('GSC')"><i class="fas fa-unlink"></i></button>
+                </div>
+              </div>
+
+              <div class="analytics-card">
+                <div class="analytics-logo al-meta"><i class="fab fa-facebook-f"></i></div>
+                <div class="analytics-info">
+                  <div class="analytics-name">Meta Pixel</div>
+                  <div class="analytics-id">Not connected — track Facebook/Instagram ad conversions</div>
+                </div>
+                <div class="analytics-right">
+                  <span class="status-disconnected">Not Connected</span>
+                  <input type="text" class="form-input" id="sMetaPixel" placeholder="Pixel ID…" style="width:130px;font-family:monospace;font-size:12px;" />
+                  <button class="btn btn-primary btn-sm" onclick="connectTool('Meta Pixel')"><i class="fas fa-link"></i> Connect</button>
+                </div>
+              </div>
+
+              <div class="analytics-card">
+                <div class="analytics-logo al-hot"><i class="fas fa-fire"></i></div>
+                <div class="analytics-info">
+                  <div class="analytics-name">Hotjar</div>
+                  <div class="analytics-id">Not connected — heatmaps and session recordings</div>
+                </div>
+                <div class="analytics-right">
+                  <span class="status-disconnected">Not Connected</span>
+                  <input type="text" class="form-input" id="sHotjarId" placeholder="Site ID…" style="width:110px;font-family:monospace;font-size:12px;" />
+                  <button class="btn btn-primary btn-sm" onclick="connectTool('Hotjar')"><i class="fas fa-link"></i> Connect</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Custom Scripts -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-code"></i> Custom Script Injection</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label class="form-label"><i class="fas fa-angle-up" style="color:var(--green)"></i> &lt;head&gt; Scripts <span class="form-hint" style="display:inline;margin-left:6px">Injected before &lt;/head&gt;</span></label>
+                <textarea class="code-editor" id="sHeadScript" placeholder="<!-- Paste tracking pixels, meta tags, or custom scripts here -->"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label"><i class="fas fa-angle-down" style="color:var(--amber)"></i> &lt;body&gt; Scripts <span class="form-hint" style="display:inline;margin-left:6px">Injected before &lt;/body&gt;</span></label>
+                <textarea class="code-editor" id="sBodyScript" placeholder="<!-- Paste chat widgets, analytics, or custom body scripts here -->"></textarea>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="saveScripts()"><i class="fas fa-save"></i> Save Scripts</button>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ════════════════════════════════
+             SECTION 6: BACKUP & RESTORE
+        ════════════════════════════════ -->
+        <section class="settings-section" id="sec-backup">
+
+          <div class="sect-hero hero-backup">
+            <div class="sect-hero-icon" style="background:rgba(255,255,255,.15)"><i class="fas fa-database" style="color:#fff"></i></div>
+            <div>
+              <h2>Backup &amp; Restore</h2>
+              <p>Automated backups, manual snapshots, and data restore points</p>
+            </div>
+          </div>
+
+          <!-- Auto-backup scheduler -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-clock"></i> Auto-Backup Scheduler</h3>
+              <label class="toggle-switch">
+                <input type="checkbox" id="autoBackupEnabled" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="panel-body">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Frequency</label>
+                  <select class="form-select" id="backupFreq">
+                    <option value="daily" selected>Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="manual">Manual Only</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Run At (server time)</label>
+                  <input type="time" class="form-input" id="backupTime" value="02:00" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Retention (days)</label>
+                  <input type="number" class="form-input" id="backupRetention" value="30" min="1" max="365" />
+                </div>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="saveBackupSchedule()"><i class="fas fa-save"></i> Save Schedule</button>
+            </div>
+          </div>
+
+          <!-- Backup list -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fas fa-archive"></i> Available Backups</h3>
+              <div style="display:flex;gap:8px;">
+                <button class="btn btn-outline btn-sm" onclick="importBackup()"><i class="fas fa-upload"></i> Import Backup</button>
+                <button class="btn btn-primary btn-sm" onclick="createBackupNow()"><i class="fas fa-plus"></i> Create Backup Now</button>
+              </div>
+            </div>
+            <div class="panel-body" style="padding:0 20px">
+              <div id="backupList">
+                <div class="backup-entry">
+                  <div class="backup-icon-wrap"><i class="fas fa-file-archive"></i></div>
+                  <div class="backup-meta">
+                    <div class="backup-name">nais-cms-backup-2026-05-10.json</div>
+                    <div class="backup-size">Auto · 2.4 MB · 10 May 2026, 02:00</div>
+                  </div>
+                  <div class="backup-actions">
+                    <button class="btn btn-outline btn-sm" onclick="restoreBackup('2026-05-10')"><i class="fas fa-undo"></i> Restore</button>
+                    <button class="btn btn-outline btn-sm" onclick="downloadBackup('2026-05-10')"><i class="fas fa-download"></i></button>
+                    <button class="btn btn-ghost btn-sm danger" onclick="deleteBackup('2026-05-10')"><i class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+                <div class="backup-entry">
+                  <div class="backup-icon-wrap"><i class="fas fa-file-archive"></i></div>
+                  <div class="backup-meta">
+                    <div class="backup-name">nais-cms-backup-2026-05-09.json</div>
+                    <div class="backup-size">Auto · 2.4 MB · 9 May 2026, 02:00</div>
+                  </div>
+                  <div class="backup-actions">
+                    <button class="btn btn-outline btn-sm" onclick="restoreBackup('2026-05-09')"><i class="fas fa-undo"></i> Restore</button>
+                    <button class="btn btn-outline btn-sm" onclick="downloadBackup('2026-05-09')"><i class="fas fa-download"></i></button>
+                    <button class="btn btn-ghost btn-sm danger" onclick="deleteBackup('2026-05-09')"><i class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+                <div class="backup-entry">
+                  <div class="backup-icon-wrap"><i class="fas fa-file-archive"></i></div>
+                  <div class="backup-meta">
+                    <div class="backup-name">nais-cms-backup-2026-05-08.json</div>
+                    <div class="backup-size">Auto · 2.3 MB · 8 May 2026, 02:00</div>
+                  </div>
+                  <div class="backup-actions">
+                    <button class="btn btn-outline btn-sm" onclick="restoreBackup('2026-05-08')"><i class="fas fa-undo"></i> Restore</button>
+                    <button class="btn btn-outline btn-sm" onclick="downloadBackup('2026-05-08')"><i class="fas fa-download"></i></button>
+                    <button class="btn btn-ghost btn-sm danger" onclick="deleteBackup('2026-05-08')"><i class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+                <div class="backup-entry">
+                  <div class="backup-icon-wrap"><i class="fas fa-file-archive"></i></div>
+                  <div class="backup-meta">
+                    <div class="backup-name">nais-cms-manual-2026-05-01.json</div>
+                    <div class="backup-size">Manual · 2.1 MB · 1 May 2026, 14:22</div>
+                  </div>
+                  <div class="backup-actions">
+                    <button class="btn btn-outline btn-sm" onclick="restoreBackup('2026-05-01-manual')"><i class="fas fa-undo"></i> Restore</button>
+                    <button class="btn btn-outline btn-sm" onclick="downloadBackup('2026-05-01-manual')"><i class="fas fa-download"></i></button>
+                    <button class="btn btn-ghost btn-sm danger" onclick="deleteBackup('2026-05-01-manual')"><i class="fas fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ════════════════════════════════
+             SECTION 7: DANGER ZONE
+        ════════════════════════════════ -->
+        <section class="settings-section" id="sec-danger">
+
+          <div class="sect-hero hero-danger">
+            <div class="sect-hero-icon" style="background:rgba(255,255,255,.15)"><i class="fas fa-skull-crossbones" style="color:#fff"></i></div>
+            <div>
+              <h2>Danger Zone</h2>
+              <p>Irreversible actions — read each description carefully before proceeding</p>
+            </div>
+          </div>
+
+          <div class="panel" style="border-color:#fee2e2;">
+            <div class="panel-header" style="background:#fff5f5;">
+              <h3 class="panel-title" style="color:var(--red)"><i class="fas fa-radiation-alt"></i> Destructive Actions</h3>
+              <span class="badge badge-red"><i class="fas fa-lock"></i> Super Admin only</span>
+            </div>
+            <div class="panel-body">
+
+              <div class="danger-card">
+                <div class="danger-card-icon"><i class="fas fa-broom"></i></div>
+                <div class="danger-card-info">
+                  <div class="danger-card-title">Clear All Cache</div>
+                  <div class="danger-card-desc">Purges all cached pages, CSS, and JS. Site may be slower for the next few minutes while cache rebuilds.</div>
+                </div>
+                <button class="btn btn-outline btn-sm" style="border-color:var(--red);color:var(--red);flex-shrink:0" onclick="dangerAction('clear-cache','Clear All Cache','This will purge all cached assets. Visitors may experience slower page loads for a few minutes.')">
+                  <i class="fas fa-broom"></i> Clear Cache
+                </button>
+              </div>
+
+              <div class="danger-card">
+                <div class="danger-card-icon"><i class="fas fa-language"></i></div>
+                <div class="danger-card-info">
+                  <div class="danger-card-title">Reset All Translations</div>
+                  <div class="danger-card-desc">Deletes all manually entered Arabic, Urdu, and French translations. The site will revert to English-only. This cannot be undone.</div>
+                </div>
+                <button class="btn btn-outline btn-sm" style="border-color:var(--red);color:var(--red);flex-shrink:0" onclick="dangerAction('reset-translations','Reset All Translations','All translations for Arabic, Urdu, and French will be permanently deleted.')">
+                  <i class="fas fa-language"></i> Reset Translations
+                </button>
+              </div>
+
+              <div class="danger-card">
+                <div class="danger-card-icon"><i class="fas fa-user-times"></i></div>
+                <div class="danger-card-info">
+                  <div class="danger-card-title">Revoke All Sessions</div>
+                  <div class="danger-card-desc">Immediately logs out all CMS users across all devices. All editors will need to log in again. Your current session will also end.</div>
+                </div>
+                <button class="btn btn-outline btn-sm" style="border-color:var(--red);color:var(--red);flex-shrink:0" onclick="dangerAction('revoke-sessions','Revoke All Sessions','All active CMS sessions will be terminated immediately, including yours.')">
+                  <i class="fas fa-user-times"></i> Revoke Sessions
+                </button>
+              </div>
+
+              <div class="danger-card">
+                <div class="danger-card-icon"><i class="fas fa-skull"></i></div>
+                <div class="danger-card-info">
+                  <div class="danger-card-title">Reset CMS to Defaults</div>
+                  <div class="danger-card-desc">Wipes all custom settings, content, staff profiles, media records, and announcements. Resets the CMS to its factory state. <strong style="color:var(--red)">This is irreversible.</strong></div>
+                </div>
+                <button class="btn btn-red btn-sm" style="flex-shrink:0" onclick="dangerAction('reset-cms','Reset CMS to Defaults','ALL data — settings, content, staff, media, announcements — will be permanently deleted and cannot be recovered.')">
+                  <i class="fas fa-skull"></i> Full Reset
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+      </div><!-- /settingsSections -->
+    </div><!-- /settings-layout -->
+
+  </div><!-- /admin-content -->
+</main>
+
+<!-- ── Sidebar overlay (mobile) ── -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ════════════════════════════════
+     CONFIRM MODAL
+════════════════════════════════ -->
+<div class="modal-backdrop" id="confirm-modal">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-header">
+      <span class="modal-title" id="confirmModalTitle">Confirm Action</span>
+      <button class="modal-close" data-modal-close><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body" style="text-align:center;padding:28px 24px">
+      <div class="confirm-modal-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="confirm-modal-title" id="confirmModalHeading">Are you sure?</div>
+      <p class="confirm-modal-desc" id="confirm-msg">This action cannot be undone.</p>
+      <div style="margin-top:8px">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;justify-content:center;font-size:13px;color:var(--gray500)">
+          <input type="checkbox" id="confirmCheck" style="accent-color:var(--red);width:15px;height:15px;" />
+          I understand this action is irreversible
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" data-modal-close>Cancel</button>
+      <button class="btn btn-red" id="confirm-btn" disabled onclick="return false">
+        <i class="fas fa-check"></i> Confirm
+      </button>
+    </div>
   </div>
+</div>
 
-  <script src="js/core.js?v=2.2"></script>
-  <script>
-  'use strict';
-  const TABLE = 'cms_events';
-  let allEvents = [], currentDeleteId = null, currentViewId = null;
+<!-- ════════════════════════════════
+     SUCCESS MODAL
+════════════════════════════════ -->
+<div class="modal-backdrop" id="success-modal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-body" style="text-align:center;padding:32px 24px">
+      <div style="width:56px;height:56px;border-radius:50%;background:rgba(22,163,74,.12);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--green);margin:0 auto 14px">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <div style="font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px" id="successModalTitle">Saved!</div>
+      <p style="font-size:13px;color:var(--gray500)" id="successModalMsg">Your settings have been saved successfully.</p>
+    </div>
+    <div class="modal-footer" style="justify-content:center">
+      <button class="btn btn-primary" data-modal-close>Done</button>
+    </div>
+  </div>
+</div>
 
-  // ── Category colour map ──
-  const CAT_COLORS = {
-    Academic:'navy', Sports:'green', Arts:'purple', Community:'teal',
-    Holiday:'gold', Workshop:'blue', Trip:'teal', Other:'gray'
-  };
-  const STATUS_BADGE = {
-    upcoming:'badge-upcoming', ongoing:'badge-ongoing',
-    past:'badge-archived',     cancelled:'badge-cancelled'
-  };
+<script src="js/core.js?v=2.2"></script>
+<script>
+'use strict';
 
-  // ── Init ──
-  document.addEventListener('DOMContentLoaded', () => {
-    if (!Auth.guard()) return;
-    initUserPanel();
-    Sidebar.init();
-    initModalClosers();
-    loadEvents();
-    document.getElementById('searchInput').addEventListener('input', renderTable);
-    document.getElementById('filterStatus').addEventListener('change', renderTable);
-    document.getElementById('filterCategory').addEventListener('change', renderTable);
+/* ════════════════════════════
+   SECTION SWITCHER
+════════════════════════════ */
+function switchSection(id, navEl) {
+  document.querySelectorAll('.settings-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.snav-item').forEach(n => n.classList.remove('active'));
+  const sec = document.getElementById('sec-' + id);
+  if (sec) sec.classList.add('active');
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ════════════════════════════
+   GENERAL — CACHE BUMP
+════════════════════════════ */
+let cacheVersion = 12;
+function bumpCacheVersion() {
+  cacheVersion++;
+  document.getElementById('cacheVersionBadge').textContent = 'v=' + cacheVersion;
+  document.getElementById('nextVersion').textContent = cacheVersion + 1;
+  Toast.success('Cache version bumped', 'All CSS/JS URLs will use ?v=' + cacheVersion + ' on next save.');
+}
+
+function previewLogo(url) {
+  const img = document.getElementById('logoPreview');
+  img.src = url;
+  img.style.display = 'block';
+}
+
+/* ════════════════════════════
+   SAVE / RESET
+════════════════════════════ */
+/* ════════════════════════════════════════════════════
+   SETTINGS FIELD → setting_key MAP
+   Maps each HTML input id to its cms_settings key
+════════════════════════════════════════════════════ */
+const FIELD_MAP = {
+  sAddressEn:    'contact_address_en',
+  sAddressAr:    'contact_address_ar',
+  sPhone1:       'contact_phone',
+  sPhone2:       'contact_phone2',
+  sWhatsapp:     'contact_whatsapp',
+  sEmailAdm:     'contact_email_adm',
+  sEmailGen:     'contact_email_gen',
+  sOfficeHours:  'contact_hours',
+  sMapsUrl:      'maps_embed_url',
+  sSchoolNameEn: 'site_name',
+  sTaglineEn:    'site_tagline',
+};
+
+/* In-memory record id cache so we can PATCH instead of POST duplicates */
+let _settingIds = {};
+
+/* ════════════════════════════════════════════════════
+   LOAD SETTINGS — populate form from cms_settings API
+════════════════════════════════════════════════════ */
+async function loadSettings() {
+  try {
+    const data = await API.get('cms_settings', { limit: 100 });
+    const rows = data.data || [];
+    rows.forEach(row => {
+      _settingIds[row.setting_key] = row.id;
+      /* Find which field id maps to this key */
+      const fieldId = Object.keys(FIELD_MAP).find(k => FIELD_MAP[k] === row.setting_key);
+      if (!fieldId) return;
+      const el = document.getElementById(fieldId);
+      if (!el) return;
+      if (el.tagName === 'TEXTAREA' || el.type === 'text' || el.type === 'tel' ||
+          el.type === 'email' || el.type === 'url') {
+        el.value = row.setting_value || '';
+      } else if (el.type === 'checkbox') {
+        el.checked = row.setting_value === 'true';
+      }
+    });
+  } catch (err) {
+    /* Non-critical — form already has sensible default values */
+    console.warn('[settings] Could not load cms_settings:', err.message);
+  }
+}
+
+/* ════════════════════════════════════════════════════
+   SAVE SETTINGS — upsert each mapped field to API
+════════════════════════════════════════════════════ */
+async function saveSettings() {
+  const btn = event?.target?.closest('button') || document.querySelector('.btn-primary');
+  const orig = btn ? btn.innerHTML : '';
+  if (btn) { btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving…'; btn.disabled = true; }
+
+  try {
+    /* Build list of upsert promises */
+    const ops = Object.entries(FIELD_MAP).map(([fieldId, settingKey]) => {
+      const el = document.getElementById(fieldId);
+      if (!el) return null;
+      const value = el.type === 'checkbox' ? String(el.checked) : el.value.trim();
+      const existingId = _settingIds[settingKey];
+      if (existingId) {
+        /* PATCH existing record */
+        return API.patch('cms_settings', existingId, { setting_value: value, updated_by: Auth.currentUser()?.email || 'admin' })
+          .then(r => { _settingIds[settingKey] = r.id; });
+      } else {
+        /* POST new record */
+        const labels = {
+          contact_address_en: 'Address (English)',  contact_address_ar: 'Address (Arabic)',
+          contact_phone:      'Primary Phone',       contact_phone2:     'Secondary Phone',
+          contact_whatsapp:   'WhatsApp Number',     contact_email_adm:  'Admissions Email',
+          contact_email_gen:  'General Email',       contact_hours:      'Office Hours',
+          maps_embed_url:     'Google Maps Embed URL', site_name:        'Site Name',
+          site_tagline:       'Site Tagline',
+        };
+        return API.post('cms_settings', {
+          setting_key:   settingKey,
+          setting_value: value,
+          label:         labels[settingKey] || settingKey,
+          group:         settingKey.startsWith('contact_') || settingKey === 'maps_embed_url' ? 'contact' : 'general',
+          type:          settingKey.includes('email') ? 'email' : settingKey.includes('url') ? 'url' : 'text',
+          updated_by:    Auth.currentUser()?.email || 'admin'
+        }).then(r => { _settingIds[settingKey] = r.id; });
+      }
+    }).filter(Boolean);
+
+    await Promise.all(ops);
+
+    if (btn) { btn.innerHTML = orig; btn.disabled = false; }
+    document.getElementById('successModalTitle').textContent = 'Settings Saved!';
+    document.getElementById('successModalMsg').textContent = 'Contact details and site settings have been saved and will appear on the website immediately.';
+    Modal.open('success-modal');
+    logActivity('updated', 'settings', 'Site settings saved — contact details updated');
+
+  } catch (err) {
+    if (btn) { btn.innerHTML = orig; btn.disabled = false; }
+    Toast.error('Save failed', err.message || 'Could not save settings. Please try again.');
+    console.error('[settings] saveSettings error:', err);
+  }
+}
+
+function resetSection() {
+  Toast.info('Changes discarded', 'Settings reverted to last saved state.');
+}
+
+function saveScripts() {
+  Toast.success('Scripts saved', 'Custom head and body scripts updated.');
+}
+
+/* ════════════════════════════
+   LANGUAGE SECTION
+════════════════════════════ */
+const LANG_DATA = {
+  ar: {
+    label: 'Arabic', pct: 94, missing: 14, total: 240,
+    sub: '226 of 240 keys translated · Last export: 3 days ago',
+    rows: [
+      { key: 'nav.home',          en: 'Home',               val: 'الرئيسية',      done: true,  cat: 'nav' },
+      { key: 'nav.about',         en: 'About Us',           val: 'من نحن',        done: true,  cat: 'nav' },
+      { key: 'nav.admissions',    en: 'Admissions',         val: 'القبول',        done: true,  cat: 'nav' },
+      { key: 'nav.academics',     en: 'Academics',          val: 'الأكاديمية',    done: true,  cat: 'nav' },
+      { key: 'nav.contact',       en: 'Contact Us',         val: 'اتصل بنا',      done: true,  cat: 'nav' },
+      { key: 'hero.title',        en: 'Where Every Student Thrives', val: 'حيث ينجح كل طالب', done: true, cat: 'home' },
+      { key: 'hero.cta.apply',    en: 'Apply Now',          val: 'سجّل الآن',     done: true,  cat: 'home' },
+      { key: 'hero.cta.tour',     en: 'Book a Tour',        val: '',              done: false, cat: 'home' },
+      { key: 'hero.stat.students',en: 'Students',           val: 'طلاب',          done: true,  cat: 'home' },
+      { key: 'hero.stat.nations', en: 'Nationalities',      val: 'جنسية',         done: true,  cat: 'home' },
+      { key: 'adm.process.title', en: 'Admissions Process', val: 'عملية القبول',  done: true,  cat: 'admissions' },
+      { key: 'adm.apply.btn',     en: 'Start Application',  val: '',              done: false, cat: 'admissions' },
+      { key: 'adm.fees.title',    en: 'Tuition & Fees',     val: 'الرسوم الدراسية', done: true, cat: 'admissions' },
+      { key: 'leader.principal',  en: 'Principal',          val: '',              done: false, cat: 'leadership' },
+      { key: 'leader.ceo',        en: 'CEO / Director',     val: 'الرئيس التنفيذي', done: true, cat: 'leadership' },
+      { key: 'leader.chairman',   en: 'Chairman',           val: '',              done: false, cat: 'leadership' },
+    ]
+  },
+  ur: {
+    label: 'Urdu', pct: 61, missing: 94, total: 240,
+    sub: '146 of 240 keys translated · Last export: 12 days ago',
+    rows: [
+      { key: 'nav.home',       en: 'Home',        val: 'ہوم',       done: true,  cat: 'nav' },
+      { key: 'nav.about',      en: 'About Us',    val: 'ہمارے بارے', done: true, cat: 'nav' },
+      { key: 'nav.admissions', en: 'Admissions',  val: '',          done: false, cat: 'nav' },
+      { key: 'hero.title',     en: 'Where Every Student Thrives', val: '', done: false, cat: 'home' },
+      { key: 'hero.cta.apply', en: 'Apply Now',   val: 'ابھی درخواست دیں', done: true, cat: 'home' },
+      { key: 'adm.fees.title', en: 'Tuition & Fees', val: '', done: false, cat: 'admissions' },
+    ]
+  },
+  fr: {
+    label: 'French', pct: 38, missing: 149, total: 240,
+    sub: '91 of 240 keys translated · Last export: 21 days ago',
+    rows: [
+      { key: 'nav.home',    en: 'Home',     val: 'Accueil',    done: true,  cat: 'nav' },
+      { key: 'nav.about',   en: 'About Us', val: 'À propos',   done: true,  cat: 'nav' },
+      { key: 'hero.title',  en: 'Where Every Student Thrives', val: '', done: false, cat: 'home' },
+      { key: 'hero.cta.apply', en: 'Apply Now', val: '', done: false, cat: 'home' },
+    ]
+  }
+};
+
+let currentLang = 'ar';
+let currentFilter = 'all';
+let currentSearch = '';
+
+function switchLangTab(btn, lang) {
+  document.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  currentLang = lang;
+  currentFilter = 'all';
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  document.querySelector('.chip').classList.add('active');
+  document.getElementById('translationSearch').value = '';
+  currentSearch = '';
+  renderLangProgress(lang);
+  renderTranslationTable();
+}
+
+function renderLangProgress(lang) {
+  const d = LANG_DATA[lang];
+  document.getElementById('langProgressLabel').textContent = d.label + ' — ' + d.pct + '% translated';
+  document.getElementById('langMissingLabel').innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + d.missing + ' missing';
+  document.getElementById('langProgressBar').style.width = d.pct + '%';
+  document.getElementById('langProgressSub').textContent = d.sub;
+}
+
+function renderTranslationTable() {
+  const d = LANG_DATA[currentLang];
+  let rows = d.rows;
+  if (currentFilter === 'missing') rows = rows.filter(r => !r.done);
+  else if (currentFilter !== 'all') rows = rows.filter(r => r.cat === currentFilter);
+  if (currentSearch) rows = rows.filter(r => r.key.includes(currentSearch) || r.en.toLowerCase().includes(currentSearch) || r.val.toLowerCase().includes(currentSearch));
+
+  const tbody = document.getElementById('translationBody');
+  if (!rows.length) {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:32px;color:var(--gray400);font-size:13px"><i class="fas fa-check-circle" style="color:var(--green);font-size:22px;display:block;margin-bottom:8px"></i>No keys match the current filter.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = rows.map((r, i) => `
+    <tr>
+      <td><code class="key-cell">${r.key}</code></td>
+      <td style="color:var(--gray600);font-size:13px">${r.en}</td>
+      <td>
+        <input class="ar-input" type="text" value="${r.val}"
+          dir="${currentLang === 'ar' || currentLang === 'ur' ? 'rtl' : 'ltr'}"
+          style="text-align:${currentLang === 'ar' || currentLang === 'ur' ? 'right' : 'left'}"
+          oninput="onTranslationInput(${i},this.value,'${r.key}')"
+          placeholder="Enter translation…" />
+      </td>
+      <td>${r.done ? '<span class="badge-done">Done</span>' : '<span class="badge-missing">Missing</span>'}</td>
+    </tr>`).join('');
+}
+
+function onTranslationInput(idx, val, key) {
+  const d = LANG_DATA[currentLang];
+  const row = d.rows.find(r => r.key === key);
+  if (row) { row.val = val; row.done = val.trim().length > 0; }
+}
+
+function filterTranslations(filter, el) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  currentFilter = filter;
+  renderTranslationTable();
+}
+
+function searchTranslations(q) {
+  currentSearch = q.toLowerCase().trim();
+  renderTranslationTable();
+}
+
+function autoFillMissing() {
+  const d = LANG_DATA[currentLang];
+  let filled = 0;
+  d.rows.forEach(r => {
+    if (!r.done || !r.val) {
+      r.val = '[Auto] ' + r.en;
+      r.done = true;
+      filled++;
+    }
+  });
+  d.missing = 0;
+  d.pct = 100;
+  renderLangProgress(currentLang);
+  renderTranslationTable();
+  Toast.success('Auto-fill complete', filled + ' missing keys populated with placeholders.');
+}
+
+function exportLang() {
+  Toast.info('Exporting…', 'lang.js download started (simulation).');
+}
+function importLang() {
+  Toast.info('Import', 'Select a lang.js file to import (simulation).');
+}
+function regenRtlCss() {
+  Toast.success('RTL CSS regenerated', 'rtl.css rebuilt from current translation data.');
+}
+
+/* ════════════════════════════
+   EMERGENCY ALERT
+════════════════════════════ */
+function updateAlertPreview() {
+  const type  = document.getElementById('alertType').value;
+  const title = document.getElementById('alertTitleEn').value || 'Alert title will appear here';
+  const msg   = document.getElementById('alertMsgEn').value   || 'Your alert message will be shown to all site visitors in real time.';
+  const active = document.getElementById('alertActive').checked;
+
+  const box = document.getElementById('alertPreviewBox');
+  const icons = { info: 'fa-info-circle', warning: 'fa-exclamation-triangle', urgent: 'fa-radiation-alt' };
+  box.className = 'alert-preview ' + type;
+  box.querySelector('.alert-preview-icon').className = 'fas ' + (icons[type] || icons.info) + ' alert-preview-icon';
+  document.getElementById('alertPreviewTitle').textContent = title;
+  document.getElementById('alertPreviewMsg').textContent = msg;
+  document.getElementById('alertInactiveMsg').style.display = active ? 'none' : 'block';
+}
+
+function publishAlert() {
+  const title = document.getElementById('alertTitleEn').value;
+  if (!title) { Toast.warning('Title required', 'Please enter an English alert title.'); return; }
+  const active = document.getElementById('alertActive').checked;
+  if (!active) { Toast.warning('Alert inactive', 'Toggle "Alert Active" on to publish.'); return; }
+  Toast.success('Alert published', '"' + title + '" is now live on the website.');
+  logActivity('published', 'alert', title);
+}
+
+function restoreAlert(label) {
+  Toast.success('Alert restored', '"' + label + '" loaded into editor.');
+}
+
+/* ════════════════════════════
+   SOCIAL MEDIA
+════════════════════════════ */
+function updateSocialStatus(platform, val) {
+  const el = document.getElementById('ss-' + platform);
+  if (!el) return;
+  if (val.trim()) {
+    el.className = 'status-live';
+    el.textContent = '● Live';
+  } else {
+    el.className = 'status-not-set';
+    el.textContent = 'Not Set';
+  }
+  // Update OG preview
+  const ogTitle = document.getElementById('sOgTitle')?.value || '';
+  const ogDesc  = document.getElementById('sOgDesc')?.value || '';
+  if (document.getElementById('ogPreviewTitle')) document.getElementById('ogPreviewTitle').textContent = ogTitle;
+  if (document.getElementById('ogPreviewDesc'))  document.getElementById('ogPreviewDesc').textContent  = ogDesc.slice(0,90) + (ogDesc.length > 90 ? '…' : '');
+}
+
+/* ════════════════════════════
+   ANALYTICS
+════════════════════════════ */
+function connectTool(name) {
+  Toast.success(name + ' connected', 'Tracking is now active on all pages.');
+}
+function disconnectTool(name) {
+  Toast.warning(name + ' disconnected', 'Tracking removed from all pages.');
+}
+
+/* ════════════════════════════
+   BACKUP
+════════════════════════════ */
+function saveBackupSchedule() {
+  Toast.success('Schedule saved', 'Auto-backups will run as configured.');
+}
+
+function createBackupNow() {
+  const btn = event.target.closest('button');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating…';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.innerHTML = '<i class="fas fa-plus"></i> Create Backup Now';
+    btn.disabled = false;
+    const now = new Date();
+    const dateStr = now.toISOString().slice(0,10);
+    const timeStr = now.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit' });
+    const list = document.getElementById('backupList');
+    const entry = document.createElement('div');
+    entry.className = 'backup-entry';
+    entry.style.animation = 'backdropIn .3s ease';
+    entry.innerHTML = `
+      <div class="backup-icon-wrap"><i class="fas fa-file-archive"></i></div>
+      <div class="backup-meta">
+        <div class="backup-name">nais-cms-manual-${dateStr}.json</div>
+        <div class="backup-size">Manual · ~2.4 MB · ${dateStr}, ${timeStr}</div>
+      </div>
+      <div class="backup-actions">
+        <button class="btn btn-outline btn-sm" onclick="restoreBackup('${dateStr}-new')"><i class="fas fa-undo"></i> Restore</button>
+        <button class="btn btn-outline btn-sm" onclick="downloadBackup('${dateStr}-new')"><i class="fas fa-download"></i></button>
+        <button class="btn btn-ghost btn-sm danger" onclick="this.closest('.backup-entry').remove()"><i class="fas fa-trash"></i></button>
+      </div>`;
+    list.prepend(entry);
+    Toast.success('Backup created', 'nais-cms-manual-' + dateStr + '.json saved.');
+    logActivity('created', 'backup', 'Manual backup ' + dateStr);
+  }, 1400);
+}
+
+function restoreBackup(id) {
+  dangerAction('restore-backup-' + id, 'Restore Backup', 'This will overwrite all current CMS data with the backup from ' + id + '. All unsaved changes will be lost.');
+}
+
+function downloadBackup(id) {
+  Toast.info('Download started', 'nais-cms-backup-' + id + '.json');
+}
+
+function deleteBackup(id) {
+  dangerAction('delete-backup-' + id, 'Delete Backup', 'Backup "' + id + '" will be permanently deleted and cannot be recovered.');
+}
+
+function importBackup() {
+  Toast.info('Import', 'Select a backup .json file to import (simulation).');
+}
+
+/* ════════════════════════════
+   DANGER ZONE
+════════════════════════════ */
+function dangerAction(actionKey, title, description) {
+  const modal     = document.getElementById('confirm-modal');
+  const heading   = document.getElementById('confirmModalHeading');
+  const msg       = document.getElementById('confirm-msg');
+  const check     = document.getElementById('confirmCheck');
+  const confirmBtn= document.getElementById('confirm-btn');
+  const modalTitle= document.getElementById('confirmModalTitle');
+
+  modalTitle.textContent = 'Confirm: ' + title;
+  heading.textContent    = title;
+  msg.textContent        = description;
+  check.checked = false;
+  confirmBtn.disabled = true;
+
+  // Enable button only when checkbox is ticked
+  const newBtn = confirmBtn.cloneNode(true);
+  confirmBtn.parentNode.replaceChild(newBtn, confirmBtn);
+  newBtn.disabled = true;
+
+  check.onchange = () => { newBtn.disabled = !check.checked; };
+
+  newBtn.addEventListener('click', () => {
+    Modal.close('confirm-modal');
+    executeDangerAction(actionKey, title);
   });
 
-  function initModalClosers() {
-    document.querySelectorAll('[data-modal-close]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.getAttribute('data-modal-close');
-        if (id) Modal.close(id); else Modal.closeAll();
-      });
-    });
-    document.querySelectorAll('.modal-backdrop').forEach(bd => {
-      bd.addEventListener('click', e => { if (e.target === bd) Modal.closeAll(); });
-    });
-  }
+  Modal.open('confirm-modal');
+}
 
-  // ── Load ──
-  async function loadEvents() {
-    try {
-      const res = await API.get(TABLE, { limit: 200 });
-      allEvents = res.data || [];
-      updateStats();
-      renderTable();
-    } catch(e) {
-      document.getElementById('eventsTableBody').innerHTML =
-        `<tr><td colspan="8" class="text-center" style="color:var(--red);padding:32px">Failed to load events: ${e.message}</td></tr>`;
+function executeDangerAction(key, title) {
+  const msgs = {
+    'clear-cache':         'Cache cleared. Assets will rebuild on next visitor request.',
+    'reset-translations':  'All translations have been reset. Site is now English-only.',
+    'revoke-sessions':     'All sessions revoked. You will be logged out in 3 seconds…',
+    'reset-cms':           'CMS reset to factory defaults. All data has been wiped.'
+  };
+  const base = key.split('-').slice(0,2).join('-');
+  Toast.success(title, msgs[base] || 'Action completed.');
+  logActivity('executed', 'danger', title);
+
+  if (base === 'revoke-sessions') {
+    setTimeout(() => Auth.logout(), 3000);
+  }
+  if (base === 'reset-cms') {
+    setTimeout(() => { localStorage.clear(); window.location.href = 'login.html'; }, 2000);
+  }
+}
+
+/* ════════════════════════════
+   INIT
+════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Load saved settings from API into form fields
+  loadSettings();
+
+  // Render translation table
+  renderLangProgress('ar');
+  renderTranslationTable();
+
+  // Set alert until to tomorrow
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const el = document.getElementById('alertUntil');
+  if (el) el.value = tomorrow.toISOString().slice(0, 16);
+
+  // OG preview live update
+  const ogTitle = document.getElementById('sOgTitle');
+  const ogDesc  = document.getElementById('sOgDesc');
+  function syncOg() {
+    if (document.getElementById('ogPreviewTitle')) document.getElementById('ogPreviewTitle').textContent = ogTitle.value;
+    if (document.getElementById('ogPreviewDesc')) {
+      const d = ogDesc.value;
+      document.getElementById('ogPreviewDesc').textContent = d.slice(0,90) + (d.length > 90 ? '…' : '');
     }
   }
-
-  function updateStats() {
-    document.getElementById('statTotal').textContent     = allEvents.length;
-    document.getElementById('statUpcoming').textContent  = allEvents.filter(e => e.status === 'upcoming').length;
-    document.getElementById('statOngoing').textContent   = allEvents.filter(e => e.status === 'ongoing').length;
-    document.getElementById('statCancelled').textContent = allEvents.filter(e => e.status === 'cancelled').length;
-  }
-
-  function renderTable() {
-    const q    = document.getElementById('searchInput').value.toLowerCase();
-    const st   = document.getElementById('filterStatus').value;
-    const cat  = document.getElementById('filterCategory').value;
-
-    let rows = allEvents.filter(ev => {
-      if (st  && ev.status   !== st)  return false;
-      if (cat && ev.category !== cat) return false;
-      if (q   && !(`${ev.title} ${ev.location} ${ev.category}`).toLowerCase().includes(q)) return false;
-      return true;
-    });
-
-    document.getElementById('countBadge').textContent = `${rows.length} event${rows.length!==1?'s':''}`;
-    const tbody = document.getElementById('eventsTableBody');
-    if (!rows.length) {
-      tbody.innerHTML = `<tr><td colspan="8" style="padding:48px;text-align:center;color:var(--gray400)">
-        <i class="fas fa-calendar-times" style="font-size:2rem;margin-bottom:10px;display:block"></i>No events found</td></tr>`;
-      return;
-    }
-
-    tbody.innerHTML = rows.map(ev => `
-      <tr>
-        <td><input type="checkbox" class="row-check" data-id="${ev.id}" /></td>
-        <td>
-          <div style="font-weight:600;color:var(--gray800)">${ev.title}</div>
-          ${ev.featured ? '<span style="font-size:10px;color:var(--amber)"><i class="fas fa-star"></i> Featured</span>' : ''}
-        </td>
-        <td>
-          <div style="font-size:13px;font-weight:500">${formatDate(ev.date_start)}</div>
-          ${ev.date_end && ev.date_end !== ev.date_start ? `<div style="font-size:11px;color:var(--gray400)">→ ${formatDate(ev.date_end)}</div>` : ''}
-          ${ev.time_start ? `<div style="font-size:11px;color:var(--gray400)">${ev.time_start}${ev.time_end?' – '+ev.time_end:''}</div>` : ''}
-        </td>
-        <td style="font-size:13px;color:var(--gray600)">${ev.location || '—'}</td>
-        <td><span class="badge badge-teal" style="font-size:11px">${ev.category || '—'}</span></td>
-        <td style="font-size:13px">${ev.audience || '—'}</td>
-        <td><span class="badge ${STATUS_BADGE[ev.status]||'badge-draft'}">${ev.status||'—'}</span></td>
-        <td>
-          <div class="table-actions">
-            <button class="table-action-btn" title="View" onclick="viewEvent('${ev.id}')"><i class="fas fa-eye"></i></button>
-            <button class="table-action-btn" title="Edit" onclick="openEventModal('${ev.id}')"><i class="fas fa-edit"></i></button>
-            <button class="table-action-btn danger" title="Delete" onclick="confirmDelete('${ev.id}','${ev.title.replace(/'/g,"\\'")}')"><i class="fas fa-trash-alt"></i></button>
-          </div>
-        </td>
-      </tr>`).join('');
-  }
-
-  // ── View ──
-  function viewEvent(id) {
-    const ev = allEvents.find(e => e.id === id); if (!ev) return;
-    currentViewId = id;
-    document.getElementById('viewEventTitle').textContent = ev.title;
-    document.getElementById('viewEventBody').innerHTML = `
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px 20px">
-        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Category</div>
-          <strong>${ev.category||'—'}</strong></div>
-        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Status</div>
-          <span class="badge ${STATUS_BADGE[ev.status]||'badge-draft'}">${ev.status||'—'}</span></div>
-        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Start Date</div>
-          <strong>${formatDate(ev.date_start)} ${ev.time_start||''}</strong></div>
-        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">End Date</div>
-          <strong>${ev.date_end ? formatDate(ev.date_end)+' '+(ev.time_end||'') : '—'}</strong></div>
-        <div style="grid-column:1/-1"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Location</div>
-          <strong>${ev.location||'—'}</strong></div>
-        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Audience</div>
-          <strong>${ev.audience||'—'}</strong></div>
-        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Featured</div>
-          <strong>${ev.featured ? '⭐ Yes' : 'No'}</strong></div>
-        ${ev.description ? `<div style="grid-column:1/-1"><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:6px">Description</div>
-          <p style="font-size:13.5px;color:var(--gray600);line-height:1.7">${ev.description}</p></div>` : ''}
-      </div>`;
-    document.getElementById('viewEditBtn').onclick = () => { Modal.close('viewEventModal'); openEventModal(id); };
-    Modal.open('viewEventModal');
-  }
-
-  // ── Open add/edit modal ──
-  function openEventModal(id = null) {
-    const fields = ['evtId','evtTitle','evtCategory','evtStatus','evtDateStart','evtDateEnd',
-                    'evtTimeStart','evtTimeEnd','evtLocation','evtAudience','evtDescription','evtImage'];
-    fields.forEach(f => { const el = document.getElementById(f); if(el) el.value = ''; });
-    document.getElementById('evtFeatured').checked = false;
-    document.getElementById('evtStatus').value = 'upcoming';
-    document.getElementById('evtAudience').value = 'All';
-
-    if (id) {
-      const ev = allEvents.find(e => e.id === id); if (!ev) return;
-      document.getElementById('eventModalTitle').textContent = 'Edit Event';
-      document.getElementById('evtId').value          = ev.id;
-      document.getElementById('evtTitle').value        = ev.title || '';
-      document.getElementById('evtCategory').value     = ev.category || 'Other';
-      document.getElementById('evtStatus').value       = ev.status || 'upcoming';
-      document.getElementById('evtDateStart').value    = ev.date_start || '';
-      document.getElementById('evtDateEnd').value      = ev.date_end || '';
-      document.getElementById('evtTimeStart').value    = ev.time_start || '';
-      document.getElementById('evtTimeEnd').value      = ev.time_end || '';
-      document.getElementById('evtLocation').value     = ev.location || '';
-      document.getElementById('evtAudience').value     = ev.audience || 'All';
-      document.getElementById('evtDescription').value  = ev.description || '';
-      document.getElementById('evtImage').value        = ev.image_url || '';
-      document.getElementById('evtFeatured').checked   = !!ev.featured;
-    } else {
-      document.getElementById('eventModalTitle').textContent = 'New Event';
-    }
-    Modal.open('eventModal');
-  }
-
-  // ── Save ──
-  async function saveEvent() {
-    const title = document.getElementById('evtTitle').value.trim();
-    const dateStart = document.getElementById('evtDateStart').value;
-    if (!title)     { Toast.warning('Required','Event title is required.'); return; }
-    if (!dateStart) { Toast.warning('Required','Start date is required.'); return; }
-
-    const btn = document.getElementById('saveEventBtn');
-    btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving…';
-
-    const id = document.getElementById('evtId').value;
-    const payload = {
-      title,
-      slug: title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''),
-      category:    document.getElementById('evtCategory').value,
-      status:      document.getElementById('evtStatus').value,
-      date_start:  dateStart,
-      date_end:    document.getElementById('evtDateEnd').value || dateStart,
-      time_start:  document.getElementById('evtTimeStart').value,
-      time_end:    document.getElementById('evtTimeEnd').value,
-      location:    document.getElementById('evtLocation').value.trim(),
-      audience:    document.getElementById('evtAudience').value,
-      description: document.getElementById('evtDescription').value.trim(),
-      image_url:   document.getElementById('evtImage').value.trim(),
-      featured:    document.getElementById('evtFeatured').checked,
-      created_by:  Auth.getUser()?.name || 'Admin'
-    };
-
-    try {
-      if (id) {
-        await API.put(TABLE, id, payload);
-        Toast.success('Updated', `"${title}" has been updated.`);
-        logActivity('edit','event', title);
-      } else {
-        await API.post(TABLE, payload);
-        Toast.success('Created', `"${title}" has been added.`);
-        logActivity('create','event', title);
-      }
-      Modal.close('eventModal');
-      loadEvents();
-    } catch(e) {
-      Toast.error('Save failed', e.message);
-    } finally {
-      btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Save Event';
-    }
-  }
-
-  // ── Delete ──
-  function confirmDelete(id, name) {
-    currentDeleteId = id;
-    document.getElementById('deleteEventName').textContent = name;
-    document.getElementById('confirmDeleteBtn').onclick = async () => {
-      try {
-        await API.delete(TABLE, currentDeleteId);
-        Toast.success('Deleted', `"${name}" removed.`);
-        logActivity('delete','event', name);
-        Modal.close('deleteModal');
-        loadEvents();
-      } catch(e) { Toast.error('Delete failed', e.message); }
-    };
-    Modal.open('deleteModal');
-  }
-
-  function formatDate(d) {
-    if (!d) return '—';
-    const [y,m,day] = d.split('-');
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return `${parseInt(day)} ${months[parseInt(m)-1]} ${y}`;
-  }
-  </script>
+  ogTitle?.addEventListener('input', syncOg);
+  ogDesc?.addEventListener('input', syncOg);
+});
+</script>
 </body>
 </html>

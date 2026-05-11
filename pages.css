@@ -3,20 +3,73 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Documents — NAIS Dubai CMS</title>
+  <title>Gallery — NAIS Dubai CMS</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/admin.css?v=2.2" />
   <style>
-    .doc-type-icon { width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0; }
-    .doc-type-pdf  { background:rgba(220,38,38,.10);  color:#dc2626; }
-    .doc-type-docx { background:rgba(37,99,235,.10);  color:#2563eb; }
-    .doc-type-xlsx { background:rgba(22,163,74,.10);  color:#16a34a; }
-    .doc-type-pptx { background:rgba(234,88,12,.10);  color:#ea580c; }
-    .doc-type-other{ background:rgba(100,116,139,.10);color:#64748b; }
-    .dl-bar { display:flex;align-items:center;gap:8px; }
-    .dl-bar-track { flex:1;height:5px;background:var(--gray100);border-radius:3px;min-width:40px; }
-    .dl-bar-fill  { height:5px;background:var(--teal);border-radius:3px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      padding: 4px 0;
+    }
+    .gallery-item {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--gray100);
+      border: 1px solid var(--gray200);
+      transition: box-shadow var(--transition), transform var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-item:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .gallery-item-thumb {
+      width: 100%; height: 150px;
+      object-fit: cover;
+      display: block;
+      background: var(--gray200);
+    }
+    .gallery-item-thumb-placeholder {
+      width: 100%; height: 150px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy3) 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 2rem;
+    }
+    .gallery-item-body { padding: 10px 12px; }
+    .gallery-item-title { font-size: 12.5px; font-weight: 600; color: var(--gray800); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gallery-item-meta  { font-size: 11px; color: var(--gray400); margin-top: 2px; }
+    .gallery-item-actions {
+      display: flex; gap: 6px; padding: 0 12px 10px;
+    }
+    .gallery-item-overlay {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,25,49,0.65);
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px;
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+    .gallery-overlay-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.35);
+      color: #fff; font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition);
+    }
+    .gallery-overlay-btn:hover { background: rgba(255,255,255,0.3); }
+    .gallery-overlay-btn.danger:hover { background: rgba(192,39,45,0.6); border-color: var(--red); }
+    .view-toggle { display: flex; gap: 4px; }
+    .view-toggle-btn {
+      width: 34px; height: 34px; border-radius: var(--radius-sm);
+      background: var(--gray100); border: 1px solid var(--gray200);
+      color: var(--gray500); cursor: pointer; font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition);
+    }
+    .view-toggle-btn.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .featured-star { color: var(--amber); font-size: 10px; }
   </style>
 </head>
 <body>
@@ -51,8 +104,8 @@
       <a href="staff.html" class="nav-item"><i class="fas fa-users"></i><span>Staff Profiles</span></a>
       <a href="admissions.html" class="nav-item"><i class="fas fa-user-graduate"></i><span>Admissions</span></a>
       <a href="results.html" class="nav-item"><i class="fas fa-award"></i><span>Results</span></a>
-      <a href="gallery.html" class="nav-item"><i class="fas fa-photo-video"></i><span>Gallery</span></a>
-      <a href="documents.html" class="nav-item active"><i class="fas fa-folder-open"></i><span>Documents</span><span class="nav-badge">2</span></a>
+      <a href="gallery.html" class="nav-item active"><i class="fas fa-photo-video"></i><span>Gallery</span></a>
+      <a href="documents.html" class="nav-item"><i class="fas fa-folder-open"></i><span>Documents</span><span class="nav-badge">2</span></a>
       <div class="nav-section-label">System</div>
       <a href="users.html" class="nav-item"><i class="fas fa-user-shield"></i><span>Users &amp; Roles</span></a>
       <a href="seo.html" class="nav-item"><i class="fas fa-search"></i><span>SEO Manager</span></a>
@@ -72,7 +125,7 @@
       <div class="topbar-breadcrumb">
         <span class="bc-home"><i class="fas fa-home"></i></span>
         <i class="fas fa-chevron-right bc-sep"></i>
-        <span class="bc-current">Documents</span>
+        <span class="bc-current">Gallery</span>
       </div>
     </div>
     <div class="topbar-right">
@@ -103,18 +156,18 @@
 
       <div class="page-header">
         <div>
-          <h1 class="page-title">Documents</h1>
-          <p class="page-subtitle">Manage downloadable files, handbooks, forms and policies.</p>
+          <h1 class="page-title">Gallery</h1>
+          <p class="page-subtitle">Manage school photos by album and category.</p>
         </div>
         <div class="page-header-actions">
           <div class="search-box">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search documents…" />
+            <input type="text" id="searchInput" class="search-input" placeholder="Search photos…" />
           </div>
           <select class="form-select" id="filterCategory" style="width:150px">
             <option value="">All Categories</option>
-            <option>Policy</option><option>Form</option><option>Handbook</option>
-            <option>Curriculum</option><option>Calendar</option><option>Newsletter</option><option>Other</option>
+            <option>Events</option><option>Campus</option><option>Sports</option>
+            <option>Arts</option><option>Trips</option><option>Celebrations</option><option>Other</option>
           </select>
           <select class="form-select" id="filterStatus" style="width:140px">
             <option value="">All Statuses</option>
@@ -122,8 +175,12 @@
             <option value="draft">Draft</option>
             <option value="archived">Archived</option>
           </select>
+          <div class="view-toggle">
+            <button class="view-toggle-btn active" id="btnGrid" onclick="setView('grid')" title="Grid view"><i class="fas fa-th"></i></button>
+            <button class="view-toggle-btn" id="btnList" onclick="setView('list')" title="List view"><i class="fas fa-list"></i></button>
+          </div>
           <button class="btn btn-primary" onclick="openModal()">
-            <i class="fas fa-plus"></i> Add Document
+            <i class="fas fa-plus"></i> Add Photo
           </button>
         </div>
       </div>
@@ -131,47 +188,54 @@
       <!-- Stats -->
       <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px">
         <div class="stat-card stat-navy">
-          <div class="stat-icon"><i class="fas fa-folder-open"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statTotal">—</div><div class="stat-label">Total Documents</div></div>
+          <div class="stat-icon"><i class="fas fa-images"></i></div>
+          <div class="stat-body"><div class="stat-value" id="statTotal">—</div><div class="stat-label">Total Photos</div></div>
         </div>
         <div class="stat-card stat-green">
           <div class="stat-icon"><i class="fas fa-globe"></i></div>
           <div class="stat-body"><div class="stat-value" id="statPublished">—</div><div class="stat-label">Published</div></div>
         </div>
         <div class="stat-card stat-gold">
-          <div class="stat-icon"><i class="fas fa-pencil-alt"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statDraft">—</div><div class="stat-label">Drafts</div></div>
+          <div class="stat-icon"><i class="fas fa-star"></i></div>
+          <div class="stat-body"><div class="stat-value" id="statFeatured">—</div><div class="stat-label">Featured</div></div>
         </div>
         <div class="stat-card stat-teal">
-          <div class="stat-icon"><i class="fas fa-download"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statDownloads">—</div><div class="stat-label">Total Downloads</div></div>
+          <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+          <div class="stat-body"><div class="stat-value" id="statAlbums">—</div><div class="stat-label">Albums</div></div>
         </div>
       </div>
 
-      <!-- Table -->
+      <!-- Gallery area -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title"><i class="fas fa-folder-open"></i> Document Library</h3>
-          <span class="badge badge-published" id="countBadge">0 documents</span>
+          <h3 class="card-title"><i class="fas fa-photo-video"></i> Photo Library</h3>
+          <span class="badge badge-published" id="countBadge">0 photos</span>
         </div>
-        <div class="table-responsive">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Document</th>
-                <th>Category</th>
-                <th>Year</th>
-                <th>File</th>
-                <th>Downloads</th>
-                <th>Restricted</th>
-                <th>Status</th>
-                <th style="width:110px">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="tableBody">
-              <tr><td colspan="8" style="text-align:center;padding:48px;color:var(--gray400)"><i class="fas fa-spinner fa-spin fa-2x"></i></td></tr>
-            </tbody>
-          </table>
+        <div style="padding:20px">
+          <!-- Grid view -->
+          <div id="galleryGrid" class="gallery-grid">
+            <div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--gray400)">
+              <i class="fas fa-spinner fa-spin fa-2x"></i>
+            </div>
+          </div>
+          <!-- List view (hidden by default) -->
+          <div id="galleryList" style="display:none">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width:60px">Thumb</th>
+                  <th>Title</th>
+                  <th>Album</th>
+                  <th>Category</th>
+                  <th>Date</th>
+                  <th>Featured</th>
+                  <th>Status</th>
+                  <th style="width:100px">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="galleryTableBody"></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -180,47 +244,51 @@
 
   <!-- ═══ ADD / EDIT MODAL ═══ -->
   <div class="modal-backdrop" id="editModal">
-    <div class="modal" style="max-width:600px">
+    <div class="modal" style="max-width:580px">
       <div class="modal-header">
-        <h3 class="modal-title" id="modalTitle">Add Document</h3>
+        <h3 class="modal-title" id="modalTitle">Add Photo</h3>
         <button class="modal-close" data-modal-close="editModal"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
         <input type="hidden" id="itemId" />
         <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:14px 18px">
           <div class="form-group" style="grid-column:1/-1">
-            <label class="form-label">Document Title <span class="required">*</span></label>
-            <input type="text" id="fTitle" class="form-input" placeholder="e.g. Parent Handbook 2024-25" />
+            <label class="form-label">Photo Title <span class="required">*</span></label>
+            <input type="text" id="fTitle" class="form-input" placeholder="e.g. Sports Day 2024 — Relay Race" />
           </div>
           <div class="form-group" style="grid-column:1/-1">
-            <label class="form-label">File URL <span class="required">*</span></label>
-            <input type="url" id="fFileUrl" class="form-input" placeholder="https://… or relative /documents/file.pdf" />
+            <label class="form-label">Image URL <span class="required">*</span></label>
+            <input type="url" id="fImageUrl" class="form-input" placeholder="https://…" oninput="previewImg()" />
+            <div id="imgPreview" style="margin-top:8px;display:none">
+              <img id="imgPreviewEl" src="" alt="Preview" style="max-height:140px;border-radius:8px;border:1px solid var(--gray200)" />
+            </div>
+          </div>
+          <div class="form-group" style="grid-column:1/-1">
+            <label class="form-label">Thumbnail URL</label>
+            <input type="url" id="fThumbUrl" class="form-input" placeholder="https://… (leave blank to use image URL)" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Album Name</label>
+            <input type="text" id="fAlbum" class="form-input" placeholder="e.g. Sports Day 2024" />
           </div>
           <div class="form-group">
             <label class="form-label">Category</label>
             <select id="fCategory" class="form-select">
-              <option>Policy</option><option>Form</option><option>Handbook</option>
-              <option>Curriculum</option><option>Calendar</option><option>Newsletter</option><option>Other</option>
+              <option>Events</option><option>Campus</option><option>Sports</option>
+              <option>Arts</option><option>Trips</option><option>Celebrations</option><option>Other</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Academic Year</label>
-            <input type="text" id="fYear" class="form-input" placeholder="e.g. 2024-25" />
+            <label class="form-label">Date Taken</label>
+            <input type="date" id="fDate" class="form-input" />
           </div>
           <div class="form-group">
-            <label class="form-label">File Type</label>
-            <select id="fFileType" class="form-select">
-              <option>PDF</option><option>Word (DOCX)</option><option>Excel (XLSX)</option>
-              <option>PowerPoint</option><option>ZIP</option><option>Other</option>
-            </select>
+            <label class="form-label">Sort Order</label>
+            <input type="number" id="fSort" class="form-input" min="1" placeholder="1" />
           </div>
-          <div class="form-group">
-            <label class="form-label">File Size</label>
-            <input type="text" id="fFileSize" class="form-input" placeholder="e.g. 2.4 MB" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Upload Date</label>
-            <input type="date" id="fUploadDate" class="form-input" />
+          <div class="form-group" style="grid-column:1/-1">
+            <label class="form-label">Caption</label>
+            <input type="text" id="fCaption" class="form-input" placeholder="Brief caption for the photo" />
           </div>
           <div class="form-group">
             <label class="form-label">Status</label>
@@ -230,20 +298,16 @@
               <option value="archived">Archived</option>
             </select>
           </div>
-          <div class="form-group" style="grid-column:1/-1">
-            <label class="form-label">Description</label>
-            <textarea id="fDescription" class="form-textarea" rows="3" placeholder="Brief description of this document…"></textarea>
-          </div>
-          <div class="form-group" style="display:flex;align-items:center;gap:10px;padding-top:6px">
-            <label class="toggle-switch"><input type="checkbox" id="fRestricted" /><span class="toggle-slider"></span></label>
-            <span class="form-label" style="margin:0">Requires login to download</span>
+          <div class="form-group" style="display:flex;align-items:center;gap:10px;padding-top:22px">
+            <label class="toggle-switch"><input type="checkbox" id="fFeatured" /><span class="toggle-slider"></span></label>
+            <span class="form-label" style="margin:0">Feature on homepage</span>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-ghost" data-modal-close="editModal">Cancel</button>
         <button class="btn btn-primary" id="saveBtn" onclick="saveItem()">
-          <i class="fas fa-save"></i> Save Document
+          <i class="fas fa-save"></i> Save Photo
         </button>
       </div>
     </div>
@@ -253,7 +317,7 @@
   <div class="modal-backdrop" id="deleteModal">
     <div class="modal" style="max-width:420px">
       <div class="modal-header">
-        <h3 class="modal-title"><i class="fas fa-trash-alt" style="color:var(--red)"></i> Delete Document</h3>
+        <h3 class="modal-title"><i class="fas fa-trash-alt" style="color:var(--red)"></i> Delete Photo</h3>
         <button class="modal-close" data-modal-close="deleteModal"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
@@ -269,15 +333,11 @@
   <script src="js/core.js?v=2.2"></script>
   <script>
   'use strict';
-  const TABLE = 'cms_documents';
-  let allRows = [];
+  const TABLE = 'cms_gallery';
+  let allRows = [], currentView = 'grid';
 
-  const STATUS_BADGE = { published:'badge-published', draft:'badge-draft', archived:'badge-archived' };
-  const TYPE_ICON = {
-    'PDF':'fa-file-pdf doc-type-pdf',
-    'Word (DOCX)':'fa-file-word doc-type-docx',
-    'Excel (XLSX)':'fa-file-excel doc-type-xlsx',
-    'PowerPoint':'fa-file-powerpoint doc-type-pptx'
+  const STATUS_BADGE = {
+    published:'badge-published', draft:'badge-draft', archived:'badge-archived'
   };
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -286,9 +346,9 @@
     Sidebar.init();
     initModalClosers();
     loadData();
-    document.getElementById('searchInput').addEventListener('input', renderTable);
-    document.getElementById('filterCategory').addEventListener('change', renderTable);
-    document.getElementById('filterStatus').addEventListener('change', renderTable);
+    document.getElementById('searchInput').addEventListener('input', renderView);
+    document.getElementById('filterCategory').addEventListener('change', renderView);
+    document.getElementById('filterStatus').addEventListener('change', renderView);
   });
 
   function initModalClosers() {
@@ -305,83 +365,100 @@
 
   async function loadData() {
     try {
-      const res = await API.get(TABLE, { limit: 200 });
+      const res = await API.get(TABLE, { limit: 300 });
       allRows = res.data || [];
       updateStats();
-      renderTable();
+      renderView();
     } catch(e) {
-      document.getElementById('tableBody').innerHTML =
-        `<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--red)">Failed to load: ${e.message}</td></tr>`;
+      document.getElementById('galleryGrid').innerHTML =
+        `<div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--red)">Failed to load: ${e.message}</div>`;
     }
   }
 
   function updateStats() {
     document.getElementById('statTotal').textContent     = allRows.length;
     document.getElementById('statPublished').textContent = allRows.filter(r=>r.status==='published').length;
-    document.getElementById('statDraft').textContent     = allRows.filter(r=>r.status==='draft').length;
-    const total = allRows.reduce((s,r) => s + (parseInt(r.downloads)||0), 0);
-    document.getElementById('statDownloads').textContent = total.toLocaleString();
+    document.getElementById('statFeatured').textContent  = allRows.filter(r=>r.featured).length;
+    const albums = new Set(allRows.map(r=>r.album).filter(Boolean));
+    document.getElementById('statAlbums').textContent    = albums.size;
   }
 
-  function renderTable() {
+  function setView(v) {
+    currentView = v;
+    document.getElementById('btnGrid').classList.toggle('active', v==='grid');
+    document.getElementById('btnList').classList.toggle('active', v==='list');
+    document.getElementById('galleryGrid').style.display = v==='grid' ? 'grid' : 'none';
+    document.getElementById('galleryList').style.display = v==='list' ? 'block' : 'none';
+    renderView();
+  }
+
+  function filtered() {
     const q   = document.getElementById('searchInput').value.toLowerCase();
     const cat = document.getElementById('filterCategory').value;
     const st  = document.getElementById('filterStatus').value;
-
-    let rows = allRows.filter(r => {
+    return allRows.filter(r => {
       if (st  && r.status   !== st)  return false;
       if (cat && r.category !== cat) return false;
-      if (q && !(`${r.title} ${r.category} ${r.description||''}`).toLowerCase().includes(q)) return false;
+      if (q && !(`${r.title} ${r.album} ${r.caption||''}`).toLowerCase().includes(q)) return false;
       return true;
     });
+  }
 
-    const maxDl = Math.max(...allRows.map(r=>parseInt(r.downloads)||0), 1);
-    document.getElementById('countBadge').textContent = `${rows.length} document${rows.length!==1?'s':''}`;
+  function renderView() {
+    const rows = filtered();
+    document.getElementById('countBadge').textContent = `${rows.length} photo${rows.length!==1?'s':''}`;
+    currentView === 'grid' ? renderGrid(rows) : renderList(rows);
+  }
 
-    const tbody = document.getElementById('tableBody');
+  function renderGrid(rows) {
+    const el = document.getElementById('galleryGrid');
     if (!rows.length) {
-      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:48px;color:var(--gray400)">
-        <i class="fas fa-folder-open" style="font-size:2rem;display:block;margin-bottom:10px"></i>No documents found</td></tr>`;
+      el.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--gray400)">
+        <i class="fas fa-images" style="font-size:2.5rem;display:block;margin-bottom:12px"></i>No photos found</div>`;
       return;
     }
+    el.innerHTML = rows.map(r => {
+      const thumb = r.thumb_url || r.image_url;
+      return `<div class="gallery-item">
+        ${thumb
+          ? `<img class="gallery-item-thumb" src="${thumb}" alt="${r.title}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : ''
+        }
+        <div class="gallery-item-thumb-placeholder" ${thumb?'style="display:none"':''}>
+          <i class="fas fa-image"></i>
+        </div>
+        <div class="gallery-item-overlay">
+          <button class="gallery-overlay-btn" title="Edit" onclick="openModal('${r.id}')"><i class="fas fa-edit"></i></button>
+          <button class="gallery-overlay-btn danger" title="Delete" onclick="confirmDelete('${r.id}','${r.title.replace(/'/g,"\\'")}')"><i class="fas fa-trash-alt"></i></button>
+        </div>
+        <div class="gallery-item-body">
+          <div class="gallery-item-title">
+            ${r.featured ? '<i class="fas fa-star featured-star"></i> ' : ''}${r.title}
+          </div>
+          <div class="gallery-item-meta">${r.album||'—'} · <span class="badge ${STATUS_BADGE[r.status]||'badge-draft'}" style="font-size:9px;padding:1px 5px">${r.status}</span></div>
+        </div>
+      </div>`;
+    }).join('');
+  }
 
+  function renderList(rows) {
+    const tbody = document.getElementById('galleryTableBody');
+    if (!rows.length) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:48px;color:var(--gray400)">No photos found</td></tr>`;
+      return;
+    }
     tbody.innerHTML = rows.map(r => {
-      const ft = r.file_type || 'PDF';
-      const iconClass = TYPE_ICON[ft] || 'fa-file doc-type-other';
-      const [iconName, ...typeClass] = iconClass.split(' ');
-      const dlCount = parseInt(r.downloads) || 0;
-      const dlPct   = Math.round((dlCount / maxDl) * 100);
+      const thumb = r.thumb_url || r.image_url;
       return `<tr>
-        <td>
-          <div style="display:flex;align-items:center;gap:12px">
-            <div class="doc-type-icon ${typeClass.join(' ')}"><i class="fas ${iconName}"></i></div>
-            <div>
-              <div style="font-weight:600;color:var(--gray800)">${r.title}</div>
-              ${r.description ? `<div style="font-size:11px;color:var(--gray400);margin-top:2px">${r.description.substring(0,60)}${r.description.length>60?'…':''}</div>` : ''}
-            </div>
-          </div>
-        </td>
+        <td>${thumb ? `<img src="${thumb}" style="width:48px;height:36px;object-fit:cover;border-radius:4px;border:1px solid var(--gray200)" onerror="this.src=''" />` : '<div style="width:48px;height:36px;background:var(--gray100);border-radius:4px"></div>'}</td>
+        <td style="font-weight:600;color:var(--gray800)">${r.title}</td>
+        <td style="font-size:13px">${r.album||'—'}</td>
         <td><span class="badge badge-teal" style="font-size:11px">${r.category||'—'}</span></td>
-        <td style="font-size:13px">${(r.academic_year||'—').replace('-','–')}</td>
-        <td>
-          <div style="font-size:12px;font-weight:600">${ft}</div>
-          <div style="font-size:11px;color:var(--gray400)">${r.file_size||''}</div>
-        </td>
-        <td>
-          <div class="dl-bar">
-            <div class="dl-bar-track"><div class="dl-bar-fill" style="width:${dlPct}%"></div></div>
-            <span style="font-size:12px;font-weight:600;color:var(--teal)">${dlCount}</span>
-          </div>
-        </td>
-        <td>${r.restricted
-          ? '<span style="font-size:12px;color:var(--amber)"><i class="fas fa-lock"></i> Yes</span>'
-          : '<span style="font-size:12px;color:var(--gray300)">—</span>'}</td>
-        <td><span class="badge ${STATUS_BADGE[r.status]||'badge-draft'}">${r.status||'—'}</span></td>
+        <td style="font-size:12px;color:var(--gray500)">${r.date_taken||'—'}</td>
+        <td>${r.featured?'<i class="fas fa-star" style="color:var(--amber)"></i>':'<span style="color:var(--gray300)">—</span>'}</td>
+        <td><span class="badge ${STATUS_BADGE[r.status]||'badge-draft'}">${r.status}</span></td>
         <td>
           <div class="table-actions">
-            ${r.file_url && r.file_url !== '#'
-              ? `<a href="${r.file_url}" target="_blank" class="table-action-btn" title="Open file"><i class="fas fa-external-link-alt"></i></a>`
-              : ''}
             <button class="table-action-btn" title="Edit" onclick="openModal('${r.id}')"><i class="fas fa-edit"></i></button>
             <button class="table-action-btn danger" title="Delete" onclick="confirmDelete('${r.id}','${r.title.replace(/'/g,"\\'")}')"><i class="fas fa-trash-alt"></i></button>
           </div>
@@ -390,74 +467,85 @@
     }).join('');
   }
 
+  function previewImg() {
+    const url = document.getElementById('fImageUrl').value.trim();
+    const wrap = document.getElementById('imgPreview');
+    const img  = document.getElementById('imgPreviewEl');
+    if (url) { img.src = url; wrap.style.display = 'block'; }
+    else { wrap.style.display = 'none'; }
+  }
+
   function openModal(id = null) {
-    ['itemId','fTitle','fFileUrl','fYear','fFileSize','fUploadDate','fDescription']
+    ['itemId','fTitle','fImageUrl','fThumbUrl','fAlbum','fDate','fSort','fCaption']
       .forEach(f => { const el = document.getElementById(f); if(el) el.value=''; });
-    document.getElementById('fCategory').value = 'Handbook';
-    document.getElementById('fFileType').value = 'PDF';
     document.getElementById('fStatus').value   = 'published';
-    document.getElementById('fRestricted').checked = false;
+    document.getElementById('fCategory').value = 'Events';
+    document.getElementById('fFeatured').checked = false;
+    document.getElementById('imgPreview').style.display = 'none';
 
     if (id) {
       const r = allRows.find(x=>x.id===id); if(!r) return;
-      document.getElementById('modalTitle').textContent = 'Edit Document';
-      document.getElementById('itemId').value        = r.id;
-      document.getElementById('fTitle').value        = r.title||'';
-      document.getElementById('fFileUrl').value      = r.file_url||'';
-      document.getElementById('fCategory').value     = r.category||'Handbook';
-      document.getElementById('fYear').value         = r.academic_year||'';
-      document.getElementById('fFileType').value     = r.file_type||'PDF';
-      document.getElementById('fFileSize').value     = r.file_size||'';
-      document.getElementById('fUploadDate').value   = r.upload_date||'';
-      document.getElementById('fStatus').value       = r.status||'published';
-      document.getElementById('fDescription').value  = r.description||'';
-      document.getElementById('fRestricted').checked = !!r.restricted;
+      document.getElementById('modalTitle').textContent = 'Edit Photo';
+      document.getElementById('itemId').value    = r.id;
+      document.getElementById('fTitle').value    = r.title||'';
+      document.getElementById('fImageUrl').value = r.image_url||'';
+      document.getElementById('fThumbUrl').value = r.thumb_url||'';
+      document.getElementById('fAlbum').value    = r.album||'';
+      document.getElementById('fCategory').value = r.category||'Events';
+      document.getElementById('fDate').value     = r.date_taken||'';
+      document.getElementById('fSort').value     = r.sort_order||'';
+      document.getElementById('fCaption').value  = r.caption||'';
+      document.getElementById('fStatus').value   = r.status||'published';
+      document.getElementById('fFeatured').checked = !!r.featured;
+      if (r.image_url) {
+        document.getElementById('imgPreviewEl').src = r.image_url;
+        document.getElementById('imgPreview').style.display = 'block';
+      }
     } else {
-      document.getElementById('modalTitle').textContent = 'Add Document';
+      document.getElementById('modalTitle').textContent = 'Add Photo';
     }
     Modal.open('editModal');
   }
 
   async function saveItem() {
-    const title   = document.getElementById('fTitle').value.trim();
-    const fileUrl = document.getElementById('fFileUrl').value.trim();
-    if (!title)   { Toast.warning('Required','Title is required.'); return; }
-    if (!fileUrl) { Toast.warning('Required','File URL is required.'); return; }
+    const title    = document.getElementById('fTitle').value.trim();
+    const imageUrl = document.getElementById('fImageUrl').value.trim();
+    if (!title)    { Toast.warning('Required','Title is required.'); return; }
+    if (!imageUrl) { Toast.warning('Required','Image URL is required.'); return; }
 
     const btn = document.getElementById('saveBtn');
     btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving…';
 
     const id = document.getElementById('itemId').value;
-    const existing = id ? allRows.find(x=>x.id===id) : null;
+    const sortVal = parseInt(document.getElementById('fSort').value) || 0;
     const payload = {
       title,
-      file_url:      fileUrl,
-      category:      document.getElementById('fCategory').value,
-      academic_year: document.getElementById('fYear').value.trim(),
-      file_type:     document.getElementById('fFileType').value,
-      file_size:     document.getElementById('fFileSize').value.trim(),
-      upload_date:   document.getElementById('fUploadDate').value || new Date().toISOString().slice(0,10),
-      status:        document.getElementById('fStatus').value,
-      description:   document.getElementById('fDescription').value.trim(),
-      restricted:    document.getElementById('fRestricted').checked,
-      downloads:     existing?.downloads || 0,
-      uploaded_by:   Auth.getUser()?.name||'Admin'
+      image_url:   imageUrl,
+      thumb_url:   document.getElementById('fThumbUrl').value.trim() || imageUrl,
+      album:       document.getElementById('fAlbum').value.trim(),
+      category:    document.getElementById('fCategory').value,
+      date_taken:  document.getElementById('fDate').value,
+      sort_order:  sortVal,
+      caption:     document.getElementById('fCaption').value.trim(),
+      status:      document.getElementById('fStatus').value,
+      featured:    document.getElementById('fFeatured').checked,
+      uploaded_by: Auth.getUser()?.name||'Admin'
     };
 
     try {
       if (id) {
         await API.put(TABLE, id, payload);
         Toast.success('Updated', `"${title}" updated.`);
-        logActivity('edit','document', title);
+        logActivity('edit','gallery', title);
       } else {
         await API.post(TABLE, payload);
-        Toast.success('Added', `"${title}" added.`);
-        logActivity('create','document', title);
+        Toast.success('Added', `"${title}" added to gallery.`);
+        logActivity('create','gallery', title);
       }
       Modal.close('editModal');
       loadData();
     } catch(e) { Toast.error('Save failed', e.message); }
-    finally { btn.disabled=false; btn.innerHTML='<i class="fas fa-save"></i> Save Document'; }
+    finally { btn.disabled=false; btn.innerHTML='<i class="fas fa-save"></i> Save Photo'; }
   }
 
   function confirmDelete(id, name) {
@@ -466,7 +554,7 @@
       try {
         await API.delete(TABLE, id);
         Toast.success('Deleted', `"${name}" removed.`);
-        logActivity('delete','document', name);
+        logActivity('delete','gallery', name);
         Modal.close('deleteModal');
         loadData();
       } catch(e) { Toast.error('Delete failed', e.message); }

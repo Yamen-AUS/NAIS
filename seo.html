@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Results — NAIS Dubai CMS</title>
+  <title>Admissions — NAIS Dubai CMS</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/admin.css?v=2.2" />
@@ -38,8 +38,8 @@
       <a href="events.html" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Events</span></a>
       <div class="nav-section-label">School</div>
       <a href="staff.html" class="nav-item"><i class="fas fa-users"></i><span>Staff Profiles</span></a>
-      <a href="admissions.html" class="nav-item"><i class="fas fa-user-graduate"></i><span>Admissions</span></a>
-      <a href="results.html" class="nav-item active"><i class="fas fa-award"></i><span>Results</span></a>
+      <a href="admissions.html" class="nav-item active"><i class="fas fa-user-graduate"></i><span>Admissions</span></a>
+      <a href="results.html" class="nav-item"><i class="fas fa-award"></i><span>Results</span></a>
       <a href="gallery.html" class="nav-item"><i class="fas fa-photo-video"></i><span>Gallery</span></a>
       <a href="documents.html" class="nav-item"><i class="fas fa-folder-open"></i><span>Documents</span><span class="nav-badge">2</span></a>
       <div class="nav-section-label">System</div>
@@ -61,7 +61,7 @@
       <div class="topbar-breadcrumb">
         <span class="bc-home"><i class="fas fa-home"></i></span>
         <i class="fas fa-chevron-right bc-sep"></i>
-        <span class="bc-current">Results</span>
+        <span class="bc-current">Admissions</span>
       </div>
     </div>
     <div class="topbar-right">
@@ -90,75 +90,77 @@
   <main class="admin-main">
     <div class="admin-content">
 
+      <!-- Page header -->
       <div class="page-header">
         <div>
-          <h1 class="page-title">Results</h1>
-          <p class="page-subtitle">Publish and manage academic exam results and reports.</p>
+          <h1 class="page-title">Admissions</h1>
+          <p class="page-subtitle">Track and manage student applications and enquiries.</p>
         </div>
         <div class="page-header-actions">
           <div class="search-box">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search results…" />
+            <input type="text" id="searchInput" class="search-input" placeholder="Search applicants…" />
           </div>
-          <select class="form-select" id="filterStatus" style="width:150px">
+          <select class="form-select" id="filterStatus" style="width:170px">
             <option value="">All Statuses</option>
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
-            <option value="archived">Archived</option>
+            <option value="new">New</option>
+            <option value="reviewing">Reviewing</option>
+            <option value="interview">Interview</option>
+            <option value="accepted">Accepted</option>
+            <option value="waitlisted">Waitlisted</option>
+            <option value="declined">Declined</option>
           </select>
-          <select class="form-select" id="filterExam" style="width:160px">
-            <option value="">All Exam Types</option>
-            <option value="IGCSE">IGCSE</option>
-            <option value="A-Level">A-Level</option>
-            <option value="Internal">Internal</option>
-            <option value="Mock">Mock</option>
-            <option value="Entry Assessment">Entry Assessment</option>
-            <option value="Other">Other</option>
+          <select class="form-select" id="filterYear" style="width:150px">
+            <option value="">All Years</option>
+            <option value="2025-26">2025–26</option>
+            <option value="2024-25">2024–25</option>
           </select>
           <button class="btn btn-primary" onclick="openModal()">
-            <i class="fas fa-plus"></i> New Results Entry
+            <i class="fas fa-plus"></i> New Application
           </button>
         </div>
       </div>
 
-      <!-- Stats -->
-      <div class="stats-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:24px">
-        <div class="stat-card stat-navy">
-          <div class="stat-icon"><i class="fas fa-award"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statTotal">—</div><div class="stat-label">Total Entries</div></div>
+      <!-- Pipeline stats -->
+      <div class="stats-grid" style="grid-template-columns:repeat(6,1fr);margin-bottom:24px">
+        <div class="stat-card stat-navy" style="padding:14px 16px">
+          <div class="stat-body"><div class="stat-value" id="statNew" style="font-size:24px">—</div><div class="stat-label">New</div></div>
         </div>
-        <div class="stat-card stat-green">
-          <div class="stat-icon"><i class="fas fa-globe"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statPublished">—</div><div class="stat-label">Published</div></div>
+        <div class="stat-card stat-teal" style="padding:14px 16px">
+          <div class="stat-body"><div class="stat-value" id="statReviewing" style="font-size:24px">—</div><div class="stat-label">Reviewing</div></div>
         </div>
-        <div class="stat-card stat-gold">
-          <div class="stat-icon"><i class="fas fa-pencil-alt"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statDraft">—</div><div class="stat-label">Drafts</div></div>
+        <div class="stat-card stat-gold" style="padding:14px 16px">
+          <div class="stat-body"><div class="stat-value" id="statInterview" style="font-size:24px">—</div><div class="stat-label">Interview</div></div>
         </div>
-        <div class="stat-card stat-teal">
-          <div class="stat-icon"><i class="fas fa-percentage"></i></div>
-          <div class="stat-body"><div class="stat-value" id="statAvgPass">—%</div><div class="stat-label">Avg Pass Rate</div></div>
+        <div class="stat-card stat-green" style="padding:14px 16px">
+          <div class="stat-body"><div class="stat-value" id="statAccepted" style="font-size:24px">—</div><div class="stat-label">Accepted</div></div>
+        </div>
+        <div class="stat-card stat-purple" style="padding:14px 16px">
+          <div class="stat-body"><div class="stat-value" id="statWaitlisted" style="font-size:24px">—</div><div class="stat-label">Waitlisted</div></div>
+        </div>
+        <div class="stat-card stat-red" style="padding:14px 16px">
+          <div class="stat-body"><div class="stat-value" id="statDeclined" style="font-size:24px">—</div><div class="stat-label">Declined</div></div>
         </div>
       </div>
 
-      <!-- Table card -->
+      <!-- Table -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title"><i class="fas fa-award"></i> Results Publications</h3>
-          <span class="badge badge-published" id="countBadge">0 entries</span>
+          <h3 class="card-title"><i class="fas fa-user-graduate"></i> Applications</h3>
+          <span class="badge badge-published" id="countBadge">0 applications</span>
         </div>
         <div class="table-responsive">
           <table class="data-table">
             <thead>
               <tr>
-                <th>Title</th>
-                <th>Exam Type</th>
-                <th>Year Group</th>
-                <th>Academic Year</th>
-                <th>Publish Date</th>
-                <th>Pass Rate</th>
+                <th>Student</th>
+                <th>Grade</th>
+                <th>Year</th>
+                <th>Parent / Contact</th>
+                <th>Submitted</th>
+                <th>Assigned To</th>
                 <th>Status</th>
-                <th style="width:110px">Actions</th>
+                <th style="width:100px">Actions</th>
               </tr>
             </thead>
             <tbody id="tableBody">
@@ -172,65 +174,106 @@
   </main>
 
   <!-- ═══ ADD / EDIT MODAL ═══ -->
-  <div class="modal-backdrop" id="editModal">
-    <div class="modal" style="max-width:600px">
+  <div class="modal-backdrop" id="appModal">
+    <div class="modal" style="max-width:660px">
       <div class="modal-header">
-        <h3 class="modal-title" id="modalTitle">New Results Entry</h3>
-        <button class="modal-close" data-modal-close="editModal"><i class="fas fa-times"></i></button>
+        <h3 class="modal-title" id="modalTitle">New Application</h3>
+        <button class="modal-close" data-modal-close="appModal"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
-        <input type="hidden" id="itemId" />
-        <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:14px 18px">
+        <input type="hidden" id="appId" />
+        <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:14px">Student Information</p>
+        <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:12px 18px">
           <div class="form-group" style="grid-column:1/-1">
-            <label class="form-label">Title <span class="required">*</span></label>
-            <input type="text" id="fTitle" class="form-input" placeholder="e.g. IGCSE Results 2025" />
+            <label class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" id="appStudentName" class="form-input" placeholder="Student's full legal name" />
           </div>
           <div class="form-group">
-            <label class="form-label">Exam Type</label>
-            <select id="fExamType" class="form-select">
-              <option>IGCSE</option><option>A-Level</option><option>Internal</option>
-              <option>Mock</option><option>Entry Assessment</option><option>Other</option>
+            <label class="form-label">Date of Birth</label>
+            <input type="date" id="appDob" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nationality</label>
+            <input type="text" id="appNationality" class="form-input" placeholder="e.g. British" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Applying for Grade <span class="required">*</span></label>
+            <select id="appGrade" class="form-select">
+              <option value="">— Select —</option>
+              <option>Foundation</option><option>Year 1</option><option>Year 2</option>
+              <option>Year 3</option><option>Year 4</option><option>Year 5</option>
+              <option>Year 6</option><option>Year 7</option><option>Year 8</option>
+              <option>Year 9</option><option>Year 10</option><option>Year 11</option>
+              <option>Year 12</option><option>Year 13</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-label">Academic Year</label>
-            <input type="text" id="fAcadYear" class="form-input" placeholder="e.g. 2024-25" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Year Group / Grade Level</label>
-            <input type="text" id="fGradeLevel" class="form-input" placeholder="e.g. Year 11, All Years" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Publish Date</label>
-            <input type="date" id="fPublishDate" class="form-input" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Pass Rate (%)</label>
-            <input type="number" id="fPassRate" class="form-input" min="0" max="100" placeholder="e.g. 98" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Status</label>
-            <select id="fStatus" class="form-select">
-              <option value="draft">Draft</option>
-              <option value="published">Published</option>
-              <option value="archived">Archived</option>
+            <select id="appYear" class="form-select">
+              <option value="2025-26">2025–26</option>
+              <option value="2026-27">2026–27</option>
+              <option value="2024-25">2024–25</option>
             </select>
           </div>
+        </div>
+        <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin:18px 0 14px">Parent / Guardian</p>
+        <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:12px 18px">
           <div class="form-group" style="grid-column:1/-1">
-            <label class="form-label">Summary / Notes</label>
-            <textarea id="fSummary" class="form-textarea" rows="3" placeholder="Brief description of results…"></textarea>
+            <label class="form-label">Parent/Guardian Name <span class="required">*</span></label>
+            <input type="text" id="appParentName" class="form-input" placeholder="Full name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" id="appParentEmail" class="form-input" placeholder="parent@email.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" id="appParentPhone" class="form-input" placeholder="+971 5X XXX XXXX" />
+          </div>
+        </div>
+        <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin:18px 0 14px">Application Status</p>
+        <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:12px 18px">
+          <div class="form-group">
+            <label class="form-label">Status</label>
+            <select id="appStatus" class="form-select">
+              <option value="new">New</option>
+              <option value="reviewing">Reviewing</option>
+              <option value="interview">Interview</option>
+              <option value="accepted">Accepted</option>
+              <option value="waitlisted">Waitlisted</option>
+              <option value="declined">Declined</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Assigned To</label>
+            <input type="text" id="appAssigned" class="form-input" placeholder="Staff member name" />
           </div>
           <div class="form-group" style="grid-column:1/-1">
-            <label class="form-label">Document / PDF URL</label>
-            <input type="url" id="fDocUrl" class="form-input" placeholder="https://… or leave blank" />
+            <label class="form-label">Internal Notes</label>
+            <textarea id="appNotes" class="form-textarea" rows="3" placeholder="Private notes — not visible to applicant…"></textarea>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-ghost" data-modal-close="editModal">Cancel</button>
-        <button class="btn btn-primary" id="saveBtn" onclick="saveItem()">
-          <i class="fas fa-save"></i> Save
+        <button class="btn btn-ghost" data-modal-close="appModal">Cancel</button>
+        <button class="btn btn-primary" id="saveBtn" onclick="saveApplication()">
+          <i class="fas fa-save"></i> Save Application
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ VIEW MODAL ═══ -->
+  <div class="modal-backdrop" id="viewModal">
+    <div class="modal" style="max-width:520px">
+      <div class="modal-header">
+        <h3 class="modal-title" id="viewTitle">Application</h3>
+        <button class="modal-close" data-modal-close="viewModal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="viewBody" style="line-height:1.8"></div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-modal-close="viewModal">Close</button>
+        <button class="btn btn-primary" id="viewEditBtn"><i class="fas fa-edit"></i> Edit</button>
       </div>
     </div>
   </div>
@@ -239,11 +282,11 @@
   <div class="modal-backdrop" id="deleteModal">
     <div class="modal" style="max-width:420px">
       <div class="modal-header">
-        <h3 class="modal-title"><i class="fas fa-trash-alt" style="color:var(--red)"></i> Delete Entry</h3>
+        <h3 class="modal-title"><i class="fas fa-trash-alt" style="color:var(--red)"></i> Delete Application</h3>
         <button class="modal-close" data-modal-close="deleteModal"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
-        <p>Delete <strong id="deleteItemName"></strong>? This cannot be undone.</p>
+        <p>Delete application for <strong id="deleteItemName"></strong>? This cannot be undone.</p>
       </div>
       <div class="modal-footer">
         <button class="btn btn-ghost" data-modal-close="deleteModal">Cancel</button>
@@ -255,11 +298,12 @@
   <script src="js/core.js?v=2.2"></script>
   <script>
   'use strict';
-  const TABLE = 'cms_results';
-  let allRows = [];
+  const TABLE = 'cms_admissions';
+  let allRows = [], currentDeleteId = null;
 
   const STATUS_BADGE = {
-    draft:'badge-draft', published:'badge-published', archived:'badge-archived'
+    new:'badge-draft', reviewing:'badge-teal', interview:'badge-gold',
+    accepted:'badge-published', waitlisted:'badge-scheduled', declined:'badge-cancelled'
   };
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -270,7 +314,7 @@
     loadData();
     document.getElementById('searchInput').addEventListener('input', renderTable);
     document.getElementById('filterStatus').addEventListener('change', renderTable);
-    document.getElementById('filterExam').addEventListener('change', renderTable);
+    document.getElementById('filterYear').addEventListener('change', renderTable);
   });
 
   function initModalClosers() {
@@ -298,145 +342,170 @@
   }
 
   function updateStats() {
-    document.getElementById('statTotal').textContent     = allRows.length;
-    document.getElementById('statPublished').textContent = allRows.filter(r=>r.status==='published').length;
-    document.getElementById('statDraft').textContent     = allRows.filter(r=>r.status==='draft').length;
-    const published = allRows.filter(r => r.status==='published' && r.pass_rate > 0);
-    const avg = published.length ? Math.round(published.reduce((s,r)=>s+(r.pass_rate||0),0)/published.length) : '—';
-    document.getElementById('statAvgPass').textContent = avg !== '—' ? avg+'%' : '—';
+    ['new','reviewing','interview','accepted','waitlisted','declined'].forEach(s => {
+      const el = document.getElementById('stat' + s.charAt(0).toUpperCase() + s.slice(1));
+      if (el) el.textContent = allRows.filter(r => r.status === s).length;
+    });
   }
 
   function renderTable() {
-    const q  = document.getElementById('searchInput').value.toLowerCase();
-    const st = document.getElementById('filterStatus').value;
-    const ex = document.getElementById('filterExam').value;
+    const q   = document.getElementById('searchInput').value.toLowerCase();
+    const st  = document.getElementById('filterStatus').value;
+    const yr  = document.getElementById('filterYear').value;
 
     let rows = allRows.filter(r => {
       if (st && r.status !== st) return false;
-      if (ex && r.exam_type !== ex) return false;
-      if (q && !(`${r.title} ${r.exam_type} ${r.grade_level} ${r.academic_year}`).toLowerCase().includes(q)) return false;
+      if (yr && r.academic_year !== yr) return false;
+      if (q && !(`${r.student_name} ${r.parent_name} ${r.parent_email} ${r.applying_grade}`).toLowerCase().includes(q)) return false;
       return true;
     });
 
-    document.getElementById('countBadge').textContent = `${rows.length} entr${rows.length!==1?'ies':'y'}`;
+    document.getElementById('countBadge').textContent = `${rows.length} application${rows.length!==1?'s':''}`;
     const tbody = document.getElementById('tableBody');
     if (!rows.length) {
       tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:48px;color:var(--gray400)">
-        <i class="fas fa-award" style="font-size:2rem;display:block;margin-bottom:10px"></i>No results found</td></tr>`;
+        <i class="fas fa-user-graduate" style="font-size:2rem;margin-bottom:10px;display:block"></i>No applications found</td></tr>`;
       return;
     }
+
     tbody.innerHTML = rows.map(r => `
       <tr>
         <td>
-          <div style="font-weight:600;color:var(--gray800)">${r.title}</div>
-          ${r.summary ? `<div style="font-size:11px;color:var(--gray400);margin-top:2px">${r.summary.substring(0,70)}${r.summary.length>70?'…':''}</div>` : ''}
+          <div style="font-weight:600;color:var(--gray800)">${r.student_name || '—'}</div>
+          <div style="font-size:11px;color:var(--gray400)">${r.nationality || ''}</div>
         </td>
-        <td><span class="badge badge-teal" style="font-size:11px">${r.exam_type||'—'}</span></td>
-        <td style="font-size:13px">${r.grade_level||'—'}</td>
+        <td style="font-size:13px;font-weight:600">${r.applying_grade || '—'}</td>
         <td style="font-size:13px">${(r.academic_year||'—').replace('-','–')}</td>
-        <td style="font-size:13px">${r.publish_date ? formatDate(r.publish_date) : '—'}</td>
         <td>
-          ${r.pass_rate > 0
-            ? `<div style="display:flex;align-items:center;gap:8px">
-                <div style="flex:1;height:6px;background:var(--gray100);border-radius:3px;min-width:60px">
-                  <div style="height:6px;background:var(--green);border-radius:3px;width:${Math.min(r.pass_rate,100)}%"></div>
-                </div>
-                <span style="font-size:12px;font-weight:700;color:var(--green)">${r.pass_rate}%</span>
-               </div>`
-            : '<span style="color:var(--gray300);font-size:12px">—</span>'}
+          <div style="font-size:13px;font-weight:500">${r.parent_name||'—'}</div>
+          <div style="font-size:11px;color:var(--gray400)">${r.parent_email||''}</div>
+          <div style="font-size:11px;color:var(--gray400)">${r.parent_phone||''}</div>
         </td>
+        <td style="font-size:12px;color:var(--gray500)">${r.submitted_at || timeAgo(r.created_at)}</td>
+        <td style="font-size:13px">${r.assigned_to || '<span style="color:var(--gray300)">Unassigned</span>'}</td>
         <td><span class="badge ${STATUS_BADGE[r.status]||'badge-draft'}">${r.status||'—'}</span></td>
         <td>
           <div class="table-actions">
-            ${r.document_url ? `<a href="${r.document_url}" target="_blank" class="table-action-btn" title="View PDF"><i class="fas fa-file-pdf"></i></a>` : ''}
+            <button class="table-action-btn" title="View" onclick="viewRow('${r.id}')"><i class="fas fa-eye"></i></button>
             <button class="table-action-btn" title="Edit" onclick="openModal('${r.id}')"><i class="fas fa-edit"></i></button>
-            <button class="table-action-btn danger" title="Delete" onclick="confirmDelete('${r.id}','${r.title.replace(/'/g,"\\'")}')"><i class="fas fa-trash-alt"></i></button>
+            <button class="table-action-btn danger" title="Delete" onclick="confirmDelete('${r.id}','${(r.student_name||'').replace(/'/g,"\\'")}')"><i class="fas fa-trash-alt"></i></button>
           </div>
         </td>
       </tr>`).join('');
   }
 
-  function openModal(id = null) {
-    ['itemId','fTitle','fAcadYear','fGradeLevel','fPublishDate','fPassRate','fSummary','fDocUrl']
-      .forEach(f => { const el = document.getElementById(f); if(el) el.value=''; });
-    document.getElementById('fStatus').value   = 'draft';
-    document.getElementById('fExamType').value = 'IGCSE';
-
-    if (id) {
-      const r = allRows.find(x=>x.id===id); if(!r) return;
-      document.getElementById('modalTitle').textContent = 'Edit Results Entry';
-      document.getElementById('itemId').value       = r.id;
-      document.getElementById('fTitle').value        = r.title||'';
-      document.getElementById('fExamType').value     = r.exam_type||'IGCSE';
-      document.getElementById('fAcadYear').value     = r.academic_year||'';
-      document.getElementById('fGradeLevel').value   = r.grade_level||'';
-      document.getElementById('fPublishDate').value  = r.publish_date||'';
-      document.getElementById('fPassRate').value     = r.pass_rate||'';
-      document.getElementById('fStatus').value       = r.status||'draft';
-      document.getElementById('fSummary').value      = r.summary||'';
-      document.getElementById('fDocUrl').value       = r.document_url||'';
-    } else {
-      document.getElementById('modalTitle').textContent = 'New Results Entry';
-    }
-    Modal.open('editModal');
+  function viewRow(id) {
+    const r = allRows.find(x => x.id === id); if (!r) return;
+    document.getElementById('viewTitle').textContent = r.student_name || 'Application';
+    document.getElementById('viewBody').innerHTML = `
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 22px">
+        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Student</div><strong>${r.student_name||'—'}</strong></div>
+        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Nationality</div><strong>${r.nationality||'—'}</strong></div>
+        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Date of Birth</div><strong>${r.dob||'—'}</strong></div>
+        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Grade Applied</div><strong>${r.applying_grade||'—'}</strong></div>
+        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Academic Year</div><strong>${(r.academic_year||'—').replace('-','–')}</strong></div>
+        <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:3px">Status</div>
+          <span class="badge ${STATUS_BADGE[r.status]||'badge-draft'}">${r.status||'—'}</span></div>
+        <div style="grid-column:1/-1;border-top:1px solid var(--gray100);padding-top:12px">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:6px">Parent / Guardian</div>
+          <strong>${r.parent_name||'—'}</strong><br/>
+          <span style="color:var(--gray500)">${r.parent_email||''} ${r.parent_phone ? '· '+r.parent_phone : ''}</span>
+        </div>
+        ${r.notes ? `<div style="grid-column:1/-1;border-top:1px solid var(--gray100);padding-top:12px">
+          <div style="font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray400);margin-bottom:6px">Internal Notes</div>
+          <p style="font-size:13.5px;color:var(--gray600)">${r.notes}</p></div>` : ''}
+      </div>`;
+    document.getElementById('viewEditBtn').onclick = () => { Modal.close('viewModal'); openModal(id); };
+    Modal.open('viewModal');
   }
 
-  async function saveItem() {
-    const title = document.getElementById('fTitle').value.trim();
-    if (!title) { Toast.warning('Required','Title is required.'); return; }
+  function openModal(id = null) {
+    ['appId','appStudentName','appDob','appNationality','appGrade','appParentName','appParentEmail','appParentPhone','appAssigned','appNotes']
+      .forEach(f => { const el = document.getElementById(f); if(el) el.value = ''; });
+    document.getElementById('appStatus').value = 'new';
+    document.getElementById('appYear').value = '2025-26';
+
+    if (id) {
+      const r = allRows.find(x => x.id === id); if (!r) return;
+      document.getElementById('modalTitle').textContent = 'Edit Application';
+      document.getElementById('appId').value           = r.id;
+      document.getElementById('appStudentName').value  = r.student_name || '';
+      document.getElementById('appDob').value          = r.dob || '';
+      document.getElementById('appNationality').value  = r.nationality || '';
+      document.getElementById('appGrade').value        = r.applying_grade || '';
+      document.getElementById('appYear').value         = r.academic_year || '2025-26';
+      document.getElementById('appParentName').value   = r.parent_name || '';
+      document.getElementById('appParentEmail').value  = r.parent_email || '';
+      document.getElementById('appParentPhone').value  = r.parent_phone || '';
+      document.getElementById('appStatus').value       = r.status || 'new';
+      document.getElementById('appAssigned').value     = r.assigned_to || '';
+      document.getElementById('appNotes').value        = r.notes || '';
+    } else {
+      document.getElementById('modalTitle').textContent = 'New Application';
+    }
+    Modal.open('appModal');
+  }
+
+  async function saveApplication() {
+    const name  = document.getElementById('appStudentName').value.trim();
+    const grade = document.getElementById('appGrade').value;
+    const pname = document.getElementById('appParentName').value.trim();
+    if (!name)  { Toast.warning('Required', 'Student name is required.'); return; }
+    if (!grade) { Toast.warning('Required', 'Grade is required.'); return; }
+    if (!pname) { Toast.warning('Required', 'Parent name is required.'); return; }
 
     const btn = document.getElementById('saveBtn');
     btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving…';
 
-    const id = document.getElementById('itemId').value;
+    const id = document.getElementById('appId').value;
     const payload = {
-      title,
-      exam_type:     document.getElementById('fExamType').value,
-      academic_year: document.getElementById('fAcadYear').value.trim(),
-      grade_level:   document.getElementById('fGradeLevel').value.trim(),
-      publish_date:  document.getElementById('fPublishDate').value,
-      pass_rate:     parseFloat(document.getElementById('fPassRate').value)||0,
-      status:        document.getElementById('fStatus').value,
-      summary:       document.getElementById('fSummary').value.trim(),
-      document_url:  document.getElementById('fDocUrl').value.trim(),
-      created_by:    Auth.getUser()?.name||'Admin'
+      student_name:  name,
+      dob:           document.getElementById('appDob').value,
+      nationality:   document.getElementById('appNationality').value.trim(),
+      applying_grade:grade,
+      academic_year: document.getElementById('appYear').value,
+      parent_name:   pname,
+      parent_email:  document.getElementById('appParentEmail').value.trim(),
+      parent_phone:  document.getElementById('appParentPhone').value.trim(),
+      status:        document.getElementById('appStatus').value,
+      assigned_to:   document.getElementById('appAssigned').value.trim(),
+      notes:         document.getElementById('appNotes').value.trim(),
+      submitted_at:  id ? undefined : new Date().toISOString().slice(0,10)
     };
+    if (!id) payload.submitted_at = new Date().toISOString().slice(0,10);
 
     try {
       if (id) {
         await API.put(TABLE, id, payload);
-        Toast.success('Updated', `"${title}" updated.`);
-        logActivity('edit','results', title);
+        Toast.success('Updated', `${name}'s application updated.`);
+        logActivity('edit','admissions', name);
       } else {
         await API.post(TABLE, payload);
-        Toast.success('Created', `"${title}" added.`);
-        logActivity('create','results', title);
+        Toast.success('Created', `Application for ${name} added.`);
+        logActivity('create','admissions', name);
       }
-      Modal.close('editModal');
+      Modal.close('appModal');
       loadData();
-    } catch(e) { Toast.error('Save failed', e.message); }
-    finally { btn.disabled=false; btn.innerHTML='<i class="fas fa-save"></i> Save'; }
+    } catch(e) {
+      Toast.error('Save failed', e.message);
+    } finally {
+      btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Save Application';
+    }
   }
 
   function confirmDelete(id, name) {
+    currentDeleteId = id;
     document.getElementById('deleteItemName').textContent = name;
     document.getElementById('confirmDeleteBtn').onclick = async () => {
       try {
         await API.delete(TABLE, id);
-        Toast.success('Deleted', `"${name}" removed.`);
-        logActivity('delete','results', name);
+        Toast.success('Deleted', `${name} removed.`);
+        logActivity('delete','admissions', name);
         Modal.close('deleteModal');
         loadData();
       } catch(e) { Toast.error('Delete failed', e.message); }
     };
     Modal.open('deleteModal');
-  }
-
-  function formatDate(d) {
-    if (!d) return '—';
-    const [y,m,day] = d.split('-');
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return `${parseInt(day)} ${months[parseInt(m)-1]} ${y}`;
   }
   </script>
 </body>

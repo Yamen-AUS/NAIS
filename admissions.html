@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Management — NAIS Dubai CMS</title>
+  <title>Announcements & Events — NAIS Dubai CMS</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/admin.css?v=2.2" />
@@ -34,7 +34,7 @@
       <a href="index.html" class="nav-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
       <a href="content.html" class="nav-item"><i class="fas fa-file-alt"></i><span>Pages</span><i class="fas fa-chevron-right nav-arrow"></i></a>
       <a href="media.html" class="nav-item"><i class="fas fa-images"></i><span>Media Library</span></a>
-      <a href="announcements.html" class="nav-item"><i class="fas fa-bullhorn"></i><span>Announcements</span><span class="nav-badge">3</span></a>
+      <a href="announcements.html" class="nav-item active"><i class="fas fa-bullhorn"></i><span>Announcements</span><span class="nav-badge">3</span></a>
       <a href="events.html" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Events</span></a>
       <div class="nav-section-label">School</div>
       <a href="staff.html" class="nav-item"><i class="fas fa-users"></i><span>Staff Profiles</span></a>
@@ -43,7 +43,7 @@
       <a href="gallery.html" class="nav-item"><i class="fas fa-photo-video"></i><span>Gallery</span></a>
       <a href="documents.html" class="nav-item"><i class="fas fa-folder-open"></i><span>Documents</span><span class="nav-badge">2</span></a>
       <div class="nav-section-label">System</div>
-      <a href="users.html" class="nav-item active"><i class="fas fa-user-shield"></i><span>Users &amp; Roles</span></a>
+      <a href="users.html" class="nav-item"><i class="fas fa-user-shield"></i><span>Users &amp; Roles</span></a>
       <a href="seo.html" class="nav-item"><i class="fas fa-search"></i><span>SEO Manager</span></a>
       <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
       <a href="../index.html" target="_blank" class="nav-item"><i class="fas fa-external-link-alt"></i><span>View Website</span></a>
@@ -60,7 +60,7 @@
       <div class="topbar-breadcrumb">
         <span class="bc-home"><i class="fas fa-home"></i></span>
         <i class="fas fa-chevron-right bc-sep"></i>
-        <span class="bc-current">User Management</span>
+        <span class="bc-current">Announcements &amp; Events</span>
       </div>
     </div>
     <div class="topbar-right">
@@ -90,134 +90,134 @@
 
       <div class="page-header">
         <div>
-          <h1 class="page-title">User Management</h1>
-          <p class="page-subtitle">Manage CMS admin accounts and role-based permissions.</p>
+          <h1 class="page-title">Announcements &amp; Events</h1>
+          <p class="page-subtitle">Manage school announcements, news posts, and upcoming events.</p>
         </div>
-        <div class="page-header-actions">
-          <button class="btn btn-outline btn-sm" onclick="switchView('matrix')">
-            <i class="fas fa-table"></i> Permissions Matrix
-          </button>
-          <button class="btn btn-primary btn-sm" onclick="openNewUserModal()" id="addUserBtn">
-            <i class="fas fa-user-plus"></i> Add User
-          </button>
+        <div class="page-header-actions" id="pageHeaderActions">
+          <!-- Populated by tab switch -->
         </div>
       </div>
 
-      <!-- Tabs -->
+      <!-- ── Tabs ── -->
       <div class="tabs-bar">
-        <button class="tab-btn active" id="tab-users-list" onclick="switchView('list')">
-          <i class="fas fa-users"></i> All Users
-          <span class="tab-count" id="userCount">—</span>
+        <button class="tab-btn active" id="tab-announcements" onclick="switchTab('announcements')">
+          <i class="fas fa-bullhorn"></i> Announcements
+          <span class="tab-count" id="annCount">—</span>
         </button>
-        <button class="tab-btn" id="tab-users-matrix" onclick="switchView('matrix')">
-          <i class="fas fa-table"></i> Permissions Matrix
+        <button class="tab-btn" id="tab-events" onclick="switchTab('events')">
+          <i class="fas fa-calendar-alt"></i> Events
+          <span class="tab-count" id="evtCount">—</span>
         </button>
       </div>
 
-      <!-- ── Users list panel ── -->
-      <div id="panel-users-list">
+      <!-- ── Announcements panel ── -->
+      <div id="panel-announcements">
 
         <!-- Toolbar -->
-        <div class="users-toolbar">
+        <div class="ann-toolbar">
           <div class="search-wrap">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" id="userSearch" placeholder="Search by name or email…" oninput="filterUsers()" style="width:240px;" />
+            <input type="text" class="search-input" id="annSearch" placeholder="Search announcements…" oninput="filterAnn()" />
           </div>
-          <select class="form-select sm" id="roleFilter" onchange="filterUsers()">
-            <option value="">All roles</option>
-            <option value="super_admin">Super Admin</option>
-            <option value="principal">Principal</option>
-            <option value="marketing">Marketing</option>
-            <option value="admissions">Admissions</option>
-            <option value="academic">Academic</option>
-            <option value="readonly">Read Only</option>
+          <select class="form-select sm" id="annCatFilter" onchange="filterAnn()">
+            <option value="">All categories</option>
+            <option value="General">General</option>
+            <option value="Academic">Academic</option>
+            <option value="Admissions">Admissions</option>
+            <option value="Events">Events</option>
+            <option value="Sports">Sports</option>
+            <option value="Community">Community</option>
+            <option value="Holiday">Holiday</option>
+            <option value="Emergency">Emergency</option>
           </select>
-          <select class="form-select sm" id="userStatusFilter" onchange="filterUsers()">
+          <select class="form-select sm" id="annStatusFilter" onchange="filterAnn()">
             <option value="">All statuses</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-            <option value="suspended">Suspended</option>
+            <option value="published">Published</option>
+            <option value="draft">Draft</option>
+            <option value="scheduled">Scheduled</option>
+            <option value="archived">Archived</option>
           </select>
-          <button class="btn btn-outline btn-sm" onclick="clearUserFilters()"><i class="fas fa-times"></i></button>
-          <span class="result-count" id="userResultCount"></span>
+          <button class="btn btn-outline btn-sm" onclick="clearAnnFilters()"><i class="fas fa-times"></i></button>
+          <span class="result-count" id="annResultCount"></span>
         </div>
 
-        <!-- User cards grid -->
-        <div class="user-cards-grid" id="userCardsGrid">
-          <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading users…</div>
-        </div>
-
-      </div>
-
-      <!-- ── Permissions Matrix panel ── -->
-      <div id="panel-users-matrix" style="display:none;">
+        <!-- Table -->
         <div class="panel">
-          <div class="panel-header">
-            <h2 class="panel-title"><i class="fas fa-shield-alt"></i> Role Permissions Matrix</h2>
-            <p style="font-size:13px;color:var(--gray400);margin:0;">Showing default permissions for each CMS role.</p>
-          </div>
           <div class="panel-body p0">
-            <div class="matrix-wrap">
-              <table class="matrix-table">
+            <div class="table-wrap">
+              <table class="data-table">
                 <thead>
                   <tr>
-                    <th class="matrix-feature-col">Feature / Action</th>
-                    <th><div class="matrix-role-header role-super_admin"><i class="fas fa-crown"></i> Super Admin</div></th>
-                    <th><div class="matrix-role-header role-principal"><i class="fas fa-user-tie"></i> Principal</div></th>
-                    <th><div class="matrix-role-header role-marketing"><i class="fas fa-bullhorn"></i> Marketing</div></th>
-                    <th><div class="matrix-role-header role-admissions"><i class="fas fa-door-open"></i> Admissions</div></th>
-                    <th><div class="matrix-role-header role-academic"><i class="fas fa-graduation-cap"></i> Academic</div></th>
-                    <th><div class="matrix-role-header role-readonly"><i class="fas fa-eye"></i> Read Only</div></th>
+                    <th style="width:36px;"><input type="checkbox" id="annSelectAll" onchange="toggleAnnSelectAll(this)" /></th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Publish Date</th>
+                    <th>Priority</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody id="matrixBody"></tbody>
+                <tbody id="annTableBody">
+                  <tr><td colspan="7" class="table-loading">Loading…</td></tr>
+                </tbody>
               </table>
             </div>
           </div>
+          <div class="panel-footer" id="annBulkBar" style="display:none;">
+            <span id="annSelCount">0 selected</span>
+            <div style="display:flex;gap:8px;">
+              <button class="btn btn-outline btn-sm" onclick="bulkPublish()"><i class="fas fa-globe"></i> Publish Selected</button>
+              <button class="btn btn-red btn-sm" onclick="bulkDeleteAnn()"><i class="fas fa-trash"></i> Delete Selected</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Events panel ── -->
+      <div id="panel-events" style="display:none;">
+
+        <!-- Toolbar -->
+        <div class="ann-toolbar">
+          <div class="search-wrap">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="evtSearch" placeholder="Search events…" oninput="filterEvt()" />
+          </div>
+          <select class="form-select sm" id="evtStatusFilter" onchange="filterEvt()">
+            <option value="">All statuses</option>
+            <option value="upcoming">Upcoming</option>
+            <option value="ongoing">Ongoing</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="draft">Draft</option>
+          </select>
+          <button class="btn btn-outline btn-sm" onclick="clearEvtFilters()"><i class="fas fa-times"></i></button>
+          <span class="result-count" id="evtResultCount"></span>
         </div>
 
-        <!-- Role descriptions -->
-        <div class="role-desc-grid">
-          <div class="role-desc-card">
-            <div class="role-desc-icon role-super_admin"><i class="fas fa-crown"></i></div>
-            <div class="role-desc-body">
-              <div class="role-desc-name">Super Admin</div>
-              <div class="role-desc-text">Full access to all CMS features including user management, settings, and all content types. Can delete any record.</div>
+        <!-- Calendar strip + table -->
+        <div class="evt-layout">
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title"><i class="fas fa-calendar-alt"></i> Upcoming Events</h2>
             </div>
-          </div>
-          <div class="role-desc-card">
-            <div class="role-desc-icon role-principal"><i class="fas fa-user-tie"></i></div>
-            <div class="role-desc-body">
-              <div class="role-desc-name">Principal</div>
-              <div class="role-desc-text">Can manage all content, staff profiles, and announcements. Cannot manage users or system settings.</div>
-            </div>
-          </div>
-          <div class="role-desc-card">
-            <div class="role-desc-icon role-marketing"><i class="fas fa-bullhorn"></i></div>
-            <div class="role-desc-body">
-              <div class="role-desc-name">Marketing</div>
-              <div class="role-desc-text">Manages announcements, events, media library, and page content. Can publish and schedule.</div>
-            </div>
-          </div>
-          <div class="role-desc-card">
-            <div class="role-desc-icon role-admissions"><i class="fas fa-door-open"></i></div>
-            <div class="role-desc-body">
-              <div class="role-desc-name">Admissions</div>
-              <div class="role-desc-text">Manages admissions-specific content, events, and announcements. Read-only access to other sections.</div>
-            </div>
-          </div>
-          <div class="role-desc-card">
-            <div class="role-desc-icon role-academic"><i class="fas fa-graduation-cap"></i></div>
-            <div class="role-desc-body">
-              <div class="role-desc-name">Academic</div>
-              <div class="role-desc-text">Can edit academic content sections and staff profiles. Cannot publish independently.</div>
-            </div>
-          </div>
-          <div class="role-desc-card">
-            <div class="role-desc-icon role-readonly"><i class="fas fa-eye"></i></div>
-            <div class="role-desc-body">
-              <div class="role-desc-name">Read Only</div>
-              <div class="role-desc-text">View-only access to all CMS areas. Cannot create, edit, or delete any content.</div>
+            <div class="panel-body p0">
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Event</th>
+                      <th>Date</th>
+                      <th>Location</th>
+                      <th>Status</th>
+                      <th>Audience</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="evtTableBody">
+                    <tr><td colspan="6" class="table-loading">Loading…</td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
@@ -226,110 +226,244 @@
     </div>
   </main>
 
-  <!-- ── User Editor Modal ── -->
-  <div class="modal-backdrop" id="userModal">
-    <div class="modal">
+  <!-- ── Announcement Modal ── -->
+  <div class="modal-backdrop" id="annModal">
+    <div class="modal modal-lg">
       <div class="modal-header">
-        <h3 class="modal-title" id="userModalTitle">Add CMS User</h3>
-        <button class="modal-close" data-modal-close="userModal"><i class="fas fa-times"></i></button>
+        <h3 class="modal-title" id="annModalTitle">New Announcement</h3>
+        <button class="modal-close" data-modal-close="annModal"><i class="fas fa-times"></i></button>
       </div>
       <div class="modal-body">
-        <form id="userForm" novalidate>
-          <input type="hidden" id="userId" />
-
-          <div class="user-avatar-row">
-            <div class="user-modal-avatar" id="userModalAvatar">?</div>
-            <div class="user-avatar-inputs">
-              <div class="form-group">
-                <label class="form-label">Full Name <span class="form-required">*</span></label>
-                <input type="text" class="form-input" id="userName" placeholder="Dr. Jane Smith" required oninput="updateAvatarPreview()" />
-              </div>
-            </div>
-          </div>
+        <form id="annForm">
+          <input type="hidden" id="annId" />
 
           <div class="form-group">
-            <label class="form-label">Email Address <span class="form-required">*</span></label>
-            <input type="email" class="form-input" id="userEmail" placeholder="jane.smith@naisdubai.ae" autocomplete="username" required />
+            <label class="form-label">Title (EN) <span class="form-required">*</span></label>
+            <input type="text" class="form-input" id="annTitleEn" placeholder="Announcement title in English" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Title (AR)</label>
+            <input type="text" class="form-input rtl-input" id="annTitleAr" placeholder="عنوان الإعلان بالعربية" dir="rtl" />
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label class="form-label">Role <span class="form-required">*</span></label>
-              <select class="form-select" id="userRole" required onchange="updateRolePreview()">
-                <option value="">— Select role —</option>
-                <option value="super_admin">Super Admin</option>
-                <option value="principal">Principal</option>
-                <option value="marketing">Marketing</option>
-                <option value="admissions">Admissions</option>
-                <option value="academic">Academic</option>
-                <option value="readonly">Read Only</option>
+              <label class="form-label">Category</label>
+              <select class="form-select" id="annCategory">
+                <option value="General">General</option>
+                <option value="Academic">Academic</option>
+                <option value="Admissions">Admissions</option>
+                <option value="Events">Events</option>
+                <option value="Sports">Sports</option>
+                <option value="Community">Community</option>
+                <option value="Holiday">Holiday</option>
+                <option value="Emergency">Emergency</option>
               </select>
             </div>
+            <div class="form-group">
+              <label class="form-label">Priority</label>
+              <select class="form-select" id="annPriority">
+                <option value="normal">Normal</option>
+                <option value="high">High</option>
+                <option value="urgent">Urgent</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Body Content (EN) <span class="form-required">*</span></label>
+            <textarea class="form-textarea" id="annBodyEn" rows="6" placeholder="Full announcement body text in English…" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Body Content (AR)</label>
+            <textarea class="form-textarea rtl-input" id="annBodyAr" rows="6" placeholder="نص الإعلان الكامل بالعربية…" dir="rtl"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Publish Date</label>
+              <input type="date" class="form-input" id="annPublishDate" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Expiry Date</label>
+              <input type="date" class="form-input" id="annExpiryDate" />
+            </div>
+          </div>
+
+          <div class="form-row">
             <div class="form-group">
               <label class="form-label">Status</label>
-              <select class="form-select" id="userStatus">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="suspended">Suspended</option>
+              <select class="form-select" id="annStatus">
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="archived">Archived</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Audience</label>
+              <select class="form-select" id="annAudience">
+                <option value="all">All</option>
+                <option value="parents">Parents</option>
+                <option value="students">Students</option>
+                <option value="staff">Staff</option>
+                <option value="prospective">Prospective Families</option>
               </select>
             </div>
           </div>
 
-          <!-- Role preview -->
-          <div class="role-preview-box" id="rolePreviewBox" style="display:none;">
-            <div class="role-preview-icon" id="rolePreviewIcon"><i class="fas fa-shield-alt"></i></div>
-            <div class="role-preview-text" id="rolePreviewText">Select a role to see permissions.</div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Password <span class="form-required" id="passwordRequired">*</span></label>
-              <div class="input-pw-wrap">
-                <input type="password" class="form-input" id="userPassword" placeholder="Min. 8 characters" autocomplete="new-password" />
-                <button type="button" class="pw-toggle" onclick="togglePw('userPassword', 'pwIcon1')"><i class="fas fa-eye" id="pwIcon1"></i></button>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Confirm Password</label>
-              <div class="input-pw-wrap">
-                <input type="password" class="form-input" id="userPasswordConfirm" placeholder="Repeat password" autocomplete="new-password" />
-                <button type="button" class="pw-toggle" onclick="togglePw('userPasswordConfirm', 'pwIcon2')"><i class="fas fa-eye" id="pwIcon2"></i></button>
-              </div>
-            </div>
-          </div>
-          <p class="form-hint" id="pwHint">Leave blank to keep current password (when editing).</p>
-
           <div class="form-group">
-            <label class="form-label">Job Title / Department</label>
-            <input type="text" class="form-input" id="userJobTitle" placeholder="Marketing Manager" />
+            <label class="form-label">Link / CTA URL</label>
+            <input type="url" class="form-input" id="annLink" placeholder="https://… (optional call-to-action link)" />
           </div>
 
           <div class="form-group">
-            <label class="form-label">Notes</label>
-            <textarea class="form-textarea" id="userNotes" rows="2" placeholder="Internal notes…"></textarea>
+            <label class="form-label">Banner Image URL</label>
+            <input type="url" class="form-input" id="annImage" placeholder="https://… (optional header image)" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tags <span style="font-size:11px;color:var(--gray400);">(comma-separated)</span></label>
+            <input type="text" class="form-input" id="annTags" placeholder="open-day, admissions, 2025" />
+          </div>
+
+          <div class="form-group">
+            <div class="toggle-row">
+              <label class="toggle-switch">
+                <input type="checkbox" id="annPinned" />
+                <span class="toggle-slider"></span>
+              </label>
+              <span class="toggle-label">Pin to top of announcements list</span>
+            </div>
           </div>
 
         </form>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-outline" data-modal-close="userModal">Cancel</button>
-        <button class="btn btn-primary" onclick="saveUser()"><i class="fas fa-save"></i> Save User</button>
+        <button class="btn btn-outline" data-modal-close="annModal">Cancel</button>
+        <button class="btn btn-outline" onclick="saveAnn('draft')"><i class="fas fa-save"></i> Save Draft</button>
+        <button class="btn btn-primary" onclick="saveAnn('published')"><i class="fas fa-globe"></i> Publish</button>
       </div>
     </div>
   </div>
 
-  <!-- ── User Detail Modal ── -->
-  <div class="modal-backdrop" id="userDetailModal">
-    <div class="modal">
+  <!-- ── Event Modal ── -->
+  <div class="modal-backdrop" id="evtModal">
+    <div class="modal modal-lg">
       <div class="modal-header">
-        <h3 class="modal-title">User Profile</h3>
-        <button class="modal-close" data-modal-close="userDetailModal"><i class="fas fa-times"></i></button>
+        <h3 class="modal-title" id="evtModalTitle">New Event</h3>
+        <button class="modal-close" data-modal-close="evtModal"><i class="fas fa-times"></i></button>
       </div>
-      <div class="modal-body" id="userDetailBody"></div>
+      <div class="modal-body">
+        <form id="evtForm">
+          <input type="hidden" id="evtId" />
+
+          <div class="form-group">
+            <label class="form-label">Event Title (EN) <span class="form-required">*</span></label>
+            <input type="text" class="form-input" id="evtTitleEn" placeholder="Open Day 2025" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Event Title (AR)</label>
+            <input type="text" class="form-input rtl-input" id="evtTitleAr" placeholder="يوم الأبواب المفتوحة 2025" dir="rtl" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description (EN)</label>
+            <textarea class="form-textarea" id="evtDescEn" rows="4" placeholder="Event description…"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description (AR)</label>
+            <textarea class="form-textarea rtl-input" id="evtDescAr" rows="4" placeholder="وصف الفعالية…" dir="rtl"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Event Date <span class="form-required">*</span></label>
+              <input type="date" class="form-input" id="evtDate" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">End Date</label>
+              <input type="date" class="form-input" id="evtEndDate" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Start Time</label>
+              <input type="time" class="form-input" id="evtStartTime" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">End Time</label>
+              <input type="time" class="form-input" id="evtEndTime" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Location</label>
+              <input type="text" class="form-input" id="evtLocation" placeholder="NAIS Dubai Campus, Main Hall…" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Location (AR)</label>
+              <input type="text" class="form-input rtl-input" id="evtLocationAr" placeholder="حرم مدرسة نايس دبي…" dir="rtl" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="evtStatus">
+                <option value="upcoming">Upcoming</option>
+                <option value="ongoing">Ongoing</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+                <option value="draft">Draft</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Audience</label>
+              <select class="form-select" id="evtAudience">
+                <option value="all">All</option>
+                <option value="parents">Parents</option>
+                <option value="students">Students</option>
+                <option value="prospective">Prospective Families</option>
+                <option value="staff">Staff</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Capacity</label>
+              <input type="number" class="form-input" id="evtCapacity" placeholder="200" min="0" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">RSVP Link</label>
+              <input type="url" class="form-input" id="evtRsvp" placeholder="https://… (registration link)" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Event Banner Image URL</label>
+            <input type="url" class="form-input" id="evtImage" placeholder="https://…" />
+          </div>
+
+          <div class="form-group">
+            <div class="toggle-row">
+              <label class="toggle-switch">
+                <input type="checkbox" id="evtFeatured" />
+                <span class="toggle-slider"></span>
+              </label>
+              <span class="toggle-label">Feature this event prominently on the homepage</span>
+            </div>
+          </div>
+
+        </form>
+      </div>
       <div class="modal-footer">
-        <button class="btn btn-outline" data-modal-close="userDetailModal">Close</button>
-        <button class="btn btn-outline" id="detailEditBtn"><i class="fas fa-edit"></i> Edit</button>
-        <button class="btn btn-red" id="detailDeleteBtn"><i class="fas fa-trash"></i> Delete</button>
+        <button class="btn btn-outline" data-modal-close="evtModal">Cancel</button>
+        <button class="btn btn-outline" onclick="saveEvt('draft')"><i class="fas fa-save"></i> Save Draft</button>
+        <button class="btn btn-primary" onclick="saveEvt('upcoming')"><i class="fas fa-check"></i> Save Event</button>
       </div>
     </div>
   </div>
@@ -339,481 +473,496 @@
 
   <script src="js/core.js?v=2.2"></script>
   <script>
-    let allUsers = [];
-    let filteredUsers = [];
-    let currentView = 'list';
+    let allAnn = [], filteredAnn = [], selectedAnnIds = new Set();
+    let allEvt = [], filteredEvt = [];
+    let activeTab = 'announcements';
 
-    // ── Role metadata ──
-    const ROLE_META = {
-      super_admin: { label: 'Super Admin',  icon: 'fa-crown',          color: '#0a1931', desc: 'Full unrestricted access to all CMS features.' },
-      principal:   { label: 'Principal',    icon: 'fa-user-tie',       color: '#166534', desc: 'Manages all content and staff. No user/settings access.' },
-      marketing:   { label: 'Marketing',    icon: 'fa-bullhorn',       color: '#1d4ed8', desc: 'Manages announcements, events, media, and content.' },
-      admissions:  { label: 'Admissions',   icon: 'fa-door-open',      color: '#7c3aed', desc: 'Manages admissions content and events.' },
-      academic:    { label: 'Academic',     icon: 'fa-graduation-cap', color: '#b45309', desc: 'Edits academic sections and staff profiles.' },
-      readonly:    { label: 'Read Only',    icon: 'fa-eye',            color: '#6b7280', desc: 'View access only. Cannot create or edit.' },
-    };
+    // ── Tab switch ──
+    function switchTab(tab) {
+      activeTab = tab;
+      document.getElementById('panel-announcements').style.display = tab === 'announcements' ? '' : 'none';
+      document.getElementById('panel-events').style.display         = tab === 'events'        ? '' : 'none';
+      document.getElementById('tab-announcements').classList.toggle('active', tab === 'announcements');
+      document.getElementById('tab-events').classList.toggle('active', tab === 'events');
 
-    // ── Permissions matrix data ──
-    const MATRIX_ROWS = [
-      { group: 'Content',     label: 'View all pages',           perms: { super_admin: true,  principal: true,  marketing: true,  admissions: true,  academic: true,  readonly: true  } },
-      { group: 'Content',     label: 'Edit page sections',       perms: { super_admin: true,  principal: true,  marketing: true,  admissions: false, academic: true,  readonly: false } },
-      { group: 'Content',     label: 'Publish content',          perms: { super_admin: true,  principal: true,  marketing: true,  admissions: false, academic: false, readonly: false } },
-      { group: 'Content',     label: 'Delete page sections',     perms: { super_admin: true,  principal: true,  marketing: false, admissions: false, academic: false, readonly: false } },
-      { group: 'Media',       label: 'View media library',       perms: { super_admin: true,  principal: true,  marketing: true,  admissions: true,  academic: true,  readonly: true  } },
-      { group: 'Media',       label: 'Upload / add media',       perms: { super_admin: true,  principal: true,  marketing: true,  admissions: false, academic: false, readonly: false } },
-      { group: 'Media',       label: 'Delete media',             perms: { super_admin: true,  principal: true,  marketing: true,  admissions: false, academic: false, readonly: false } },
-      { group: 'Staff',       label: 'View staff profiles',      perms: { super_admin: true,  principal: true,  marketing: true,  admissions: true,  academic: true,  readonly: true  } },
-      { group: 'Staff',       label: 'Create / edit staff',      perms: { super_admin: true,  principal: true,  marketing: false, admissions: false, academic: true,  readonly: false } },
-      { group: 'Staff',       label: 'Delete staff profiles',    perms: { super_admin: true,  principal: true,  marketing: false, admissions: false, academic: false, readonly: false } },
-      { group: 'Announce.',   label: 'View announcements',       perms: { super_admin: true,  principal: true,  marketing: true,  admissions: true,  academic: true,  readonly: true  } },
-      { group: 'Announce.',   label: 'Create announcements',     perms: { super_admin: true,  principal: true,  marketing: true,  admissions: true,  academic: false, readonly: false } },
-      { group: 'Announce.',   label: 'Publish announcements',    perms: { super_admin: true,  principal: true,  marketing: true,  admissions: false, academic: false, readonly: false } },
-      { group: 'Announce.',   label: 'Delete announcements',     perms: { super_admin: true,  principal: true,  marketing: true,  admissions: false, academic: false, readonly: false } },
-      { group: 'Events',      label: 'View events',              perms: { super_admin: true,  principal: true,  marketing: true,  admissions: true,  academic: true,  readonly: true  } },
-      { group: 'Events',      label: 'Create / edit events',     perms: { super_admin: true,  principal: true,  marketing: true,  admissions: true,  academic: false, readonly: false } },
-      { group: 'Events',      label: 'Delete events',            perms: { super_admin: true,  principal: true,  marketing: true,  admissions: false, academic: false, readonly: false } },
-      { group: 'Users',       label: 'View user list',           perms: { super_admin: true,  principal: false, marketing: false, admissions: false, academic: false, readonly: false } },
-      { group: 'Users',       label: 'Create / edit users',      perms: { super_admin: true,  principal: false, marketing: false, admissions: false, academic: false, readonly: false } },
-      { group: 'Users',       label: 'Delete users',             perms: { super_admin: true,  principal: false, marketing: false, admissions: false, academic: false, readonly: false } },
-      { group: 'Settings',    label: 'View settings',            perms: { super_admin: true,  principal: false, marketing: false, admissions: false, academic: false, readonly: false } },
-      { group: 'Settings',    label: 'Edit site settings',       perms: { super_admin: true,  principal: false, marketing: false, admissions: false, academic: false, readonly: false } },
-      { group: 'Settings',    label: 'Edit SEO settings',        perms: { super_admin: true,  principal: false, marketing: true,  admissions: false, academic: false, readonly: false } },
-      { group: 'Activity',    label: 'View activity log',        perms: { super_admin: true,  principal: true,  marketing: false, admissions: false, academic: false, readonly: false } },
-    ];
-
-    // ── Load users ──
-    async function loadUsers() {
-      try {
-        const res = await API.get('cms_users', { limit: 100 });
-        allUsers = res.data || [];
-        document.getElementById('userCount').textContent = allUsers.length;
-        filterUsers();
-      } catch(e) {
-        document.getElementById('userCardsGrid').innerHTML =
-          '<div class="empty-state"><i class="fas fa-exclamation-triangle empty-state-icon" style="color:var(--red)"></i><p>Could not load users.</p></div>';
+      const actionsDiv = document.getElementById('pageHeaderActions');
+      if (tab === 'announcements') {
+        actionsDiv.innerHTML = `<button class="btn btn-primary btn-sm" onclick="openNewAnn()"><i class="fas fa-plus"></i> New Announcement</button>`;
+      } else {
+        actionsDiv.innerHTML = `<button class="btn btn-primary btn-sm" onclick="openNewEvt()"><i class="fas fa-plus"></i> New Event</button>`;
       }
     }
 
-    // ── Filter ──
-    function filterUsers() {
-      const q      = (document.getElementById('userSearch').value || '').toLowerCase();
-      const role   = document.getElementById('roleFilter').value;
-      const status = document.getElementById('userStatusFilter').value;
-      filteredUsers = allUsers.filter(u => {
-        const mq = !q || (u.name||'').toLowerCase().includes(q) || (u.email||'').toLowerCase().includes(q);
-        const mr = !role   || u.role === role;
-        const ms = !status || u.status === status;
-        return mq && mr && ms;
+    // ════════════════════════════════════
+    //  ANNOUNCEMENTS
+    // ════════════════════════════════════
+
+    async function loadAnn() {
+      try {
+        const res = await API.get('cms_announcements', { limit: 200 });
+        allAnn = res.data || [];
+        document.getElementById('annCount').textContent = allAnn.length;
+        filterAnn();
+      } catch(e) {
+        document.getElementById('annTableBody').innerHTML =
+          '<tr><td colspan="7" class="table-empty">Could not load announcements.</td></tr>';
+      }
+    }
+
+    function filterAnn() {
+      const q      = (document.getElementById('annSearch').value || '').toLowerCase();
+      const cat    = document.getElementById('annCatFilter').value;
+      const status = document.getElementById('annStatusFilter').value;
+      filteredAnn = allAnn.filter(a => {
+        const mq = !q || (a.title||'').toLowerCase().includes(q) || (a.body_en||'').toLowerCase().includes(q);
+        const mc = !cat    || a.category === cat;
+        const ms = !status || a.status   === status;
+        return mq && mc && ms;
       });
-      document.getElementById('userResultCount').textContent = `${filteredUsers.length} user${filteredUsers.length!==1?'s':''}`;
-      renderUserCards();
+      document.getElementById('annResultCount').textContent = `${filteredAnn.length} result${filteredAnn.length!==1?'s':''}`;
+      renderAnnTable();
     }
 
-    function clearUserFilters() {
-      document.getElementById('userSearch').value = '';
-      document.getElementById('roleFilter').value = '';
-      document.getElementById('userStatusFilter').value = '';
-      filterUsers();
+    function clearAnnFilters() {
+      document.getElementById('annSearch').value = '';
+      document.getElementById('annCatFilter').value = '';
+      document.getElementById('annStatusFilter').value = '';
+      filterAnn();
     }
 
-    // ── Render user cards ──
-    function renderUserCards() {
-      const grid = document.getElementById('userCardsGrid');
-      if (!filteredUsers.length) {
-        grid.innerHTML = `
-          <div class="empty-state" style="grid-column:1/-1">
-            <i class="fas fa-user-slash empty-state-icon"></i>
-            <p>No users found matching your filters.</p>
-          </div>`;
+    function renderAnnTable() {
+      const tbody = document.getElementById('annTableBody');
+      if (!filteredAnn.length) {
+        tbody.innerHTML = '<tr><td colspan="7" class="table-empty">No announcements found. <a href="#" onclick="openNewAnn();return false;">Create one</a>.</td></tr>';
         return;
       }
-      grid.innerHTML = filteredUsers.map(u => renderUserCard(u)).join('');
-    }
-
-    function initials(name) {
-      return (name||'?').split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
-    }
-
-    function renderUserCard(u) {
-      const meta = ROLE_META[u.role] || { label: u.role, icon: 'fa-user', color: '#94a3b8' };
-      const statusBadge = u.status === 'active' ? '<span class="badge badge-green">Active</span>' : u.status === 'suspended' ? '<span class="badge badge-red">Suspended</span>' : '<span class="badge badge-gray">Inactive</span>';
-      const isCurrentUser = Auth.getUser()?.email === u.email;
-      return `
-        <div class="user-card" onclick="openUserDetail('${u.id}')">
-          <div class="user-card-header">
-            <div class="user-card-avatar" style="background:${meta.color};">${u.avatar || initials(u.name)}</div>
-            <div class="user-card-status">${statusBadge} ${isCurrentUser?'<span class="badge badge-gold">You</span>':''}</div>
-          </div>
-          <div class="user-card-body">
-            <div class="user-card-name">${escHtml(u.name||'—')}</div>
-            <div class="user-card-email">${escHtml(u.email||'—')}</div>
-            <div class="user-card-role">
-              <span class="role-badge role-${u.role}">
-                <i class="fas ${meta.icon}"></i> ${meta.label}
-              </span>
+      // Sort: pinned first, then by publish date desc
+      const sorted = [...filteredAnn].sort((a,b) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
+        return (b.publish_date||b.created_at||'') > (a.publish_date||a.created_at||'') ? 1 : -1;
+      });
+      tbody.innerHTML = sorted.map(a => {
+        const isSelected = selectedAnnIds.has(a.id);
+        const pinHtml = a.pinned ? '<i class="fas fa-thumbtack" title="Pinned" style="color:var(--navy);font-size:11px;margin-right:4px;"></i>' : '';
+        const priorityBadge = a.priority === 'urgent' ? '<span class="priority-badge urgent">Urgent</span>' : a.priority === 'high' ? '<span class="priority-badge high">High</span>' : '<span class="priority-badge normal">Normal</span>';
+        return `<tr class="${isSelected?'row-selected':''}">
+          <td><input type="checkbox" class="ann-check" value="${a.id}" ${isSelected?'checked':''} onchange="toggleAnnSelect('${a.id}',this.checked)" /></td>
+          <td>
+            <div class="ann-title-cell">${pinHtml}<span class="table-title-cell">${escHtml(a.title||'—')}</span></div>
+            ${a.tags ? `<div class="ann-tags">${a.tags.split(',').map(t=>`<span class="tag-pill">${escHtml(t.trim())}</span>`).join('')}</div>` : ''}
+          </td>
+          <td><span class="badge badge-navy">${escHtml(a.category||'General')}</span></td>
+          <td>${badgeHtml(a.status||'draft')}</td>
+          <td class="table-date">${a.publish_date ? formatDate(a.publish_date) : '<span style="color:var(--gray400)">—</span>'}</td>
+          <td>${priorityBadge}</td>
+          <td>
+            <div class="table-actions">
+              <button class="btn btn-ghost btn-icon" onclick="editAnn('${a.id}')" title="Edit"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-ghost btn-icon" onclick="togglePin('${a.id}')" title="${a.pinned?'Unpin':'Pin'}"><i class="fas fa-thumbtack"></i></button>
+              <button class="btn btn-ghost btn-icon danger" onclick="deleteAnn('${a.id}','${escHtml(a.title||'')}')" title="Delete"><i class="fas fa-trash"></i></button>
             </div>
-            ${u.job_title ? `<div class="user-card-job">${escHtml(u.job_title)}</div>` : ''}
-          </div>
-          <div class="user-card-footer">
-            <span class="user-card-date"><i class="fas fa-clock"></i> ${formatDate(u.created_at)}</span>
-            <div class="user-card-actions" onclick="event.stopPropagation()">
-              <button class="btn btn-ghost btn-icon" onclick="editUser('${u.id}')" title="Edit"><i class="fas fa-edit"></i></button>
-              ${!isCurrentUser ? `<button class="btn btn-ghost btn-icon danger" onclick="deleteUser('${u.id}','${escHtml(u.name||'')}')" title="Delete"><i class="fas fa-trash"></i></button>` : ''}
-            </div>
-          </div>
-        </div>`;
+          </td>
+        </tr>`;
+      }).join('');
     }
 
-    // ── Open user detail ──
-    function openUserDetail(id) {
-      const u = allUsers.find(x=>x.id===id);
-      if (!u) return;
-      const meta = ROLE_META[u.role] || { label: u.role, icon: 'fa-user', color: '#94a3b8', desc: '' };
-      document.getElementById('userDetailBody').innerHTML = `
-        <div class="user-detail-layout">
-          <div class="user-detail-avatar" style="background:${meta.color};">${u.avatar || initials(u.name)}</div>
-          <div class="user-detail-info">
-            <h3 style="font-size:20px;font-weight:700;margin-bottom:4px;">${escHtml(u.name||'—')}</h3>
-            <div style="font-size:13px;color:var(--gray500);margin-bottom:10px;">${escHtml(u.email||'—')}</div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-              <span class="role-badge role-${u.role}"><i class="fas ${meta.icon}"></i> ${meta.label}</span>
-              ${u.status==='active'?'<span class="badge badge-green">Active</span>':u.status==='suspended'?'<span class="badge badge-red">Suspended</span>':'<span class="badge badge-gray">Inactive</span>'}
-            </div>
-            ${u.job_title ? `<div style="font-size:13px;color:var(--gray600);margin-bottom:8px;"><i class="fas fa-briefcase" style="color:var(--navy);margin-right:6px;"></i>${escHtml(u.job_title)}</div>` : ''}
-            <div class="role-perm-desc"><i class="fas fa-info-circle"></i> ${meta.desc}</div>
-          </div>
-        </div>
-        <div style="margin-top:20px;">
-          <table class="detail-table">
-            <tr><th>Account ID</th><td style="font-family:monospace;font-size:11px;">${u.id}</td></tr>
-            <tr><th>Created</th><td>${formatDate(u.created_at)}</td></tr>
-            <tr><th>Last Modified</th><td>${formatDate(u.updated_at)}</td></tr>
-            ${u.notes ? `<tr><th>Notes</th><td style="color:var(--gray500);">${escHtml(u.notes)}</td></tr>` : ''}
-          </table>
-        </div>`;
-      document.getElementById('detailEditBtn').onclick = () => { Modal.close('userDetailModal'); editUser(id); };
-      document.getElementById('detailDeleteBtn').onclick = () => { Modal.close('userDetailModal'); deleteUser(id, u.name); };
-      if (Auth.getUser()?.email === u.email) document.getElementById('detailDeleteBtn').style.display = 'none';
-      Modal.open('userDetailModal');
+    // ── Open new announcement ──
+    function openNewAnn() {
+      document.getElementById('annModalTitle').textContent = 'New Announcement';
+      document.getElementById('annForm').reset();
+      document.getElementById('annId').value = '';
+      document.getElementById('annPublishDate').value = new Date().toISOString().slice(0,10);
+      Modal.open('annModal');
     }
 
-    // ── Open new user ──
-    function openNewUserModal() {
-      document.getElementById('userModalTitle').textContent = 'Add CMS User';
-      document.getElementById('userForm').reset();
-      document.getElementById('userId').value = '';
-      document.getElementById('userModalAvatar').textContent = '?';
-      document.getElementById('rolePreviewBox').style.display = 'none';
-      document.getElementById('pwHint').style.display = 'none';
-      document.getElementById('passwordRequired').style.display = '';
-      Modal.open('userModal');
+    // ── Edit announcement ──
+    function editAnn(id) {
+      const a = allAnn.find(x=>x.id===id);
+      if (!a) return;
+      document.getElementById('annModalTitle').textContent = 'Edit Announcement';
+      document.getElementById('annId').value          = a.id;
+      document.getElementById('annTitleEn').value     = a.title || '';
+      document.getElementById('annTitleAr').value     = a.title_ar || '';
+      document.getElementById('annCategory').value    = a.category || 'General';
+      document.getElementById('annPriority').value    = a.priority || 'normal';
+      document.getElementById('annBodyEn').value      = a.body_en || '';
+      document.getElementById('annBodyAr').value      = a.body_ar || '';
+      document.getElementById('annPublishDate').value = (a.publish_date||'').slice(0,10);
+      document.getElementById('annExpiryDate').value  = (a.expiry_date||'').slice(0,10);
+      document.getElementById('annStatus').value      = a.status || 'published';
+      document.getElementById('annAudience').value    = a.audience || 'all';
+      document.getElementById('annLink').value        = a.link_url || '';
+      document.getElementById('annImage').value       = a.image_url || '';
+      document.getElementById('annTags').value        = a.tags || '';
+      document.getElementById('annPinned').checked    = !!a.pinned;
+      Modal.open('annModal');
     }
 
-    // ── Edit user ──
-    function editUser(id) {
-      const u = allUsers.find(x=>x.id===id);
-      if (!u) return;
-      document.getElementById('userModalTitle').textContent = 'Edit User';
-      document.getElementById('userId').value       = u.id;
-      document.getElementById('userName').value     = u.name || '';
-      document.getElementById('userEmail').value    = u.email || '';
-      document.getElementById('userRole').value     = u.role || '';
-      document.getElementById('userStatus').value   = u.status || 'active';
-      document.getElementById('userJobTitle').value = u.job_title || '';
-      document.getElementById('userNotes').value    = u.notes || '';
-      document.getElementById('userPassword').value = '';
-      document.getElementById('userPasswordConfirm').value = '';
-      document.getElementById('pwHint').style.display = '';
-      document.getElementById('passwordRequired').style.display = 'none';
-      updateAvatarPreview();
-      updateRolePreview();
-      Modal.open('userModal');
-    }
+    // ── Save announcement ──
+    async function saveAnn(forcedStatus) {
+      const id = document.getElementById('annId').value;
+      const title = document.getElementById('annTitleEn').value.trim();
+      const body  = document.getElementById('annBodyEn').value.trim();
+      if (!title || !body) { Toast.warning('Title and body content are required.'); return; }
 
-    // ── Save user ──
-    async function saveUser() {
-      const id       = document.getElementById('userId').value;
-      const name     = document.getElementById('userName').value.trim();
-      const email    = document.getElementById('userEmail').value.trim().toLowerCase();
-      const role     = document.getElementById('userRole').value;
-      const status   = document.getElementById('userStatus').value;
-      const pw       = document.getElementById('userPassword').value;
-      const pwConf   = document.getElementById('userPasswordConfirm').value;
-      const jobTitle = document.getElementById('userJobTitle').value.trim();
-      const notes    = document.getElementById('userNotes').value.trim();
-
-      if (!name || !email || !role) { Toast.warning('Name, email, and role are required.'); return; }
-      if (!id && !pw) { Toast.warning('Password is required for new users.'); return; }
-      if (pw && pw !== pwConf) { Toast.error('Passwords do not match.'); return; }
-      if (pw && pw.length < 8) { Toast.warning('Password must be at least 8 characters.'); return; }
-
-      const meta = ROLE_META[role] || {};
       const payload = {
-        name, email, role, status, job_title: jobTitle, notes,
-        avatar: initials(name),
-        ...(pw ? { password: pw } : {}),
+        title:        title,
+        title_ar:     document.getElementById('annTitleAr').value.trim(),
+        category:     document.getElementById('annCategory').value,
+        priority:     document.getElementById('annPriority').value,
+        body_en:      body,
+        body_ar:      document.getElementById('annBodyAr').value.trim(),
+        publish_date: document.getElementById('annPublishDate').value,
+        expiry_date:  document.getElementById('annExpiryDate').value,
+        status:       forcedStatus || document.getElementById('annStatus').value,
+        audience:     document.getElementById('annAudience').value,
+        link_url:     document.getElementById('annLink').value.trim(),
+        image_url:    document.getElementById('annImage').value.trim(),
+        tags:         document.getElementById('annTags').value.trim(),
+        pinned:       document.getElementById('annPinned').checked,
       };
 
       try {
         if (id) {
-          await API.put('cms_users', id, payload);
-          logActivity('updated', 'user account', name);
-          Toast.success('User updated.');
+          await API.put('cms_announcements', id, payload);
+          logActivity('updated', 'announcement', title);
+          Toast.success('Announcement updated.');
         } else {
-          await API.post('cms_users', payload);
-          logActivity('created', 'user account', name);
-          Toast.success('User created.');
+          await API.post('cms_announcements', payload);
+          logActivity('published', 'announcement', title);
+          Toast.success('Announcement ' + (forcedStatus === 'draft' ? 'saved as draft.' : 'published.'));
         }
-        Modal.close('userModal');
-        loadUsers();
+        Modal.close('annModal');
+        loadAnn();
       } catch(e) { Toast.error('Save failed.'); }
     }
 
-    // ── Delete user ──
-    async function deleteUser(id, name) {
-      if (Auth.getUser()?.email && allUsers.find(u=>u.id===id)?.email === Auth.getUser().email) {
-        Toast.error("You can't delete your own account.");
-        return;
-      }
-      confirmDelete(name || 'this user', async () => {
-        await API.delete('cms_users', id);
-        logActivity('deleted', 'user account', name);
-        Toast.success('User deleted.');
-        loadUsers();
+    // ── Pin/Unpin ──
+    async function togglePin(id) {
+      const a = allAnn.find(x=>x.id===id);
+      if (!a) return;
+      await API.patch('cms_announcements', id, { pinned: !a.pinned });
+      Toast.success(a.pinned ? 'Unpinned.' : 'Pinned to top.');
+      loadAnn();
+    }
+
+    // ── Delete ──
+    async function deleteAnn(id, label) {
+      confirmDelete(label, async () => {
+        await API.delete('cms_announcements', id);
+        logActivity('deleted', 'announcement', label);
+        Toast.success('Announcement deleted.');
+        loadAnn();
       });
     }
 
-    // ── Helpers ──
-    function updateAvatarPreview() {
-      const name = document.getElementById('userName').value.trim();
-      document.getElementById('userModalAvatar').textContent = name ? initials(name) : '?';
+    // ── Selection ──
+    function toggleAnnSelect(id, checked) {
+      if (checked) selectedAnnIds.add(id); else selectedAnnIds.delete(id);
+      updateAnnBulkBar();
+    }
+    function toggleAnnSelectAll(cb) {
+      filteredAnn.forEach(a => { if(cb.checked) selectedAnnIds.add(a.id); else selectedAnnIds.delete(a.id); });
+      renderAnnTable();
+      updateAnnBulkBar();
+    }
+    function updateAnnBulkBar() {
+      const bar = document.getElementById('annBulkBar');
+      bar.style.display = selectedAnnIds.size > 0 ? 'flex' : 'none';
+      document.getElementById('annSelCount').textContent = `${selectedAnnIds.size} selected`;
+    }
+    async function bulkPublish() {
+      for (const id of selectedAnnIds) await API.patch('cms_announcements', id, { status: 'published' });
+      Toast.success(`${selectedAnnIds.size} announcement(s) published.`);
+      selectedAnnIds.clear();
+      loadAnn();
+    }
+    async function bulkDeleteAnn() {
+      confirmDelete(`${selectedAnnIds.size} announcement(s)`, async () => {
+        for (const id of selectedAnnIds) await API.delete('cms_announcements', id);
+        Toast.success('Selected announcements deleted.');
+        selectedAnnIds.clear();
+        loadAnn();
+      });
     }
 
-    function updateRolePreview() {
-      const role = document.getElementById('userRole').value;
-      const box  = document.getElementById('rolePreviewBox');
-      if (!role) { box.style.display = 'none'; return; }
-      const meta = ROLE_META[role];
-      if (!meta) { box.style.display = 'none'; return; }
-      box.style.display = 'flex';
-      document.getElementById('rolePreviewIcon').innerHTML = `<i class="fas ${meta.icon}"></i>`;
-      document.getElementById('rolePreviewIcon').style.background = meta.color;
-      document.getElementById('rolePreviewText').textContent = meta.desc;
+    // ════════════════════════════════════
+    //  EVENTS
+    // ════════════════════════════════════
+
+    async function loadEvt() {
+      try {
+        const res = await API.get('cms_events', { limit: 200 });
+        allEvt = res.data || [];
+        document.getElementById('evtCount').textContent = allEvt.length;
+        filterEvt();
+      } catch(e) {
+        document.getElementById('evtTableBody').innerHTML =
+          '<tr><td colspan="6" class="table-empty">Could not load events.</td></tr>';
+      }
     }
 
-    function togglePw(inputId, iconId) {
-      const inp = document.getElementById(inputId);
-      const ico = document.getElementById(iconId);
-      const isText = inp.type === 'text';
-      inp.type = isText ? 'password' : 'text';
-      ico.className = isText ? 'fas fa-eye' : 'fas fa-eye-slash';
+    function filterEvt() {
+      const q      = (document.getElementById('evtSearch').value || '').toLowerCase();
+      const status = document.getElementById('evtStatusFilter').value;
+      filteredEvt = allEvt.filter(e => {
+        const mq = !q || (e.title||'').toLowerCase().includes(q) || (e.location||'').toLowerCase().includes(q);
+        const ms = !status || e.status === status;
+        return mq && ms;
+      });
+      document.getElementById('evtResultCount').textContent = `${filteredEvt.length} result${filteredEvt.length!==1?'s':''}`;
+      renderEvtTable();
     }
 
-    // ── Permissions matrix render ──
-    function renderMatrix() {
-      const roles = ['super_admin','principal','marketing','admissions','academic','readonly'];
-      let lastGroup = null;
-      const rows = MATRIX_ROWS.map(row => {
-        let groupCell = '';
-        if (row.group !== lastGroup) {
-          const count = MATRIX_ROWS.filter(r=>r.group===row.group).length;
-          groupCell = `<td class="matrix-group-cell" rowspan="${count}">${row.group}</td>`;
-          lastGroup = row.group;
-        }
-        const cells = roles.map(r => {
-          const has = row.perms[r];
-          return `<td class="matrix-cell ${has?'has-perm':'no-perm'}">${has ? '<i class="fas fa-check matrix-check"></i>' : '<i class="fas fa-times matrix-cross"></i>'}</td>`;
-        }).join('');
-        return `<tr>${groupCell}<td class="matrix-label-cell">${row.label}</td>${cells}</tr>`;
+    function clearEvtFilters() {
+      document.getElementById('evtSearch').value = '';
+      document.getElementById('evtStatusFilter').value = '';
+      filterEvt();
+    }
+
+    function renderEvtTable() {
+      const tbody = document.getElementById('evtTableBody');
+      if (!filteredEvt.length) {
+        tbody.innerHTML = '<tr><td colspan="6" class="table-empty">No events found. <a href="#" onclick="openNewEvt();return false;">Create one</a>.</td></tr>';
+        return;
+      }
+      const sorted = [...filteredEvt].sort((a,b) => (a.event_date||'') > (b.event_date||'') ? 1 : -1);
+      tbody.innerHTML = sorted.map(e => {
+        const isPast = e.event_date && new Date(e.event_date) < new Date();
+        return `<tr class="${isPast&&e.status==='upcoming'?'row-past':''}">
+          <td>
+            <div style="display:flex;align-items:center;gap:8px;">
+              ${e.featured?'<i class="fas fa-star" style="color:var(--gold);font-size:11px;"></i>':''}
+              <span class="table-title-cell">${escHtml(e.title||'—')}</span>
+            </div>
+            ${e.description_en ? `<div style="font-size:11px;color:var(--gray400);margin-top:2px;">${escHtml((e.description_en||'').slice(0,60))}…</div>` : ''}
+          </td>
+          <td>
+            <div class="evt-date-cell">
+              <i class="fas fa-calendar" style="color:var(--navy);font-size:11px;"></i>
+              ${e.event_date ? formatDate(e.event_date) : '—'}
+            </div>
+            ${e.start_time ? `<div style="font-size:11px;color:var(--gray400);">${e.start_time}${e.end_time?'–'+e.end_time:''}</div>` : ''}
+          </td>
+          <td style="font-size:13px;">${escHtml(e.location||'—')}</td>
+          <td>${badgeHtml(e.status||'upcoming')}</td>
+          <td><span class="badge badge-gray">${escHtml(e.audience||'All')}</span></td>
+          <td>
+            <div class="table-actions">
+              <button class="btn btn-ghost btn-icon" onclick="editEvt('${e.id}')" title="Edit"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-ghost btn-icon danger" onclick="deleteEvt('${e.id}','${escHtml(e.title||'')}')" title="Delete"><i class="fas fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>`;
       }).join('');
-      document.getElementById('matrixBody').innerHTML = rows;
     }
 
-    // ── Tab/view switch ──
-    function switchView(view) {
-      currentView = view;
-      document.getElementById('panel-users-list').style.display   = view === 'list'   ? '' : 'none';
-      document.getElementById('panel-users-matrix').style.display = view === 'matrix' ? '' : 'none';
-      document.getElementById('tab-users-list').classList.toggle('active', view === 'list');
-      document.getElementById('tab-users-matrix').classList.toggle('active', view === 'matrix');
-      document.getElementById('addUserBtn').style.display = view === 'list' ? '' : 'none';
+    function openNewEvt() {
+      document.getElementById('evtModalTitle').textContent = 'New Event';
+      document.getElementById('evtForm').reset();
+      document.getElementById('evtId').value = '';
+      document.getElementById('evtDate').value = new Date().toISOString().slice(0,10);
+      Modal.open('evtModal');
+    }
+
+    function editEvt(id) {
+      const e = allEvt.find(x=>x.id===id);
+      if (!e) return;
+      document.getElementById('evtModalTitle').textContent = 'Edit Event';
+      document.getElementById('evtId').value          = e.id;
+      document.getElementById('evtTitleEn').value     = e.title || '';
+      document.getElementById('evtTitleAr').value     = e.title_ar || '';
+      document.getElementById('evtDescEn').value      = e.description_en || '';
+      document.getElementById('evtDescAr').value      = e.description_ar || '';
+      document.getElementById('evtDate').value        = (e.event_date||'').slice(0,10);
+      document.getElementById('evtEndDate').value     = (e.end_date||'').slice(0,10);
+      document.getElementById('evtStartTime').value   = e.start_time || '';
+      document.getElementById('evtEndTime').value     = e.end_time || '';
+      document.getElementById('evtLocation').value    = e.location || '';
+      document.getElementById('evtLocationAr').value  = e.location_ar || '';
+      document.getElementById('evtStatus').value      = e.status || 'upcoming';
+      document.getElementById('evtAudience').value    = e.audience || 'all';
+      document.getElementById('evtCapacity').value    = e.capacity || '';
+      document.getElementById('evtRsvp').value        = e.rsvp_url || '';
+      document.getElementById('evtImage').value       = e.image_url || '';
+      document.getElementById('evtFeatured').checked  = !!e.featured;
+      Modal.open('evtModal');
+    }
+
+    async function saveEvt(forcedStatus) {
+      const id    = document.getElementById('evtId').value;
+      const title = document.getElementById('evtTitleEn').value.trim();
+      const date  = document.getElementById('evtDate').value;
+      if (!title || !date) { Toast.warning('Event title and date are required.'); return; }
+
+      const payload = {
+        title:          title,
+        title_ar:       document.getElementById('evtTitleAr').value.trim(),
+        description_en: document.getElementById('evtDescEn').value.trim(),
+        description_ar: document.getElementById('evtDescAr').value.trim(),
+        event_date:     date,
+        end_date:       document.getElementById('evtEndDate').value,
+        start_time:     document.getElementById('evtStartTime').value,
+        end_time:       document.getElementById('evtEndTime').value,
+        location:       document.getElementById('evtLocation').value.trim(),
+        location_ar:    document.getElementById('evtLocationAr').value.trim(),
+        status:         forcedStatus || document.getElementById('evtStatus').value,
+        audience:       document.getElementById('evtAudience').value,
+        capacity:       parseInt(document.getElementById('evtCapacity').value)||null,
+        rsvp_url:       document.getElementById('evtRsvp').value.trim(),
+        image_url:      document.getElementById('evtImage').value.trim(),
+        featured:       document.getElementById('evtFeatured').checked,
+      };
+
+      try {
+        if (id) {
+          await API.put('cms_events', id, payload);
+          logActivity('updated', 'event', title);
+          Toast.success('Event updated.');
+        } else {
+          await API.post('cms_events', payload);
+          logActivity('created', 'event', title);
+          Toast.success('Event saved.');
+        }
+        Modal.close('evtModal');
+        loadEvt();
+      } catch(e) { Toast.error('Save failed.'); }
+    }
+
+    async function deleteEvt(id, label) {
+      confirmDelete(label, async () => {
+        await API.delete('cms_events', id);
+        logActivity('deleted', 'event', label);
+        Toast.success('Event deleted.');
+        loadEvt();
+      });
     }
 
     function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
     // ── Init ──
     document.addEventListener('DOMContentLoaded', () => {
-      loadUsers();
-      renderMatrix();
+      // Set default add button
+      switchTab('announcements');
+
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get('tab');
+      if (tabParam === 'events') {
+        switchTab('events');
+        if (params.get('new') === '1') setTimeout(openNewEvt, 400);
+      } else {
+        if (params.get('new') === '1') setTimeout(openNewAnn, 400);
+        // Check edit param
+        const editId = params.get('edit');
+        if (editId) { loadAnn().then(() => editAnn(editId)); return; }
+      }
+
+      loadAnn();
+      loadEvt();
     });
   </script>
 
   <style>
-    /* Toolbar */
-    .users-toolbar { display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px; }
-    .result-count { font-size:13px;color:var(--gray400);margin-left:auto; }
-    .search-wrap { position:relative; }
-    .search-icon { position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gray400);font-size:12px;pointer-events:none; }
-    .search-input { height:34px;border:1.5px solid var(--gray200);border-radius:8px;padding:0 10px 0 30px;font-size:13px;font-family:'Inter',sans-serif;color:var(--gray700);outline:none; }
-    .search-input:focus { border-color:var(--navy); }
-    .form-select.sm { height:34px;font-size:13px;padding:0 10px;min-width:150px;border:1.5px solid var(--gray200);border-radius:8px;font-family:'Inter',sans-serif;color:var(--gray700);outline:none; }
-
-    /* Tabs */
-    .tabs-bar { display:flex;gap:4px;border-bottom:2px solid var(--gray200);margin-bottom:24px; }
-    .tab-btn { background:none;border:none;padding:10px 20px;font-size:14px;font-weight:600;color:var(--gray500);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;display:flex;align-items:center;gap:8px;transition:all .15s;font-family:'Inter',sans-serif; }
-    .tab-btn.active { color:var(--navy);border-bottom-color:var(--navy); }
-    .tab-btn:hover:not(.active) { color:var(--gray700); }
-    .tab-count { background:var(--gray100);color:var(--gray500);font-size:11px;font-weight:700;padding:1px 6px;border-radius:10px; }
-    .tab-btn.active .tab-count { background:rgba(10,25,49,.1);color:var(--navy); }
-
-    /* User cards grid */
-    .user-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 20px;
-    }
-
-    .user-card {
-      background: #fff;
-      border: 1.5px solid var(--gray200);
-      border-radius: 14px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: box-shadow .18s, transform .15s;
-    }
-    .user-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.1); transform: translateY(-2px); }
-
-    .user-card-header {
-      padding: 20px 18px 0;
+    /* Tabs bar */
+    .tabs-bar {
       display: flex;
-      align-items: flex-start;
+      gap: 4px;
+      border-bottom: 2px solid var(--gray200);
+      margin-bottom: 24px;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray500);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); }
+    .tab-btn:hover:not(.active) { color: var(--gray700); }
+    .tab-count {
+      background: var(--gray100);
+      color: var(--gray500);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 10px;
+    }
+    .tab-btn.active .tab-count { background: rgba(10,25,49,.1); color: var(--navy); }
+
+    /* Toolbar */
+    .ann-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .result-count { font-size: 13px; color: var(--gray400); margin-left: auto; }
+    .search-wrap { position: relative; }
+    .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--gray400); font-size: 12px; pointer-events: none; }
+    .search-input { height: 34px; border: 1.5px solid var(--gray200); border-radius: 8px; padding: 0 10px 0 30px; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--gray700); outline: none; width: 220px; }
+    .search-input:focus { border-color: var(--navy); }
+    .form-select.sm { height: 34px; font-size: 13px; padding: 0 10px; min-width: 140px; border: 1.5px solid var(--gray200); border-radius: 8px; font-family: 'Inter', sans-serif; color: var(--gray700); outline: none; }
+
+    /* Announcement table extras */
+    .ann-title-cell { display: flex; align-items: center; }
+    .ann-tags { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px; }
+    .tag-pill { font-size: 10px; background: var(--gray100); color: var(--gray600); padding: 1px 6px; border-radius: 10px; }
+
+    .priority-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 2px 7px; border-radius: 10px; }
+    .priority-badge.normal  { background: var(--gray100); color: var(--gray500); }
+    .priority-badge.high    { background: #fef3c7; color: #92400e; }
+    .priority-badge.urgent  { background: #fee2e2; color: #991b1b; }
+
+    /* Event table extras */
+    .evt-date-cell { display: flex; align-items: center; gap: 5px; font-size: 13px; }
+    .row-past td { opacity: 0.6; }
+
+    /* Panel footer for bulk actions */
+    .panel-footer {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-    }
-    .user-card-avatar {
-      width: 56px; height: 56px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; font-weight: 700; color: #fff;
-      letter-spacing: -1px;
-    }
-    .user-card-status { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-
-    .user-card-body { padding: 14px 18px 10px; }
-    .user-card-name { font-size: 15px; font-weight: 700; color: var(--gray800); margin-bottom: 2px; }
-    .user-card-email { font-size: 12px; color: var(--gray400); margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .user-card-role { margin-bottom: 6px; }
-    .user-card-job { font-size: 11px; color: var(--gray500); }
-
-    .user-card-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 16px;
-      border-top: 1px solid var(--gray100);
+      padding: 12px 20px;
+      border-top: 1px solid var(--gray200);
       background: var(--gray50);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray600);
     }
-    .user-card-date { font-size: 11px; color: var(--gray400); display: flex; align-items: center; gap: 5px; }
-    .user-card-actions { display: flex; gap: 2px; }
 
-    /* Role badges */
-    .role-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-size: 11px; font-weight: 700;
-      letter-spacing: .04em; text-transform: uppercase;
-      padding: 3px 8px; border-radius: 20px;
-    }
-    .role-super_admin { background: rgba(10,25,49,.12); color: #0a1931; }
-    .role-principal   { background: #dcfce7; color: #166534; }
-    .role-marketing   { background: #dbeafe; color: #1d4ed8; }
-    .role-admissions  { background: #ede9fe; color: #5b21b6; }
-    .role-academic    { background: #fef3c7; color: #92400e; }
-    .role-readonly    { background: var(--gray100); color: var(--gray600); }
+    /* Toggle (reused from staff.html) */
+    .toggle-row { display:flex;align-items:center;gap:12px; }
+    .toggle-switch { position:relative;width:44px;height:24px;flex-shrink:0; }
+    .toggle-switch input { opacity:0;width:0;height:0; }
+    .toggle-slider { position:absolute;inset:0;background:var(--gray200);border-radius:24px;cursor:pointer;transition:background .2s; }
+    .toggle-slider::before { content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.2); }
+    .toggle-switch input:checked + .toggle-slider { background:var(--navy); }
+    .toggle-switch input:checked + .toggle-slider::before { transform:translateX(20px); }
+    .toggle-label { font-size:13px;color:var(--gray600); }
 
-    /* Badge extras */
-    .badge-green  { background: #dcfce7; color: #166534; }
-    .badge-red    { background: #fee2e2; color: #991b1b; }
-    .badge-gray   { background: var(--gray100); color: var(--gray600); }
-    .badge-gold   { background: #fef3c7; color: #92400e; }
+    /* Misc */
+    .table-empty { text-align:center;padding:32px;color:var(--gray400);font-size:13px; }
+    .table-empty a { color:var(--navy);font-weight:600; }
+    .table-loading { text-align:center;padding:24px;color:var(--gray400);font-size:13px; }
+    .rtl-input { text-align:right; }
+    .badge-gray { background:var(--gray100);color:var(--gray600); }
+    .badge-navy { background:rgba(10,25,49,.1);color:var(--navy); }
+    .row-selected td { background:rgba(10,25,49,.04); }
 
-    /* User detail */
-    .user-detail-layout { display: flex; gap: 20px; align-items: flex-start; }
-    .user-detail-avatar { width: 80px; height: 80px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; color: #fff; flex-shrink: 0; }
-    .user-detail-info { flex: 1; }
-    .role-perm-desc { font-size: 12px; color: var(--gray500); background: var(--gray50); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--gray200); display: flex; align-items: center; gap: 8px; }
-    .role-perm-desc i { color: var(--navy); }
-    .detail-table { width:100%;border-collapse:collapse; }
-    .detail-table th { width:100px;text-align:left;font-size:12px;color:var(--gray400);font-weight:500;padding:6px 0; }
-    .detail-table td { font-size:13px;color:var(--gray700);padding:6px 0; }
-
-    /* Modal user avatar */
-    .user-avatar-row { display:flex;gap:16px;align-items:center;margin-bottom:20px; }
-    .user-modal-avatar { width:60px;height:60px;border-radius:14px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0;letter-spacing:-1px; }
-    .user-avatar-inputs { flex:1; }
-
-    /* Role preview */
-    .role-preview-box { display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--gray50);border:1.5px solid var(--gray200);border-radius:10px;margin-bottom:16px; }
-    .role-preview-icon { width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;flex-shrink:0; }
-    .role-preview-text { font-size:13px;color:var(--gray600);line-height:1.5; }
-
-    /* Password input */
-    .input-pw-wrap { position:relative; }
-    .input-pw-wrap .form-input { padding-right:38px; }
-    .pw-toggle { position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--gray400);font-size:13px;padding:4px;transition:color .15s; }
-    .pw-toggle:hover { color:var(--navy); }
-    .form-hint { font-size:11px;color:var(--gray400);margin-top:-8px;margin-bottom:14px; }
-
-    /* Permissions matrix */
-    .matrix-wrap { overflow-x:auto; }
-    .matrix-table { width:100%;border-collapse:collapse;min-width:700px; }
-    .matrix-table th, .matrix-table td { border:1px solid var(--gray200);padding:0; }
-    .matrix-table thead th {
-      background: var(--gray50);
-      padding: 12px 10px;
-      text-align: center;
-      font-size: 12px;
-    }
-    .matrix-feature-col { width: 120px; text-align: left !important; padding-left: 16px !important; }
-    .matrix-role-header { display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em; }
-    .matrix-role-header i { font-size:16px;margin-bottom:2px; }
-    .role-super_admin.matrix-role-header { color:#0a1931; }
-    .role-principal.matrix-role-header   { color:#166534; }
-    .role-marketing.matrix-role-header   { color:#1d4ed8; }
-    .role-admissions.matrix-role-header  { color:#5b21b6; }
-    .role-academic.matrix-role-header    { color:#92400e; }
-    .role-readonly.matrix-role-header    { color:#6b7280; }
-
-    .matrix-group-cell { background:var(--gray50);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray400);padding:8px 12px;vertical-align:middle;text-align:center; }
-    .matrix-label-cell { font-size:12px;color:var(--gray700);padding:10px 14px; }
-    .matrix-cell { text-align:center;padding:10px;transition:background .15s; }
-    .matrix-cell.has-perm { background:#f0fdf4; }
-    .matrix-cell.no-perm  { background:#fef2f2; }
-    .matrix-check { color:#16a34a;font-size:14px; }
-    .matrix-cross { color:#dc2626;font-size:14px; }
-
-    /* Role descriptions */
-    .role-desc-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:24px; }
-    .role-desc-card { background:#fff;border:1.5px solid var(--gray200);border-radius:12px;padding:16px;display:flex;gap:12px;align-items:flex-start; }
-    .role-desc-icon { width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;flex-shrink:0; }
-    .role-super_admin.role-desc-icon { background:#0a1931; }
-    .role-principal.role-desc-icon   { background:#166534; }
-    .role-marketing.role-desc-icon   { background:#1d4ed8; }
-    .role-admissions.role-desc-icon  { background:#5b21b6; }
-    .role-academic.role-desc-icon    { background:#92400e; }
-    .role-readonly.role-desc-icon    { background:#6b7280; }
-    .role-desc-name { font-size:13px;font-weight:700;color:var(--gray800);margin-bottom:4px; }
-    .role-desc-text { font-size:12px;color:var(--gray500);line-height:1.6; }
-
-    /* States */
-    .empty-state { text-align:center;padding:60px 24px; }
-    .empty-state-icon { font-size:40px;color:var(--gray300);margin-bottom:14px;display:block; }
-    .empty-state p { font-size:14px;color:var(--gray400); }
-    .loading-state { text-align:center;padding:40px;color:var(--gray400);font-size:14px; }
-
-    @media (max-width:900px) {
-      .user-cards-grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); }
-      .role-desc-grid { grid-template-columns:1fr 1fr; }
-    }
-    @media (max-width:600px) {
-      .user-cards-grid { grid-template-columns:1fr 1fr; }
-      .role-desc-grid { grid-template-columns:1fr; }
-      .users-toolbar { flex-direction:column;align-items:stretch; }
+    @media (max-width:700px) {
+      .ann-toolbar { flex-direction:column;align-items:stretch; }
+      .result-count { margin-left:0; }
     }
   </style>
 </body>
