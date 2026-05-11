@@ -25,11 +25,11 @@ admin/login.html
 | Email | Password | Role | Permissions |
 |-------|----------|------|-------------|
 | `admin@naisdubai.ae` | `Admin@2025!` | Super Admin | Full access — all features |
-| `principal@naisdubai.ae` | `Principal@2025!` | Principal | Content, Staff, Ann., Events, Media |
-| `marketing@naisdubai.ae` | `Marketing@2025!` | Marketing | Content, Media, Ann., Events |
-| `admissions@naisdubai.ae` | `Admissions@2025!` | Admissions | Admissions content, Ann., Events |
-| `academic@naisdubai.ae` | `Academic@2025!` | Academic | Academic content, Staff, Media |
-| `viewer@naisdubai.ae` | `Viewer@2025!` | Read Only | View only — no write access |
+| `s.mitchell@naisdubai.ae` | `Principal@2025!` | Admin (Principal) | Content, Staff, Ann., Events, Media |
+| `j.thornton@naisdubai.ae` | `VPAcademic@2025!` | Editor (VP Academic) | Announcements, Results, Documents |
+| `l.hassan@naisdubai.ae` | `Admissions@2025!` | Editor (Head of Admissions) | Admissions pipeline, Events, Ann. |
+| `t.mansour@naisdubai.ae` | `ITManager@2025!` | Editor (IT Manager) | Media Library, SEO settings |
+| `o.alrashidi@naisdubai.ae` | `HODSports@2025!` | Viewer (HOD PE) | View only — no write access |
 
 > **Session security**: Sessions are stamped with `_v: '2.1'`. Stale sessions from older versions are auto-cleared on page load. Login page validates both email + version before auto-redirecting.
 
@@ -187,23 +187,27 @@ academic     →  Academic/Curriculum/Results content, Staff, Media
 readonly     →  Read-only — no create/edit/delete
 ```
 
-### CMS Database Tables (Table API)
+### CMS Database Tables (Table API) — v2.2 Seeded
 
-| Table | Purpose | Key Fields |
-|-------|---------|------------|
-| `cms_users` | CMS user accounts | name, email, role, status, avatar, job_title |
-| `cms_pages` | Page section content | page_key, section_key, title_en, title_ar, content_en, content_ar, content_type, order, status |
-| `cms_announcements` | School announcements | title_en, title_ar, body_en, body_ar, category, priority, status, pinned, publish_date, expiry_date, audience |
-| `cms_events` | School events (standalone) | title, slug, category, status, date_start, date_end, time_start, time_end, location, description, image_url, audience, featured, created_by |
-| `cms_admissions` | Admissions applications | student_name, dob, nationality, applying_grade, academic_year, parent_name, parent_email, parent_phone, status, notes, submitted_at, assigned_to |
-| `cms_results` | Exam results publications | title, exam_type, academic_year, grade_level, publish_date, status, document_url, summary, pass_rate, created_by |
-| `cms_gallery` | Photo gallery | title, category, image_url, thumb_url, caption, album, date_taken, status, featured, sort_order, uploaded_by |
-| `cms_documents` | Downloadable documents | title, category, file_url, file_type, file_size, description, academic_year, status, downloads, restricted, uploaded_by, upload_date |
-| `cms_seo` | Per-page SEO data | page_slug, page_name, meta_title, meta_description, focus_keyword, og_image, canonical_url, no_index, schema_type, last_updated, seo_score |
-| `cms_staff` | Staff/leadership profiles | name_en, name_ar, title_en, title_ar, department, photo_url, bio_en, bio_ar, order, status, featured, show_on_pages |
-| `cms_media` | Media library | url, title, type, alt_text, page, file_size, width, height, status |
-| `cms_settings` | Site-wide settings | setting_key, setting_value, category, label, updated_by |
-| `cms_activity_log` | Audit log | user_name, user_role, action, target_type, target_label, timestamp, ip_note |
+All 14 tables have schemas matching the HTML page JavaScript exactly, and are seeded with realistic NAIS Dubai demo data.
+
+| Table | Rows | Key Fields (actual schema) |
+|-------|------|---------------------------|
+| `cms_announcements` | 7 | `title`, `title_ar`, `body_en`, `body_ar`, `category`, `priority`, `pinned`, `status`, `publish_date`, `expiry_date`, `audience`, `tags`, `created_by` |
+| `cms_events` | 7 | `title`, `title_ar`, `description_en`, `description_ar`, `event_date`, `end_date`, `start_time`, `end_time`, `location`, `location_ar`, `category`, `capacity`, `rsvp_url`, `featured`, `status`, `created_by` |
+| `cms_staff` | 8 | `name_en`, `name_ar`, `title_en`, `title_ar`, `department`, `bio_en`, `bio_ar`, `email`, `nationality`, `years_experience`, `photo_url`, `linkedin_url`, `display_order`, `show_about`, `show_home`, `show_careers`, `featured`, `tag` |
+| `cms_admissions` | 8 | `student_name`, `dob`, `nationality`, `applying_grade`, `parent_name`, `parent_email`, `parent_phone`, `whatsapp`, `status`, `stage`, `notes`, `submitted_at`, `assigned_to` |
+| `cms_results` | 5 | `title`, `exam_type`, `academic_year`, `grade_level`, `publish_date`, `status`, `document_url`, `summary`, `pass_rate`, `created_by` |
+| `cms_gallery` | 8 | `title`, `image_url`, `thumb_url`, `category`, `album`, `caption`, `date_taken`, `status`, `featured`, `sort_order`, `tags` |
+| `cms_documents` | 7 | `title`, `doc_type`, `file_url`, `file_size`, `file_format`, `audience`, `status`, `upload_date`, `academic_year`, `uploaded_by`, `download_count` |
+| `cms_seo` | 10 | `page_slug`, `page_name`, `meta_title`, `meta_description`, `focus_keyword`, `og_image`, `canonical_url`, `no_index`, `schema_type`, `seo_score`, `last_updated` |
+| `cms_media` | 8 | `file_name`, `file_url`, `thumb_url`, `file_type`, `mime_type`, `file_size`, `file_size_label`, `alt_text`, `folder`, `upload_date`, `uploaded_by`, `usage_count` |
+| `cms_users` | 6 | `name`, `email`, `password`, `role`, `status`, `job_title`, `avatar`, `notes`, `last_login` |
+| `cms_activity_log` | 12 | `user_name`, `role`, `action`, `target_label`, `module`, `details` |
+| `cms_pages` | — | `page_key`, `section_key`, `title_en`, `title_ar`, `content_en`, `content_ar`, `content_type`, `order`, `status` |
+| `cms_settings` | — | `setting_key`, `setting_value`, `category`, `label`, `updated_by` |
+
+> **Dashboard field mapping**: Activity log uses `user_name`, `action`, `target_label` (read by `index.html`). Events table uses `event_date`, `location`, `status`. Announcements table uses `title`, `category`, `status`, `publish_date`.
 
 ---
 
