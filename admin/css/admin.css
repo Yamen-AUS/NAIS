@@ -1075,3 +1075,192 @@ input, select, textarea { font-family: inherit; }
   .topbar-chevron   { display: none; }
   .admin-content { padding: 16px 12px 40px; }
 }
+
+/* ══════════════════════════════════════════════
+   SHARED UTILITY CLASSES
+   Used by events, admissions, results, gallery,
+   documents, seo — and any future pages.
+══════════════════════════════════════════════ */
+
+/* ── .card — white panel container ── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray200);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--gray100);
+  flex-wrap: wrap;
+  background: var(--white);
+}
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-body {
+  padding: 20px;
+}
+
+/* ── .table-responsive — horizontal scroll wrapper ── */
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── .search-box — search field with icon ── */
+.search-box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray400);
+  font-size: 12px;
+  pointer-events: none;
+  z-index: 1;
+}
+.search-input {
+  height: 36px;
+  padding: 0 12px 0 32px;
+  border: 1.5px solid var(--gray200);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--gray700);
+  background: var(--white);
+  outline: none;
+  width: 220px;
+  transition: border-color var(--transition);
+}
+.search-input:focus { border-color: var(--navy); }
+.search-input::placeholder { color: var(--gray400); }
+
+/* ── .table-action-btn — small icon button in table rows ── */
+.table-action-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background: var(--gray100);
+  border: 1px solid var(--gray200);
+  color: var(--gray600);
+  font-size: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.table-action-btn:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+.table-action-btn.danger:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+
+/* ── .toggle-switch / .toggle-slider — CSS toggle checkbox ── */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--gray300);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform var(--transition);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.toggle-switch input:checked + .toggle-slider {
+  background: var(--navy);
+}
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(18px);
+}
+
+/* ── .form-grid — CSS grid for form fields ── */
+.form-grid {
+  display: grid;
+  gap: 16px;
+}
+
+/* ── .required — red asterisk on required labels ── */
+.required {
+  color: var(--red);
+  margin-left: 2px;
+  font-weight: 700;
+}
+
+/* ── .btn-danger — destructive action button (alias for .btn-red) ── */
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+.btn-danger:hover {
+  background: var(--red2);
+  transform: translateY(-1px);
+}
+.btn-danger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── .text-center — text alignment utility ── */
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+.text-left   { text-align: left; }

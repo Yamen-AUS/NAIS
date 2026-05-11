@@ -20,16 +20,18 @@ Full multi-page static website for NAIS Dubai featuring an animated intro, hero 
 admin/login.html
 ```
 
-### Demo Credentials
+### Demo Credentials (Session Version: 2.1)
 
 | Email | Password | Role | Permissions |
 |-------|----------|------|-------------|
-| `arwa@naischool.ae` | `super2025` | Super Admin | Full access — all features |
-| `justin@naischool.ae` | `principal2025` | Principal | Content, Staff, Ann., Events, Media |
-| `marketing@naischool.ae` | `marketing2025` | Marketing | Content, Media, Ann., Events |
-| `admissions@naischool.ae` | `admissions2025` | Admissions | Admissions content, Ann., Events |
-| `academic@naischool.ae` | `academic2025` | Academic | Academic content, Staff, Media |
-| `readonly@naischool.ae` | `readonly2025` | Read Only | View only — no write access |
+| `admin@naisdubai.ae` | `Admin@2025!` | Super Admin | Full access — all features |
+| `principal@naisdubai.ae` | `Principal@2025!` | Principal | Content, Staff, Ann., Events, Media |
+| `marketing@naisdubai.ae` | `Marketing@2025!` | Marketing | Content, Media, Ann., Events |
+| `admissions@naisdubai.ae` | `Admissions@2025!` | Admissions | Admissions content, Ann., Events |
+| `academic@naisdubai.ae` | `Academic@2025!` | Academic | Academic content, Staff, Media |
+| `viewer@naisdubai.ae` | `Viewer@2025!` | Read Only | View only — no write access |
+
+> **Session security**: Sessions are stamped with `_v: '2.1'`. Stale sessions from older versions are auto-cleared on page load. Login page validates both email + version before auto-redirecting.
 
 ### Admin Pages
 
@@ -163,12 +165,14 @@ Key: `nais_cms_user` (localStorage)
 
 ```json
 {
-  "email": "arwa@naischool.ae",
-  "name": "Arwa A. Taher",
+  "email": "admin@naisdubai.ae",
+  "name": "System Administrator",
   "role": "super_admin",
-  "avatar": "AT",
+  "avatar": "SA",
   "department": "Executive",
-  "loginTime": 1746867600000
+  "loginAt": "2026-05-11T10:00:00.000Z",
+  "remember": false,
+  "_v": "2.1"
 }
 ```
 
@@ -250,18 +254,38 @@ readonly     →  Read-only — no create/edit/delete
 
 ### CMS Admin Panel ✅ (Phase 3 + Phase 4 Sidebar Expansion — Complete)
 - ✅ **14 admin HTML pages** — login, dashboard, content, media, staff, announcements, events, admissions, results, gallery, documents, users, SEO, settings
-- ✅ **admin/css/admin.css** — Full design system; new classes: `.sidebar-user`, `.sidebar-user-avatar`, `.sidebar-user-name`, `.sidebar-user-badge`, `.sidebar-signout-btn`, `.nav-arrow`
-- ✅ **admin/js/core.js** — `sidebarSignOut` button wired for all 14 pages; all element IDs match HTML exactly
+- ✅ **admin/css/admin.css** — Full design system + all shared utility classes (see below)
+- ✅ **admin/js/core.js** — `SESSION_VERSION = '2.1'`; role-based DEMO_USERS; `getUser()` auto-clears stale sessions; `sidebarSignOut` wired for all pages
 - ✅ **14 CMS table schemas** — all defined and seeded with demo data
 - ✅ **Sidebar redesigned** — all 14 pages: 🏫 emoji logo, user profile block (avatar + name + role badge), full nav (13 items across Main/School/System sections), Sign Out button pinned to bottom
-- ✅ **Sidebar nav expanded** — Pages▶, Media Library, Announcements🔴3, Events | Staff Profiles, Admissions, Results, Gallery, Documents🟡2 | Users & Roles, SEO Manager, Settings, View Website
+- ✅ **Sidebar CSS fixed** — `box-sizing: border-box` on all children, fixed 20px icon column with `margin-right: 10px`, nav label `flex: 1` with overflow ellipsis, sidebar width 270px
+- ✅ **Stat cards fixed** — `.stat-trend` moved inside `.stat-body`; `.stat-card` uses `align-items: center`; `.stat-body` uses `flex-direction: column`
+- ✅ **Login auto-redirect fixed** — `checkExistingSession()` validates email against DEMO_USERS AND `_v === SESSION_VERSION` before redirecting; stale sessions auto-cleared
+- ✅ **Credentials synced** — `core.js` DEMO_USERS matches `login.html` exactly; no personal names; role-based display names only
+- ✅ **Cache-busting** — `?v=2.1` on all `admin.css` and `core.js` references across all 13 admin pages
+- ✅ **Missing CSS classes added** — `.card`, `.card-header`, `.card-title`, `.card-body`, `.table-responsive`, `.search-box`, `.search-icon`, `.search-input`, `.table-action-btn`, `.toggle-switch`, `.toggle-slider`, `.form-grid`, `.required`, `.btn-danger`, `.text-center` — all now defined globally in `admin.css` (see "Shared Utility Classes" section below)
+- ✅ **Activity log reseeded** — `cms_activity_log` cleared of old personal names; reseeded with 7 role-based entries
 - ✅ **Role-based auth** — 6-level hierarchy enforced via `Auth.can()`, session in localStorage
 - ✅ **Bilingual content** — all forms have EN + AR fields with `dir="rtl"` Arabic inputs
-- ✅ **Live design preview** — colour pickers in settings.html update mini site preview in real time
-- ✅ **SEO Google preview** — live-updating simulated search result in settings
 - ✅ **Permissions matrix** — 24 feature rows × 6 roles rendered in users.html
 - ✅ **Paste-URL detection** — media.html auto-opens modal with URL pre-filled on paste
 - ✅ **0 console errors** — all 14 admin pages verified via Playwright
+
+### Shared Utility CSS Classes (admin.css — added v2.1)
+
+These classes were missing and causing Events, Admissions, Results, Gallery, Documents, and SEO pages to render broken. Now globally defined:
+
+| Class(es) | Purpose |
+|-----------|---------|
+| `.card`, `.card-header`, `.card-title`, `.card-body` | White panel container with header and optional body padding |
+| `.table-responsive` | Horizontal scroll wrapper for tables on small screens |
+| `.search-box`, `.search-icon`, `.search-input` | Search field with left-aligned icon, focus ring, 220px default width |
+| `.table-action-btn` (+ `.danger` modifier) | 30×30px icon button in table rows; navy hover, red hover for danger |
+| `.toggle-switch`, `.toggle-slider` | CSS-only checkbox toggle; 40×22px; navy when checked |
+| `.form-grid` | CSS grid container for form field layouts |
+| `.required` | Red asterisk (`*`) for required field labels |
+| `.btn-danger` | Destructive action button (red fill, white text, hover darkens) |
+| `.text-center`, `.text-right`, `.text-left` | Text alignment utilities |
 
 ### Design & UX
 - ✅ **Responsive** — mobile-first, tested down to 320px
