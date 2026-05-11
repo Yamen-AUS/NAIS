@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media Manager — NAIS Dubai CMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin.css?v=2.1" />
+</head>
+<body>
+
+  <!-- ── Sidebar ── -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-mark">🏫</div>
+        <div class="sidebar-logo-text">
+          <span class="sidebar-school">NAIS Dubai</span>
+          <span class="sidebar-cms">CMS Admin</span>
+        </div>
+      </div>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar" data-user-avatar>SA</div>
+      <div class="sidebar-user-info">
+        <span class="sidebar-user-name" data-user-name>Loading…</span>
+        <span class="sidebar-user-badge" data-user-role>Admin</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="index.html" class="nav-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+      <a href="content.html" class="nav-item"><i class="fas fa-file-alt"></i><span>Pages</span><i class="fas fa-chevron-right nav-arrow"></i></a>
+      <a href="media.html" class="nav-item active"><i class="fas fa-images"></i><span>Media Library</span></a>
+      <a href="announcements.html" class="nav-item"><i class="fas fa-bullhorn"></i><span>Announcements</span><span class="nav-badge">3</span></a>
+      <a href="events.html" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Events</span></a>
+      <div class="nav-section-label">School</div>
+      <a href="staff.html" class="nav-item"><i class="fas fa-users"></i><span>Staff Profiles</span></a>
+      <a href="admissions.html" class="nav-item"><i class="fas fa-user-graduate"></i><span>Admissions</span></a>
+      <a href="results.html" class="nav-item"><i class="fas fa-award"></i><span>Results</span></a>
+      <a href="gallery.html" class="nav-item"><i class="fas fa-photo-video"></i><span>Gallery</span></a>
+      <a href="documents.html" class="nav-item"><i class="fas fa-folder-open"></i><span>Documents</span><span class="nav-badge">2</span></a>
+      <div class="nav-section-label">System</div>
+      <a href="users.html" class="nav-item"><i class="fas fa-user-shield"></i><span>Users &amp; Roles</span></a>
+      <a href="seo.html" class="nav-item"><i class="fas fa-search"></i><span>SEO Manager</span></a>
+      <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+      <a href="../index.html" target="_blank" class="nav-item"><i class="fas fa-external-link-alt"></i><span>View Website</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-signout-btn" id="sidebarSignOut"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- ── Topbar ── -->
+  <header class="admin-topbar">
+    <div class="topbar-left">
+      <button class="topbar-menu-btn" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-breadcrumb">
+        <span class="bc-home"><i class="fas fa-home"></i></span>
+        <i class="fas fa-chevron-right bc-sep"></i>
+        <span class="bc-current">Media Manager</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="topbar-icon-btn" onclick="window.open('../index.html','_blank')"><i class="fas fa-globe"></i></button>
+      <div class="topbar-user" id="topbarUser">
+        <div class="topbar-avatar" data-user-avatar>SA</div>
+        <div class="topbar-user-info">
+          <span class="topbar-user-name" data-user-name>Loading…</span>
+          <span class="topbar-user-role" data-user-role>—</span>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="user-dropdown-header">
+            <div class="udh-avatar" data-user-avatar>SA</div>
+            <div><div class="udh-name" data-user-name>—</div><div class="udh-email" data-user-email>—</div></div>
+          </div>
+          <div class="user-dropdown-divider"></div>
+          <a href="settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+          <button class="user-dropdown-item danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main ── -->
+  <main class="admin-main">
+    <div class="admin-content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Media Manager</h1>
+          <p class="page-subtitle">Manage image URLs, embeds, and media references used across the website.</p>
+        </div>
+        <div class="page-header-actions">
+          <div class="view-toggle">
+            <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')" title="Grid view"><i class="fas fa-th"></i></button>
+            <button class="view-btn" id="listViewBtn" onclick="setView('list')" title="List view"><i class="fas fa-list"></i></button>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="Modal.open('addMediaModal')">
+            <i class="fas fa-plus"></i> Add Media
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Drop zone + toolbar ── -->
+      <div class="media-toolbar panel">
+        <div class="media-toolbar-inner">
+          <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-inner">
+              <i class="fas fa-cloud-upload-alt drop-zone-icon"></i>
+              <div class="drop-zone-text">
+                <strong>Paste or drag an image URL here</strong>
+                <span>Or click "Add Media" to enter a URL manually</span>
+              </div>
+            </div>
+          </div>
+          <div class="media-filters">
+            <div class="search-wrap">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" class="search-input" id="mediaSearch" placeholder="Search by name or tag…" oninput="filterMedia()" />
+            </div>
+            <select class="form-select sm" id="typeFilter" onchange="filterMedia()">
+              <option value="">All types</option>
+              <option value="image">Images</option>
+              <option value="video">Videos</option>
+              <option value="document">Documents</option>
+              <option value="embed">Embeds</option>
+            </select>
+            <select class="form-select sm" id="pageFilter" onchange="filterMedia()">
+              <option value="">All pages</option>
+              <option value="home">Home</option>
+              <option value="about">About</option>
+              <option value="academics">Academics</option>
+              <option value="admissions">Admissions</option>
+              <option value="studentlife">Student Life</option>
+              <option value="facilities">Facilities</option>
+              <option value="community">Community</option>
+              <option value="innovation">Innovation</option>
+              <option value="sports">Sports</option>
+              <option value="news">News</option>
+            </select>
+            <button class="btn btn-outline btn-sm" onclick="clearFilters()"><i class="fas fa-times"></i> Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div class="media-stats-row" id="mediaStatsRow">
+        <span class="media-stat"><i class="fas fa-images"></i> <span id="totalCount">—</span> items</span>
+        <span class="media-stat"><i class="fas fa-image"></i> <span id="imageCount">—</span> images</span>
+        <span class="media-stat"><i class="fas fa-video"></i> <span id="videoCount">—</span> videos</span>
+        <span class="media-stat"><i class="fas fa-code"></i> <span id="embedCount">—</span> embeds</span>
+        <span id="selectionInfo" class="media-stat selection-info" style="display:none;">
+          <i class="fas fa-check-square"></i> <span id="selectedCount">0</span> selected
+          <button class="btn btn-red btn-sm" style="margin-left:8px;" onclick="deleteSelected()"><i class="fas fa-trash"></i> Delete Selected</button>
+        </span>
+      </div>
+
+      <!-- ── Media grid ── -->
+      <div class="media-grid-wrap" id="mediaGridWrap">
+        <div class="media-grid" id="mediaGrid">
+          <div class="media-loading"><i class="fas fa-spinner fa-spin"></i> Loading media…</div>
+        </div>
+      </div>
+
+      <!-- ── Pagination ── -->
+      <div class="pagination-row" id="paginationRow" style="display:none;">
+        <button class="btn btn-outline btn-sm" id="prevPage" onclick="changePage(-1)"><i class="fas fa-chevron-left"></i> Prev</button>
+        <span class="pagination-info" id="pageInfo">Page 1</span>
+        <button class="btn btn-outline btn-sm" id="nextPage" onclick="changePage(1)">Next <i class="fas fa-chevron-right"></i></button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ── Add/Edit Media Modal ── -->
+  <div class="modal-backdrop" id="addMediaModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="mediaModalTitle">Add Media Item</h3>
+        <button class="modal-close" data-modal-close="addMediaModal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="mediaForm">
+          <input type="hidden" id="mediaId" />
+          <div class="form-group">
+            <label class="form-label">Name / Label <span class="form-required">*</span></label>
+            <input type="text" class="form-input" id="mediaName" placeholder="e.g. Hero Banner — Homepage" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Media Type</label>
+              <select class="form-select" id="mediaType" onchange="onTypeChange()">
+                <option value="image">Image</option>
+                <option value="video">Video</option>
+                <option value="embed">Embed / iFrame</option>
+                <option value="document">Document</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Assigned Page</label>
+              <select class="form-select" id="mediaPage">
+                <option value="">— All pages —</option>
+                <option value="home">Home</option>
+                <option value="about">About</option>
+                <option value="academics">Academics</option>
+                <option value="admissions">Admissions</option>
+                <option value="studentlife">Student Life</option>
+                <option value="facilities">Facilities</option>
+                <option value="community">Community</option>
+                <option value="innovation">Innovation</option>
+                <option value="sports">Sports</option>
+                <option value="news">News</option>
+                <option value="careers">Careers</option>
+                <option value="contact">Contact</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">URL / Source <span class="form-required">*</span></label>
+            <input type="url" class="form-input" id="mediaUrl" placeholder="https://…" required oninput="previewUrl()" />
+          </div>
+          <!-- Image preview -->
+          <div class="form-group" id="imgPreviewWrap" style="display:none;">
+            <label class="form-label">Preview</label>
+            <div class="url-preview-box">
+              <img id="urlPreviewImg" src="" alt="Preview" style="max-height:180px;max-width:100%;border-radius:8px;object-fit:cover;" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Alt Text / Description</label>
+            <input type="text" class="form-input" id="mediaAlt" placeholder="Descriptive alt text for accessibility" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tags <span style="font-size:11px;color:var(--gray400);font-weight:400;">(comma-separated)</span></label>
+            <input type="text" class="form-input" id="mediaTags" placeholder="hero, banner, campus" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Notes</label>
+            <textarea class="form-textarea" id="mediaNotes" rows="2" placeholder="Internal notes…"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" data-modal-close="addMediaModal">Cancel</button>
+        <button class="btn btn-primary" onclick="saveMedia()"><i class="fas fa-save"></i> Save Media</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Media Detail Modal ── -->
+  <div class="modal-backdrop" id="mediaDetailModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="detailTitle">Media Detail</h3>
+        <button class="modal-close" data-modal-close="mediaDetailModal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="detailBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" data-modal-close="mediaDetailModal">Close</button>
+        <button class="btn btn-outline" id="detailEditBtn"><i class="fas fa-edit"></i> Edit</button>
+        <button class="btn btn-red" id="detailDeleteBtn"><i class="fas fa-trash"></i> Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script src="js/core.js?v=2.1"></script>
+  <script>
+    let allMedia = [];
+    let filteredMedia = [];
+    let selectedIds = new Set();
+    let currentView = 'grid';
+    let currentPageNum = 1;
+    const PAGE_SIZE = 24;
+
+    // ── Load media ──
+    async function loadMedia() {
+      try {
+        const res = await API.get('cms_media', { limit: 200 });
+        allMedia = res.data || [];
+        updateStats();
+        filterMedia();
+      } catch(e) {
+        document.getElementById('mediaGrid').innerHTML =
+          '<div class="media-empty"><i class="fas fa-exclamation-triangle"></i><p>Could not load media.</p></div>';
+      }
+    }
+
+    // ── Stats ──
+    function updateStats() {
+      document.getElementById('totalCount').textContent  = allMedia.length;
+      document.getElementById('imageCount').textContent  = allMedia.filter(m=>m.media_type==='image').length;
+      document.getElementById('videoCount').textContent  = allMedia.filter(m=>m.media_type==='video').length;
+      document.getElementById('embedCount').textContent  = allMedia.filter(m=>m.media_type==='embed').length;
+    }
+
+    // ── Filter ──
+    function filterMedia() {
+      const q    = (document.getElementById('mediaSearch').value || '').toLowerCase();
+      const type = document.getElementById('typeFilter').value;
+      const page = document.getElementById('pageFilter').value;
+      filteredMedia = allMedia.filter(m => {
+        const matchQ    = !q || (m.name||'').toLowerCase().includes(q) || (m.tags||'').toLowerCase().includes(q);
+        const matchType = !type || m.media_type === type;
+        const matchPage = !page || m.assigned_page === page;
+        return matchQ && matchType && matchPage;
+      });
+      currentPageNum = 1;
+      renderMedia();
+    }
+
+    function clearFilters() {
+      document.getElementById('mediaSearch').value = '';
+      document.getElementById('typeFilter').value  = '';
+      document.getElementById('pageFilter').value  = '';
+      filterMedia();
+    }
+
+    // ── Render media ──
+    function renderMedia() {
+      const grid = document.getElementById('mediaGrid');
+      const start = (currentPageNum - 1) * PAGE_SIZE;
+      const pageItems = filteredMedia.slice(start, start + PAGE_SIZE);
+      const totalPages = Math.ceil(filteredMedia.length / PAGE_SIZE);
+
+      if (!filteredMedia.length) {
+        grid.innerHTML = `<div class="media-empty"><i class="fas fa-images"></i><p>No media items found.</p><button class="btn btn-primary btn-sm" onclick="Modal.open('addMediaModal')" style="margin-top:12px;"><i class="fas fa-plus"></i> Add First Item</button></div>`;
+        document.getElementById('paginationRow').style.display = 'none';
+        return;
+      }
+
+      if (currentView === 'grid') {
+        grid.className = 'media-grid grid-view';
+        grid.innerHTML = pageItems.map(m => renderMediaCard(m)).join('');
+      } else {
+        grid.className = 'media-grid list-view';
+        grid.innerHTML = `
+          <table class="data-table" style="width:100%">
+            <thead><tr><th style="width:32px;"><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)"></th><th>Name</th><th>Type</th><th>Page</th><th>Tags</th><th>Added</th><th>Actions</th></tr></thead>
+            <tbody>${pageItems.map(m => renderMediaRow(m)).join('')}</tbody>
+          </table>`;
+      }
+
+      // Pagination
+      const pr = document.getElementById('paginationRow');
+      if (totalPages > 1) {
+        pr.style.display = 'flex';
+        document.getElementById('pageInfo').textContent = `Page ${currentPageNum} of ${totalPages}`;
+        document.getElementById('prevPage').disabled = currentPageNum <= 1;
+        document.getElementById('nextPage').disabled = currentPageNum >= totalPages;
+      } else {
+        pr.style.display = 'none';
+      }
+
+      updateSelectionUI();
+    }
+
+    function changePage(dir) {
+      currentPageNum += dir;
+      renderMedia();
+    }
+
+    function renderMediaCard(m) {
+      const isSelected = selectedIds.has(m.id);
+      const isImg = m.media_type === 'image';
+      const thumb = isImg && m.url ? `<img src="${escHtml(m.url)}" alt="${escHtml(m.alt_text||m.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" /><div class="media-thumb-fallback" style="display:none;"><i class="fas ${typeIcon(m.media_type)}"></i></div>` : `<div class="media-thumb-fallback"><i class="fas ${typeIcon(m.media_type)}"></i></div>`;
+      return `
+        <div class="media-card ${isSelected?'selected':''}" data-id="${m.id}" onclick="toggleSelect('${m.id}',event)">
+          <div class="media-card-thumb" ondblclick="openDetail('${m.id}',event)">
+            ${thumb}
+            <div class="media-card-overlay">
+              <button class="media-overlay-btn" onclick="openDetail('${m.id}',event)" title="View details"><i class="fas fa-eye"></i></button>
+              <button class="media-overlay-btn" onclick="editMedia('${m.id}',event)" title="Edit"><i class="fas fa-edit"></i></button>
+              <button class="media-overlay-btn danger" onclick="deleteMedia('${m.id}','${escHtml(m.name||'')}',event)" title="Delete"><i class="fas fa-trash"></i></button>
+            </div>
+            <div class="media-select-check ${isSelected?'visible':''}"><i class="fas fa-check"></i></div>
+          </div>
+          <div class="media-card-meta">
+            <div class="media-card-name" title="${escHtml(m.name||'')}">${escHtml(m.name||'Untitled')}</div>
+            <div class="media-card-info">
+              <span class="media-type-badge type-${m.media_type||'image'}">${m.media_type||'image'}</span>
+              ${m.assigned_page ? `<span class="media-page-tag">${m.assigned_page}</span>` : ''}
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderMediaRow(m) {
+      const isSelected = selectedIds.has(m.id);
+      return `
+        <tr class="${isSelected?'row-selected':''}">
+          <td><input type="checkbox" class="row-check" value="${m.id}" ${isSelected?'checked':''} onchange="toggleSelectById('${m.id}',this.checked)" onclick="event.stopPropagation()"></td>
+          <td>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div class="list-thumb">${m.media_type==='image'&&m.url?`<img src="${escHtml(m.url)}" style="width:40px;height:40px;object-fit:cover;border-radius:4px;" onerror="this.style.display='none'"/>`:''}<i class="fas ${typeIcon(m.media_type)}" style="font-size:18px;color:var(--gray400);${m.media_type==='image'&&m.url?'display:none':''}"></i></div>
+              <div>
+                <div style="font-weight:500;font-size:13px;">${escHtml(m.name||'Untitled')}</div>
+                <div style="font-size:11px;color:var(--gray400);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escHtml(m.url||'')}</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="media-type-badge type-${m.media_type||'image'}">${m.media_type||'image'}</span></td>
+          <td>${m.assigned_page?`<span class="badge badge-navy">${m.assigned_page}</span>`:'<span style="color:var(--gray400)">—</span>'}</td>
+          <td><span style="font-size:11px;color:var(--gray500);">${m.tags||'—'}</span></td>
+          <td class="table-date">${formatDate(m.created_at)}</td>
+          <td>
+            <div class="table-actions">
+              <button class="btn btn-ghost btn-icon" onclick="openDetail('${m.id}',event)" title="View"><i class="fas fa-eye"></i></button>
+              <button class="btn btn-ghost btn-icon" onclick="editMedia('${m.id}',event)" title="Edit"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-ghost btn-icon danger" onclick="deleteMedia('${m.id}','${escHtml(m.name||'')}',event)" title="Delete"><i class="fas fa-trash"></i></button>
+            </div>
+          </td>
+        </tr>`;
+    }
+
+    function typeIcon(type) {
+      return { image:'fa-image', video:'fa-video', embed:'fa-code', document:'fa-file-pdf' }[type] || 'fa-file';
+    }
+
+    // ── Selection ──
+    function toggleSelect(id, e) {
+      if (e && (e.target.closest('.media-overlay-btn') || e.target.closest('button'))) return;
+      if (selectedIds.has(id)) selectedIds.delete(id);
+      else selectedIds.add(id);
+      renderMedia();
+    }
+
+    function toggleSelectById(id, checked) {
+      if (checked) selectedIds.add(id);
+      else selectedIds.delete(id);
+      updateSelectionUI();
+    }
+
+    function toggleSelectAll(cb) {
+      const start = (currentPageNum - 1) * PAGE_SIZE;
+      const pageItems = filteredMedia.slice(start, start + PAGE_SIZE);
+      if (cb.checked) pageItems.forEach(m => selectedIds.add(m.id));
+      else pageItems.forEach(m => selectedIds.delete(m.id));
+      renderMedia();
+    }
+
+    function updateSelectionUI() {
+      const info = document.getElementById('selectionInfo');
+      document.getElementById('selectedCount').textContent = selectedIds.size;
+      info.style.display = selectedIds.size > 0 ? '' : 'none';
+    }
+
+    async function deleteSelected() {
+      if (!selectedIds.size) return;
+      confirmDelete(`${selectedIds.size} media item(s)`, async () => {
+        for (const id of selectedIds) {
+          await API.delete('cms_media', id);
+        }
+        selectedIds.clear();
+        Toast.success(`${selectedIds.size || 'Selected'} items deleted.`);
+        loadMedia();
+      });
+    }
+
+    // ── View toggle ──
+    function setView(view) {
+      currentView = view;
+      document.getElementById('gridViewBtn').classList.toggle('active', view === 'grid');
+      document.getElementById('listViewBtn').classList.toggle('active', view === 'list');
+      renderMedia();
+    }
+
+    // ── Save media ──
+    async function saveMedia() {
+      const id    = document.getElementById('mediaId').value;
+      const name  = document.getElementById('mediaName').value.trim();
+      const url   = document.getElementById('mediaUrl').value.trim();
+      const type  = document.getElementById('mediaType').value;
+      const page  = document.getElementById('mediaPage').value;
+      const alt   = document.getElementById('mediaAlt').value.trim();
+      const tags  = document.getElementById('mediaTags').value.trim();
+      const notes = document.getElementById('mediaNotes').value.trim();
+
+      if (!name || !url) { Toast.warning('Name and URL are required.'); return; }
+
+      const payload = { name, url, media_type: type, assigned_page: page, alt_text: alt, tags, notes };
+
+      try {
+        if (id) {
+          await API.put('cms_media', id, payload);
+          logActivity('updated', 'media item', name);
+          Toast.success('Media updated.');
+        } else {
+          await API.post('cms_media', payload);
+          logActivity('uploaded', 'media item', name);
+          Toast.success('Media added.');
+        }
+        Modal.close('addMediaModal');
+        loadMedia();
+      } catch(e) {
+        Toast.error('Save failed.');
+      }
+    }
+
+    // ── Edit media ──
+    function editMedia(id, e) {
+      if (e) e.stopPropagation();
+      const m = allMedia.find(x => x.id === id);
+      if (!m) return;
+      document.getElementById('mediaModalTitle').textContent = 'Edit Media Item';
+      document.getElementById('mediaId').value   = m.id;
+      document.getElementById('mediaName').value = m.name || '';
+      document.getElementById('mediaUrl').value  = m.url || '';
+      document.getElementById('mediaType').value = m.media_type || 'image';
+      document.getElementById('mediaPage').value = m.assigned_page || '';
+      document.getElementById('mediaAlt').value  = m.alt_text || '';
+      document.getElementById('mediaTags').value = m.tags || '';
+      document.getElementById('mediaNotes').value= m.notes || '';
+      onTypeChange();
+      previewUrl();
+      Modal.open('addMediaModal');
+    }
+
+    // ── Delete media ──
+    async function deleteMedia(id, label, e) {
+      if (e) e.stopPropagation();
+      confirmDelete(label || 'this media item', async () => {
+        await API.delete('cms_media', id);
+        logActivity('deleted', 'media item', label);
+        Toast.success('Media deleted.');
+        loadMedia();
+      });
+    }
+
+    // ── Open detail ──
+    function openDetail(id, e) {
+      if (e) e.stopPropagation();
+      const m = allMedia.find(x => x.id === id);
+      if (!m) return;
+      document.getElementById('detailTitle').textContent = m.name || 'Media Detail';
+      const isImg = m.media_type === 'image';
+      document.getElementById('detailBody').innerHTML = `
+        <div class="detail-layout">
+          <div class="detail-preview">
+            ${isImg && m.url ? `<img src="${escHtml(m.url)}" alt="${escHtml(m.alt_text||m.name)}" style="width:100%;max-height:300px;object-fit:contain;border-radius:10px;background:var(--gray100);" onerror="this.outerHTML='<div class=\\"detail-no-preview\\"><i class=\\"fas fa-image\\"></i><p>Preview unavailable</p></div>'" />` : `<div class="detail-no-preview"><i class="fas ${typeIcon(m.media_type)}" style="font-size:48px;"></i><p>${m.media_type}</p></div>`}
+          </div>
+          <div class="detail-meta">
+            <table class="detail-table">
+              <tr><th>Name</th><td>${escHtml(m.name||'—')}</td></tr>
+              <tr><th>Type</th><td><span class="media-type-badge type-${m.media_type||'image'}">${m.media_type||'—'}</span></td></tr>
+              <tr><th>Page</th><td>${m.assigned_page||'All pages'}</td></tr>
+              <tr><th>Alt Text</th><td>${escHtml(m.alt_text||'—')}</td></tr>
+              <tr><th>Tags</th><td>${m.tags||'—'}</td></tr>
+              <tr><th>Added</th><td>${formatDate(m.created_at)}</td></tr>
+            </table>
+            <div style="margin-top:14px;">
+              <label class="form-label" style="margin-bottom:6px;">URL</label>
+              <div class="url-copy-row">
+                <input type="text" class="form-input" value="${escHtml(m.url||'')}" readonly id="copyUrlInput_${m.id}" style="font-size:12px;font-family:monospace;" />
+                <button class="btn btn-outline btn-sm" onclick="copyUrl('${m.id}')"><i class="fas fa-copy"></i></button>
+              </div>
+            </div>
+            ${m.notes ? `<div style="margin-top:12px;padding:10px 12px;background:var(--gray50);border-radius:8px;font-size:12px;color:var(--gray600);">${escHtml(m.notes)}</div>` : ''}
+          </div>
+        </div>`;
+      document.getElementById('detailEditBtn').onclick = () => { Modal.close('mediaDetailModal'); editMedia(id); };
+      document.getElementById('detailDeleteBtn').onclick = () => { Modal.close('mediaDetailModal'); deleteMedia(id, m.name); };
+      Modal.open('mediaDetailModal');
+    }
+
+    function copyUrl(id) {
+      const input = document.getElementById(`copyUrlInput_${id}`);
+      if (!input) return;
+      navigator.clipboard.writeText(input.value).then(() => Toast.success('URL copied to clipboard.')).catch(() => { input.select(); document.execCommand('copy'); Toast.success('URL copied.'); });
+    }
+
+    // ── URL preview on type ──
+    function previewUrl() {
+      const url = document.getElementById('mediaUrl').value.trim();
+      const type = document.getElementById('mediaType').value;
+      const wrap = document.getElementById('imgPreviewWrap');
+      if (type === 'image' && url) {
+        document.getElementById('urlPreviewImg').src = url;
+        wrap.style.display = '';
+      } else {
+        wrap.style.display = 'none';
+      }
+    }
+
+    function onTypeChange() {
+      previewUrl();
+    }
+
+    // ── Drop zone: paste URL ──
+    document.getElementById('dropZone').addEventListener('click', () => {
+      document.getElementById('mediaId').value = '';
+      document.getElementById('mediaModalTitle').textContent = 'Add Media Item';
+      document.getElementById('mediaForm').reset();
+      Modal.open('addMediaModal');
+    });
+
+    document.addEventListener('paste', (e) => {
+      const text = e.clipboardData.getData('text');
+      if (text && (text.startsWith('http://') || text.startsWith('https://'))) {
+        document.getElementById('mediaId').value  = '';
+        document.getElementById('mediaModalTitle').textContent = 'Add Media Item';
+        document.getElementById('mediaForm').reset();
+        document.getElementById('mediaUrl').value = text;
+        const ext = text.split('.').pop().toLowerCase();
+        if (['jpg','jpeg','png','webp','gif','svg','avif'].includes(ext)) document.getElementById('mediaType').value = 'image';
+        else if (['mp4','webm','mov'].includes(ext)) document.getElementById('mediaType').value = 'video';
+        previewUrl();
+        Modal.open('addMediaModal');
+        Toast.info('URL pasted! Fill in the details and save.');
+      }
+    });
+
+    function escHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    // ── Modal reset on open ──
+    document.querySelector('[data-modal-close="addMediaModal"]')?.addEventListener('click', () => {
+      document.getElementById('mediaForm').reset();
+      document.getElementById('mediaId').value = '';
+      document.getElementById('imgPreviewWrap').style.display = 'none';
+    });
+
+    document.addEventListener('DOMContentLoaded', () => { loadMedia(); });
+  </script>
+
+  <style>
+    /* ── Media toolbar ── */
+    .media-toolbar { margin-bottom: 16px; }
+    .media-toolbar-inner { display: flex; flex-direction: column; gap: 16px; }
+
+    .drop-zone {
+      border: 2px dashed var(--gray200);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .drop-zone:hover { border-color: var(--navy); background: rgba(10,25,49,0.03); }
+    .drop-zone-inner { display: flex; align-items: center; justify-content: center; gap: 16px; }
+    .drop-zone-icon { font-size: 28px; color: var(--gray300); }
+    .drop-zone-text strong { display: block; font-size: 14px; color: var(--gray700); margin-bottom: 2px; }
+    .drop-zone-text span { font-size: 12px; color: var(--gray400); }
+
+    .media-filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .form-select.sm { height: 34px; font-size: 13px; padding: 0 10px; min-width: 130px; }
+
+    /* ── Stats row ── */
+    .media-stats-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 10px 0;
+    }
+    .media-stat { font-size: 13px; color: var(--gray500); display: flex; align-items: center; gap: 6px; }
+    .media-stat i { color: var(--navy); }
+    .selection-info { color: var(--navy); font-weight: 600; }
+
+    /* ── View toggle ── */
+    .view-toggle { display: flex; border: 1.5px solid var(--gray200); border-radius: 8px; overflow: hidden; }
+    .view-btn { background: none; border: none; padding: 6px 10px; cursor: pointer; color: var(--gray400); font-size: 14px; transition: all 0.15s; }
+    .view-btn.active { background: var(--navy); color: #fff; }
+    .view-btn:hover:not(.active) { background: var(--gray100); color: var(--gray600); }
+
+    /* ── Grid ── */
+    .media-grid-wrap { }
+    .media-grid.grid-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+    .media-grid.list-view { display: block; }
+    .media-loading, .media-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray400);
+      font-size: 14px;
+    }
+    .media-empty i { font-size: 36px; margin-bottom: 12px; display: block; }
+
+    /* ── Media card ── */
+    .media-card {
+      background: #fff;
+      border: 1.5px solid var(--gray200);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: box-shadow 0.18s, border-color 0.18s, transform 0.15s;
+      position: relative;
+    }
+    .media-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .media-card.selected { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(10,25,49,0.12); }
+
+    .media-card-thumb {
+      position: relative;
+      width: 100%;
+      height: 130px;
+      background: var(--gray100);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .media-card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .media-card:hover .media-card-thumb img { transform: scale(1.05); }
+    .media-thumb-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--gray100); }
+    .media-thumb-fallback i { font-size: 32px; color: var(--gray300); }
+
+    .media-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .media-card:hover .media-card-overlay { opacity: 1; }
+    .media-overlay-btn {
+      width: 32px; height: 32px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s;
+    }
+    .media-overlay-btn:hover { background: rgba(255,255,255,0.3); }
+    .media-overlay-btn.danger:hover { background: rgba(192,39,45,0.7); }
+
+    .media-select-check {
+      position: absolute;
+      top: 8px; left: 8px;
+      width: 22px; height: 22px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 10px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .media-select-check.visible { opacity: 1; }
+
+    .media-card-meta { padding: 10px 12px; }
+    .media-card-name { font-size: 12px; font-weight: 600; color: var(--gray700); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 5px; }
+    .media-card-info { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+
+    .media-type-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .type-image    { background: #dbeafe; color: #1d4ed8; }
+    .type-video    { background: #fce7f3; color: #9d174d; }
+    .type-embed    { background: #dcfce7; color: #166534; }
+    .type-document { background: #fef3c7; color: #92400e; }
+
+    .media-page-tag { font-size: 10px; color: var(--gray400); background: var(--gray100); padding: 2px 5px; border-radius: 3px; }
+
+    /* ── List view ── */
+    .row-selected td { background: rgba(10,25,49,0.04); }
+    .list-thumb { width: 40px; height: 40px; background: var(--gray100); border-radius: 6px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+
+    /* ── Detail modal ── */
+    .detail-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .detail-no-preview { display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gray100); border-radius: 10px; height: 200px; color: var(--gray400); gap: 8px; font-size: 13px; }
+    .detail-table { width: 100%; border-collapse: collapse; }
+    .detail-table th { width: 80px; text-align: left; font-size: 12px; color: var(--gray400); font-weight: 500; padding: 6px 0; }
+    .detail-table td { font-size: 13px; color: var(--gray700); padding: 6px 0; }
+    .url-copy-row { display: flex; gap: 8px; }
+    .url-preview-box { background: var(--gray50); border: 1px solid var(--gray200); border-radius: 8px; padding: 10px; text-align: center; }
+
+    /* ── Pagination ── */
+    .pagination-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 24px; }
+    .pagination-info { font-size: 13px; color: var(--gray500); }
+
+    /* Search (reused from content.html) */
+    .search-wrap { position: relative; }
+    .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--gray400); font-size: 12px; pointer-events: none; }
+    .search-input { height: 34px; border: 1.5px solid var(--gray200); border-radius: 8px; padding: 0 10px 0 30px; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--gray700); outline: none; width: 200px; }
+    .search-input:focus { border-color: var(--navy); }
+
+    @media (max-width: 900px) {
+      .detail-layout { grid-template-columns: 1fr; }
+      .media-grid.grid-view { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .drop-zone-inner { flex-direction: column; gap: 8px; }
+      .media-grid.grid-view { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</body>
+</html>
