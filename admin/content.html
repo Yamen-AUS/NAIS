@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager — NAIS Dubai CMS</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin.css?v=2.1" />
+</head>
+<body>
+
+  <!-- ── Sidebar ── -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-mark">🏫</div>
+        <div class="sidebar-logo-text">
+          <span class="sidebar-school">NAIS Dubai</span>
+          <span class="sidebar-cms">CMS Admin</span>
+        </div>
+      </div>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar" data-user-avatar>SA</div>
+      <div class="sidebar-user-info">
+        <span class="sidebar-user-name" data-user-name>Loading…</span>
+        <span class="sidebar-user-badge" data-user-role>Admin</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="index.html" class="nav-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+      <a href="content.html" class="nav-item active"><i class="fas fa-file-alt"></i><span>Pages</span><i class="fas fa-chevron-right nav-arrow"></i></a>
+      <a href="media.html" class="nav-item"><i class="fas fa-images"></i><span>Media Library</span></a>
+      <a href="announcements.html" class="nav-item"><i class="fas fa-bullhorn"></i><span>Announcements</span><span class="nav-badge">3</span></a>
+      <a href="events.html" class="nav-item"><i class="fas fa-calendar-alt"></i><span>Events</span></a>
+      <div class="nav-section-label">School</div>
+      <a href="staff.html" class="nav-item"><i class="fas fa-users"></i><span>Staff Profiles</span></a>
+      <a href="admissions.html" class="nav-item"><i class="fas fa-user-graduate"></i><span>Admissions</span></a>
+      <a href="results.html" class="nav-item"><i class="fas fa-award"></i><span>Results</span></a>
+      <a href="gallery.html" class="nav-item"><i class="fas fa-photo-video"></i><span>Gallery</span></a>
+      <a href="documents.html" class="nav-item"><i class="fas fa-folder-open"></i><span>Documents</span><span class="nav-badge">2</span></a>
+      <div class="nav-section-label">System</div>
+      <a href="users.html" class="nav-item"><i class="fas fa-user-shield"></i><span>Users &amp; Roles</span></a>
+      <a href="seo.html" class="nav-item"><i class="fas fa-search"></i><span>SEO Manager</span></a>
+      <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i><span>Settings</span></a>
+      <a href="../index.html" target="_blank" class="nav-item"><i class="fas fa-external-link-alt"></i><span>View Website</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-signout-btn" id="sidebarSignOut"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- ── Topbar ── -->
+  <header class="admin-topbar">
+    <div class="topbar-left">
+      <button class="topbar-menu-btn" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+      <div class="topbar-breadcrumb">
+        <span class="bc-home"><i class="fas fa-home"></i></span>
+        <i class="fas fa-chevron-right bc-sep"></i>
+        <span class="bc-current">Content Manager</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <button class="topbar-icon-btn" onclick="window.open('../index.html','_blank')"><i class="fas fa-globe"></i></button>
+      <div class="topbar-user" id="topbarUser">
+        <div class="topbar-avatar" data-user-avatar>SA</div>
+        <div class="topbar-user-info">
+          <span class="topbar-user-name" data-user-name>Loading…</span>
+          <span class="topbar-user-role" data-user-role>—</span>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <div class="user-dropdown-header">
+            <div class="udh-avatar" data-user-avatar>SA</div>
+            <div><div class="udh-name" data-user-name>—</div><div class="udh-email" data-user-email>—</div></div>
+          </div>
+          <div class="user-dropdown-divider"></div>
+          <a href="settings.html" class="user-dropdown-item"><i class="fas fa-cog"></i> Settings</a>
+          <button class="user-dropdown-item danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Main ── -->
+  <main class="admin-main">
+    <div class="admin-content">
+
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Content Manager</h1>
+          <p class="page-subtitle">Edit page sections and content blocks across all 12 site pages.</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-primary btn-sm" id="newSectionBtn" onclick="openNewModal()">
+            <i class="fas fa-plus"></i> New Section
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabs: pages -->
+      <div class="content-layout">
+
+        <!-- Left: page tree -->
+        <div class="page-tree-panel panel">
+          <div class="panel-header">
+            <h2 class="panel-title"><i class="fas fa-sitemap"></i> Pages</h2>
+          </div>
+          <div class="panel-body p0">
+            <ul class="page-tree" id="pageTree"></ul>
+          </div>
+        </div>
+
+        <!-- Right: sections for selected page -->
+        <div class="sections-panel">
+          <div class="panel">
+            <div class="panel-header">
+              <h2 class="panel-title" id="selectedPageTitle"><i class="fas fa-file-alt"></i> Select a page</h2>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <div class="search-wrap">
+                  <i class="fas fa-search search-icon"></i>
+                  <input type="text" class="search-input" id="sectionSearch" placeholder="Search sections…" oninput="filterSections()" />
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="openNewModal()"><i class="fas fa-plus"></i> Add Section</button>
+              </div>
+            </div>
+            <div class="panel-body p0">
+              <div id="sectionsContainer">
+                <div class="empty-state">
+                  <i class="fas fa-hand-pointer empty-state-icon"></i>
+                  <p>Select a page from the left to view and edit its content sections.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- .content-layout -->
+    </div>
+  </main>
+
+  <!-- ── Section Editor Modal ── -->
+  <div class="modal-backdrop" id="sectionModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title" id="sectionModalTitle">Add Content Section</h3>
+        <button class="modal-close" data-modal-close="sectionModal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <form id="sectionForm">
+          <input type="hidden" id="sectionId" />
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Page <span class="form-required">*</span></label>
+              <select class="form-select" id="sectionPage" required>
+                <option value="">— Select page —</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Section Key <span class="form-required">*</span></label>
+              <input type="text" class="form-input" id="sectionKey" placeholder="e.g. hero, about-intro" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Section Title <span class="form-required">*</span></label>
+            <input type="text" class="form-input" id="sectionTitle" placeholder="Hero Banner" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Content Type</label>
+            <div class="content-type-grid" id="contentTypeGrid">
+              <label class="content-type-option">
+                <input type="radio" name="contentType" value="text" checked />
+                <span><i class="fas fa-align-left"></i> Text</span>
+              </label>
+              <label class="content-type-option">
+                <input type="radio" name="contentType" value="rich_text" />
+                <span><i class="fas fa-paragraph"></i> Rich Text</span>
+              </label>
+              <label class="content-type-option">
+                <input type="radio" name="contentType" value="html" />
+                <span><i class="fas fa-code"></i> HTML</span>
+              </label>
+              <label class="content-type-option">
+                <input type="radio" name="contentType" value="list" />
+                <span><i class="fas fa-list"></i> List</span>
+              </label>
+              <label class="content-type-option">
+                <input type="radio" name="contentType" value="stats" />
+                <span><i class="fas fa-chart-bar"></i> Stats</span>
+              </label>
+              <label class="content-type-option">
+                <input type="radio" name="contentType" value="image" />
+                <span><i class="fas fa-image"></i> Image URL</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Content (English) <span class="form-required">*</span></label>
+            <textarea class="form-textarea" id="sectionContentEn" rows="5" placeholder="Enter English content…"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Content (Arabic)</label>
+            <textarea class="form-textarea rtl-input" id="sectionContentAr" rows="5" placeholder="أدخل المحتوى بالعربية…" dir="rtl"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Order / Priority</label>
+              <input type="number" class="form-input" id="sectionOrder" value="1" min="1" max="999" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Status</label>
+              <select class="form-select" id="sectionStatus">
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+                <option value="archived">Archived</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Notes / Admin Notes</label>
+            <textarea class="form-textarea" id="sectionNotes" rows="2" placeholder="Internal notes (not shown on site)…"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" data-modal-close="sectionModal">Cancel</button>
+        <button class="btn btn-primary" id="saveSectionBtn" onclick="saveSection()">
+          <i class="fas fa-save"></i> Save Section
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── View/Preview Modal ── -->
+  <div class="modal-backdrop" id="previewModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title">Section Preview</h3>
+        <button class="modal-close" data-modal-close="previewModal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body" id="previewBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" data-modal-close="previewModal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <script src="js/core.js?v=2.1"></script>
+  <script>
+    // ── Site pages definition ──
+    const SITE_PAGES = [
+      { key: 'home',        label: 'Home',         href: '../index.html',       icon: 'fa-home' },
+      { key: 'about',       label: 'About',         href: '../about.html',       icon: 'fa-info-circle' },
+      { key: 'academics',   label: 'Academics',     href: '../academics.html',   icon: 'fa-graduation-cap' },
+      { key: 'admissions',  label: 'Admissions',    href: '../admissions.html',  icon: 'fa-door-open' },
+      { key: 'studentlife', label: 'Student Life',  href: '../studentlife.html', icon: 'fa-star' },
+      { key: 'facilities',  label: 'Facilities',    href: '../facilities.html',  icon: 'fa-building' },
+      { key: 'community',   label: 'Community',     href: '../community.html',   icon: 'fa-hands-helping' },
+      { key: 'innovation',  label: 'Innovation',    href: '../innovation.html',  icon: 'fa-lightbulb' },
+      { key: 'sports',      label: 'Sports',        href: '../sports.html',      icon: 'fa-futbol' },
+      { key: 'news',        label: 'News',          href: '../news.html',        icon: 'fa-newspaper' },
+      { key: 'careers',     label: 'Careers',       href: '../careers.html',     icon: 'fa-briefcase' },
+      { key: 'contact',     label: 'Contact',       href: '../contact.html',     icon: 'fa-envelope' },
+    ];
+
+    let currentPage = null;
+    let allSections = [];
+
+    // ── Render page tree ──
+    function renderPageTree() {
+      const ul = document.getElementById('pageTree');
+      ul.innerHTML = SITE_PAGES.map(p => `
+        <li class="page-tree-item" data-page="${p.key}" onclick="selectPage('${p.key}')">
+          <i class="fas ${p.icon}"></i>
+          <span>${p.label}</span>
+          <a href="${p.href}" target="_blank" class="tree-view-btn" title="View page" onclick="event.stopPropagation()">
+            <i class="fas fa-external-link-alt"></i>
+          </a>
+        </li>
+      `).join('');
+
+      // Select from URL param
+      const urlParams = new URLSearchParams(window.location.search);
+      const pageParam = urlParams.get('page');
+      if (pageParam) {
+        selectPage(pageParam);
+      }
+    }
+
+    // ── Populate page select in modal ──
+    function populatePageSelect(selected) {
+      const sel = document.getElementById('sectionPage');
+      sel.innerHTML = '<option value="">— Select page —</option>' +
+        SITE_PAGES.map(p => `<option value="${p.key}" ${p.key===selected?'selected':''}>${p.label}</option>`).join('');
+    }
+
+    // ── Select page ──
+    async function selectPage(pageKey) {
+      currentPage = pageKey;
+
+      document.querySelectorAll('.page-tree-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.page === pageKey);
+      });
+
+      const page = SITE_PAGES.find(p => p.key === pageKey);
+      document.getElementById('selectedPageTitle').innerHTML =
+        `<i class="fas ${page.icon}"></i> ${page.label} — Sections`;
+
+      await loadSections(pageKey);
+    }
+
+    // ── Load sections ──
+    async function loadSections(pageKey) {
+      const container = document.getElementById('sectionsContainer');
+      container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Loading sections…</div>';
+
+      try {
+        const res = await API.get('cms_pages', { limit: 200 });
+        allSections = (res.data || []).filter(s => s.page_key === pageKey);
+        allSections.sort((a, b) => (a.order || 1) - (b.order || 1));
+        renderSections(allSections);
+      } catch(e) {
+        container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle empty-state-icon" style="color:var(--red)"></i><p>Could not load sections.</p></div>';
+      }
+    }
+
+    // ── Render sections ──
+    function renderSections(sections) {
+      const container = document.getElementById('sectionsContainer');
+      if (!sections.length) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-puzzle-piece empty-state-icon"></i>
+            <p>No sections yet for this page.</p>
+            <button class="btn btn-primary btn-sm" onclick="openNewModal()" style="margin-top:12px;">
+              <i class="fas fa-plus"></i> Add First Section
+            </button>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="section-cards">
+          ${sections.map(s => renderSectionCard(s)).join('')}
+        </div>`;
+    }
+
+    function renderSectionCard(s) {
+      const statusBadge = badgeHtml(s.status || 'published');
+      const contentPreview = (s.content_en || '').slice(0, 120) + ((s.content_en||'').length > 120 ? '…' : '');
+      return `
+        <div class="section-card" data-id="${s.id}">
+          <div class="section-card-header">
+            <div class="section-card-meta">
+              <span class="section-card-order">#${s.order || 1}</span>
+              <span class="section-card-type type-${s.content_type || 'text'}">
+                ${contentTypeIcon(s.content_type)} ${s.content_type || 'text'}
+              </span>
+            </div>
+            <div class="section-card-actions">
+              ${statusBadge}
+              <button class="btn btn-ghost btn-icon" onclick="previewSection('${s.id}')" title="Preview"><i class="fas fa-eye"></i></button>
+              <button class="btn btn-ghost btn-icon" onclick="editSection('${s.id}')" title="Edit"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-ghost btn-icon danger" onclick="deleteSection('${s.id}','${escHtml(s.section_title||'')}')" title="Delete"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          <div class="section-card-title">${escHtml(s.section_title || s.section_key || '—')}</div>
+          <div class="section-card-key"><code>${escHtml(s.section_key || '')}</code></div>
+          <div class="section-card-preview">${escHtml(contentPreview || 'No content yet.')}</div>
+          ${s.content_ar ? `<div class="section-card-ar" dir="rtl">${escHtml((s.content_ar||'').slice(0,80))}${(s.content_ar||'').length>80?'…':''}</div>` : ''}
+        </div>`;
+    }
+
+    function contentTypeIcon(type) {
+      const icons = { text:'<i class="fas fa-align-left"></i>', rich_text:'<i class="fas fa-paragraph"></i>', html:'<i class="fas fa-code"></i>', list:'<i class="fas fa-list"></i>', stats:'<i class="fas fa-chart-bar"></i>', image:'<i class="fas fa-image"></i>' };
+      return icons[type] || '<i class="fas fa-file"></i>';
+    }
+
+    // ── Filter sections ──
+    function filterSections() {
+      const q = document.getElementById('sectionSearch').value.toLowerCase();
+      const filtered = allSections.filter(s =>
+        (s.section_title||'').toLowerCase().includes(q) ||
+        (s.section_key||'').toLowerCase().includes(q) ||
+        (s.content_en||'').toLowerCase().includes(q)
+      );
+      renderSections(filtered);
+    }
+
+    // ── Open new section modal ──
+    function openNewModal() {
+      document.getElementById('sectionModalTitle').textContent = 'Add Content Section';
+      document.getElementById('sectionForm').reset();
+      document.getElementById('sectionId').value = '';
+      populatePageSelect(currentPage || '');
+      Modal.open('sectionModal');
+    }
+
+    // ── Edit section ──
+    function editSection(id) {
+      const s = allSections.find(x => x.id === id);
+      if (!s) return;
+      document.getElementById('sectionModalTitle').textContent = 'Edit Section';
+      document.getElementById('sectionId').value      = s.id;
+      populatePageSelect(s.page_key);
+      document.getElementById('sectionKey').value     = s.section_key || '';
+      document.getElementById('sectionTitle').value   = s.section_title || '';
+      document.getElementById('sectionContentEn').value = s.content_en || '';
+      document.getElementById('sectionContentAr').value = s.content_ar || '';
+      document.getElementById('sectionOrder').value   = s.order || 1;
+      document.getElementById('sectionStatus').value  = s.status || 'published';
+      document.getElementById('sectionNotes').value   = s.notes || '';
+
+      // Set radio
+      const radioVal = s.content_type || 'text';
+      const radio = document.querySelector(`input[name="contentType"][value="${radioVal}"]`);
+      if (radio) radio.checked = true;
+
+      Modal.open('sectionModal');
+    }
+
+    // ── Preview section ──
+    function previewSection(id) {
+      const s = allSections.find(x => x.id === id);
+      if (!s) return;
+      document.getElementById('previewBody').innerHTML = `
+        <div style="margin-bottom:16px;">
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px;">
+            <strong style="font-size:17px;">${escHtml(s.section_title||'')}</strong>
+            ${badgeHtml(s.status||'published')}
+            <code style="font-size:11px;background:var(--gray100);padding:2px 8px;border-radius:4px;">${escHtml(s.section_key||'')}</code>
+          </div>
+        </div>
+        <div class="preview-lang-tabs">
+          <div class="preview-lang-label">🇬🇧 English</div>
+          <div class="preview-content-box">${s.content_type === 'html' ? (s.content_en||'<em>No content</em>') : escHtml(s.content_en||'No content.')}</div>
+          ${s.content_ar ? `
+          <div class="preview-lang-label" style="margin-top:16px;">🇦🇪 Arabic</div>
+          <div class="preview-content-box rtl-text" dir="rtl">${escHtml(s.content_ar)}</div>` : ''}
+        </div>
+        ${s.notes ? `<div class="preview-notes"><i class="fas fa-sticky-note"></i> <em>${escHtml(s.notes)}</em></div>` : ''}
+      `;
+      Modal.open('previewModal');
+    }
+
+    // ── Save section ──
+    async function saveSection() {
+      const id        = document.getElementById('sectionId').value;
+      const pageKey   = document.getElementById('sectionPage').value;
+      const key       = document.getElementById('sectionKey').value.trim();
+      const title     = document.getElementById('sectionTitle').value.trim();
+      const contentEn = document.getElementById('sectionContentEn').value.trim();
+      const contentAr = document.getElementById('sectionContentAr').value.trim();
+      const order     = parseInt(document.getElementById('sectionOrder').value) || 1;
+      const status    = document.getElementById('sectionStatus').value;
+      const notes     = document.getElementById('sectionNotes').value.trim();
+      const type      = document.querySelector('input[name="contentType"]:checked')?.value || 'text';
+
+      if (!pageKey || !key || !title) {
+        Toast.warning('Please fill in Page, Section Key, and Title.');
+        return;
+      }
+
+      const payload = { page_key: pageKey, section_key: key, section_title: title, content_en: contentEn, content_ar: contentAr, content_type: type, order, status, notes };
+
+      const btn = document.getElementById('saveSectionBtn');
+      btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving…';
+
+      try {
+        if (id) {
+          await API.put('cms_pages', id, payload);
+          logActivity('updated', 'content section', title);
+          Toast.success('Section updated successfully.');
+        } else {
+          await API.post('cms_pages', payload);
+          logActivity('created', 'content section', title);
+          Toast.success('Section created successfully.');
+        }
+        Modal.close('sectionModal');
+        await loadSections(currentPage || pageKey);
+      } catch(e) {
+        Toast.error('Save failed. Please try again.');
+      } finally {
+        btn.disabled = false; btn.innerHTML = '<i class="fas fa-save"></i> Save Section';
+      }
+    }
+
+    // ── Delete section ──
+    async function deleteSection(id, label) {
+      confirmDelete(label || 'this section', async () => {
+        try {
+          await API.delete('cms_pages', id);
+          logActivity('deleted', 'content section', label);
+          Toast.success('Section deleted.');
+          await loadSections(currentPage);
+        } catch(e) {
+          Toast.error('Delete failed.');
+        }
+      });
+    }
+
+    function escHtml(s) {
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── Init ──
+    document.addEventListener('DOMContentLoaded', () => { renderPageTree(); });
+  </script>
+
+  <style>
+    .content-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Page tree */
+    .page-tree-panel { position: sticky; top: calc(var(--topbar-h) + 16px); }
+    .page-tree { list-style: none; padding: 0; margin: 0; }
+    .page-tree-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray600);
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+      position: relative;
+    }
+    .page-tree-item:hover { background: var(--gray50); color: var(--navy); }
+    .page-tree-item.active { background: rgba(10,25,49,0.06); border-left-color: var(--navy); color: var(--navy); font-weight: 600; }
+    .page-tree-item i { width: 16px; text-align: center; font-size: 12px; }
+    .page-tree-item span { flex: 1; }
+    .tree-view-btn {
+      opacity: 0;
+      color: var(--gray400);
+      font-size: 10px;
+      padding: 3px;
+      transition: opacity 0.15s;
+    }
+    .page-tree-item:hover .tree-view-btn { opacity: 1; }
+
+    /* Section cards */
+    .section-cards { display: flex; flex-direction: column; gap: 0; }
+    .section-card {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--gray100);
+      transition: background 0.15s;
+    }
+    .section-card:last-child { border-bottom: none; }
+    .section-card:hover { background: var(--gray50); }
+    .section-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; gap: 10px; flex-wrap: wrap; }
+    .section-card-meta { display: flex; align-items: center; gap: 8px; }
+    .section-card-order { font-size: 11px; font-weight: 700; color: var(--gray400); background: var(--gray100); border-radius: 4px; padding: 2px 6px; }
+    .section-card-type { font-size: 10px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; display: flex; align-items: center; gap: 4px; }
+    .type-text      { background: #e0f2fe; color: #0369a1; }
+    .type-rich_text { background: #fce7f3; color: #9d174d; }
+    .type-html      { background: #dcfce7; color: #166534; }
+    .type-list      { background: #fef3c7; color: #92400e; }
+    .type-stats     { background: #ede9fe; color: #5b21b6; }
+    .type-image     { background: #fee2e2; color: #991b1b; }
+    .section-card-actions { display: flex; align-items: center; gap: 4px; }
+    .section-card-title { font-size: 14px; font-weight: 600; color: var(--gray800); margin-bottom: 3px; }
+    .section-card-key code { font-size: 11px; color: var(--gray500); background: var(--gray100); padding: 1px 6px; border-radius: 3px; }
+    .section-card-preview { font-size: 12px; color: var(--gray500); line-height: 1.6; margin-top: 6px; }
+    .section-card-ar { font-size: 12px; color: var(--gray500); margin-top: 4px; text-align: right; font-style: italic; }
+
+    /* Modal extras */
+    .content-type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
+    .content-type-option { cursor: pointer; }
+    .content-type-option input { display: none; }
+    .content-type-option span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border: 1.5px solid var(--gray200);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray600);
+      transition: all 0.15s;
+    }
+    .content-type-option input:checked + span { border-color: var(--navy); background: rgba(10,25,49,0.05); color: var(--navy); font-weight: 600; }
+    .content-type-option span:hover { border-color: var(--navy); }
+
+    /* Preview */
+    .preview-lang-label { font-size: 12px; font-weight: 600; color: var(--gray500); margin-bottom: 6px; }
+    .preview-content-box { background: var(--gray50); border: 1px solid var(--gray200); border-radius: 8px; padding: 14px; font-size: 14px; line-height: 1.7; color: var(--gray700); white-space: pre-wrap; word-break: break-word; }
+    .rtl-text { text-align: right; direction: rtl; }
+    .preview-notes { margin-top: 16px; padding: 10px 14px; background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; font-size: 12px; color: var(--gray600); }
+
+    /* States */
+    .empty-state { text-align: center; padding: 60px 24px; }
+    .empty-state-icon { font-size: 40px; color: var(--gray300); margin-bottom: 14px; display: block; }
+    .empty-state p { font-size: 14px; color: var(--gray400); }
+    .loading-state { text-align: center; padding: 40px; color: var(--gray400); font-size: 14px; }
+    .rtl-input { text-align: right; }
+
+    /* Search */
+    .search-wrap { position: relative; }
+    .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--gray400); font-size: 12px; pointer-events: none; }
+    .search-input { height: 34px; border: 1.5px solid var(--gray200); border-radius: 8px; padding: 0 10px 0 30px; font-size: 13px; font-family: 'Inter', sans-serif; color: var(--gray700); outline: none; width: 200px; }
+    .search-input:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(10,25,49,0.06); }
+
+    @media (max-width: 900px) {
+      .content-layout { grid-template-columns: 1fr; }
+      .page-tree-panel { position: static; }
+      .content-type-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</body>
+</html>
