@@ -60,7 +60,7 @@
     'site_tagline': 'site_tagline'
   };
 
-  /* ─── Detect whether we are on a static host (GitHub Pages etc.) ─── */
+  /* ─── Detect whether we are on a static host (server without Table API) ─── */
   var IS_STATIC_HOST = (function () {
     var h = window.location.hostname;
     if (h === 'localhost' || h === '127.0.0.1' || h === '') return false;
@@ -69,7 +69,7 @@
   })();
 
   /* ─── In-page static fallback data (mirrors cms_settings seed) ─── */
-  /* Used on GitHub Pages where the Table API is unavailable           */
+  /* Used on static deployments where the Table API is unavailable           */
   var STATIC_SETTINGS = {
     contact_address_en: 'Al Mizhar 1, Mirdif, Dubai, UAE',
     contact_address_ar: 'الميزهر 1، مردف، دبي، الإمارات',
@@ -160,7 +160,7 @@
     return map;
   }
 
-  /* ─── Fetch from Table API (Genspark preview only) ─── */
+  /* ─── Fetch from Table API ─── */
   function fetchFromAPI() {
     return fetch('tables/cms_settings?limit=100')
       .then(function (res) {
@@ -187,7 +187,7 @@
       return;
     }
 
-    /* Live Genspark preview — fetch real data from API */
+    /* Live preview — fetch real data from API */
     fetchFromAPI()
       .then(function (config) {
         applyConfig(config);

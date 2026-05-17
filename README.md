@@ -269,16 +269,16 @@ All 14 tables have schemas matching the HTML page JavaScript exactly, and are se
 - ✅ **Cache-busting** — `?v=2.1` on all `admin.css` and `core.js` references across all 13 admin pages
 - ✅ **Missing CSS classes added** — `.card`, `.card-header`, `.card-title`, `.card-body`, `.table-responsive`, `.search-box`, `.search-icon`, `.search-input`, `.table-action-btn`, `.toggle-switch`, `.toggle-slider`, `.form-grid`, `.required`, `.btn-danger`, `.text-center` — all now defined globally in `admin.css` (see "Shared Utility Classes" section below)
 - ✅ **Activity log reseeded** — `cms_activity_log` cleared of old personal names; reseeded with 12 realistic entries
-- ✅ **Static host compatibility (v2.2)** — `core.js` now detects GitHub Pages / any static host via `IS_STATIC_HOST` flag. On static hosts, all `API.*` calls are intercepted and served from a built-in `STATIC_DB` in-memory store containing all 11 tables of realistic NAIS Dubai demo data. Writes (POST/PUT/PATCH/DELETE) work in-session via an in-memory write layer. Full live Table API is used on Genspark preview as normal.
-- ✅ **Demo mode banner (v2.2)** — On static hosts, a fixed bottom banner appears: "Static Demo Mode — data is built-in and read-only; changes reset on refresh." with a dismiss button and a link to Genspark for full live data.
-- ✅ **Cache-bust bumped to v2.2** — All 13 admin pages updated: `admin.css?v=2.2` and `core.js?v=2.2`
-- ✅ **cms_settings seeded (v2.2)** — 20 rows added: 10 contact/maps rows, 2 general, 4 social, 2 SEO, 2 features. Also added to `STATIC_DB` in `core.js` so GitHub Pages can serve them too.
-- ✅ **CMS → Website live sync (v2.3)** — Any change saved in CMS Settings → Contact Details is now reflected on the public website automatically. Implementation:
-  - `js/site-config.js` (new) — loads `cms_settings` via Table API on Genspark preview, or uses built-in `STATIC_SETTINGS` on static hosts. Exposes `window.NAIS_CONFIG`, then injects live values into every DOM element with `data-config="KEY"` or `data-config-href="KEY"` attributes.
-  - `admin/settings.html` — `saveSettings()` rewritten to actually PATCH/POST each field to `cms_settings` via `API.patch/post`. New `loadSettings()` function pre-populates all form fields from the API on page load. `FIELD_MAP` maps each input `id` to its `setting_key`.
-  - `js/i18n.js` — listens for `nais:config-loaded` event dispatched by `site-config.js`; patches `T['topbar.address']`, `T['contact.addr.span']`, `T['contact.hours.val']`, `T['contact.hours.span']`, `T['footer.addr']`, `T['footer.hours']` with live CMS values, then re-runs `applyTranslations()`.
-  - `js/nav.js` — hardcoded phone in error alert replaced with `window.NAIS_CONFIG?.contact_phone || '+971 4 263 5456'`.
-  - **All 12 public HTML pages** — every phone/email/address/hours element tagged with `data-config` and/or `data-config-href`. `<script src="js/site-config.js"></script>` added before `</body>` on all 12 pages.
+- ✅ **Static host compatibility (v3.0)** — `core.js` detects static deployments via `IS_STATIC_HOST`. On static hosts all `API.*` calls are served from a built-in local data store. Writes work in-session.
+- ✅ **Demo banner removed (v3.0)** — No platform or hosting references shown to CMS users.
+- ✅ **Cache-bust bumped to v3.0** — All 13 admin pages updated: `admin.css?v=3.0` and `core.js?v=3.0`
+- ✅ **cms_settings seeded (v3.0)** — 20 rows: 10 contact/maps, 2 general, 4 social, 2 SEO, 2 features. Also present in local data store so static deployments can serve them.
+- ✅ **CMS → Website live sync (v2.3)** — Changes saved in CMS Settings are reflected on the public website automatically:
+  - `js/site-config.js` — loads `cms_settings` via Table API (live) or built-in data (static). Exposes `window.NAIS_CONFIG`.
+  - `admin/settings.html` — `saveSettings()` PATCH/POSTs each field to `cms_settings` API. `loadSettings()` pre-populates form fields on page load.
+  - `js/i18n.js` — listens for `nais:config-loaded`; patches address/hours translation keys.
+  - `js/nav.js` — phone in error alert uses `window.NAIS_CONFIG.contact_phone`.
+  - **All 12 public HTML pages** — every phone/email/address/hours element tagged with `data-config` / `data-config-href`.
 - ✅ **Role-based auth** — 6-level hierarchy enforced via `Auth.can()`, session in localStorage
 - ✅ **Bilingual content** — all forms have EN + AR fields with `dir="rtl"` Arabic inputs
 - ✅ **Permissions matrix** — 24 feature rows × 6 roles rendered in users.html

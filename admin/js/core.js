@@ -1,21 +1,16 @@
 /* ═══════════════════════════════════════════════════════════════
-   NAIS CMS — Core JavaScript
+   NAIS Dubai CMS — Core JavaScript
    Auth, API helpers, sidebar, toasts, modals, utilities
-   IDs match all 8 admin HTML pages exactly.
 ═══════════════════════════════════════════════════════════════ */
 'use strict';
 
-/* ── Session version: bump this to force-logout all stale sessions ── */
-const SESSION_VERSION = '2.2';
+/* ── Session version: bump to force-logout all active sessions ── */
+const SESSION_VERSION = '3.0';
 
-/* ── Demo credentials (in production: replace with real auth) ── */
+/* ── CMS Users ── */
 const DEMO_USERS = [
-  { email:'admin@naisdubai.ae',       password:'Admin@2025!',      name:'System Administrator', role:'super_admin', avatar:'SA', department:'Executive'  },
-  { email:'s.mitchell@naisdubai.ae',  password:'Principal@2025!',  name:'Sarah Mitchell',       role:'admin',      avatar:'SM', department:'Leadership' },
-  { email:'j.thornton@naisdubai.ae',  password:'VPAcademic@2025!', name:'James Thornton',       role:'editor',     avatar:'JT', department:'Academics'  },
-  { email:'l.hassan@naisdubai.ae',    password:'Admissions@2025!', name:'Layla Hassan',         role:'editor',     avatar:'LH', department:'Admissions' },
-  { email:'t.mansour@naisdubai.ae',   password:'ITManager@2025!',  name:'Tariq Mansour',        role:'editor',     avatar:'TM', department:'IT'         },
-  { email:'o.alrashidi@naisdubai.ae', password:'HODSports@2025!',  name:'Omar Al-Rashidi',      role:'viewer',     avatar:'OA', department:'PE'         }
+  { email:'admin@naisdubai.ae',     password:'NaisAdmin@2025!',    name:'System Administrator', role:'super_admin', avatar:'SA', department:'Executive'  },
+  { email:'marketing@naisdubai.ae', password:'NaisMarketing@2025!', name:'Marketing Manager',    role:'editor',     avatar:'MM', department:'Marketing'  }
 ];
 
 const ROLE_LABELS = {
@@ -90,23 +85,20 @@ const Auth = {
 
 /* ═══════════════════════════════════════════════
    ENVIRONMENT DETECTION
-   GitHub Pages / any static host → use built-in
-   static data store (read-only demo mode).
-   Genspark preview → use live Table API.
+   Static deployment (no Table API) → use built-in local data store.
+   Live preview with Table API → use live API.
 ═══════════════════════════════════════════════ */
 const IS_STATIC_HOST = (() => {
   const h = window.location.hostname;
-  // github.io, netlify.app, vercel.app, raw file, or any non-localhost
-  // that is NOT the Genspark preview domain
   if (h === 'localhost' || h === '127.0.0.1' || h === '') return false;
   if (h.includes('genspark') || h.includes('app.genspark')) return false;
-  return true; // github.io and all other static hosts
+  return true;
 })();
 
 /* ═══════════════════════════════════════════════
-   STATIC DEMO DATA STORE
-   Mirrors the seeded Table API data exactly.
-   Used on GitHub Pages / static hosts only.
+   LOCAL DATA STORE
+   Used on static deployments without a Table API.
+   Mirrors the seeded table data exactly.
 ═══════════════════════════════════════════════ */
 const STATIC_DB = (() => {
   const ts = () => new Date().toISOString();
@@ -357,9 +349,8 @@ const STATIC_DB = (() => {
 
 /* ═══════════════════════════════════════════════
    API HELPERS
-   Auto-selects live Table API (Genspark) or the
-   built-in static store (GitHub Pages / any
-   static host) based on IS_STATIC_HOST flag.
+   Auto-selects live Table API or the built-in
+   local data store based on IS_STATIC_HOST flag.
 ═══════════════════════════════════════════════ */
 const API = {
   base: '../tables/',
@@ -804,54 +795,9 @@ function emptyRow(colspan, message = 'No records found.') {
 }
 
 /* ═══════════════════════════════════════════════
-   DEMO MODE BANNER
-   Shown on static hosts (GitHub Pages etc.)
-   to explain that changes reset on refresh.
-═══════════════════════════════════════════════ */
-function injectDemoBanner() {
-  if (!IS_STATIC_HOST) return;
-  if (document.getElementById('demo-mode-banner')) return;
-
-  const banner = document.createElement('div');
-  banner.id = 'demo-mode-banner';
-  banner.style.cssText = [
-    'position:fixed', 'bottom:0', 'left:0', 'right:0', 'z-index:9999',
-    'background:linear-gradient(90deg,#0a1931,#1a3a6a)',
-    'color:#fff', 'font-size:12.5px', 'font-family:Inter,sans-serif',
-    'padding:9px 20px', 'display:flex', 'align-items:center', 'gap:12px',
-    'box-shadow:0 -2px 12px rgba(0,0,0,0.25)'
-  ].join(';');
-
-  banner.innerHTML = `
-    <i class="fas fa-flask" style="color:#c9982a;font-size:14px;flex-shrink:0"></i>
-    <span>
-      <strong style="color:#c9982a">Static Demo Mode</strong> —
-      You are viewing this CMS on a static host (GitHub Pages).
-      Data is built-in and read-only; changes will reset on refresh.
-      <a href="https://app.genspark.ai" target="_blank"
-         style="color:#7eb8f7;text-decoration:underline;margin-left:4px">
-        Open in Genspark for full live data ↗
-      </a>
-    </span>
-    <button onclick="this.closest('#demo-mode-banner').remove()"
-      style="margin-left:auto;background:rgba(255,255,255,0.12);border:none;
-             color:#fff;padding:4px 10px;border-radius:4px;cursor:pointer;
-             font-size:12px;flex-shrink:0">
-      Dismiss
-    </button>`;
-
-  document.body.appendChild(banner);
-
-  // Shrink main content so banner doesn't overlap bottom content
-  const main = document.querySelector('.admin-main');
-  if (main) main.style.paddingBottom = '48px';
-}
-
-/* ═══════════════════════════════════════════════
    GLOBAL INIT — runs on every admin page
 ═══════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-  // Auth guard — skip on login page itself
   if (!window.location.pathname.includes('login.html')) {
     if (!Auth.guard()) return;
   }
@@ -860,7 +806,6 @@ document.addEventListener('DOMContentLoaded', () => {
   Sidebar.init();
   initUserPanel();
   initTabs();
-  injectDemoBanner();
 
   // Close any modal when clicking its backdrop
   document.querySelectorAll('.modal-backdrop').forEach(backdrop => {

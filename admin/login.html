@@ -372,95 +372,6 @@
     }
     .forgot-link:hover { opacity: 1; }
 
-    /* ── Demo credentials panel ── */
-    .demo-panel {
-      margin-top: 28px;
-      border-top: 1.5px solid var(--gray100);
-      padding-top: 24px;
-    }
-
-    .demo-panel-toggle {
-      background: none;
-      border: 1.5px solid var(--gray200);
-      border-radius: 8px;
-      width: 100%;
-      padding: 10px 14px;
-      font-size: 12px;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      color: var(--gray600);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .demo-panel-toggle:hover { border-color: var(--navy); color: var(--navy); }
-
-    .demo-panel-toggle .arrow {
-      transition: transform 0.25s;
-    }
-    .demo-panel-toggle.open .arrow { transform: rotate(180deg); }
-
-    .demo-creds {
-      display: none;
-      margin-top: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    .demo-creds.open { max-height: 400px; }
-
-    .demo-cred-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr auto;
-      align-items: center;
-      gap: 8px;
-      background: var(--gray50);
-      border: 1px solid var(--gray200);
-      border-radius: 8px;
-      padding: 8px 10px;
-      cursor: pointer;
-      transition: background 0.15s, border-color 0.15s;
-    }
-
-    .demo-cred-row:hover { background: #eef2ff; border-color: #c7d2fe; }
-
-    .demo-role {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--navy);
-    }
-
-    .demo-email {
-      font-size: 11px;
-      color: var(--gray600);
-      font-family: monospace;
-    }
-
-    .demo-fill-btn {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--navy);
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: rgba(10,25,49,0.08);
-      white-space: nowrap;
-    }
-    .demo-fill-btn:hover { background: rgba(10,25,49,0.15); }
-
     /* ── Back to site ── */
     .back-to-site {
       text-align: center;
@@ -613,47 +524,6 @@
         </button>
       </form>
 
-      <!-- Demo credentials panel -->
-      <div class="demo-panel">
-        <button class="demo-panel-toggle" id="demoPanelToggle" type="button">
-          <span><i class="fas fa-key"></i> &nbsp; Demo Credentials</span>
-          <i class="fas fa-chevron-down arrow"></i>
-        </button>
-
-        <div class="demo-creds" id="demoCreds">
-          <div class="demo-cred-row" onclick="fillCreds('admin@naisdubai.ae','Admin@2025!')">
-            <div class="demo-role">Super Admin</div>
-            <div class="demo-email">admin@naisdubai.ae</div>
-            <button class="demo-fill-btn" type="button">Fill</button>
-          </div>
-          <div class="demo-cred-row" onclick="fillCreds('s.mitchell@naisdubai.ae','Principal@2025!')">
-            <div class="demo-role">Admin — Principal</div>
-            <div class="demo-email">s.mitchell@naisdubai.ae</div>
-            <button class="demo-fill-btn" type="button">Fill</button>
-          </div>
-          <div class="demo-cred-row" onclick="fillCreds('j.thornton@naisdubai.ae','VPAcademic@2025!')">
-            <div class="demo-role">Editor — VP Academic</div>
-            <div class="demo-email">j.thornton@naisdubai.ae</div>
-            <button class="demo-fill-btn" type="button">Fill</button>
-          </div>
-          <div class="demo-cred-row" onclick="fillCreds('l.hassan@naisdubai.ae','Admissions@2025!')">
-            <div class="demo-role">Editor — Admissions</div>
-            <div class="demo-email">l.hassan@naisdubai.ae</div>
-            <button class="demo-fill-btn" type="button">Fill</button>
-          </div>
-          <div class="demo-cred-row" onclick="fillCreds('t.mansour@naisdubai.ae','ITManager@2025!')">
-            <div class="demo-role">Editor — IT Manager</div>
-            <div class="demo-email">t.mansour@naisdubai.ae</div>
-            <button class="demo-fill-btn" type="button">Fill</button>
-          </div>
-          <div class="demo-cred-row" onclick="fillCreds('o.alrashidi@naisdubai.ae','HODSports@2025!')">
-            <div class="demo-role">Viewer — HOD PE</div>
-            <div class="demo-email">o.alrashidi@naisdubai.ae</div>
-            <button class="demo-fill-btn" type="button">Fill</button>
-          </div>
-        </div>
-      </div>
-
       <!-- Back to site -->
       <div class="back-to-site">
         <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to NAIS Dubai website</a>
@@ -663,18 +533,14 @@
   </div><!-- .login-page -->
 
   <script>
-    // ── Demo users (mirrored from core.js DEMO_USERS — keep in sync) ──
+    // ── CMS Users (keep in sync with core.js DEMO_USERS) ──
     const DEMO_USERS = [
-      { email: 'admin@naisdubai.ae',        password: 'Admin@2025!',       role: 'super_admin', name: 'System Administrator', avatar: 'SA', department: 'Executive' },
-      { email: 's.mitchell@naisdubai.ae',   password: 'Principal@2025!',   role: 'principal',   name: 'Sarah Mitchell',       avatar: 'SM', department: 'Leadership' },
-      { email: 'j.thornton@naisdubai.ae',   password: 'VPAcademic@2025!',  role: 'editor',      name: 'James Thornton',       avatar: 'JT', department: 'Academics' },
-      { email: 'l.hassan@naisdubai.ae',     password: 'Admissions@2025!',  role: 'editor',      name: 'Layla Hassan',         avatar: 'LH', department: 'Admissions' },
-      { email: 't.mansour@naisdubai.ae',    password: 'ITManager@2025!',   role: 'editor',      name: 'Tariq Mansour',        avatar: 'TM', department: 'IT' },
-      { email: 'o.alrashidi@naisdubai.ae',  password: 'HODSports@2025!',   role: 'viewer',      name: 'Omar Al-Rashidi',      avatar: 'OA', department: 'PE' },
+      { email: 'admin@naisdubai.ae',     password: 'NaisAdmin@2025!',    role: 'super_admin', name: 'System Administrator', avatar: 'SA', department: 'Executive' },
+      { email: 'marketing@naisdubai.ae', password: 'NaisMarketing@2025!', role: 'editor',      name: 'Marketing Manager',    avatar: 'MM', department: 'Marketing' }
     ];
 
     // ── Session version — must match core.js SESSION_VERSION ──
-    const SESSION_VERSION = '2.2';
+    const SESSION_VERSION = '3.0';
 
     // ── Already logged in? Validate session email + version before auto-redirecting ──
     (function checkExistingSession() {
@@ -707,23 +573,6 @@
       passInput.type = isText ? 'password' : 'text';
       passToggleIcon.className = isText ? 'fas fa-eye' : 'fas fa-eye-slash';
     });
-
-    // ── Demo panel toggle ──
-    const demoPanelToggle = document.getElementById('demoPanelToggle');
-    const demoCreds       = document.getElementById('demoCreds');
-
-    demoPanelToggle.addEventListener('click', () => {
-      const isOpen = demoCreds.classList.toggle('open');
-      demoPanelToggle.classList.toggle('open', isOpen);
-    });
-
-    // ── Fill credentials helper ──
-    function fillCreds(email, password) {
-      document.getElementById('emailInput').value    = email;
-      document.getElementById('passwordInput').value = password;
-      hideError();
-      document.getElementById('emailInput').focus();
-    }
 
     // ── Error helpers ──
     function showError(msg) {
